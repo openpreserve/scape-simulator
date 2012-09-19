@@ -5,6 +5,5 @@
 target/
 lib/
 bin/
-prototype/data/tdb/*
 .checkstyle
 */.checkstyle
