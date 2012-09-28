@@ -1,5 +1,16 @@
 package eu.scape_project.simulator.event;
 
-public class DeleteFormat implements Event {
+import eu.scape_project.simulator.model.Format;
 
+public class DeleteFormat extends AbstractEvent {
+
+	Format node ;
+	
+	public DeleteFormat(Format n) {
+		node = n;
+	}
+	
+	public void execute() {
+		network.deleteNode(node);
+	}
 }
