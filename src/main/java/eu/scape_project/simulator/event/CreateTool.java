@@ -13,6 +13,6 @@ public class CreateTool extends AbstractEvent {
 	
 	@Override
 	public void execute() {
-		System.out.println("Executing");
+		System.out.println("New tool is created");
 	}
 }

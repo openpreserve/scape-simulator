@@ -29,12 +29,12 @@ public class Network {
 	}
 	
 	public void addNode(Node node) {
-		System.out.println("Adding new format");
+		//System.out.println("Adding new format");
 		nodes.add(node);
 	}
 	
 	public void deleteNode(Node node) {
-		System.out.println("Deleting");
+		//System.out.println("Deleting");
 		nodes.remove(node);
 	}
 }

@@ -11,6 +11,7 @@ public class DeleteFormat extends AbstractEvent {
 	}
 	
 	public void execute() {
+		System.out.println("Deleting format in month " + run);
 		network.deleteNode(node);
 	}
 }
