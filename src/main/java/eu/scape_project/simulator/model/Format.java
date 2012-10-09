@@ -1,9 +1,14 @@
 package eu.scape_project.simulator.model;
 
+import java.util.List;
+
 import eu.scape_project.simulator.event.CreateTool;
 import eu.scape_project.simulator.event.DeleteFormat;
 
 public class Format extends AbstractNode{
+	
+	List<Node> list; 
+	
 	
 	public void init() {
 		//System.out.println("initializing");
