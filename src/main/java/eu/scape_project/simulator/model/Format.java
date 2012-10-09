@@ -14,6 +14,8 @@ public class Format extends AbstractNode{
 		df.setRun(birth+80);
 		eventProcesor.addEvent(df);
 		
+		CreateTool ct = new CreateTool(this);
+		
 	}
 
 }

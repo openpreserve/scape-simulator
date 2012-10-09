@@ -29,14 +29,18 @@ public class EventProcesor {
 				tmp.setEventProcesor(this);
 				tmp.execute();
 			}
-			System.out.println("Month " + counter);
+			
+			//System.out.println("Month " + counter);
 			counter++;
 			
-			if (Math.random()<0.1) {
-				System.out.println("Now");
+			if (Math.random()<0.05) {
+				//System.out.println("Now");
 				CreateFormat ev = new CreateFormat();
 				ev.setRun(counter);
 				events.add(ev);
+			}
+			if (events.size()==0){
+				break;
 			}
 			
 		}
