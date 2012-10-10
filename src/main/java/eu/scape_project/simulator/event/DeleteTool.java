@@ -15,7 +15,7 @@ public class DeleteTool extends AbstractEvent {
 	}
 	
 	public void execute() {		
-		System.out.println("Deleting tool in month " + run);
+		//System.out.println("Deleting tool in month " + run);
 		network.deleteNode(tool);
 	}
 }

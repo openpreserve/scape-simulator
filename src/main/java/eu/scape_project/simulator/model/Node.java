@@ -11,4 +11,12 @@ public interface Node {
 	void setBirth(int b);
 	
 	int getBirth();
+	
+	boolean isFormat();
+	
+	void notifyDelete();
+	
+	void removeLink(Node node);
+	
+	int getTools();
 }

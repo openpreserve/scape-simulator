@@ -4,6 +4,10 @@ import eu.scape_project.simulator.event.DeleteTool;
 
 public class Tool extends AbstractNode{
 
+	public Tool() {
+		super();
+	}
+	
 	public void init() {
 		System.out.println("initializing");
 		DeleteTool dt = new DeleteTool(this);
@@ -12,5 +16,9 @@ public class Tool extends AbstractNode{
 		dt.setRun(birth+lifeExpe);
 		eventProcesor.addEvent(dt);
 		
+	}
+
+	public boolean isFormat() {
+		return false;
 	}
 }

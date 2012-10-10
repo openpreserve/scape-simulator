@@ -7,7 +7,8 @@ import eu.scape_project.simulator.event.Event;
 
 public class EventProcesor {
 
-	Network network;
+	private Network network;
+	private Observer observer;
 
 	private PriorityQueue<Event> events;
 
@@ -33,21 +34,27 @@ public class EventProcesor {
 				}
 			}
 
+			observer.observe(network,counter);
+			
 			// System.out.println("Month " + counter);
 			counter++;
 
 			// new format will be created
-			if (Math.random() < 0.07) {
+			if (Math.random() < 0.15) {
 				CreateFormat ev = new CreateFormat();
 				ev.setRun(counter);
 				events.add(ev);
 			}
-			if (counter>1000) {
+			if (counter>1200) {
 				System.out.println("End of simulation");
 				break;
 			}
 		}
 
+	}
+	
+	public void setObserver(Observer observer){
+		this.observer=observer;
 	}
 
 	public void addEvent(Event event) {

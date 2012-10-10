@@ -12,6 +12,10 @@ public class Network {
 	
 	private EventProcesor ep;
 	
+	private int numFormat = 0;
+	
+	private int numTool = 0;
+	
 	public Network() {
 		nodes = new ArrayList<Node>();
 	}
@@ -29,12 +33,44 @@ public class Network {
 	}
 	
 	public void addNode(Node node) {
-		//System.out.println("Adding new format");
+		
+		if (node.isFormat()){
+			numFormat++;
+		}else {
+			numTool++;
+		}
+		
 		nodes.add(node);
 	}
 	
 	public void deleteNode(Node node) {
-		//System.out.println("Deleting");
+		if (node.isFormat()){
+			numFormat--;
+		}else {
+			numTool--;
+		}
 		nodes.remove(node);
+		node.notifyDelete();
 	}
+	
+	public int getNumberFormat() {
+		return numFormat;
+	}
+	
+	public int getNumberTool() {
+		return numTool;
+	}
+	
+	public int getNumberOfActiveFormats() {
+		int counter = 0;
+		for (Node node : nodes) {
+			if (node.isFormat()){
+				if(node.getTools()>0){
+					counter++;
+				}
+			}
+		}
+		return counter;
+	}
+	
 }
