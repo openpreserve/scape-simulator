@@ -23,6 +23,14 @@ public class Observer {
 		numbofActiveFormats.add(network.getNumberOfActiveFormats());
 		numbofFormats.add(network.getNumberFormat());
 		
+		if (currentFormat.getNumberOfTools()<=2){
+			Format tmp = network.getBestFormat();
+			if (tmp != currentFormat && tmp.getTools()>currentFormat.getTools()){
+				System.out.println("Migrating at " + ((month+1)%12+1) + "/" + ((month+1)/12+2013) + " to antoher format");
+				currentFormat = tmp;
+			}
+		}
+		
 	}
 	
 	public void setCurrentFormat(Format f) {

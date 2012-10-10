@@ -73,4 +73,17 @@ public class Network {
 		return counter;
 	}
 	
+	public Format getBestFormat() {
+		int max = -1;
+		Node tmp = null;
+		for (Node node : nodes) {
+			if (node.isFormat()){
+				if (node.getTools()>max){
+					max = node.getTools();
+					tmp = node;
+				}
+			}
+		}
+		return (Format) tmp;
+	}
 }
