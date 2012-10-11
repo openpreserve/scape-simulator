@@ -18,10 +18,10 @@ public class Format extends AbstractNode {
 		
 		// create tools
 
-		int numTool = (int) Math.round(2 + (6 - 2) * Math.random());
+		int numTool = (int) Math.round(2 + (10 - 2) * Math.random());
 		for (int i = 0; i < numTool; i++) {
 			CreateTool ct = new CreateTool(this);
-			ct.setRun(birth + (int) Math.round(1 + (30 - 1) * Math.random()));
+			ct.setRun(birth + (int) Math.round(1 + (60 - 1) * Math.random()));
 			eventProcesor.addEvent(ct);
 		}
 	}
