@@ -40,7 +40,7 @@ public class EventProcesor {
 			counter++;
 
 			// new format will be created
-			if (Math.random() < 0.15) {
+			if (Math.random() < 0.18) {
 				CreateFormat ev = new CreateFormat();
 				ev.setRun(counter);
 				events.add(ev);

@@ -1,9 +1,10 @@
 package eu.scape_project.simulator.model;
 
-import java.util.List;
+import org.apache.commons.math.MathException;
+import org.apache.commons.math.distribution.NormalDistribution;
+import org.apache.commons.math.distribution.NormalDistributionImpl;
 
 import eu.scape_project.simulator.event.CreateTool;
-import eu.scape_project.simulator.event.DeleteFormat;
 
 public class Format extends AbstractNode {
 
@@ -18,10 +19,24 @@ public class Format extends AbstractNode {
 		
 		// create tools
 
-		int numTool = (int) Math.round(2 + (10 - 2) * Math.random());
+		//int numTool = (int) Math.round(2 + (10 - 2) * Math.random());
+		NormalDistributionImpl d = new NormalDistributionImpl(7,2);
+		long numTool=0;
+		try {
+			numTool = Math.round(d.sample());
+		} catch (MathException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		d = new NormalDistributionImpl(18, 6);
 		for (int i = 0; i < numTool; i++) {
 			CreateTool ct = new CreateTool(this);
-			ct.setRun(birth + (int) Math.round(1 + (60 - 1) * Math.random()));
+			try {
+				ct.setRun(birth + (int) Math.round(d.sample()));
+			} catch (MathException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			eventProcesor.addEvent(ct);
 		}
 	}
