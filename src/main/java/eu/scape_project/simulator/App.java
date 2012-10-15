@@ -2,6 +2,8 @@ package eu.scape_project.simulator;
 
 import java.util.List;
 
+import org.apache.commons.math.MathException;
+import org.apache.commons.math.distribution.WeibullDistributionImpl;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
@@ -70,14 +72,24 @@ public class App  {
         frame.setVisible(true);
         
         JFreeChart chart2 = ChartFactory.createTimeSeriesChart(
-                "Formats", 
+                "Formats", 	
                 "Date",           
                 "number of formats",   
                 dataset2, true, true, false);
-        
         ChartFrame frame2 = new ChartFrame("Graph", chart2);
         frame2.pack();
         frame2.setVisible(true);
         
+        
+        WeibullDistributionImpl w = new WeibullDistributionImpl(1.5, 1);
+        
+        for (int i=0; i<100; i++) {
+        	try {
+				System.out.println(w.sample());
+			} catch (MathException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
     }
 }

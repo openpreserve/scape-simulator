@@ -1,8 +1,8 @@
 package eu.scape_project.simulator.model;
 
 import org.apache.commons.math.MathException;
-import org.apache.commons.math.distribution.NormalDistribution;
 import org.apache.commons.math.distribution.NormalDistributionImpl;
+import org.apache.commons.math.distribution.WeibullDistributionImpl;
 
 import eu.scape_project.simulator.event.CreateTool;
 
@@ -20,7 +20,7 @@ public class Format extends AbstractNode {
 		// create tools
 
 		//int numTool = (int) Math.round(2 + (10 - 2) * Math.random());
-		NormalDistributionImpl d = new NormalDistributionImpl(7,2);
+		NormalDistributionImpl d = new NormalDistributionImpl(8,2);
 		long numTool=0;
 		try {
 			numTool = Math.round(d.sample());
@@ -28,11 +28,11 @@ public class Format extends AbstractNode {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		d = new NormalDistributionImpl(18, 6);
+		WeibullDistributionImpl w = new WeibullDistributionImpl(1.5, 1);
 		for (int i = 0; i < numTool; i++) {
 			CreateTool ct = new CreateTool(this);
 			try {
-				ct.setRun(birth + (int) Math.round(d.sample()));
+				ct.setRun(birth + (int) Math.round(w.sample()*10));
 			} catch (MathException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
