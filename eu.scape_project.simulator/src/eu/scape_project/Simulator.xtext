@@ -1,0 +1,12 @@
+grammar eu.scape_project.Simulator with org.eclipse.xtext.common.Terminals
+
+generate simulator "http://www.scape_project.eu/Simulator"
+
+Simulation:
+	'Simulation { '
+		'name=' name=ID
+		'}'
+;	
+	 
+	
+
