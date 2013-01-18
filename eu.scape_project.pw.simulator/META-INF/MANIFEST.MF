@@ -32,5 +32,4 @@ Export-Package: eu.scape_project.pw,
  eu.scape_project.pw.scoping,
  eu.scape_project.pw.generator,
  eu.scape_project.pw.formatting
-Bundle-ClassPath: lib/simulation-engine-1.0-SNAPSHOT.jar,
- .
+Bundle-ClassPath: .
