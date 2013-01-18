@@ -1,4 +1,7 @@
 *.class
+*.jar
+.launch
+.settings
 .settings
 .DS_Store
 target/
