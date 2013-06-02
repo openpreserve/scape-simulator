@@ -65,6 +65,7 @@ public class SimulatorFactoryImpl extends EFactoryImpl implements SimulatorFacto
     switch (eClass.getClassifierID())
     {
       case SimulatorPackage.SIMULATION: return createSimulation();
+      case SimulatorPackage.ENTITY: return createEntity();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -79,6 +80,17 @@ public class SimulatorFactoryImpl extends EFactoryImpl implements SimulatorFacto
   {
     SimulationImpl simulation = new SimulationImpl();
     return simulation;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Entity createEntity()
+  {
+    EntityImpl entity = new EntityImpl();
+    return entity;
   }
 
   /**

@@ -5,6 +5,7 @@ package eu.scape_project.pw.simulator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -75,13 +76,50 @@ public interface SimulatorPackage extends EPackage
   int SIMULATION__NAME = 0;
 
   /**
+   * The feature id for the '<em><b>Entities</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SIMULATION__ENTITIES = 1;
+
+  /**
    * The number of structural features of the '<em>Simulation</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SIMULATION_FEATURE_COUNT = 1;
+  int SIMULATION_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link eu.scape_project.pw.simulator.impl.EntityImpl <em>Entity</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see eu.scape_project.pw.simulator.impl.EntityImpl
+   * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getEntity()
+   * @generated
+   */
+  int ENTITY = 1;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENTITY__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Entity</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENTITY_FEATURE_COUNT = 1;
 
 
   /**
@@ -104,6 +142,38 @@ public interface SimulatorPackage extends EPackage
    * @generated
    */
   EAttribute getSimulation_Name();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link eu.scape_project.pw.simulator.Simulation#getEntities <em>Entities</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Entities</em>'.
+   * @see eu.scape_project.pw.simulator.Simulation#getEntities()
+   * @see #getSimulation()
+   * @generated
+   */
+  EReference getSimulation_Entities();
+
+  /**
+   * Returns the meta object for class '{@link eu.scape_project.pw.simulator.Entity <em>Entity</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Entity</em>'.
+   * @see eu.scape_project.pw.simulator.Entity
+   * @generated
+   */
+  EClass getEntity();
+
+  /**
+   * Returns the meta object for the attribute '{@link eu.scape_project.pw.simulator.Entity#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see eu.scape_project.pw.simulator.Entity#getName()
+   * @see #getEntity()
+   * @generated
+   */
+  EAttribute getEntity_Name();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -145,6 +215,32 @@ public interface SimulatorPackage extends EPackage
      * @generated
      */
     EAttribute SIMULATION__NAME = eINSTANCE.getSimulation_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Entities</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SIMULATION__ENTITIES = eINSTANCE.getSimulation_Entities();
+
+    /**
+     * The meta object literal for the '{@link eu.scape_project.pw.simulator.impl.EntityImpl <em>Entity</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see eu.scape_project.pw.simulator.impl.EntityImpl
+     * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getEntity()
+     * @generated
+     */
+    EClass ENTITY = eINSTANCE.getEntity();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ENTITY__NAME = eINSTANCE.getEntity_Name();
 
   }
 

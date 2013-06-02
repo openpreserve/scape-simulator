@@ -2,6 +2,7 @@
  */
 package eu.scape_project.pw.simulator.impl;
 
+import eu.scape_project.pw.simulator.Entity;
 import eu.scape_project.pw.simulator.Simulation;
 import eu.scape_project.pw.simulator.SimulatorFactory;
 import eu.scape_project.pw.simulator.SimulatorPackage;
@@ -9,6 +10,7 @@ import eu.scape_project.pw.simulator.SimulatorPackage;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
@@ -26,6 +28,13 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
    * @generated
    */
   private EClass simulationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass entityEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -115,6 +124,36 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getSimulation_Entities()
+  {
+    return (EReference)simulationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEntity()
+  {
+    return entityEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEntity_Name()
+  {
+    return (EAttribute)entityEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public SimulatorFactory getSimulatorFactory()
   {
     return (SimulatorFactory)getEFactoryInstance();
@@ -142,6 +181,10 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
     // Create classes and their features
     simulationEClass = createEClass(SIMULATION);
     createEAttribute(simulationEClass, SIMULATION__NAME);
+    createEReference(simulationEClass, SIMULATION__ENTITIES);
+
+    entityEClass = createEClass(ENTITY);
+    createEAttribute(entityEClass, ENTITY__NAME);
   }
 
   /**
@@ -177,6 +220,10 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
     // Initialize classes and features; add operations and parameters
     initEClass(simulationEClass, Simulation.class, "Simulation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSimulation_Name(), ecorePackage.getEString(), "name", null, 0, 1, Simulation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSimulation_Entities(), this.getEntity(), null, "entities", null, 0, -1, Simulation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEntity_Name(), ecorePackage.getEString(), "name", null, 0, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

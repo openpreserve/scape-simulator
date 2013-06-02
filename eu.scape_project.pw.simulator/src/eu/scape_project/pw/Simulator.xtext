@@ -4,6 +4,11 @@ generate simulator "http://www.scape_project.eu/pw/Simulator"
 
 Simulation : 
 	'Simulation' name=STRING '{'
-		
+		(entities+=Entity)+
 	'}'
+;
+
+Entity :
+	'Collection' name=STRING '{'
+	'}' 
 ;

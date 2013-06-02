@@ -20,5 +20,6 @@ Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: eu.scape_project.pw.ui.contentassist,
  eu.scape_project.pw.ui.contentassist.antlr,
- eu.scape_project.pw.ui.internal
+ eu.scape_project.pw.ui.internal,
+ eu.scape_project.pw.ui.quickfix
 Bundle-Activator: eu.scape_project.pw.ui.internal.SimulatorActivator

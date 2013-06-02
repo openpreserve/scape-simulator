@@ -9,6 +9,10 @@
       ecorePackage="Simulator.ecore#/">
     <genClasses ecoreClass="Simulator.ecore#//Simulation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//Simulation/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Simulator.ecore#//Simulation/entities"/>
+    </genClasses>
+    <genClasses ecoreClass="Simulator.ecore#//Entity">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//Entity/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

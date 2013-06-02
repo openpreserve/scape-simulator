@@ -3,40 +3,29 @@
 package eu.scape_project.pw.simulator.impl;
 
 import eu.scape_project.pw.simulator.Entity;
-import eu.scape_project.pw.simulator.Simulation;
 import eu.scape_project.pw.simulator.SimulatorPackage;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Simulation</b></em>'.
+ * An implementation of the model object '<em><b>Entity</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link eu.scape_project.pw.simulator.impl.SimulationImpl#getName <em>Name</em>}</li>
- *   <li>{@link eu.scape_project.pw.simulator.impl.SimulationImpl#getEntities <em>Entities</em>}</li>
+ *   <li>{@link eu.scape_project.pw.simulator.impl.EntityImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class SimulationImpl extends MinimalEObjectImpl.Container implements Simulation
+public class EntityImpl extends MinimalEObjectImpl.Container implements Entity
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -59,21 +48,11 @@ public class SimulationImpl extends MinimalEObjectImpl.Container implements Simu
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getEntities() <em>Entities</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getEntities()
-   * @generated
-   * @ordered
-   */
-  protected EList<Entity> entities;
-
-  /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected SimulationImpl()
+  protected EntityImpl()
   {
     super();
   }
@@ -86,7 +65,7 @@ public class SimulationImpl extends MinimalEObjectImpl.Container implements Simu
   @Override
   protected EClass eStaticClass()
   {
-    return SimulatorPackage.Literals.SIMULATION;
+    return SimulatorPackage.Literals.ENTITY;
   }
 
   /**
@@ -109,37 +88,7 @@ public class SimulationImpl extends MinimalEObjectImpl.Container implements Simu
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SimulatorPackage.SIMULATION__NAME, oldName, name));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EList<Entity> getEntities()
-  {
-    if (entities == null)
-    {
-      entities = new EObjectContainmentEList<Entity>(Entity.class, this, SimulatorPackage.SIMULATION__ENTITIES);
-    }
-    return entities;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case SimulatorPackage.SIMULATION__ENTITIES:
-        return ((InternalEList<?>)getEntities()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+      eNotify(new ENotificationImpl(this, Notification.SET, SimulatorPackage.ENTITY__NAME, oldName, name));
   }
 
   /**
@@ -152,10 +101,8 @@ public class SimulationImpl extends MinimalEObjectImpl.Container implements Simu
   {
     switch (featureID)
     {
-      case SimulatorPackage.SIMULATION__NAME:
+      case SimulatorPackage.ENTITY__NAME:
         return getName();
-      case SimulatorPackage.SIMULATION__ENTITIES:
-        return getEntities();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -165,18 +112,13 @@ public class SimulationImpl extends MinimalEObjectImpl.Container implements Simu
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case SimulatorPackage.SIMULATION__NAME:
+      case SimulatorPackage.ENTITY__NAME:
         setName((String)newValue);
-        return;
-      case SimulatorPackage.SIMULATION__ENTITIES:
-        getEntities().clear();
-        getEntities().addAll((Collection<? extends Entity>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -192,11 +134,8 @@ public class SimulationImpl extends MinimalEObjectImpl.Container implements Simu
   {
     switch (featureID)
     {
-      case SimulatorPackage.SIMULATION__NAME:
+      case SimulatorPackage.ENTITY__NAME:
         setName(NAME_EDEFAULT);
-        return;
-      case SimulatorPackage.SIMULATION__ENTITIES:
-        getEntities().clear();
         return;
     }
     super.eUnset(featureID);
@@ -212,10 +151,8 @@ public class SimulationImpl extends MinimalEObjectImpl.Container implements Simu
   {
     switch (featureID)
     {
-      case SimulatorPackage.SIMULATION__NAME:
+      case SimulatorPackage.ENTITY__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case SimulatorPackage.SIMULATION__ENTITIES:
-        return entities != null && !entities.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -237,4 +174,4 @@ public class SimulationImpl extends MinimalEObjectImpl.Container implements Simu
     return result.toString();
   }
 
-} //SimulationImpl
+} //EntityImpl

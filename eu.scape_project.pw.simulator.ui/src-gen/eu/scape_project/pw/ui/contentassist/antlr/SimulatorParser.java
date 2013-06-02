@@ -38,7 +38,10 @@ public class SimulatorParser extends AbstractContentAssistParser {
 				private static final long serialVersionUID = 1L;
 				{
 					put(grammarAccess.getSimulationAccess().getGroup(), "rule__Simulation__Group__0");
+					put(grammarAccess.getEntityAccess().getGroup(), "rule__Entity__Group__0");
 					put(grammarAccess.getSimulationAccess().getNameAssignment_1(), "rule__Simulation__NameAssignment_1");
+					put(grammarAccess.getSimulationAccess().getEntitiesAssignment_3(), "rule__Simulation__EntitiesAssignment_3");
+					put(grammarAccess.getEntityAccess().getNameAssignment_1(), "rule__Entity__NameAssignment_1");
 				}
 			};
 		}
