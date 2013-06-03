@@ -2,7 +2,7 @@
  */
 package eu.scape_project.pw.simulator.impl;
 
-import eu.scape_project.pw.simulator.Entity;
+import eu.scape_project.pw.simulator.Event;
 import eu.scape_project.pw.simulator.Simulation;
 import eu.scape_project.pw.simulator.SimulatorFactory;
 import eu.scape_project.pw.simulator.SimulatorPackage;
@@ -34,7 +34,7 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass entityEClass = null;
+  private EClass eventEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -124,7 +124,7 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getSimulation_Entities()
+  public EReference getSimulation_Events()
   {
     return (EReference)simulationEClass.getEStructuralFeatures().get(1);
   }
@@ -134,9 +134,9 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getEntity()
+  public EClass getEvent()
   {
-    return entityEClass;
+    return eventEClass;
   }
 
   /**
@@ -144,9 +144,19 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getEntity_Name()
+  public EAttribute getEvent_Name()
   {
-    return (EAttribute)entityEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)eventEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEvent_Events()
+  {
+    return (EReference)eventEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -181,10 +191,11 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
     // Create classes and their features
     simulationEClass = createEClass(SIMULATION);
     createEAttribute(simulationEClass, SIMULATION__NAME);
-    createEReference(simulationEClass, SIMULATION__ENTITIES);
+    createEReference(simulationEClass, SIMULATION__EVENTS);
 
-    entityEClass = createEClass(ENTITY);
-    createEAttribute(entityEClass, ENTITY__NAME);
+    eventEClass = createEClass(EVENT);
+    createEAttribute(eventEClass, EVENT__NAME);
+    createEReference(eventEClass, EVENT__EVENTS);
   }
 
   /**
@@ -220,10 +231,11 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
     // Initialize classes and features; add operations and parameters
     initEClass(simulationEClass, Simulation.class, "Simulation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSimulation_Name(), ecorePackage.getEString(), "name", null, 0, 1, Simulation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getSimulation_Entities(), this.getEntity(), null, "entities", null, 0, -1, Simulation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSimulation_Events(), this.getEvent(), null, "events", null, 0, -1, Simulation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEntity_Name(), ecorePackage.getEString(), "name", null, 0, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(eventEClass, Event.class, "Event", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEvent_Name(), ecorePackage.getEString(), "name", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEvent_Events(), this.getEvent(), null, "events", null, 0, -1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

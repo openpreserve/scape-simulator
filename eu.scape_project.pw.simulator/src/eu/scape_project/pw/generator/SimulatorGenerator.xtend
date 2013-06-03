@@ -3,20 +3,25 @@
  */
 package eu.scape_project.pw.generator
 
+import eu.scape_project.pw.simulator.Event
+import eu.scape_project.pw.simulator.Simulation
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
-import eu.scape_project.pw.simulator.Simulation
 
 class SimulatorGenerator implements IGenerator {
-	
+
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
-		for (e: resource.allContents.toIterable.filter(typeof(Simulation))){
-			fsa.generateFile("/simulator/"+e.name+".java",e.compile)
+		for (e : resource.allContents.toIterable.filter(typeof(Simulation))) {
+			fsa.generateFile("/simulator/" + e.name + ".java", e.compile)
+		}
+		
+		for (e : resource.allContents.toIterable.filter(typeof(Event))) {
+			fsa.generateFile("/simulator/" + e.name + ".java", e.compileEvent)
 		}
 	}
-	
-	def compile(Simulation s)'''
+
+	def compile(Simulation s) '''
 		
 		package simulator;
 		import eu.scape_project.App;
@@ -26,6 +31,25 @@ class SimulatorGenerator implements IGenerator {
 				test.test(); 	
 			}
 		}
-	
+		
 	'''
+	
+	def compileEvent(Event e) '''
+		
+		package simulator;
+		import eu.scape_project.*;
+		import java.util.List;
+		public class «e.name» extends Event{ 
+			 	
+			protected List<IEvent> scheduleNextEvents() {
+				return null;	
+			}
+	
+			protected void executeEvent() {
+				System.out.println("Hello  «e.name» "); 
+			}
+		}
+		
+	'''
+	
 }

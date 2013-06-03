@@ -4,11 +4,14 @@ generate simulator "http://www.scape_project.eu/pw/Simulator"
 
 Simulation : 
 	'Simulation' name=STRING '{'
-		(entities+=Entity)+
+		(events+=Event)*
 	'}'
 ;
 
-Entity :
-	'Collection' name=STRING '{'
+Event :
+	'Event' name=STRING '{'
+	
+	 ('schedules =>' (events+=Event)+)?
+	 
 	'}' 
 ;

@@ -1,5 +1,6 @@
 RULE_ID=5
 RULE_STRING=4
+T__15=15
 T__12=12
 T__11=11
 T__14=14
@@ -9,7 +10,8 @@ RULE_INT=6
 RULE_WS=9
 RULE_SL_COMMENT=8
 RULE_ML_COMMENT=7
-'Collection'=14
 '}'=13
 '{'=12
+'schedules =>'=15
+'Event'=14
 'Simulation'=11

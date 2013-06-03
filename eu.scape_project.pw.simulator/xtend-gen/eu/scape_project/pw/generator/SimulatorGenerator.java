@@ -4,6 +4,7 @@
 package eu.scape_project.pw.generator;
 
 import com.google.common.collect.Iterables;
+import eu.scape_project.pw.simulator.Event;
 import eu.scape_project.pw.simulator.Simulation;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -25,6 +26,16 @@ public class SimulatorGenerator implements IGenerator {
       String _plus_1 = (_plus + ".java");
       CharSequence _compile = this.compile(e);
       fsa.generateFile(_plus_1, _compile);
+    }
+    TreeIterator<EObject> _allContents_1 = resource.getAllContents();
+    Iterable<EObject> _iterable_1 = IteratorExtensions.<EObject>toIterable(_allContents_1);
+    Iterable<Event> _filter_1 = Iterables.<Event>filter(_iterable_1, Event.class);
+    for (final Event e_1 : _filter_1) {
+      String _name_1 = e_1.getName();
+      String _plus_2 = ("/simulator/" + _name_1);
+      String _plus_3 = (_plus_2 + ".java");
+      CharSequence _compileEvent = this.compileEvent(e_1);
+      fsa.generateFile(_plus_3, _compileEvent);
     }
   }
   
@@ -54,7 +65,51 @@ public class SimulatorGenerator implements IGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
+    _builder.newLine();
+    return _builder;
+  }
+  
+  public CharSequence compileEvent(final Event e) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
+    _builder.append("package simulator;");
+    _builder.newLine();
+    _builder.append("import eu.scape_project.*;");
+    _builder.newLine();
+    _builder.append("import java.util.List;");
+    _builder.newLine();
+    _builder.append("public class ");
+    String _name = e.getName();
+    _builder.append(_name, "");
+    _builder.append(" extends Event{ ");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t \t");
+    _builder.newLine();
     _builder.append("\t");
+    _builder.append("protected List<IEvent> scheduleNextEvents() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return null;\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("protected void executeEvent() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("System.out.println(\"Hello  ");
+    String _name_1 = e.getName();
+    _builder.append(_name_1, "		");
+    _builder.append(" \"); ");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
     _builder.newLine();
     return _builder;
   }

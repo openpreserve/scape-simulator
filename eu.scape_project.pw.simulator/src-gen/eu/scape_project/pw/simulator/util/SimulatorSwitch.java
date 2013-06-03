@@ -79,10 +79,10 @@ public class SimulatorSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case SimulatorPackage.ENTITY:
+      case SimulatorPackage.EVENT:
       {
-        Entity entity = (Entity)theEObject;
-        T result = caseEntity(entity);
+        Event event = (Event)theEObject;
+        T result = caseEvent(event);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -107,17 +107,17 @@ public class SimulatorSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Entity</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Event</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Entity</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Event</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseEntity(Entity object)
+  public T caseEvent(Event object)
   {
     return null;
   }

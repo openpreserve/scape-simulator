@@ -76,13 +76,13 @@ public interface SimulatorPackage extends EPackage
   int SIMULATION__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Entities</b></em>' containment reference list.
+   * The feature id for the '<em><b>Events</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SIMULATION__ENTITIES = 1;
+  int SIMULATION__EVENTS = 1;
 
   /**
    * The number of structural features of the '<em>Simulation</em>' class.
@@ -94,14 +94,14 @@ public interface SimulatorPackage extends EPackage
   int SIMULATION_FEATURE_COUNT = 2;
 
   /**
-   * The meta object id for the '{@link eu.scape_project.pw.simulator.impl.EntityImpl <em>Entity</em>}' class.
+   * The meta object id for the '{@link eu.scape_project.pw.simulator.impl.EventImpl <em>Event</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see eu.scape_project.pw.simulator.impl.EntityImpl
-   * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getEntity()
+   * @see eu.scape_project.pw.simulator.impl.EventImpl
+   * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getEvent()
    * @generated
    */
-  int ENTITY = 1;
+  int EVENT = 1;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -110,16 +110,25 @@ public interface SimulatorPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ENTITY__NAME = 0;
+  int EVENT__NAME = 0;
 
   /**
-   * The number of structural features of the '<em>Entity</em>' class.
+   * The feature id for the '<em><b>Events</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ENTITY_FEATURE_COUNT = 1;
+  int EVENT__EVENTS = 1;
+
+  /**
+   * The number of structural features of the '<em>Event</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EVENT_FEATURE_COUNT = 2;
 
 
   /**
@@ -144,36 +153,47 @@ public interface SimulatorPackage extends EPackage
   EAttribute getSimulation_Name();
 
   /**
-   * Returns the meta object for the containment reference list '{@link eu.scape_project.pw.simulator.Simulation#getEntities <em>Entities</em>}'.
+   * Returns the meta object for the containment reference list '{@link eu.scape_project.pw.simulator.Simulation#getEvents <em>Events</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Entities</em>'.
-   * @see eu.scape_project.pw.simulator.Simulation#getEntities()
+   * @return the meta object for the containment reference list '<em>Events</em>'.
+   * @see eu.scape_project.pw.simulator.Simulation#getEvents()
    * @see #getSimulation()
    * @generated
    */
-  EReference getSimulation_Entities();
+  EReference getSimulation_Events();
 
   /**
-   * Returns the meta object for class '{@link eu.scape_project.pw.simulator.Entity <em>Entity</em>}'.
+   * Returns the meta object for class '{@link eu.scape_project.pw.simulator.Event <em>Event</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Entity</em>'.
-   * @see eu.scape_project.pw.simulator.Entity
+   * @return the meta object for class '<em>Event</em>'.
+   * @see eu.scape_project.pw.simulator.Event
    * @generated
    */
-  EClass getEntity();
+  EClass getEvent();
 
   /**
-   * Returns the meta object for the attribute '{@link eu.scape_project.pw.simulator.Entity#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link eu.scape_project.pw.simulator.Event#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see eu.scape_project.pw.simulator.Entity#getName()
-   * @see #getEntity()
+   * @see eu.scape_project.pw.simulator.Event#getName()
+   * @see #getEvent()
    * @generated
    */
-  EAttribute getEntity_Name();
+  EAttribute getEvent_Name();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link eu.scape_project.pw.simulator.Event#getEvents <em>Events</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Events</em>'.
+   * @see eu.scape_project.pw.simulator.Event#getEvents()
+   * @see #getEvent()
+   * @generated
+   */
+  EReference getEvent_Events();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -217,22 +237,22 @@ public interface SimulatorPackage extends EPackage
     EAttribute SIMULATION__NAME = eINSTANCE.getSimulation_Name();
 
     /**
-     * The meta object literal for the '<em><b>Entities</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Events</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference SIMULATION__ENTITIES = eINSTANCE.getSimulation_Entities();
+    EReference SIMULATION__EVENTS = eINSTANCE.getSimulation_Events();
 
     /**
-     * The meta object literal for the '{@link eu.scape_project.pw.simulator.impl.EntityImpl <em>Entity</em>}' class.
+     * The meta object literal for the '{@link eu.scape_project.pw.simulator.impl.EventImpl <em>Event</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see eu.scape_project.pw.simulator.impl.EntityImpl
-     * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getEntity()
+     * @see eu.scape_project.pw.simulator.impl.EventImpl
+     * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getEvent()
      * @generated
      */
-    EClass ENTITY = eINSTANCE.getEntity();
+    EClass EVENT = eINSTANCE.getEvent();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -240,7 +260,15 @@ public interface SimulatorPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ENTITY__NAME = eINSTANCE.getEntity_Name();
+    EAttribute EVENT__NAME = eINSTANCE.getEvent_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Events</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EVENT__EVENTS = eINSTANCE.getEvent_Events();
 
   }
 

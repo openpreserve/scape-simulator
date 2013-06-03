@@ -32,13 +32,13 @@ public interface SimulatorFactory extends EFactory
   Simulation createSimulation();
 
   /**
-   * Returns a new object of class '<em>Entity</em>'.
+   * Returns a new object of class '<em>Event</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Entity</em>'.
+   * @return a new object of class '<em>Event</em>'.
    * @generated
    */
-  Entity createEntity();
+  Event createEvent();
 
   /**
    * Returns the package supported by this factory.

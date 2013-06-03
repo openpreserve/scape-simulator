@@ -1,6 +1,8 @@
 package eu.scape_project;
 
-public interface IEvent {
+public interface IEvent extends Comparable<IEvent> {
 
-	void execute();
+	void execute(EventProcessor eP);
+	
+	long getScheduleTime();
 }

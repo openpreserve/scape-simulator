@@ -80,9 +80,9 @@ public class SimulatorAdapterFactory extends AdapterFactoryImpl
         return createSimulationAdapter();
       }
       @Override
-      public Adapter caseEntity(Entity object)
+      public Adapter caseEvent(Event object)
       {
-        return createEntityAdapter();
+        return createEventAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -122,16 +122,16 @@ public class SimulatorAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link eu.scape_project.pw.simulator.Entity <em>Entity</em>}'.
+   * Creates a new adapter for an object of class '{@link eu.scape_project.pw.simulator.Event <em>Event</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see eu.scape_project.pw.simulator.Entity
+   * @see eu.scape_project.pw.simulator.Event
    * @generated
    */
-  public Adapter createEntityAdapter()
+  public Adapter createEventAdapter()
   {
     return null;
   }

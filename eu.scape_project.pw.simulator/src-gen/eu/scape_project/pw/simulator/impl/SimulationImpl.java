@@ -2,7 +2,7 @@
  */
 package eu.scape_project.pw.simulator.impl;
 
-import eu.scape_project.pw.simulator.Entity;
+import eu.scape_project.pw.simulator.Event;
 import eu.scape_project.pw.simulator.Simulation;
 import eu.scape_project.pw.simulator.SimulatorPackage;
 
@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link eu.scape_project.pw.simulator.impl.SimulationImpl#getName <em>Name</em>}</li>
- *   <li>{@link eu.scape_project.pw.simulator.impl.SimulationImpl#getEntities <em>Entities</em>}</li>
+ *   <li>{@link eu.scape_project.pw.simulator.impl.SimulationImpl#getEvents <em>Events</em>}</li>
  * </ul>
  * </p>
  *
@@ -59,14 +59,14 @@ public class SimulationImpl extends MinimalEObjectImpl.Container implements Simu
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getEntities() <em>Entities</em>}' containment reference list.
+   * The cached value of the '{@link #getEvents() <em>Events</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getEntities()
+   * @see #getEvents()
    * @generated
    * @ordered
    */
-  protected EList<Entity> entities;
+  protected EList<Event> events;
 
   /**
    * <!-- begin-user-doc -->
@@ -117,13 +117,13 @@ public class SimulationImpl extends MinimalEObjectImpl.Container implements Simu
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Entity> getEntities()
+  public EList<Event> getEvents()
   {
-    if (entities == null)
+    if (events == null)
     {
-      entities = new EObjectContainmentEList<Entity>(Entity.class, this, SimulatorPackage.SIMULATION__ENTITIES);
+      events = new EObjectContainmentEList<Event>(Event.class, this, SimulatorPackage.SIMULATION__EVENTS);
     }
-    return entities;
+    return events;
   }
 
   /**
@@ -136,8 +136,8 @@ public class SimulationImpl extends MinimalEObjectImpl.Container implements Simu
   {
     switch (featureID)
     {
-      case SimulatorPackage.SIMULATION__ENTITIES:
-        return ((InternalEList<?>)getEntities()).basicRemove(otherEnd, msgs);
+      case SimulatorPackage.SIMULATION__EVENTS:
+        return ((InternalEList<?>)getEvents()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -154,8 +154,8 @@ public class SimulationImpl extends MinimalEObjectImpl.Container implements Simu
     {
       case SimulatorPackage.SIMULATION__NAME:
         return getName();
-      case SimulatorPackage.SIMULATION__ENTITIES:
-        return getEntities();
+      case SimulatorPackage.SIMULATION__EVENTS:
+        return getEvents();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -174,9 +174,9 @@ public class SimulationImpl extends MinimalEObjectImpl.Container implements Simu
       case SimulatorPackage.SIMULATION__NAME:
         setName((String)newValue);
         return;
-      case SimulatorPackage.SIMULATION__ENTITIES:
-        getEntities().clear();
-        getEntities().addAll((Collection<? extends Entity>)newValue);
+      case SimulatorPackage.SIMULATION__EVENTS:
+        getEvents().clear();
+        getEvents().addAll((Collection<? extends Event>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -195,8 +195,8 @@ public class SimulationImpl extends MinimalEObjectImpl.Container implements Simu
       case SimulatorPackage.SIMULATION__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case SimulatorPackage.SIMULATION__ENTITIES:
-        getEntities().clear();
+      case SimulatorPackage.SIMULATION__EVENTS:
+        getEvents().clear();
         return;
     }
     super.eUnset(featureID);
@@ -214,8 +214,8 @@ public class SimulationImpl extends MinimalEObjectImpl.Container implements Simu
     {
       case SimulatorPackage.SIMULATION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case SimulatorPackage.SIMULATION__ENTITIES:
-        return entities != null && !entities.isEmpty();
+      case SimulatorPackage.SIMULATION__EVENTS:
+        return events != null && !events.isEmpty();
     }
     return super.eIsSet(featureID);
   }

@@ -25,15 +25,15 @@ public class SimulatorGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameSTRINGTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cEntitiesAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cEntitiesEntityParserRuleCall_3_0 = (RuleCall)cEntitiesAssignment_3.eContents().get(0);
+		private final Assignment cEventsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cEventsEventParserRuleCall_3_0 = (RuleCall)cEventsAssignment_3.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Simulation:
-		//	"Simulation" name=STRING "{" entities+=Entity+ "}";
+		//	"Simulation" name=STRING "{" events+=Event* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"Simulation" name=STRING "{" entities+=Entity+ "}"
+		//"Simulation" name=STRING "{" events+=Event* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"Simulation"
@@ -48,34 +48,38 @@ public class SimulatorGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
-		//entities+=Entity+
-		public Assignment getEntitiesAssignment_3() { return cEntitiesAssignment_3; }
+		//events+=Event*
+		public Assignment getEventsAssignment_3() { return cEventsAssignment_3; }
 
-		//Entity
-		public RuleCall getEntitiesEntityParserRuleCall_3_0() { return cEntitiesEntityParserRuleCall_3_0; }
+		//Event
+		public RuleCall getEventsEventParserRuleCall_3_0() { return cEventsEventParserRuleCall_3_0; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
-	public class EntityElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Entity");
+	public class EventElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Event");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cCollectionKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Keyword cEventKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameSTRINGTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cSchedulesKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cEventsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cEventsEventParserRuleCall_3_1_0 = (RuleCall)cEventsAssignment_3_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
-		//Entity:
-		//	"Collection" name=STRING "{" "}";
+		//Event:
+		//	"Event" name=STRING "{" ("schedules =>" events+=Event+)? "}";
 		public ParserRule getRule() { return rule; }
 
-		//"Collection" name=STRING "{" "}"
+		//"Event" name=STRING "{" ("schedules =>" events+=Event+)? "}"
 		public Group getGroup() { return cGroup; }
 
-		//"Collection"
-		public Keyword getCollectionKeyword_0() { return cCollectionKeyword_0; }
+		//"Event"
+		public Keyword getEventKeyword_0() { return cEventKeyword_0; }
 
 		//name=STRING
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
@@ -86,13 +90,25 @@ public class SimulatorGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
+		//("schedules =>" events+=Event+)?
+		public Group getGroup_3() { return cGroup_3; }
+
+		//"schedules =>"
+		public Keyword getSchedulesKeyword_3_0() { return cSchedulesKeyword_3_0; }
+
+		//events+=Event+
+		public Assignment getEventsAssignment_3_1() { return cEventsAssignment_3_1; }
+
+		//Event
+		public RuleCall getEventsEventParserRuleCall_3_1_0() { return cEventsEventParserRuleCall_3_1_0; }
+
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
+		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 	
 	
 	private SimulationElements pSimulation;
-	private EntityElements pEntity;
+	private EventElements pEvent;
 	
 	private final Grammar grammar;
 
@@ -133,7 +149,7 @@ public class SimulatorGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//Simulation:
-	//	"Simulation" name=STRING "{" entities+=Entity+ "}";
+	//	"Simulation" name=STRING "{" events+=Event* "}";
 	public SimulationElements getSimulationAccess() {
 		return (pSimulation != null) ? pSimulation : (pSimulation = new SimulationElements());
 	}
@@ -142,14 +158,14 @@ public class SimulatorGrammarAccess extends AbstractGrammarElementFinder {
 		return getSimulationAccess().getRule();
 	}
 
-	//Entity:
-	//	"Collection" name=STRING "{" "}";
-	public EntityElements getEntityAccess() {
-		return (pEntity != null) ? pEntity : (pEntity = new EntityElements());
+	//Event:
+	//	"Event" name=STRING "{" ("schedules =>" events+=Event+)? "}";
+	public EventElements getEventAccess() {
+		return (pEvent != null) ? pEvent : (pEvent = new EventElements());
 	}
 	
-	public ParserRule getEntityRule() {
-		return getEntityAccess().getRule();
+	public ParserRule getEventRule() {
+		return getEventAccess().getRule();
 	}
 
 	//terminal ID:
