@@ -41,9 +41,7 @@ class SimulatorGenerator implements IGenerator {
 		import java.util.List;
 		public class «e.name» extends Event{ 
 			 	
-			protected List<IEvent> scheduleNextEvents() {
-				return null;	
-			}
+
 	
 			protected void executeEvent() {
 				System.out.println("Hello  «e.name» "); 

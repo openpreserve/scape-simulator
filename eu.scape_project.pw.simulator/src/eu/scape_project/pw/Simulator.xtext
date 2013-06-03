@@ -4,14 +4,22 @@ generate simulator "http://www.scape_project.eu/pw/Simulator"
 
 Simulation : 
 	'Simulation' name=STRING '{'
-		(events+=Event)*
+		'events:' (events+=Event)*
+		'scheduling:' (scheduling+=Scheduling)*
 	'}'
 ;
 
 Event :
 	'Event' name=STRING '{'
-	
-	 ('schedules =>' (events+=Event)+)?
-	 
+		 
 	'}' 
+;
+
+Scheduling: EventScheduling | ConditionalScheduling;
+
+EventScheduling :
+	'true'
+;
+ConditionalScheduling: 
+	'false'
 ;

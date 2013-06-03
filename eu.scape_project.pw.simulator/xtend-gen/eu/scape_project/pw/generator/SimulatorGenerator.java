@@ -85,14 +85,6 @@ public class SimulatorGenerator implements IGenerator {
     _builder.newLineIfNotEmpty();
     _builder.append("\t \t");
     _builder.newLine();
-    _builder.append("\t");
-    _builder.append("protected List<IEvent> scheduleNextEvents() {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("return null;\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
     _builder.newLine();
     _builder.append("\t");
     _builder.newLine();
