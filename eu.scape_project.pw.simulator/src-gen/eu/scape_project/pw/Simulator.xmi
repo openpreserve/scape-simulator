@@ -14,8 +14,13 @@
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
         </elements>
         <elements xsi:type="xtext:Keyword" value="{"/>
+        <elements xsi:type="xtext:Keyword" value="events:"/>
         <elements xsi:type="xtext:Assignment" cardinality="*" feature="events" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="scheduling:"/>
+        <elements xsi:type="xtext:Assignment" cardinality="*" feature="scheduling" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
         </elements>
         <elements xsi:type="xtext:Keyword" value="}"/>
       </alternatives>
@@ -30,10 +35,95 @@
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
         </elements>
         <elements xsi:type="xtext:Keyword" value="{"/>
+        <elements xsi:type="xtext:Keyword" value="}"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Scheduling">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.scape_project.eu/pw/Simulator#//Scheduling"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="EventScheduling">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.scape_project.eu/pw/Simulator#//EventScheduling"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="schedule "/>
+        <elements xsi:type="xtext:Assignment" feature="schedule" operator="=">
+          <terminal xsi:type="xtext:CrossReference">
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://www.scape_project.eu/pw/Simulator#//Event"/>
+            </type>
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </terminal>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="{"/>
         <elements xsi:type="xtext:Group" cardinality="?">
-          <elements xsi:type="xtext:Keyword" value="schedules =>"/>
-          <elements xsi:type="xtext:Assignment" cardinality="+" feature="events" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+          <elements xsi:type="xtext:Keyword" value="start"/>
+          <elements xsi:type="xtext:Keyword" value="="/>
+          <elements xsi:type="xtext:Assignment" feature="start" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value=";"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="end"/>
+          <elements xsi:type="xtext:Keyword" value="="/>
+          <elements xsi:type="xtext:Assignment" feature="end" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value=";"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="repeat"/>
+          <elements xsi:type="xtext:Keyword" value="="/>
+          <elements xsi:type="xtext:Assignment" feature="repeat" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value=";"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="every"/>
+          <elements xsi:type="xtext:Keyword" value="="/>
+          <elements xsi:type="xtext:Assignment" feature="every" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value=";"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="}"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="ConditionalScheduling">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.scape_project.eu/pw/Simulator#//ConditionalScheduling"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Assignment" feature="observes" operator="=">
+          <terminal xsi:type="xtext:CrossReference">
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://www.scape_project.eu/pw/Simulator#//Event"/>
+            </type>
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </terminal>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="=>"/>
+        <elements xsi:type="xtext:Assignment" feature="schedule" operator="=">
+          <terminal xsi:type="xtext:CrossReference">
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://www.scape_project.eu/pw/Simulator#//Event"/>
+            </type>
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </terminal>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="{"/>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="delay"/>
+          <elements xsi:type="xtext:Assignment" feature="delay" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
           </elements>
         </elements>
         <elements xsi:type="xtext:Keyword" value="}"/>

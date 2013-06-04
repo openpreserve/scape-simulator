@@ -10,10 +10,23 @@
     <genClasses ecoreClass="Simulator.ecore#//Simulation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//Simulation/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Simulator.ecore#//Simulation/events"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Simulator.ecore#//Simulation/scheduling"/>
     </genClasses>
     <genClasses ecoreClass="Simulator.ecore#//Event">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//Event/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Simulator.ecore#//Event/events"/>
+    </genClasses>
+    <genClasses ecoreClass="Simulator.ecore#//Scheduling">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Simulator.ecore#//Scheduling/schedule"/>
+    </genClasses>
+    <genClasses ecoreClass="Simulator.ecore#//EventScheduling">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//EventScheduling/start"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//EventScheduling/end"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//EventScheduling/repeat"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//EventScheduling/every"/>
+    </genClasses>
+    <genClasses ecoreClass="Simulator.ecore#//ConditionalScheduling">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Simulator.ecore#//ConditionalScheduling/observes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//ConditionalScheduling/delay"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

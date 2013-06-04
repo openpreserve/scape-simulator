@@ -85,6 +85,21 @@ public class SimulatorAdapterFactory extends AdapterFactoryImpl
         return createEventAdapter();
       }
       @Override
+      public Adapter caseScheduling(Scheduling object)
+      {
+        return createSchedulingAdapter();
+      }
+      @Override
+      public Adapter caseEventScheduling(EventScheduling object)
+      {
+        return createEventSchedulingAdapter();
+      }
+      @Override
+      public Adapter caseConditionalScheduling(ConditionalScheduling object)
+      {
+        return createConditionalSchedulingAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -132,6 +147,51 @@ public class SimulatorAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEventAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link eu.scape_project.pw.simulator.Scheduling <em>Scheduling</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see eu.scape_project.pw.simulator.Scheduling
+   * @generated
+   */
+  public Adapter createSchedulingAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link eu.scape_project.pw.simulator.EventScheduling <em>Event Scheduling</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see eu.scape_project.pw.simulator.EventScheduling
+   * @generated
+   */
+  public Adapter createEventSchedulingAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link eu.scape_project.pw.simulator.ConditionalScheduling <em>Conditional Scheduling</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see eu.scape_project.pw.simulator.ConditionalScheduling
+   * @generated
+   */
+  public Adapter createConditionalSchedulingAdapter()
   {
     return null;
   }

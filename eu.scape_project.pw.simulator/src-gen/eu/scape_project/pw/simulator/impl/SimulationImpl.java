@@ -3,6 +3,7 @@
 package eu.scape_project.pw.simulator.impl;
 
 import eu.scape_project.pw.simulator.Event;
+import eu.scape_project.pw.simulator.Scheduling;
 import eu.scape_project.pw.simulator.Simulation;
 import eu.scape_project.pw.simulator.SimulatorPackage;
 
@@ -31,6 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link eu.scape_project.pw.simulator.impl.SimulationImpl#getName <em>Name</em>}</li>
  *   <li>{@link eu.scape_project.pw.simulator.impl.SimulationImpl#getEvents <em>Events</em>}</li>
+ *   <li>{@link eu.scape_project.pw.simulator.impl.SimulationImpl#getScheduling <em>Scheduling</em>}</li>
  * </ul>
  * </p>
  *
@@ -67,6 +69,16 @@ public class SimulationImpl extends MinimalEObjectImpl.Container implements Simu
    * @ordered
    */
   protected EList<Event> events;
+
+  /**
+   * The cached value of the '{@link #getScheduling() <em>Scheduling</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getScheduling()
+   * @generated
+   * @ordered
+   */
+  protected EList<Scheduling> scheduling;
 
   /**
    * <!-- begin-user-doc -->
@@ -131,6 +143,20 @@ public class SimulationImpl extends MinimalEObjectImpl.Container implements Simu
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<Scheduling> getScheduling()
+  {
+    if (scheduling == null)
+    {
+      scheduling = new EObjectContainmentEList<Scheduling>(Scheduling.class, this, SimulatorPackage.SIMULATION__SCHEDULING);
+    }
+    return scheduling;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -138,6 +164,8 @@ public class SimulationImpl extends MinimalEObjectImpl.Container implements Simu
     {
       case SimulatorPackage.SIMULATION__EVENTS:
         return ((InternalEList<?>)getEvents()).basicRemove(otherEnd, msgs);
+      case SimulatorPackage.SIMULATION__SCHEDULING:
+        return ((InternalEList<?>)getScheduling()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -156,6 +184,8 @@ public class SimulationImpl extends MinimalEObjectImpl.Container implements Simu
         return getName();
       case SimulatorPackage.SIMULATION__EVENTS:
         return getEvents();
+      case SimulatorPackage.SIMULATION__SCHEDULING:
+        return getScheduling();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -178,6 +208,10 @@ public class SimulationImpl extends MinimalEObjectImpl.Container implements Simu
         getEvents().clear();
         getEvents().addAll((Collection<? extends Event>)newValue);
         return;
+      case SimulatorPackage.SIMULATION__SCHEDULING:
+        getScheduling().clear();
+        getScheduling().addAll((Collection<? extends Scheduling>)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -198,6 +232,9 @@ public class SimulationImpl extends MinimalEObjectImpl.Container implements Simu
       case SimulatorPackage.SIMULATION__EVENTS:
         getEvents().clear();
         return;
+      case SimulatorPackage.SIMULATION__SCHEDULING:
+        getScheduling().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -216,6 +253,8 @@ public class SimulationImpl extends MinimalEObjectImpl.Container implements Simu
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case SimulatorPackage.SIMULATION__EVENTS:
         return events != null && !events.isEmpty();
+      case SimulatorPackage.SIMULATION__SCHEDULING:
+        return scheduling != null && !scheduling.isEmpty();
     }
     return super.eIsSet(featureID);
   }

@@ -25,15 +25,19 @@ public class SimulatorGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameSTRINGTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cEventsAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cEventsEventParserRuleCall_3_0 = (RuleCall)cEventsAssignment_3.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cEventsKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Assignment cEventsAssignment_4 = (Assignment)cGroup.eContents().get(4);
+		private final RuleCall cEventsEventParserRuleCall_4_0 = (RuleCall)cEventsAssignment_4.eContents().get(0);
+		private final Keyword cSchedulingKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		private final Assignment cSchedulingAssignment_6 = (Assignment)cGroup.eContents().get(6);
+		private final RuleCall cSchedulingSchedulingParserRuleCall_6_0 = (RuleCall)cSchedulingAssignment_6.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//Simulation:
-		//	"Simulation" name=STRING "{" events+=Event* "}";
+		//	"Simulation" name=STRING "{" "events:" events+=Event* "scheduling:" scheduling+=Scheduling* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"Simulation" name=STRING "{" events+=Event* "}"
+		//"Simulation" name=STRING "{" "events:" events+=Event* "scheduling:" scheduling+=Scheduling* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"Simulation"
@@ -48,14 +52,26 @@ public class SimulatorGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
+		//"events:"
+		public Keyword getEventsKeyword_3() { return cEventsKeyword_3; }
+
 		//events+=Event*
-		public Assignment getEventsAssignment_3() { return cEventsAssignment_3; }
+		public Assignment getEventsAssignment_4() { return cEventsAssignment_4; }
 
 		//Event
-		public RuleCall getEventsEventParserRuleCall_3_0() { return cEventsEventParserRuleCall_3_0; }
+		public RuleCall getEventsEventParserRuleCall_4_0() { return cEventsEventParserRuleCall_4_0; }
+
+		//"scheduling:"
+		public Keyword getSchedulingKeyword_5() { return cSchedulingKeyword_5; }
+
+		//scheduling+=Scheduling*
+		public Assignment getSchedulingAssignment_6() { return cSchedulingAssignment_6; }
+
+		//Scheduling
+		public RuleCall getSchedulingSchedulingParserRuleCall_6_0() { return cSchedulingSchedulingParserRuleCall_6_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
 	}
 
 	public class EventElements extends AbstractParserRuleElementFinder {
@@ -65,17 +81,13 @@ public class SimulatorGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameSTRINGTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cSchedulesKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cEventsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cEventsEventParserRuleCall_3_1_0 = (RuleCall)cEventsAssignment_3_1.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//Event:
-		//	"Event" name=STRING "{" ("schedules =>" events+=Event+)? "}";
+		//	"Event" name=STRING "{" "}";
 		public ParserRule getRule() { return rule; }
 
-		//"Event" name=STRING "{" ("schedules =>" events+=Event+)? "}"
+		//"Event" name=STRING "{" "}"
 		public Group getGroup() { return cGroup; }
 
 		//"Event"
@@ -90,25 +102,234 @@ public class SimulatorGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
-		//("schedules =>" events+=Event+)?
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
+	}
+
+	public class SchedulingElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Scheduling");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cEventSchedulingParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cConditionalSchedulingParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//Scheduling:
+		//	EventScheduling | ConditionalScheduling;
+		public ParserRule getRule() { return rule; }
+
+		//EventScheduling | ConditionalScheduling
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//EventScheduling
+		public RuleCall getEventSchedulingParserRuleCall_0() { return cEventSchedulingParserRuleCall_0; }
+
+		//ConditionalScheduling
+		public RuleCall getConditionalSchedulingParserRuleCall_1() { return cConditionalSchedulingParserRuleCall_1; }
+	}
+
+	public class EventSchedulingElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EventScheduling");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cScheduleKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cScheduleAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cScheduleEventCrossReference_1_0 = (CrossReference)cScheduleAssignment_1.eContents().get(0);
+		private final RuleCall cScheduleEventIDTerminalRuleCall_1_0_1 = (RuleCall)cScheduleEventCrossReference_1_0.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cStartKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
+		private final Assignment cStartAssignment_3_2 = (Assignment)cGroup_3.eContents().get(2);
+		private final RuleCall cStartINTTerminalRuleCall_3_2_0 = (RuleCall)cStartAssignment_3_2.eContents().get(0);
+		private final Keyword cSemicolonKeyword_3_3 = (Keyword)cGroup_3.eContents().get(3);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cEndKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
+		private final Assignment cEndAssignment_4_2 = (Assignment)cGroup_4.eContents().get(2);
+		private final RuleCall cEndINTTerminalRuleCall_4_2_0 = (RuleCall)cEndAssignment_4_2.eContents().get(0);
+		private final Keyword cSemicolonKeyword_4_3 = (Keyword)cGroup_4.eContents().get(3);
+		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
+		private final Keyword cRepeatKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_5_1 = (Keyword)cGroup_5.eContents().get(1);
+		private final Assignment cRepeatAssignment_5_2 = (Assignment)cGroup_5.eContents().get(2);
+		private final RuleCall cRepeatINTTerminalRuleCall_5_2_0 = (RuleCall)cRepeatAssignment_5_2.eContents().get(0);
+		private final Keyword cSemicolonKeyword_5_3 = (Keyword)cGroup_5.eContents().get(3);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cEveryKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Keyword cEqualsSignKeyword_6_1 = (Keyword)cGroup_6.eContents().get(1);
+		private final Assignment cEveryAssignment_6_2 = (Assignment)cGroup_6.eContents().get(2);
+		private final RuleCall cEveryINTTerminalRuleCall_6_2_0 = (RuleCall)cEveryAssignment_6_2.eContents().get(0);
+		private final Keyword cSemicolonKeyword_6_3 = (Keyword)cGroup_6.eContents().get(3);
+		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		
+		//EventScheduling:
+		//	"schedule " schedule=[Event] "{" ("start" "=" start=INT ";")? ("end" "=" end=INT ";")? ("repeat" "=" repeat=INT ";")?
+		//	("every" "=" every=INT ";")? "}";
+		public ParserRule getRule() { return rule; }
+
+		//"schedule " schedule=[Event] "{" ("start" "=" start=INT ";")? ("end" "=" end=INT ";")? ("repeat" "=" repeat=INT ";")?
+		//("every" "=" every=INT ";")? "}"
+		public Group getGroup() { return cGroup; }
+
+		//"schedule "
+		public Keyword getScheduleKeyword_0() { return cScheduleKeyword_0; }
+
+		//schedule=[Event]
+		public Assignment getScheduleAssignment_1() { return cScheduleAssignment_1; }
+
+		//[Event]
+		public CrossReference getScheduleEventCrossReference_1_0() { return cScheduleEventCrossReference_1_0; }
+
+		//ID
+		public RuleCall getScheduleEventIDTerminalRuleCall_1_0_1() { return cScheduleEventIDTerminalRuleCall_1_0_1; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
+
+		//("start" "=" start=INT ";")?
 		public Group getGroup_3() { return cGroup_3; }
 
-		//"schedules =>"
-		public Keyword getSchedulesKeyword_3_0() { return cSchedulesKeyword_3_0; }
+		//"start"
+		public Keyword getStartKeyword_3_0() { return cStartKeyword_3_0; }
 
-		//events+=Event+
-		public Assignment getEventsAssignment_3_1() { return cEventsAssignment_3_1; }
+		//"="
+		public Keyword getEqualsSignKeyword_3_1() { return cEqualsSignKeyword_3_1; }
 
-		//Event
-		public RuleCall getEventsEventParserRuleCall_3_1_0() { return cEventsEventParserRuleCall_3_1_0; }
+		//start=INT
+		public Assignment getStartAssignment_3_2() { return cStartAssignment_3_2; }
+
+		//INT
+		public RuleCall getStartINTTerminalRuleCall_3_2_0() { return cStartINTTerminalRuleCall_3_2_0; }
+
+		//";"
+		public Keyword getSemicolonKeyword_3_3() { return cSemicolonKeyword_3_3; }
+
+		//("end" "=" end=INT ";")?
+		public Group getGroup_4() { return cGroup_4; }
+
+		//"end"
+		public Keyword getEndKeyword_4_0() { return cEndKeyword_4_0; }
+
+		//"="
+		public Keyword getEqualsSignKeyword_4_1() { return cEqualsSignKeyword_4_1; }
+
+		//end=INT
+		public Assignment getEndAssignment_4_2() { return cEndAssignment_4_2; }
+
+		//INT
+		public RuleCall getEndINTTerminalRuleCall_4_2_0() { return cEndINTTerminalRuleCall_4_2_0; }
+
+		//";"
+		public Keyword getSemicolonKeyword_4_3() { return cSemicolonKeyword_4_3; }
+
+		//("repeat" "=" repeat=INT ";")?
+		public Group getGroup_5() { return cGroup_5; }
+
+		//"repeat"
+		public Keyword getRepeatKeyword_5_0() { return cRepeatKeyword_5_0; }
+
+		//"="
+		public Keyword getEqualsSignKeyword_5_1() { return cEqualsSignKeyword_5_1; }
+
+		//repeat=INT
+		public Assignment getRepeatAssignment_5_2() { return cRepeatAssignment_5_2; }
+
+		//INT
+		public RuleCall getRepeatINTTerminalRuleCall_5_2_0() { return cRepeatINTTerminalRuleCall_5_2_0; }
+
+		//";"
+		public Keyword getSemicolonKeyword_5_3() { return cSemicolonKeyword_5_3; }
+
+		//("every" "=" every=INT ";")?
+		public Group getGroup_6() { return cGroup_6; }
+
+		//"every"
+		public Keyword getEveryKeyword_6_0() { return cEveryKeyword_6_0; }
+
+		//"="
+		public Keyword getEqualsSignKeyword_6_1() { return cEqualsSignKeyword_6_1; }
+
+		//every=INT
+		public Assignment getEveryAssignment_6_2() { return cEveryAssignment_6_2; }
+
+		//INT
+		public RuleCall getEveryINTTerminalRuleCall_6_2_0() { return cEveryINTTerminalRuleCall_6_2_0; }
+
+		//";"
+		public Keyword getSemicolonKeyword_6_3() { return cSemicolonKeyword_6_3; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
+		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
+	}
+
+	public class ConditionalSchedulingElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ConditionalScheduling");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cObservesAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final CrossReference cObservesEventCrossReference_0_0 = (CrossReference)cObservesAssignment_0.eContents().get(0);
+		private final RuleCall cObservesEventIDTerminalRuleCall_0_0_1 = (RuleCall)cObservesEventCrossReference_0_0.eContents().get(1);
+		private final Keyword cEqualsSignGreaterThanSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cScheduleAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cScheduleEventCrossReference_2_0 = (CrossReference)cScheduleAssignment_2.eContents().get(0);
+		private final RuleCall cScheduleEventIDTerminalRuleCall_2_0_1 = (RuleCall)cScheduleEventCrossReference_2_0.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cDelayKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cDelayAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cDelayINTTerminalRuleCall_4_1_0 = (RuleCall)cDelayAssignment_4_1.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
+		
+		//ConditionalScheduling:
+		//	observes=[Event] "=>" schedule=[Event] "{" ("delay" delay=INT)? "}";
+		public ParserRule getRule() { return rule; }
+
+		//observes=[Event] "=>" schedule=[Event] "{" ("delay" delay=INT)? "}"
+		public Group getGroup() { return cGroup; }
+
+		//observes=[Event]
+		public Assignment getObservesAssignment_0() { return cObservesAssignment_0; }
+
+		//[Event]
+		public CrossReference getObservesEventCrossReference_0_0() { return cObservesEventCrossReference_0_0; }
+
+		//ID
+		public RuleCall getObservesEventIDTerminalRuleCall_0_0_1() { return cObservesEventIDTerminalRuleCall_0_0_1; }
+
+		//"=>"
+		public Keyword getEqualsSignGreaterThanSignKeyword_1() { return cEqualsSignGreaterThanSignKeyword_1; }
+
+		//schedule=[Event]
+		public Assignment getScheduleAssignment_2() { return cScheduleAssignment_2; }
+
+		//[Event]
+		public CrossReference getScheduleEventCrossReference_2_0() { return cScheduleEventCrossReference_2_0; }
+
+		//ID
+		public RuleCall getScheduleEventIDTerminalRuleCall_2_0_1() { return cScheduleEventIDTerminalRuleCall_2_0_1; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
+
+		//("delay" delay=INT)?
+		public Group getGroup_4() { return cGroup_4; }
+
+		//"delay"
+		public Keyword getDelayKeyword_4_0() { return cDelayKeyword_4_0; }
+
+		//delay=INT
+		public Assignment getDelayAssignment_4_1() { return cDelayAssignment_4_1; }
+
+		//INT
+		public RuleCall getDelayINTTerminalRuleCall_4_1_0() { return cDelayINTTerminalRuleCall_4_1_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
 	}
 	
 	
 	private SimulationElements pSimulation;
 	private EventElements pEvent;
+	private SchedulingElements pScheduling;
+	private EventSchedulingElements pEventScheduling;
+	private ConditionalSchedulingElements pConditionalScheduling;
 	
 	private final Grammar grammar;
 
@@ -149,7 +370,7 @@ public class SimulatorGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//Simulation:
-	//	"Simulation" name=STRING "{" events+=Event* "}";
+	//	"Simulation" name=STRING "{" "events:" events+=Event* "scheduling:" scheduling+=Scheduling* "}";
 	public SimulationElements getSimulationAccess() {
 		return (pSimulation != null) ? pSimulation : (pSimulation = new SimulationElements());
 	}
@@ -159,13 +380,44 @@ public class SimulatorGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Event:
-	//	"Event" name=STRING "{" ("schedules =>" events+=Event+)? "}";
+	//	"Event" name=STRING "{" "}";
 	public EventElements getEventAccess() {
 		return (pEvent != null) ? pEvent : (pEvent = new EventElements());
 	}
 	
 	public ParserRule getEventRule() {
 		return getEventAccess().getRule();
+	}
+
+	//Scheduling:
+	//	EventScheduling | ConditionalScheduling;
+	public SchedulingElements getSchedulingAccess() {
+		return (pScheduling != null) ? pScheduling : (pScheduling = new SchedulingElements());
+	}
+	
+	public ParserRule getSchedulingRule() {
+		return getSchedulingAccess().getRule();
+	}
+
+	//EventScheduling:
+	//	"schedule " schedule=[Event] "{" ("start" "=" start=INT ";")? ("end" "=" end=INT ";")? ("repeat" "=" repeat=INT ";")?
+	//	("every" "=" every=INT ";")? "}";
+	public EventSchedulingElements getEventSchedulingAccess() {
+		return (pEventScheduling != null) ? pEventScheduling : (pEventScheduling = new EventSchedulingElements());
+	}
+	
+	public ParserRule getEventSchedulingRule() {
+		return getEventSchedulingAccess().getRule();
+	}
+
+	//ConditionalScheduling:
+	//	observes=[Event] "=>" schedule=[Event] "{" ("delay" delay=INT)? "}";
+	public ConditionalSchedulingElements getConditionalSchedulingAccess() {
+		return (pConditionalScheduling != null) ? pConditionalScheduling : (pConditionalScheduling = new ConditionalSchedulingElements());
+	}
+	
+	public ParserRule getConditionalSchedulingRule() {
+		return getConditionalSchedulingAccess().getRule();
 	}
 
 	//terminal ID:

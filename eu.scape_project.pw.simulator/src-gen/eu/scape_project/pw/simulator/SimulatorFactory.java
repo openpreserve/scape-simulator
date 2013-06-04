@@ -41,6 +41,33 @@ public interface SimulatorFactory extends EFactory
   Event createEvent();
 
   /**
+   * Returns a new object of class '<em>Scheduling</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Scheduling</em>'.
+   * @generated
+   */
+  Scheduling createScheduling();
+
+  /**
+   * Returns a new object of class '<em>Event Scheduling</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Event Scheduling</em>'.
+   * @generated
+   */
+  EventScheduling createEventScheduling();
+
+  /**
+   * Returns a new object of class '<em>Conditional Scheduling</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Conditional Scheduling</em>'.
+   * @generated
+   */
+  ConditionalScheduling createConditionalScheduling();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

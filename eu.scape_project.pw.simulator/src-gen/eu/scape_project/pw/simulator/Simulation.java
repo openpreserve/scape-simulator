@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link eu.scape_project.pw.simulator.Simulation#getName <em>Name</em>}</li>
  *   <li>{@link eu.scape_project.pw.simulator.Simulation#getEvents <em>Events</em>}</li>
+ *   <li>{@link eu.scape_project.pw.simulator.Simulation#getScheduling <em>Scheduling</em>}</li>
  * </ul>
  * </p>
  *
@@ -66,5 +67,21 @@ public interface Simulation extends EObject
    * @generated
    */
   EList<Event> getEvents();
+
+  /**
+   * Returns the value of the '<em><b>Scheduling</b></em>' containment reference list.
+   * The list contents are of type {@link eu.scape_project.pw.simulator.Scheduling}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Scheduling</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Scheduling</em>' containment reference list.
+   * @see eu.scape_project.pw.simulator.SimulatorPackage#getSimulation_Scheduling()
+   * @model containment="true"
+   * @generated
+   */
+  EList<Scheduling> getScheduling();
 
 } // Simulation

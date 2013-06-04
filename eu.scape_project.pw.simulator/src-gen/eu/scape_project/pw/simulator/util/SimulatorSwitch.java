@@ -86,6 +86,29 @@ public class SimulatorSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case SimulatorPackage.SCHEDULING:
+      {
+        Scheduling scheduling = (Scheduling)theEObject;
+        T result = caseScheduling(scheduling);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimulatorPackage.EVENT_SCHEDULING:
+      {
+        EventScheduling eventScheduling = (EventScheduling)theEObject;
+        T result = caseEventScheduling(eventScheduling);
+        if (result == null) result = caseScheduling(eventScheduling);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimulatorPackage.CONDITIONAL_SCHEDULING:
+      {
+        ConditionalScheduling conditionalScheduling = (ConditionalScheduling)theEObject;
+        T result = caseConditionalScheduling(conditionalScheduling);
+        if (result == null) result = caseScheduling(conditionalScheduling);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -118,6 +141,54 @@ public class SimulatorSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEvent(Event object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Scheduling</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Scheduling</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseScheduling(Scheduling object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Event Scheduling</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Event Scheduling</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEventScheduling(EventScheduling object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Conditional Scheduling</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Conditional Scheduling</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseConditionalScheduling(ConditionalScheduling object)
   {
     return null;
   }

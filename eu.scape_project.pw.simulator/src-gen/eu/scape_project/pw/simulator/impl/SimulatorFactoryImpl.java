@@ -66,6 +66,9 @@ public class SimulatorFactoryImpl extends EFactoryImpl implements SimulatorFacto
     {
       case SimulatorPackage.SIMULATION: return createSimulation();
       case SimulatorPackage.EVENT: return createEvent();
+      case SimulatorPackage.SCHEDULING: return createScheduling();
+      case SimulatorPackage.EVENT_SCHEDULING: return createEventScheduling();
+      case SimulatorPackage.CONDITIONAL_SCHEDULING: return createConditionalScheduling();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -91,6 +94,39 @@ public class SimulatorFactoryImpl extends EFactoryImpl implements SimulatorFacto
   {
     EventImpl event = new EventImpl();
     return event;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Scheduling createScheduling()
+  {
+    SchedulingImpl scheduling = new SchedulingImpl();
+    return scheduling;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EventScheduling createEventScheduling()
+  {
+    EventSchedulingImpl eventScheduling = new EventSchedulingImpl();
+    return eventScheduling;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ConditionalScheduling createConditionalScheduling()
+  {
+    ConditionalSchedulingImpl conditionalScheduling = new ConditionalSchedulingImpl();
+    return conditionalScheduling;
   }
 
   /**

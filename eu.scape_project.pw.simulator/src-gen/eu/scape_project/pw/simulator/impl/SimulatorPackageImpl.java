@@ -2,7 +2,10 @@
  */
 package eu.scape_project.pw.simulator.impl;
 
+import eu.scape_project.pw.simulator.ConditionalScheduling;
 import eu.scape_project.pw.simulator.Event;
+import eu.scape_project.pw.simulator.EventScheduling;
+import eu.scape_project.pw.simulator.Scheduling;
 import eu.scape_project.pw.simulator.Simulation;
 import eu.scape_project.pw.simulator.SimulatorFactory;
 import eu.scape_project.pw.simulator.SimulatorPackage;
@@ -35,6 +38,27 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
    * @generated
    */
   private EClass eventEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass schedulingEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eventSchedulingEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass conditionalSchedulingEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -134,6 +158,16 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getSimulation_Scheduling()
+  {
+    return (EReference)simulationEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getEvent()
   {
     return eventEClass;
@@ -154,9 +188,99 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getEvent_Events()
+  public EClass getScheduling()
   {
-    return (EReference)eventEClass.getEStructuralFeatures().get(1);
+    return schedulingEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getScheduling_Schedule()
+  {
+    return (EReference)schedulingEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEventScheduling()
+  {
+    return eventSchedulingEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEventScheduling_Start()
+  {
+    return (EAttribute)eventSchedulingEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEventScheduling_End()
+  {
+    return (EAttribute)eventSchedulingEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEventScheduling_Repeat()
+  {
+    return (EAttribute)eventSchedulingEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEventScheduling_Every()
+  {
+    return (EAttribute)eventSchedulingEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getConditionalScheduling()
+  {
+    return conditionalSchedulingEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getConditionalScheduling_Observes()
+  {
+    return (EReference)conditionalSchedulingEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getConditionalScheduling_Delay()
+  {
+    return (EAttribute)conditionalSchedulingEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -192,10 +316,23 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
     simulationEClass = createEClass(SIMULATION);
     createEAttribute(simulationEClass, SIMULATION__NAME);
     createEReference(simulationEClass, SIMULATION__EVENTS);
+    createEReference(simulationEClass, SIMULATION__SCHEDULING);
 
     eventEClass = createEClass(EVENT);
     createEAttribute(eventEClass, EVENT__NAME);
-    createEReference(eventEClass, EVENT__EVENTS);
+
+    schedulingEClass = createEClass(SCHEDULING);
+    createEReference(schedulingEClass, SCHEDULING__SCHEDULE);
+
+    eventSchedulingEClass = createEClass(EVENT_SCHEDULING);
+    createEAttribute(eventSchedulingEClass, EVENT_SCHEDULING__START);
+    createEAttribute(eventSchedulingEClass, EVENT_SCHEDULING__END);
+    createEAttribute(eventSchedulingEClass, EVENT_SCHEDULING__REPEAT);
+    createEAttribute(eventSchedulingEClass, EVENT_SCHEDULING__EVERY);
+
+    conditionalSchedulingEClass = createEClass(CONDITIONAL_SCHEDULING);
+    createEReference(conditionalSchedulingEClass, CONDITIONAL_SCHEDULING__OBSERVES);
+    createEAttribute(conditionalSchedulingEClass, CONDITIONAL_SCHEDULING__DELAY);
   }
 
   /**
@@ -227,15 +364,30 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    eventSchedulingEClass.getESuperTypes().add(this.getScheduling());
+    conditionalSchedulingEClass.getESuperTypes().add(this.getScheduling());
 
     // Initialize classes and features; add operations and parameters
     initEClass(simulationEClass, Simulation.class, "Simulation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSimulation_Name(), ecorePackage.getEString(), "name", null, 0, 1, Simulation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getSimulation_Events(), this.getEvent(), null, "events", null, 0, -1, Simulation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSimulation_Scheduling(), this.getScheduling(), null, "scheduling", null, 0, -1, Simulation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eventEClass, Event.class, "Event", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEvent_Name(), ecorePackage.getEString(), "name", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEvent_Events(), this.getEvent(), null, "events", null, 0, -1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(schedulingEClass, Scheduling.class, "Scheduling", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getScheduling_Schedule(), this.getEvent(), null, "schedule", null, 0, 1, Scheduling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(eventSchedulingEClass, EventScheduling.class, "EventScheduling", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEventScheduling_Start(), ecorePackage.getEInt(), "start", null, 0, 1, EventScheduling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEventScheduling_End(), ecorePackage.getEInt(), "end", null, 0, 1, EventScheduling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEventScheduling_Repeat(), ecorePackage.getEInt(), "repeat", null, 0, 1, EventScheduling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getEventScheduling_Every(), ecorePackage.getEInt(), "every", null, 0, 1, EventScheduling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(conditionalSchedulingEClass, ConditionalScheduling.class, "ConditionalScheduling", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getConditionalScheduling_Observes(), this.getEvent(), null, "observes", null, 0, 1, ConditionalScheduling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getConditionalScheduling_Delay(), ecorePackage.getEInt(), "delay", null, 0, 1, ConditionalScheduling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

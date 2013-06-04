@@ -18,8 +18,18 @@ Event :
 Scheduling: EventScheduling | ConditionalScheduling;
 
 EventScheduling :
-	'true'
+	'schedule ' schedule=[Event] 
+	'{'
+		('start''=' start=INT ';')?
+		('end' '=' end=INT ';')?
+		('repeat' '=' repeat=INT ';')?
+		('every' '=' every=INT ';')?
+			
+	'}'
 ;
+
 ConditionalScheduling: 
-	'false'
+	observes=[Event] '=>' schedule=[Event] '{'
+			('delay' '=' delay=INT)?
+		'}'
 ;

@@ -3,56 +3,48 @@
 package eu.scape_project.pw.simulator.impl;
 
 import eu.scape_project.pw.simulator.Event;
+import eu.scape_project.pw.simulator.Scheduling;
 import eu.scape_project.pw.simulator.SimulatorPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Event</b></em>'.
+ * An implementation of the model object '<em><b>Scheduling</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link eu.scape_project.pw.simulator.impl.EventImpl#getName <em>Name</em>}</li>
+ *   <li>{@link eu.scape_project.pw.simulator.impl.SchedulingImpl#getSchedule <em>Schedule</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class EventImpl extends MinimalEObjectImpl.Container implements Event
+public class SchedulingImpl extends MinimalEObjectImpl.Container implements Scheduling
 {
   /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * The cached value of the '{@link #getSchedule() <em>Schedule</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getName()
+   * @see #getSchedule()
    * @generated
    * @ordered
    */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
+  protected Event schedule;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EventImpl()
+  protected SchedulingImpl()
   {
     super();
   }
@@ -65,7 +57,7 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
   @Override
   protected EClass eStaticClass()
   {
-    return SimulatorPackage.Literals.EVENT;
+    return SimulatorPackage.Literals.SCHEDULING;
   }
 
   /**
@@ -73,9 +65,19 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getName()
+  public Event getSchedule()
   {
-    return name;
+    if (schedule != null && schedule.eIsProxy())
+    {
+      InternalEObject oldSchedule = (InternalEObject)schedule;
+      schedule = (Event)eResolveProxy(oldSchedule);
+      if (schedule != oldSchedule)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, SimulatorPackage.SCHEDULING__SCHEDULE, oldSchedule, schedule));
+      }
+    }
+    return schedule;
   }
 
   /**
@@ -83,12 +85,22 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setName(String newName)
+  public Event basicGetSchedule()
   {
-    String oldName = name;
-    name = newName;
+    return schedule;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setSchedule(Event newSchedule)
+  {
+    Event oldSchedule = schedule;
+    schedule = newSchedule;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SimulatorPackage.EVENT__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, SimulatorPackage.SCHEDULING__SCHEDULE, oldSchedule, schedule));
   }
 
   /**
@@ -101,8 +113,9 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
   {
     switch (featureID)
     {
-      case SimulatorPackage.EVENT__NAME:
-        return getName();
+      case SimulatorPackage.SCHEDULING__SCHEDULE:
+        if (resolve) return getSchedule();
+        return basicGetSchedule();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -117,8 +130,8 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
   {
     switch (featureID)
     {
-      case SimulatorPackage.EVENT__NAME:
-        setName((String)newValue);
+      case SimulatorPackage.SCHEDULING__SCHEDULE:
+        setSchedule((Event)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -134,8 +147,8 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
   {
     switch (featureID)
     {
-      case SimulatorPackage.EVENT__NAME:
-        setName(NAME_EDEFAULT);
+      case SimulatorPackage.SCHEDULING__SCHEDULE:
+        setSchedule((Event)null);
         return;
     }
     super.eUnset(featureID);
@@ -151,27 +164,10 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
   {
     switch (featureID)
     {
-      case SimulatorPackage.EVENT__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case SimulatorPackage.SCHEDULING__SCHEDULE:
+        return schedule != null;
     }
     return super.eIsSet(featureID);
   }
 
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (name: ");
-    result.append(name);
-    result.append(')');
-    return result.toString();
-  }
-
-} //EventImpl
+} //SchedulingImpl
