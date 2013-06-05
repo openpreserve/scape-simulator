@@ -58,7 +58,7 @@ public class SimulatorParser extends AbstractContentAssistParser {
 					put(grammarAccess.getEventSchedulingAccess().getEveryAssignment_6_2(), "rule__EventScheduling__EveryAssignment_6_2");
 					put(grammarAccess.getConditionalSchedulingAccess().getObservesAssignment_0(), "rule__ConditionalScheduling__ObservesAssignment_0");
 					put(grammarAccess.getConditionalSchedulingAccess().getScheduleAssignment_2(), "rule__ConditionalScheduling__ScheduleAssignment_2");
-					put(grammarAccess.getConditionalSchedulingAccess().getDelayAssignment_4_1(), "rule__ConditionalScheduling__DelayAssignment_4_1");
+					put(grammarAccess.getConditionalSchedulingAccess().getDelayAssignment_4_2(), "rule__ConditionalScheduling__DelayAssignment_4_2");
 				}
 			};
 		}

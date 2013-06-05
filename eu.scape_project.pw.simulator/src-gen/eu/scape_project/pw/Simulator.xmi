@@ -122,6 +122,7 @@
         <elements xsi:type="xtext:Keyword" value="{"/>
         <elements xsi:type="xtext:Group" cardinality="?">
           <elements xsi:type="xtext:Keyword" value="delay"/>
+          <elements xsi:type="xtext:Keyword" value="="/>
           <elements xsi:type="xtext:Assignment" feature="delay" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
           </elements>

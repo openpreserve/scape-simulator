@@ -467,11 +467,15 @@ ruleConditionalScheduling returns [EObject current=null]
     {
     	newLeafNode(otherlv_4, grammarAccess.getConditionalSchedulingAccess().getDelayKeyword_4_0());
     }
+	otherlv_5='=' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getConditionalSchedulingAccess().getEqualsSignKeyword_4_1());
+    }
 (
 (
-		lv_delay_5_0=RULE_INT
+		lv_delay_6_0=RULE_INT
 		{
-			newLeafNode(lv_delay_5_0, grammarAccess.getConditionalSchedulingAccess().getDelayINTTerminalRuleCall_4_1_0()); 
+			newLeafNode(lv_delay_6_0, grammarAccess.getConditionalSchedulingAccess().getDelayINTTerminalRuleCall_4_2_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -480,14 +484,14 @@ ruleConditionalScheduling returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"delay",
-        		lv_delay_5_0, 
+        		lv_delay_6_0, 
         		"INT");
 	    }
 
 )
-))?	otherlv_6='}' 
+))?	otherlv_7='}' 
     {
-    	newLeafNode(otherlv_6, grammarAccess.getConditionalSchedulingAccess().getRightCurlyBracketKeyword_5());
+    	newLeafNode(otherlv_7, grammarAccess.getConditionalSchedulingAccess().getRightCurlyBracketKeyword_5());
     }
 )
 ;

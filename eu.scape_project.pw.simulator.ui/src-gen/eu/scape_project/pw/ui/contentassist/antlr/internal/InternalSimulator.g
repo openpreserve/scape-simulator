@@ -1604,6 +1604,7 @@ rule__ConditionalScheduling__Group_4__1
     }
 :
 	rule__ConditionalScheduling__Group_4__1__Impl
+	rule__ConditionalScheduling__Group_4__2
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -1615,15 +1616,47 @@ rule__ConditionalScheduling__Group_4__1__Impl
     }
 :
 (
-{ before(grammarAccess.getConditionalSchedulingAccess().getDelayAssignment_4_1()); }
-(rule__ConditionalScheduling__DelayAssignment_4_1)
-{ after(grammarAccess.getConditionalSchedulingAccess().getDelayAssignment_4_1()); }
+{ before(grammarAccess.getConditionalSchedulingAccess().getEqualsSignKeyword_4_1()); }
+
+	'=' 
+
+{ after(grammarAccess.getConditionalSchedulingAccess().getEqualsSignKeyword_4_1()); }
 )
 
 ;
 finally {
 	restoreStackSize(stackSize);
 }
+
+
+rule__ConditionalScheduling__Group_4__2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__ConditionalScheduling__Group_4__2__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__ConditionalScheduling__Group_4__2__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getConditionalSchedulingAccess().getDelayAssignment_4_2()); }
+(rule__ConditionalScheduling__DelayAssignment_4_2)
+{ after(grammarAccess.getConditionalSchedulingAccess().getDelayAssignment_4_2()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
 
 
 
@@ -1808,14 +1841,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__ConditionalScheduling__DelayAssignment_4_1
+rule__ConditionalScheduling__DelayAssignment_4_2
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getConditionalSchedulingAccess().getDelayINTTerminalRuleCall_4_1_0()); }
-	RULE_INT{ after(grammarAccess.getConditionalSchedulingAccess().getDelayINTTerminalRuleCall_4_1_0()); }
+{ before(grammarAccess.getConditionalSchedulingAccess().getDelayINTTerminalRuleCall_4_2_0()); }
+	RULE_INT{ after(grammarAccess.getConditionalSchedulingAccess().getDelayINTTerminalRuleCall_4_2_0()); }
 )
 
 ;

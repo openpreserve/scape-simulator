@@ -3986,17 +3986,22 @@ public class InternalSimulatorParser extends AbstractInternalContentAssistParser
 
 
     // $ANTLR start "rule__ConditionalScheduling__Group_4__1"
-    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1601:1: rule__ConditionalScheduling__Group_4__1 : rule__ConditionalScheduling__Group_4__1__Impl ;
+    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1601:1: rule__ConditionalScheduling__Group_4__1 : rule__ConditionalScheduling__Group_4__1__Impl rule__ConditionalScheduling__Group_4__2 ;
     public final void rule__ConditionalScheduling__Group_4__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1605:1: ( rule__ConditionalScheduling__Group_4__1__Impl )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1606:2: rule__ConditionalScheduling__Group_4__1__Impl
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1605:1: ( rule__ConditionalScheduling__Group_4__1__Impl rule__ConditionalScheduling__Group_4__2 )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1606:2: rule__ConditionalScheduling__Group_4__1__Impl rule__ConditionalScheduling__Group_4__2
             {
             pushFollow(FOLLOW_rule__ConditionalScheduling__Group_4__1__Impl_in_rule__ConditionalScheduling__Group_4__13118);
             rule__ConditionalScheduling__Group_4__1__Impl();
+
+            state._fsp--;
+
+            pushFollow(FOLLOW_rule__ConditionalScheduling__Group_4__2_in_rule__ConditionalScheduling__Group_4__13121);
+            rule__ConditionalScheduling__Group_4__2();
 
             state._fsp--;
 
@@ -4019,31 +4024,21 @@ public class InternalSimulatorParser extends AbstractInternalContentAssistParser
 
 
     // $ANTLR start "rule__ConditionalScheduling__Group_4__1__Impl"
-    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1612:1: rule__ConditionalScheduling__Group_4__1__Impl : ( ( rule__ConditionalScheduling__DelayAssignment_4_1 ) ) ;
+    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1613:1: rule__ConditionalScheduling__Group_4__1__Impl : ( '=' ) ;
     public final void rule__ConditionalScheduling__Group_4__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1616:1: ( ( ( rule__ConditionalScheduling__DelayAssignment_4_1 ) ) )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1617:1: ( ( rule__ConditionalScheduling__DelayAssignment_4_1 ) )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1617:1: ( ( '=' ) )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1618:1: ( '=' )
             {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1617:1: ( ( rule__ConditionalScheduling__DelayAssignment_4_1 ) )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1618:1: ( rule__ConditionalScheduling__DelayAssignment_4_1 )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1618:1: ( '=' )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1619:1: '='
             {
-             before(grammarAccess.getConditionalSchedulingAccess().getDelayAssignment_4_1()); 
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1619:1: ( rule__ConditionalScheduling__DelayAssignment_4_1 )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1619:2: rule__ConditionalScheduling__DelayAssignment_4_1
-            {
-            pushFollow(FOLLOW_rule__ConditionalScheduling__DelayAssignment_4_1_in_rule__ConditionalScheduling__Group_4__1__Impl3145);
-            rule__ConditionalScheduling__DelayAssignment_4_1();
-
-            state._fsp--;
-
-
-            }
-
-             after(grammarAccess.getConditionalSchedulingAccess().getDelayAssignment_4_1()); 
+             before(grammarAccess.getConditionalSchedulingAccess().getEqualsSignKeyword_4_1()); 
+            match(input,19,FOLLOW_19_in_rule__ConditionalScheduling__Group_4__1__Impl3149); 
+             after(grammarAccess.getConditionalSchedulingAccess().getEqualsSignKeyword_4_1()); 
 
             }
 
@@ -4065,21 +4060,101 @@ public class InternalSimulatorParser extends AbstractInternalContentAssistParser
     // $ANTLR end "rule__ConditionalScheduling__Group_4__1__Impl"
 
 
+    // $ANTLR start "rule__ConditionalScheduling__Group_4__2"
+    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1632:1: rule__ConditionalScheduling__Group_4__2 : rule__ConditionalScheduling__Group_4__2__Impl ;
+    public final void rule__ConditionalScheduling__Group_4__2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1636:1: ( rule__ConditionalScheduling__Group_4__2__Impl )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1637:2: rule__ConditionalScheduling__Group_4__2__Impl
+            {
+            pushFollow(FOLLOW_rule__ConditionalScheduling__Group_4__2__Impl_in_rule__ConditionalScheduling__Group_4__23180);
+            rule__ConditionalScheduling__Group_4__2__Impl();
+
+            state._fsp--;
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ConditionalScheduling__Group_4__2"
+
+
+    // $ANTLR start "rule__ConditionalScheduling__Group_4__2__Impl"
+    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1643:1: rule__ConditionalScheduling__Group_4__2__Impl : ( ( rule__ConditionalScheduling__DelayAssignment_4_2 ) ) ;
+    public final void rule__ConditionalScheduling__Group_4__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1647:1: ( ( ( rule__ConditionalScheduling__DelayAssignment_4_2 ) ) )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1648:1: ( ( rule__ConditionalScheduling__DelayAssignment_4_2 ) )
+            {
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1648:1: ( ( rule__ConditionalScheduling__DelayAssignment_4_2 ) )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1649:1: ( rule__ConditionalScheduling__DelayAssignment_4_2 )
+            {
+             before(grammarAccess.getConditionalSchedulingAccess().getDelayAssignment_4_2()); 
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1650:1: ( rule__ConditionalScheduling__DelayAssignment_4_2 )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1650:2: rule__ConditionalScheduling__DelayAssignment_4_2
+            {
+            pushFollow(FOLLOW_rule__ConditionalScheduling__DelayAssignment_4_2_in_rule__ConditionalScheduling__Group_4__2__Impl3207);
+            rule__ConditionalScheduling__DelayAssignment_4_2();
+
+            state._fsp--;
+
+
+            }
+
+             after(grammarAccess.getConditionalSchedulingAccess().getDelayAssignment_4_2()); 
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ConditionalScheduling__Group_4__2__Impl"
+
+
     // $ANTLR start "rule__Simulation__NameAssignment_1"
-    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1634:1: rule__Simulation__NameAssignment_1 : ( RULE_STRING ) ;
+    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1667:1: rule__Simulation__NameAssignment_1 : ( RULE_STRING ) ;
     public final void rule__Simulation__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1638:1: ( ( RULE_STRING ) )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1639:1: ( RULE_STRING )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1671:1: ( ( RULE_STRING ) )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1672:1: ( RULE_STRING )
             {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1639:1: ( RULE_STRING )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1640:1: RULE_STRING
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1672:1: ( RULE_STRING )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1673:1: RULE_STRING
             {
              before(grammarAccess.getSimulationAccess().getNameSTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Simulation__NameAssignment_13184); 
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Simulation__NameAssignment_13248); 
              after(grammarAccess.getSimulationAccess().getNameSTRINGTerminalRuleCall_1_0()); 
 
             }
@@ -4103,20 +4178,20 @@ public class InternalSimulatorParser extends AbstractInternalContentAssistParser
 
 
     // $ANTLR start "rule__Simulation__EventsAssignment_4"
-    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1649:1: rule__Simulation__EventsAssignment_4 : ( ruleEvent ) ;
+    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1682:1: rule__Simulation__EventsAssignment_4 : ( ruleEvent ) ;
     public final void rule__Simulation__EventsAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1653:1: ( ( ruleEvent ) )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1654:1: ( ruleEvent )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1686:1: ( ( ruleEvent ) )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1687:1: ( ruleEvent )
             {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1654:1: ( ruleEvent )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1655:1: ruleEvent
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1687:1: ( ruleEvent )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1688:1: ruleEvent
             {
              before(grammarAccess.getSimulationAccess().getEventsEventParserRuleCall_4_0()); 
-            pushFollow(FOLLOW_ruleEvent_in_rule__Simulation__EventsAssignment_43215);
+            pushFollow(FOLLOW_ruleEvent_in_rule__Simulation__EventsAssignment_43279);
             ruleEvent();
 
             state._fsp--;
@@ -4144,20 +4219,20 @@ public class InternalSimulatorParser extends AbstractInternalContentAssistParser
 
 
     // $ANTLR start "rule__Simulation__SchedulingAssignment_6"
-    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1664:1: rule__Simulation__SchedulingAssignment_6 : ( ruleScheduling ) ;
+    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1697:1: rule__Simulation__SchedulingAssignment_6 : ( ruleScheduling ) ;
     public final void rule__Simulation__SchedulingAssignment_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1668:1: ( ( ruleScheduling ) )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1669:1: ( ruleScheduling )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1701:1: ( ( ruleScheduling ) )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1702:1: ( ruleScheduling )
             {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1669:1: ( ruleScheduling )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1670:1: ruleScheduling
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1702:1: ( ruleScheduling )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1703:1: ruleScheduling
             {
              before(grammarAccess.getSimulationAccess().getSchedulingSchedulingParserRuleCall_6_0()); 
-            pushFollow(FOLLOW_ruleScheduling_in_rule__Simulation__SchedulingAssignment_63246);
+            pushFollow(FOLLOW_ruleScheduling_in_rule__Simulation__SchedulingAssignment_63310);
             ruleScheduling();
 
             state._fsp--;
@@ -4185,20 +4260,20 @@ public class InternalSimulatorParser extends AbstractInternalContentAssistParser
 
 
     // $ANTLR start "rule__Event__NameAssignment_1"
-    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1679:1: rule__Event__NameAssignment_1 : ( RULE_STRING ) ;
+    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1712:1: rule__Event__NameAssignment_1 : ( RULE_STRING ) ;
     public final void rule__Event__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1683:1: ( ( RULE_STRING ) )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1684:1: ( RULE_STRING )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1716:1: ( ( RULE_STRING ) )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1717:1: ( RULE_STRING )
             {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1684:1: ( RULE_STRING )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1685:1: RULE_STRING
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1717:1: ( RULE_STRING )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1718:1: RULE_STRING
             {
              before(grammarAccess.getEventAccess().getNameSTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Event__NameAssignment_13277); 
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Event__NameAssignment_13341); 
              after(grammarAccess.getEventAccess().getNameSTRINGTerminalRuleCall_1_0()); 
 
             }
@@ -4222,24 +4297,24 @@ public class InternalSimulatorParser extends AbstractInternalContentAssistParser
 
 
     // $ANTLR start "rule__EventScheduling__ScheduleAssignment_1"
-    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1694:1: rule__EventScheduling__ScheduleAssignment_1 : ( ( RULE_ID ) ) ;
+    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1727:1: rule__EventScheduling__ScheduleAssignment_1 : ( ( RULE_ID ) ) ;
     public final void rule__EventScheduling__ScheduleAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1698:1: ( ( ( RULE_ID ) ) )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1699:1: ( ( RULE_ID ) )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1731:1: ( ( ( RULE_ID ) ) )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1732:1: ( ( RULE_ID ) )
             {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1699:1: ( ( RULE_ID ) )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1700:1: ( RULE_ID )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1732:1: ( ( RULE_ID ) )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1733:1: ( RULE_ID )
             {
              before(grammarAccess.getEventSchedulingAccess().getScheduleEventCrossReference_1_0()); 
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1701:1: ( RULE_ID )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1702:1: RULE_ID
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1734:1: ( RULE_ID )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1735:1: RULE_ID
             {
              before(grammarAccess.getEventSchedulingAccess().getScheduleEventIDTerminalRuleCall_1_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__EventScheduling__ScheduleAssignment_13312); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__EventScheduling__ScheduleAssignment_13376); 
              after(grammarAccess.getEventSchedulingAccess().getScheduleEventIDTerminalRuleCall_1_0_1()); 
 
             }
@@ -4267,20 +4342,20 @@ public class InternalSimulatorParser extends AbstractInternalContentAssistParser
 
 
     // $ANTLR start "rule__EventScheduling__StartAssignment_3_2"
-    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1713:1: rule__EventScheduling__StartAssignment_3_2 : ( RULE_INT ) ;
+    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1746:1: rule__EventScheduling__StartAssignment_3_2 : ( RULE_INT ) ;
     public final void rule__EventScheduling__StartAssignment_3_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1717:1: ( ( RULE_INT ) )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1718:1: ( RULE_INT )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1750:1: ( ( RULE_INT ) )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1751:1: ( RULE_INT )
             {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1718:1: ( RULE_INT )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1719:1: RULE_INT
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1751:1: ( RULE_INT )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1752:1: RULE_INT
             {
              before(grammarAccess.getEventSchedulingAccess().getStartINTTerminalRuleCall_3_2_0()); 
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__EventScheduling__StartAssignment_3_23347); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__EventScheduling__StartAssignment_3_23411); 
              after(grammarAccess.getEventSchedulingAccess().getStartINTTerminalRuleCall_3_2_0()); 
 
             }
@@ -4304,20 +4379,20 @@ public class InternalSimulatorParser extends AbstractInternalContentAssistParser
 
 
     // $ANTLR start "rule__EventScheduling__EndAssignment_4_2"
-    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1728:1: rule__EventScheduling__EndAssignment_4_2 : ( RULE_INT ) ;
+    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1761:1: rule__EventScheduling__EndAssignment_4_2 : ( RULE_INT ) ;
     public final void rule__EventScheduling__EndAssignment_4_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1732:1: ( ( RULE_INT ) )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1733:1: ( RULE_INT )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1765:1: ( ( RULE_INT ) )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1766:1: ( RULE_INT )
             {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1733:1: ( RULE_INT )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1734:1: RULE_INT
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1766:1: ( RULE_INT )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1767:1: RULE_INT
             {
              before(grammarAccess.getEventSchedulingAccess().getEndINTTerminalRuleCall_4_2_0()); 
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__EventScheduling__EndAssignment_4_23378); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__EventScheduling__EndAssignment_4_23442); 
              after(grammarAccess.getEventSchedulingAccess().getEndINTTerminalRuleCall_4_2_0()); 
 
             }
@@ -4341,20 +4416,20 @@ public class InternalSimulatorParser extends AbstractInternalContentAssistParser
 
 
     // $ANTLR start "rule__EventScheduling__RepeatAssignment_5_2"
-    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1743:1: rule__EventScheduling__RepeatAssignment_5_2 : ( RULE_INT ) ;
+    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1776:1: rule__EventScheduling__RepeatAssignment_5_2 : ( RULE_INT ) ;
     public final void rule__EventScheduling__RepeatAssignment_5_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1747:1: ( ( RULE_INT ) )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1748:1: ( RULE_INT )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1780:1: ( ( RULE_INT ) )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1781:1: ( RULE_INT )
             {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1748:1: ( RULE_INT )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1749:1: RULE_INT
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1781:1: ( RULE_INT )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1782:1: RULE_INT
             {
              before(grammarAccess.getEventSchedulingAccess().getRepeatINTTerminalRuleCall_5_2_0()); 
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__EventScheduling__RepeatAssignment_5_23409); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__EventScheduling__RepeatAssignment_5_23473); 
              after(grammarAccess.getEventSchedulingAccess().getRepeatINTTerminalRuleCall_5_2_0()); 
 
             }
@@ -4378,20 +4453,20 @@ public class InternalSimulatorParser extends AbstractInternalContentAssistParser
 
 
     // $ANTLR start "rule__EventScheduling__EveryAssignment_6_2"
-    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1758:1: rule__EventScheduling__EveryAssignment_6_2 : ( RULE_INT ) ;
+    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1791:1: rule__EventScheduling__EveryAssignment_6_2 : ( RULE_INT ) ;
     public final void rule__EventScheduling__EveryAssignment_6_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1762:1: ( ( RULE_INT ) )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1763:1: ( RULE_INT )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1795:1: ( ( RULE_INT ) )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1796:1: ( RULE_INT )
             {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1763:1: ( RULE_INT )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1764:1: RULE_INT
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1796:1: ( RULE_INT )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1797:1: RULE_INT
             {
              before(grammarAccess.getEventSchedulingAccess().getEveryINTTerminalRuleCall_6_2_0()); 
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__EventScheduling__EveryAssignment_6_23440); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__EventScheduling__EveryAssignment_6_23504); 
              after(grammarAccess.getEventSchedulingAccess().getEveryINTTerminalRuleCall_6_2_0()); 
 
             }
@@ -4415,24 +4490,24 @@ public class InternalSimulatorParser extends AbstractInternalContentAssistParser
 
 
     // $ANTLR start "rule__ConditionalScheduling__ObservesAssignment_0"
-    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1773:1: rule__ConditionalScheduling__ObservesAssignment_0 : ( ( RULE_ID ) ) ;
+    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1806:1: rule__ConditionalScheduling__ObservesAssignment_0 : ( ( RULE_ID ) ) ;
     public final void rule__ConditionalScheduling__ObservesAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1777:1: ( ( ( RULE_ID ) ) )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1778:1: ( ( RULE_ID ) )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1810:1: ( ( ( RULE_ID ) ) )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1811:1: ( ( RULE_ID ) )
             {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1778:1: ( ( RULE_ID ) )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1779:1: ( RULE_ID )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1811:1: ( ( RULE_ID ) )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1812:1: ( RULE_ID )
             {
              before(grammarAccess.getConditionalSchedulingAccess().getObservesEventCrossReference_0_0()); 
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1780:1: ( RULE_ID )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1781:1: RULE_ID
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1813:1: ( RULE_ID )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1814:1: RULE_ID
             {
              before(grammarAccess.getConditionalSchedulingAccess().getObservesEventIDTerminalRuleCall_0_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__ConditionalScheduling__ObservesAssignment_03475); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__ConditionalScheduling__ObservesAssignment_03539); 
              after(grammarAccess.getConditionalSchedulingAccess().getObservesEventIDTerminalRuleCall_0_0_1()); 
 
             }
@@ -4460,24 +4535,24 @@ public class InternalSimulatorParser extends AbstractInternalContentAssistParser
 
 
     // $ANTLR start "rule__ConditionalScheduling__ScheduleAssignment_2"
-    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1792:1: rule__ConditionalScheduling__ScheduleAssignment_2 : ( ( RULE_ID ) ) ;
+    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1825:1: rule__ConditionalScheduling__ScheduleAssignment_2 : ( ( RULE_ID ) ) ;
     public final void rule__ConditionalScheduling__ScheduleAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1796:1: ( ( ( RULE_ID ) ) )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1797:1: ( ( RULE_ID ) )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1829:1: ( ( ( RULE_ID ) ) )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1830:1: ( ( RULE_ID ) )
             {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1797:1: ( ( RULE_ID ) )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1798:1: ( RULE_ID )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1830:1: ( ( RULE_ID ) )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1831:1: ( RULE_ID )
             {
              before(grammarAccess.getConditionalSchedulingAccess().getScheduleEventCrossReference_2_0()); 
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1799:1: ( RULE_ID )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1800:1: RULE_ID
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1832:1: ( RULE_ID )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1833:1: RULE_ID
             {
              before(grammarAccess.getConditionalSchedulingAccess().getScheduleEventIDTerminalRuleCall_2_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__ConditionalScheduling__ScheduleAssignment_23514); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__ConditionalScheduling__ScheduleAssignment_23578); 
              after(grammarAccess.getConditionalSchedulingAccess().getScheduleEventIDTerminalRuleCall_2_0_1()); 
 
             }
@@ -4504,22 +4579,22 @@ public class InternalSimulatorParser extends AbstractInternalContentAssistParser
     // $ANTLR end "rule__ConditionalScheduling__ScheduleAssignment_2"
 
 
-    // $ANTLR start "rule__ConditionalScheduling__DelayAssignment_4_1"
-    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1811:1: rule__ConditionalScheduling__DelayAssignment_4_1 : ( RULE_INT ) ;
-    public final void rule__ConditionalScheduling__DelayAssignment_4_1() throws RecognitionException {
+    // $ANTLR start "rule__ConditionalScheduling__DelayAssignment_4_2"
+    // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1844:1: rule__ConditionalScheduling__DelayAssignment_4_2 : ( RULE_INT ) ;
+    public final void rule__ConditionalScheduling__DelayAssignment_4_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1815:1: ( ( RULE_INT ) )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1816:1: ( RULE_INT )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1848:1: ( ( RULE_INT ) )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1849:1: ( RULE_INT )
             {
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1816:1: ( RULE_INT )
-            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1817:1: RULE_INT
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1849:1: ( RULE_INT )
+            // ../eu.scape_project.pw.simulator.ui/src-gen/eu/scape_project/pw/ui/contentassist/antlr/internal/InternalSimulator.g:1850:1: RULE_INT
             {
-             before(grammarAccess.getConditionalSchedulingAccess().getDelayINTTerminalRuleCall_4_1_0()); 
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__ConditionalScheduling__DelayAssignment_4_13549); 
-             after(grammarAccess.getConditionalSchedulingAccess().getDelayINTTerminalRuleCall_4_1_0()); 
+             before(grammarAccess.getConditionalSchedulingAccess().getDelayINTTerminalRuleCall_4_2_0()); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__ConditionalScheduling__DelayAssignment_4_23613); 
+             after(grammarAccess.getConditionalSchedulingAccess().getDelayINTTerminalRuleCall_4_2_0()); 
 
             }
 
@@ -4538,7 +4613,7 @@ public class InternalSimulatorParser extends AbstractInternalContentAssistParser
         }
         return ;
     }
-    // $ANTLR end "rule__ConditionalScheduling__DelayAssignment_4_1"
+    // $ANTLR end "rule__ConditionalScheduling__DelayAssignment_4_2"
 
     // Delegated rules
 
@@ -4680,22 +4755,25 @@ public class InternalSimulatorParser extends AbstractInternalContentAssistParser
     public static final BitSet FOLLOW_rule__ConditionalScheduling__Group_4__0_in_rule__ConditionalScheduling__Group__4__Impl2954 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ConditionalScheduling__Group__5__Impl_in_rule__ConditionalScheduling__Group__52985 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_15_in_rule__ConditionalScheduling__Group__5__Impl3013 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ConditionalScheduling__Group_4__0__Impl_in_rule__ConditionalScheduling__Group_4__03056 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_rule__ConditionalScheduling__Group_4__0__Impl_in_rule__ConditionalScheduling__Group_4__03056 = new BitSet(new long[]{0x0000000000080000L});
     public static final BitSet FOLLOW_rule__ConditionalScheduling__Group_4__1_in_rule__ConditionalScheduling__Group_4__03059 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_25_in_rule__ConditionalScheduling__Group_4__0__Impl3087 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ConditionalScheduling__Group_4__1__Impl_in_rule__ConditionalScheduling__Group_4__13118 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ConditionalScheduling__DelayAssignment_4_1_in_rule__ConditionalScheduling__Group_4__1__Impl3145 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__Simulation__NameAssignment_13184 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEvent_in_rule__Simulation__EventsAssignment_43215 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleScheduling_in_rule__Simulation__SchedulingAssignment_63246 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__Event__NameAssignment_13277 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__EventScheduling__ScheduleAssignment_13312 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__EventScheduling__StartAssignment_3_23347 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__EventScheduling__EndAssignment_4_23378 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__EventScheduling__RepeatAssignment_5_23409 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__EventScheduling__EveryAssignment_6_23440 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__ConditionalScheduling__ObservesAssignment_03475 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__ConditionalScheduling__ScheduleAssignment_23514 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__ConditionalScheduling__DelayAssignment_4_13549 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ConditionalScheduling__Group_4__1__Impl_in_rule__ConditionalScheduling__Group_4__13118 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_rule__ConditionalScheduling__Group_4__2_in_rule__ConditionalScheduling__Group_4__13121 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_rule__ConditionalScheduling__Group_4__1__Impl3149 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ConditionalScheduling__Group_4__2__Impl_in_rule__ConditionalScheduling__Group_4__23180 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ConditionalScheduling__DelayAssignment_4_2_in_rule__ConditionalScheduling__Group_4__2__Impl3207 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__Simulation__NameAssignment_13248 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEvent_in_rule__Simulation__EventsAssignment_43279 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleScheduling_in_rule__Simulation__SchedulingAssignment_63310 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__Event__NameAssignment_13341 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__EventScheduling__ScheduleAssignment_13376 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__EventScheduling__StartAssignment_3_23411 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__EventScheduling__EndAssignment_4_23442 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__EventScheduling__RepeatAssignment_5_23473 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__EventScheduling__EveryAssignment_6_23504 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__ConditionalScheduling__ObservesAssignment_03539 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__ConditionalScheduling__ScheduleAssignment_23578 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_rule__ConditionalScheduling__DelayAssignment_4_23613 = new BitSet(new long[]{0x0000000000000002L});
 
 }

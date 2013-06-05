@@ -929,7 +929,7 @@ public class InternalSimulatorParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleConditionalScheduling"
-    // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:428:1: ruleConditionalScheduling returns [EObject current=null] : ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '=>' ( (otherlv_2= RULE_ID ) ) otherlv_3= '{' (otherlv_4= 'delay' ( (lv_delay_5_0= RULE_INT ) ) )? otherlv_6= '}' ) ;
+    // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:428:1: ruleConditionalScheduling returns [EObject current=null] : ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '=>' ( (otherlv_2= RULE_ID ) ) otherlv_3= '{' (otherlv_4= 'delay' otherlv_5= '=' ( (lv_delay_6_0= RULE_INT ) ) )? otherlv_7= '}' ) ;
     public final EObject ruleConditionalScheduling() throws RecognitionException {
         EObject current = null;
 
@@ -938,17 +938,18 @@ public class InternalSimulatorParser extends AbstractInternalAntlrParser {
         Token otherlv_2=null;
         Token otherlv_3=null;
         Token otherlv_4=null;
-        Token lv_delay_5_0=null;
-        Token otherlv_6=null;
+        Token otherlv_5=null;
+        Token lv_delay_6_0=null;
+        Token otherlv_7=null;
 
          enterRule(); 
             
         try {
-            // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:431:28: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '=>' ( (otherlv_2= RULE_ID ) ) otherlv_3= '{' (otherlv_4= 'delay' ( (lv_delay_5_0= RULE_INT ) ) )? otherlv_6= '}' ) )
-            // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:432:1: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '=>' ( (otherlv_2= RULE_ID ) ) otherlv_3= '{' (otherlv_4= 'delay' ( (lv_delay_5_0= RULE_INT ) ) )? otherlv_6= '}' )
+            // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:431:28: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '=>' ( (otherlv_2= RULE_ID ) ) otherlv_3= '{' (otherlv_4= 'delay' otherlv_5= '=' ( (lv_delay_6_0= RULE_INT ) ) )? otherlv_7= '}' ) )
+            // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:432:1: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '=>' ( (otherlv_2= RULE_ID ) ) otherlv_3= '{' (otherlv_4= 'delay' otherlv_5= '=' ( (lv_delay_6_0= RULE_INT ) ) )? otherlv_7= '}' )
             {
-            // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:432:1: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '=>' ( (otherlv_2= RULE_ID ) ) otherlv_3= '{' (otherlv_4= 'delay' ( (lv_delay_5_0= RULE_INT ) ) )? otherlv_6= '}' )
-            // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:432:2: ( (otherlv_0= RULE_ID ) ) otherlv_1= '=>' ( (otherlv_2= RULE_ID ) ) otherlv_3= '{' (otherlv_4= 'delay' ( (lv_delay_5_0= RULE_INT ) ) )? otherlv_6= '}'
+            // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:432:1: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= '=>' ( (otherlv_2= RULE_ID ) ) otherlv_3= '{' (otherlv_4= 'delay' otherlv_5= '=' ( (lv_delay_6_0= RULE_INT ) ) )? otherlv_7= '}' )
+            // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:432:2: ( (otherlv_0= RULE_ID ) ) otherlv_1= '=>' ( (otherlv_2= RULE_ID ) ) otherlv_3= '{' (otherlv_4= 'delay' otherlv_5= '=' ( (lv_delay_6_0= RULE_INT ) ) )? otherlv_7= '}'
             {
             // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:432:2: ( (otherlv_0= RULE_ID ) )
             // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:433:1: (otherlv_0= RULE_ID )
@@ -1000,7 +1001,7 @@ public class InternalSimulatorParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_3, grammarAccess.getConditionalSchedulingAccess().getLeftCurlyBracketKeyword_3());
                 
-            // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:466:1: (otherlv_4= 'delay' ( (lv_delay_5_0= RULE_INT ) ) )?
+            // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:466:1: (otherlv_4= 'delay' otherlv_5= '=' ( (lv_delay_6_0= RULE_INT ) ) )?
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1009,21 +1010,25 @@ public class InternalSimulatorParser extends AbstractInternalAntlrParser {
             }
             switch (alt8) {
                 case 1 :
-                    // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:466:3: otherlv_4= 'delay' ( (lv_delay_5_0= RULE_INT ) )
+                    // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:466:3: otherlv_4= 'delay' otherlv_5= '=' ( (lv_delay_6_0= RULE_INT ) )
                     {
                     otherlv_4=(Token)match(input,25,FOLLOW_25_in_ruleConditionalScheduling1003); 
 
                         	newLeafNode(otherlv_4, grammarAccess.getConditionalSchedulingAccess().getDelayKeyword_4_0());
                         
-                    // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:470:1: ( (lv_delay_5_0= RULE_INT ) )
-                    // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:471:1: (lv_delay_5_0= RULE_INT )
-                    {
-                    // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:471:1: (lv_delay_5_0= RULE_INT )
-                    // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:472:3: lv_delay_5_0= RULE_INT
-                    {
-                    lv_delay_5_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleConditionalScheduling1020); 
+                    otherlv_5=(Token)match(input,19,FOLLOW_19_in_ruleConditionalScheduling1015); 
 
-                    			newLeafNode(lv_delay_5_0, grammarAccess.getConditionalSchedulingAccess().getDelayINTTerminalRuleCall_4_1_0()); 
+                        	newLeafNode(otherlv_5, grammarAccess.getConditionalSchedulingAccess().getEqualsSignKeyword_4_1());
+                        
+                    // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:474:1: ( (lv_delay_6_0= RULE_INT ) )
+                    // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:475:1: (lv_delay_6_0= RULE_INT )
+                    {
+                    // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:475:1: (lv_delay_6_0= RULE_INT )
+                    // ../eu.scape_project.pw.simulator/src-gen/eu/scape_project/pw/parser/antlr/internal/InternalSimulator.g:476:3: lv_delay_6_0= RULE_INT
+                    {
+                    lv_delay_6_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleConditionalScheduling1032); 
+
+                    			newLeafNode(lv_delay_6_0, grammarAccess.getConditionalSchedulingAccess().getDelayINTTerminalRuleCall_4_2_0()); 
                     		
 
                     	        if (current==null) {
@@ -1032,7 +1037,7 @@ public class InternalSimulatorParser extends AbstractInternalAntlrParser {
                            		setWithLastConsumed(
                            			current, 
                            			"delay",
-                            		lv_delay_5_0, 
+                            		lv_delay_6_0, 
                             		"INT");
                     	    
 
@@ -1047,9 +1052,9 @@ public class InternalSimulatorParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_6=(Token)match(input,15,FOLLOW_15_in_ruleConditionalScheduling1039); 
+            otherlv_7=(Token)match(input,15,FOLLOW_15_in_ruleConditionalScheduling1051); 
 
-                	newLeafNode(otherlv_6, grammarAccess.getConditionalSchedulingAccess().getRightCurlyBracketKeyword_5());
+                	newLeafNode(otherlv_7, grammarAccess.getConditionalSchedulingAccess().getRightCurlyBracketKeyword_5());
                 
 
             }
@@ -1123,8 +1128,9 @@ public class InternalSimulatorParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_24_in_ruleConditionalScheduling958 = new BitSet(new long[]{0x0000000000000020L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleConditionalScheduling978 = new BitSet(new long[]{0x0000000000001000L});
     public static final BitSet FOLLOW_12_in_ruleConditionalScheduling990 = new BitSet(new long[]{0x0000000002008000L});
-    public static final BitSet FOLLOW_25_in_ruleConditionalScheduling1003 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleConditionalScheduling1020 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleConditionalScheduling1039 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_25_in_ruleConditionalScheduling1003 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_19_in_ruleConditionalScheduling1015 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleConditionalScheduling1032 = new BitSet(new long[]{0x0000000000008000L});
+    public static final BitSet FOLLOW_15_in_ruleConditionalScheduling1051 = new BitSet(new long[]{0x0000000000000002L});
 
 }
