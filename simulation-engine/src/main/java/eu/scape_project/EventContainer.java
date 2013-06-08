@@ -7,7 +7,7 @@ public class EventContainer {
 
 	PriorityQueue<IEvent> events;
 
-	EventContainer() {
+	public EventContainer() {
 		
 		events = new PriorityQueue<IEvent>();
 	

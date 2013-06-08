@@ -30,6 +30,6 @@ EventScheduling :
 
 ConditionalScheduling: 
 	observes=[Event] '=>' schedule=[Event] '{'
-			('delay' '=' delay=INT)?
+			('delay' '=' delay=INT ';')?
 		'}'
 ;

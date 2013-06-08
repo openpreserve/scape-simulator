@@ -489,9 +489,13 @@ ruleConditionalScheduling returns [EObject current=null]
 	    }
 
 )
-))?	otherlv_7='}' 
+)	otherlv_7=';' 
     {
-    	newLeafNode(otherlv_7, grammarAccess.getConditionalSchedulingAccess().getRightCurlyBracketKeyword_5());
+    	newLeafNode(otherlv_7, grammarAccess.getConditionalSchedulingAccess().getSemicolonKeyword_4_3());
+    }
+)?	otherlv_8='}' 
+    {
+    	newLeafNode(otherlv_8, grammarAccess.getConditionalSchedulingAccess().getRightCurlyBracketKeyword_5());
     }
 )
 ;

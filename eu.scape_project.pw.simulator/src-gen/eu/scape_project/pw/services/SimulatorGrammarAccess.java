@@ -276,13 +276,14 @@ public class SimulatorGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cEqualsSignKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
 		private final Assignment cDelayAssignment_4_2 = (Assignment)cGroup_4.eContents().get(2);
 		private final RuleCall cDelayINTTerminalRuleCall_4_2_0 = (RuleCall)cDelayAssignment_4_2.eContents().get(0);
+		private final Keyword cSemicolonKeyword_4_3 = (Keyword)cGroup_4.eContents().get(3);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//ConditionalScheduling:
-		//	observes=[Event] "=>" schedule=[Event] "{" ("delay" "=" delay=INT)? "}";
+		//	observes=[Event] "=>" schedule=[Event] "{" ("delay" "=" delay=INT ";")? "}";
 		public ParserRule getRule() { return rule; }
 
-		//observes=[Event] "=>" schedule=[Event] "{" ("delay" "=" delay=INT)? "}"
+		//observes=[Event] "=>" schedule=[Event] "{" ("delay" "=" delay=INT ";")? "}"
 		public Group getGroup() { return cGroup; }
 
 		//observes=[Event]
@@ -309,7 +310,7 @@ public class SimulatorGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
-		//("delay" "=" delay=INT)?
+		//("delay" "=" delay=INT ";")?
 		public Group getGroup_4() { return cGroup_4; }
 
 		//"delay"
@@ -323,6 +324,9 @@ public class SimulatorGrammarAccess extends AbstractGrammarElementFinder {
 
 		//INT
 		public RuleCall getDelayINTTerminalRuleCall_4_2_0() { return cDelayINTTerminalRuleCall_4_2_0; }
+
+		//";"
+		public Keyword getSemicolonKeyword_4_3() { return cSemicolonKeyword_4_3; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
@@ -415,7 +419,7 @@ public class SimulatorGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ConditionalScheduling:
-	//	observes=[Event] "=>" schedule=[Event] "{" ("delay" "=" delay=INT)? "}";
+	//	observes=[Event] "=>" schedule=[Event] "{" ("delay" "=" delay=INT ";")? "}";
 	public ConditionalSchedulingElements getConditionalSchedulingAccess() {
 		return (pConditionalScheduling != null) ? pConditionalScheduling : (pConditionalScheduling = new ConditionalSchedulingElements());
 	}

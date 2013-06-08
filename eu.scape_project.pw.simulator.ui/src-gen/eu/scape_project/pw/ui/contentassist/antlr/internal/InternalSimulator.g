@@ -1635,6 +1635,7 @@ rule__ConditionalScheduling__Group_4__2
     }
 :
 	rule__ConditionalScheduling__Group_4__2__Impl
+	rule__ConditionalScheduling__Group_4__3
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -1655,6 +1656,38 @@ rule__ConditionalScheduling__Group_4__2__Impl
 finally {
 	restoreStackSize(stackSize);
 }
+
+
+rule__ConditionalScheduling__Group_4__3
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+	rule__ConditionalScheduling__Group_4__3__Impl
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__ConditionalScheduling__Group_4__3__Impl
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getConditionalSchedulingAccess().getSemicolonKeyword_4_3()); }
+
+	';' 
+
+{ after(grammarAccess.getConditionalSchedulingAccess().getSemicolonKeyword_4_3()); }
+)
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
 
 
 
