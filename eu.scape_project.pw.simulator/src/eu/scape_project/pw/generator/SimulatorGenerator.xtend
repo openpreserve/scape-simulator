@@ -4,9 +4,9 @@
 package eu.scape_project.pw.generator
 
 import eu.scape_project.pw.simulator.ConditionalScheduling
+import eu.scape_project.pw.simulator.Entity
 import eu.scape_project.pw.simulator.Event
 import eu.scape_project.pw.simulator.EventScheduling
-import eu.scape_project.pw.simulator.Scheduling
 import eu.scape_project.pw.simulator.Simulation
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IFileSystemAccess
@@ -25,6 +25,10 @@ class SimulatorGenerator implements IGenerator {
 		
 		for (e : resource.allContents.toIterable.filter(typeof(ConditionalScheduling))) {
 			fsa.generateFile("/simulator/" + e.observes.name + "2" + e.schedule.name + ".java", e.compileConditionalScheduling)
+		}
+		
+		for (e : resource.allContents.toIterable.filter(typeof(Entity))) {
+			fsa.generateFile("/simulator/" + e.name + ".java", e.compileEntity)
 		}
 	}
 
@@ -78,10 +82,23 @@ class SimulatorGenerator implements IGenerator {
 	
 			@Override
 			public void execute(SimulationState state) {
-				System.out.println("Hello from event «e.name» at time " + state.getTime()); 
+				System.out.println("Hello from event «e.name» at time " + state.getTime() + "I am referencing  «e.entity.name» " ); 
 			}
 		}
 		
+	'''
+	
+	def compileEntity(Entity e) '''
+
+	package simulator;
+	import eu.scape_project.*;
+	public class «e.name» extends Entity {
+		
+		public «e.name»() {
+			name = "«e.name»";
+		}
+	}
+
 	'''
 	
 	def compileConditionalScheduling(ConditionalScheduling e) '''

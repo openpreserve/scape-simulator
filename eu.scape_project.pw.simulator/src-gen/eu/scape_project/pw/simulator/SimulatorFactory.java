@@ -41,6 +41,15 @@ public interface SimulatorFactory extends EFactory
   Event createEvent();
 
   /**
+   * Returns a new object of class '<em>Entity</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Entity</em>'.
+   * @generated
+   */
+  Entity createEntity();
+
+  /**
    * Returns a new object of class '<em>Scheduling</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

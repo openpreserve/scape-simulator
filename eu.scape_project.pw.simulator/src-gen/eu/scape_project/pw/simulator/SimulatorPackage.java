@@ -76,13 +76,22 @@ public interface SimulatorPackage extends EPackage
   int SIMULATION__NAME = 0;
 
   /**
+   * The feature id for the '<em><b>Entities</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SIMULATION__ENTITIES = 1;
+
+  /**
    * The feature id for the '<em><b>Events</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int SIMULATION__EVENTS = 1;
+  int SIMULATION__EVENTS = 2;
 
   /**
    * The feature id for the '<em><b>Scheduling</b></em>' containment reference list.
@@ -91,7 +100,7 @@ public interface SimulatorPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SIMULATION__SCHEDULING = 2;
+  int SIMULATION__SCHEDULING = 3;
 
   /**
    * The number of structural features of the '<em>Simulation</em>' class.
@@ -100,7 +109,7 @@ public interface SimulatorPackage extends EPackage
    * @generated
    * @ordered
    */
-  int SIMULATION_FEATURE_COUNT = 3;
+  int SIMULATION_FEATURE_COUNT = 4;
 
   /**
    * The meta object id for the '{@link eu.scape_project.pw.simulator.impl.EventImpl <em>Event</em>}' class.
@@ -122,13 +131,50 @@ public interface SimulatorPackage extends EPackage
   int EVENT__NAME = 0;
 
   /**
+   * The feature id for the '<em><b>Entity</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EVENT__ENTITY = 1;
+
+  /**
    * The number of structural features of the '<em>Event</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EVENT_FEATURE_COUNT = 1;
+  int EVENT_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link eu.scape_project.pw.simulator.impl.EntityImpl <em>Entity</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see eu.scape_project.pw.simulator.impl.EntityImpl
+   * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getEntity()
+   * @generated
+   */
+  int ENTITY = 2;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENTITY__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Entity</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENTITY_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link eu.scape_project.pw.simulator.impl.SchedulingImpl <em>Scheduling</em>}' class.
@@ -138,7 +184,7 @@ public interface SimulatorPackage extends EPackage
    * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getScheduling()
    * @generated
    */
-  int SCHEDULING = 2;
+  int SCHEDULING = 3;
 
   /**
    * The feature id for the '<em><b>Schedule</b></em>' reference.
@@ -166,7 +212,7 @@ public interface SimulatorPackage extends EPackage
    * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getEventScheduling()
    * @generated
    */
-  int EVENT_SCHEDULING = 3;
+  int EVENT_SCHEDULING = 4;
 
   /**
    * The feature id for the '<em><b>Schedule</b></em>' reference.
@@ -230,7 +276,7 @@ public interface SimulatorPackage extends EPackage
    * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getConditionalScheduling()
    * @generated
    */
-  int CONDITIONAL_SCHEDULING = 4;
+  int CONDITIONAL_SCHEDULING = 5;
 
   /**
    * The feature id for the '<em><b>Schedule</b></em>' reference.
@@ -291,6 +337,17 @@ public interface SimulatorPackage extends EPackage
   EAttribute getSimulation_Name();
 
   /**
+   * Returns the meta object for the containment reference list '{@link eu.scape_project.pw.simulator.Simulation#getEntities <em>Entities</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Entities</em>'.
+   * @see eu.scape_project.pw.simulator.Simulation#getEntities()
+   * @see #getSimulation()
+   * @generated
+   */
+  EReference getSimulation_Entities();
+
+  /**
    * Returns the meta object for the containment reference list '{@link eu.scape_project.pw.simulator.Simulation#getEvents <em>Events</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -332,6 +389,38 @@ public interface SimulatorPackage extends EPackage
    * @generated
    */
   EAttribute getEvent_Name();
+
+  /**
+   * Returns the meta object for the reference '{@link eu.scape_project.pw.simulator.Event#getEntity <em>Entity</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Entity</em>'.
+   * @see eu.scape_project.pw.simulator.Event#getEntity()
+   * @see #getEvent()
+   * @generated
+   */
+  EReference getEvent_Entity();
+
+  /**
+   * Returns the meta object for class '{@link eu.scape_project.pw.simulator.Entity <em>Entity</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Entity</em>'.
+   * @see eu.scape_project.pw.simulator.Entity
+   * @generated
+   */
+  EClass getEntity();
+
+  /**
+   * Returns the meta object for the attribute '{@link eu.scape_project.pw.simulator.Entity#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see eu.scape_project.pw.simulator.Entity#getName()
+   * @see #getEntity()
+   * @generated
+   */
+  EAttribute getEntity_Name();
 
   /**
    * Returns the meta object for class '{@link eu.scape_project.pw.simulator.Scheduling <em>Scheduling</em>}'.
@@ -482,6 +571,14 @@ public interface SimulatorPackage extends EPackage
     EAttribute SIMULATION__NAME = eINSTANCE.getSimulation_Name();
 
     /**
+     * The meta object literal for the '<em><b>Entities</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SIMULATION__ENTITIES = eINSTANCE.getSimulation_Entities();
+
+    /**
      * The meta object literal for the '<em><b>Events</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -514,6 +611,32 @@ public interface SimulatorPackage extends EPackage
      * @generated
      */
     EAttribute EVENT__NAME = eINSTANCE.getEvent_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Entity</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference EVENT__ENTITY = eINSTANCE.getEvent_Entity();
+
+    /**
+     * The meta object literal for the '{@link eu.scape_project.pw.simulator.impl.EntityImpl <em>Entity</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see eu.scape_project.pw.simulator.impl.EntityImpl
+     * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getEntity()
+     * @generated
+     */
+    EClass ENTITY = eINSTANCE.getEntity();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ENTITY__NAME = eINSTANCE.getEntity_Name();
 
     /**
      * The meta object literal for the '{@link eu.scape_project.pw.simulator.impl.SchedulingImpl <em>Scheduling</em>}' class.

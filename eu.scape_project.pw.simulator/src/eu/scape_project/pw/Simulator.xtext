@@ -4,6 +4,7 @@ generate simulator "http://www.scape_project.eu/pw/Simulator"
 
 Simulation : 
 	'Simulation' name=STRING '{'
+		'entities:' (entities+=Entity)*
 		'events:' (events+=Event)*
 		'scheduling:' (scheduling+=Scheduling)*
 	'}'
@@ -11,8 +12,12 @@ Simulation :
 
 Event :
 	'Event' name=STRING '{'
-		 
+		 'references' '=' entity=[Entity] 
 	'}' 
+;
+
+Entity :
+	'Entity' name=STRING '{' '}'
 ;
 
 Scheduling: EventScheduling | ConditionalScheduling;

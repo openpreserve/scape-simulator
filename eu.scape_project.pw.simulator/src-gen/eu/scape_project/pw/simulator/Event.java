@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link eu.scape_project.pw.simulator.Event#getName <em>Name</em>}</li>
+ *   <li>{@link eu.scape_project.pw.simulator.Event#getEntity <em>Entity</em>}</li>
  * </ul>
  * </p>
  *
@@ -47,5 +48,31 @@ public interface Event extends EObject
    * @generated
    */
   void setName(String value);
+
+  /**
+   * Returns the value of the '<em><b>Entity</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Entity</em>' reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Entity</em>' reference.
+   * @see #setEntity(Entity)
+   * @see eu.scape_project.pw.simulator.SimulatorPackage#getEvent_Entity()
+   * @model
+   * @generated
+   */
+  Entity getEntity();
+
+  /**
+   * Sets the value of the '{@link eu.scape_project.pw.simulator.Event#getEntity <em>Entity</em>}' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Entity</em>' reference.
+   * @see #getEntity()
+   * @generated
+   */
+  void setEntity(Entity value);
 
 } // Event

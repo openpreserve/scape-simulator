@@ -1,4 +1,7 @@
 RULE_ID=5
+T__28=28
+T__27=27
+T__26=26
 T__25=25
 T__24=24
 T__23=23
@@ -20,18 +23,21 @@ T__14=14
 T__13=13
 RULE_INT=6
 RULE_WS=9
-'end'=21
-'}'=15
-'every'=23
+'references'=18
+'Entity'=20
+'end'=24
+'}'=16
+'every'=26
 '{'=12
-'events:'=13
-'scheduling:'=14
-'Event'=16
-'delay'=25
-'repeat'=22
-';'=20
-'start'=18
+'entities:'=13
+'events:'=14
+'scheduling:'=15
+'Event'=17
+'delay'=28
+'repeat'=25
+';'=23
+'start'=22
 '='=19
-'=>'=24
-'schedule '=17
+'=>'=27
+'schedule '=21
 'Simulation'=11

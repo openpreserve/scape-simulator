@@ -40,6 +40,7 @@ public class SimulatorParser extends AbstractContentAssistParser {
 					put(grammarAccess.getSchedulingAccess().getAlternatives(), "rule__Scheduling__Alternatives");
 					put(grammarAccess.getSimulationAccess().getGroup(), "rule__Simulation__Group__0");
 					put(grammarAccess.getEventAccess().getGroup(), "rule__Event__Group__0");
+					put(grammarAccess.getEntityAccess().getGroup(), "rule__Entity__Group__0");
 					put(grammarAccess.getEventSchedulingAccess().getGroup(), "rule__EventScheduling__Group__0");
 					put(grammarAccess.getEventSchedulingAccess().getGroup_3(), "rule__EventScheduling__Group_3__0");
 					put(grammarAccess.getEventSchedulingAccess().getGroup_4(), "rule__EventScheduling__Group_4__0");
@@ -48,9 +49,12 @@ public class SimulatorParser extends AbstractContentAssistParser {
 					put(grammarAccess.getConditionalSchedulingAccess().getGroup(), "rule__ConditionalScheduling__Group__0");
 					put(grammarAccess.getConditionalSchedulingAccess().getGroup_4(), "rule__ConditionalScheduling__Group_4__0");
 					put(grammarAccess.getSimulationAccess().getNameAssignment_1(), "rule__Simulation__NameAssignment_1");
-					put(grammarAccess.getSimulationAccess().getEventsAssignment_4(), "rule__Simulation__EventsAssignment_4");
-					put(grammarAccess.getSimulationAccess().getSchedulingAssignment_6(), "rule__Simulation__SchedulingAssignment_6");
+					put(grammarAccess.getSimulationAccess().getEntitiesAssignment_4(), "rule__Simulation__EntitiesAssignment_4");
+					put(grammarAccess.getSimulationAccess().getEventsAssignment_6(), "rule__Simulation__EventsAssignment_6");
+					put(grammarAccess.getSimulationAccess().getSchedulingAssignment_8(), "rule__Simulation__SchedulingAssignment_8");
 					put(grammarAccess.getEventAccess().getNameAssignment_1(), "rule__Event__NameAssignment_1");
+					put(grammarAccess.getEventAccess().getEntityAssignment_5(), "rule__Event__EntityAssignment_5");
+					put(grammarAccess.getEntityAccess().getNameAssignment_1(), "rule__Entity__NameAssignment_1");
 					put(grammarAccess.getEventSchedulingAccess().getScheduleAssignment_1(), "rule__EventScheduling__ScheduleAssignment_1");
 					put(grammarAccess.getEventSchedulingAccess().getStartAssignment_3_2(), "rule__EventScheduling__StartAssignment_3_2");
 					put(grammarAccess.getEventSchedulingAccess().getEndAssignment_4_2(), "rule__EventScheduling__EndAssignment_4_2");
