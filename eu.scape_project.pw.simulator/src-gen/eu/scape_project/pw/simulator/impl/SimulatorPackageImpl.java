@@ -18,6 +18,8 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.common.types.TypesPackage;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model <b>Package</b>.
@@ -115,6 +117,9 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
     SimulatorPackageImpl theSimulatorPackage = (SimulatorPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof SimulatorPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new SimulatorPackageImpl());
 
     isInited = true;
+
+    // Initialize simple dependencies
+    TypesPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theSimulatorPackage.createPackageContents();
@@ -229,6 +234,16 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
   public EAttribute getEntity_Name()
   {
     return (EAttribute)entityEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEntity_Type()
+  {
+    return (EReference)entityEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -373,6 +388,7 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
 
     entityEClass = createEClass(ENTITY);
     createEAttribute(entityEClass, ENTITY__NAME);
+    createEReference(entityEClass, ENTITY__TYPE);
 
     schedulingEClass = createEClass(SCHEDULING);
     createEReference(schedulingEClass, SCHEDULING__SCHEDULE);
@@ -412,6 +428,9 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
     setNsPrefix(eNS_PREFIX);
     setNsURI(eNS_URI);
 
+    // Obtain other dependent packages
+    TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
+
     // Create type parameters
 
     // Set bounds for type parameters
@@ -433,6 +452,7 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
 
     initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEntity_Name(), ecorePackage.getEString(), "name", null, 0, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEntity_Type(), theTypesPackage.getJvmTypeReference(), null, "type", null, 0, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(schedulingEClass, Scheduling.class, "Scheduling", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getScheduling_Schedule(), this.getEvent(), null, "schedule", null, 0, 1, Scheduling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

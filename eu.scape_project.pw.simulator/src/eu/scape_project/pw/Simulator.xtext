@@ -1,9 +1,9 @@
-grammar eu.scape_project.pw.Simulator with org.eclipse.xtext.common.Terminals
+grammar eu.scape_project.pw.Simulator with org.eclipse.xtext.xbase.Xbase
 
 generate simulator "http://www.scape_project.eu/pw/Simulator"
 
 Simulation : 
-	'Simulation' name=STRING '{'
+	'Simulation' name=ValidID '{'
 		'entities:' (entities+=Entity)*
 		'events:' (events+=Event)*
 		'scheduling:' (scheduling+=Scheduling)*
@@ -11,13 +11,17 @@ Simulation :
 ;
 
 Event :
-	'Event' name=STRING '{'
+	'Event' name=ValidID '{'
 		 'references' '=' entity=[Entity] 
 	'}' 
 ;
 
 Entity :
-	'Entity' name=STRING '{' '}'
+	'Entity' name=ValidID '{' 
+		
+		property=ValidID ':' type=JvmTypeReference
+		
+	'}'
 ;
 
 Scheduling: EventScheduling | ConditionalScheduling;

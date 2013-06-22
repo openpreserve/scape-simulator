@@ -168,13 +168,22 @@ public interface SimulatorPackage extends EPackage
   int ENTITY__NAME = 0;
 
   /**
+   * The feature id for the '<em><b>Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ENTITY__TYPE = 1;
+
+  /**
    * The number of structural features of the '<em>Entity</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ENTITY_FEATURE_COUNT = 1;
+  int ENTITY_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link eu.scape_project.pw.simulator.impl.SchedulingImpl <em>Scheduling</em>}' class.
@@ -423,6 +432,17 @@ public interface SimulatorPackage extends EPackage
   EAttribute getEntity_Name();
 
   /**
+   * Returns the meta object for the containment reference '{@link eu.scape_project.pw.simulator.Entity#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Type</em>'.
+   * @see eu.scape_project.pw.simulator.Entity#getType()
+   * @see #getEntity()
+   * @generated
+   */
+  EReference getEntity_Type();
+
+  /**
    * Returns the meta object for class '{@link eu.scape_project.pw.simulator.Scheduling <em>Scheduling</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -637,6 +657,14 @@ public interface SimulatorPackage extends EPackage
      * @generated
      */
     EAttribute ENTITY__NAME = eINSTANCE.getEntity_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ENTITY__TYPE = eINSTANCE.getEntity_Type();
 
     /**
      * The meta object literal for the '{@link eu.scape_project.pw.simulator.impl.SchedulingImpl <em>Scheduling</em>}' class.

@@ -8,12 +8,15 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
 
-public class AbstractSimulatorJavaValidator extends org.eclipse.xtext.validation.AbstractDeclarativeValidator {
+public class AbstractSimulatorJavaValidator extends org.eclipse.xtext.xbase.validation.XbaseJavaValidator {
 
 	@Override
 	protected List<EPackage> getEPackages() {
 	    List<EPackage> result = new ArrayList<EPackage>();
 	    result.add(eu.scape_project.pw.simulator.SimulatorPackage.eINSTANCE);
+	    result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/xtext/xbase/Xbase"));
+	    result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/xtext/common/JavaVMTypes"));
+	    result.add(EPackage.Registry.INSTANCE.getEPackage("http://www.eclipse.org/xtext/xbase/Xtype"));
 		return result;
 	}
 

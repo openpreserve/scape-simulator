@@ -3,9 +3,14 @@
  */
 package eu.scape_project.pw;
 
+import eu.scape_project.pw.generator.SimulatorGenerator;
+
 /**
  * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class SimulatorRuntimeModule extends eu.scape_project.pw.AbstractSimulatorRuntimeModule {
 
+	public Class<? extends org.eclipse.xtext.generator.IGenerator> bindIGenerator() {
+		return SimulatorGenerator.class;
+	}
 }

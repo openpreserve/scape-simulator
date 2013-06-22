@@ -16,7 +16,8 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.antlr.runtime,
- org.eclipse.xtext.common.types
+ org.eclipse.xtext.common.types,
+ org.eclipse.xtext.xbase.lib
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
@@ -31,5 +32,6 @@ Export-Package: eu.scape_project.pw,
  eu.scape_project.pw.validation,
  eu.scape_project.pw.scoping,
  eu.scape_project.pw.generator,
- eu.scape_project.pw.formatting
+ eu.scape_project.pw.formatting,
+ eu.scape_project.pw.jvmmodel
 Bundle-ClassPath: .
