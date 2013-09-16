@@ -12,16 +12,23 @@ Simulation :
 
 Event :
 	'Event' name=ValidID '{'
-		 'references' '=' entity=[Entity] 
+		expression = XExpression   
 	'}' 
 ;
 
-Entity :
-	'Entity' name=ValidID '{' 
+Entity : Collection ; 
+
+Collection : 
+	'collection' name=ID '{' 
 		
-		property=ValidID ':' type=JvmTypeReference
+		(keyValues+=KeyValue)*
+		(subCollections+=Collection)*	
 		
-	'}'
+	'}' 
+;
+	
+KeyValue :
+	key=ID ':' value= INT | DECIMAL | STRING
 ;
 
 Scheduling: EventScheduling | ConditionalScheduling;

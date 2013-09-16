@@ -4,13 +4,11 @@
 package eu.scape_project.pw.generator;
 
 import com.google.common.collect.Iterables;
+import eu.scape_project.pw.generator.InitializatorGenerator;
 import eu.scape_project.pw.simulator.ConditionalScheduling;
-import eu.scape_project.pw.simulator.Entity;
 import eu.scape_project.pw.simulator.Event;
 import eu.scape_project.pw.simulator.EventScheduling;
-import eu.scape_project.pw.simulator.Scheduling;
 import eu.scape_project.pw.simulator.Simulation;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -21,7 +19,11 @@ import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
 @SuppressWarnings("all")
 public class SimulatorGenerator implements IGenerator {
+  private InitializatorGenerator iGenerator;
+  
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
+    InitializatorGenerator _initializatorGenerator = new InitializatorGenerator();
+    this.iGenerator = _initializatorGenerator;
     TreeIterator<EObject> _allContents = resource.getAllContents();
     Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_allContents);
     Iterable<Simulation> _filter = Iterables.<Simulation>filter(_iterable, Simulation.class);
@@ -29,9 +31,10 @@ public class SimulatorGenerator implements IGenerator {
       String _name = e.getName();
       String _plus = ("/simulator/" + _name);
       String _plus_1 = (_plus + ".java");
-      CharSequence _compile = this.compile(e);
-      fsa.generateFile(_plus_1, _compile);
+      CharSequence _createMain = this.createMain(e);
+      fsa.generateFile(_plus_1, _createMain);
     }
+    this.iGenerator.generateInitializator(resource, fsa);
     TreeIterator<EObject> _allContents_1 = resource.getAllContents();
     Iterable<EObject> _iterable_1 = IteratorExtensions.<EObject>toIterable(_allContents_1);
     Iterable<Event> _filter_1 = Iterables.<Event>filter(_iterable_1, Event.class);
@@ -57,19 +60,12 @@ public class SimulatorGenerator implements IGenerator {
       CharSequence _compileConditionalScheduling = this.compileConditionalScheduling(e_2);
       fsa.generateFile(_plus_7, _compileConditionalScheduling);
     }
-    TreeIterator<EObject> _allContents_3 = resource.getAllContents();
-    Iterable<EObject> _iterable_3 = IteratorExtensions.<EObject>toIterable(_allContents_3);
-    Iterable<Entity> _filter_3 = Iterables.<Entity>filter(_iterable_3, Entity.class);
-    for (final Entity e_3 : _filter_3) {
-      String _name_4 = e_3.getName();
-      String _plus_8 = ("/simulator/" + _name_4);
-      String _plus_9 = (_plus_8 + ".java");
-      CharSequence _compileEntity = this.compileEntity(e_3);
-      fsa.generateFile(_plus_9, _compileEntity);
-    }
   }
   
-  public CharSequence compile(final Simulation s) {
+  /**
+   * generate main file
+   */
+  public CharSequence createMain(final Simulation s) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
     _builder.append("package simulator;");
@@ -85,49 +81,22 @@ public class SimulatorGenerator implements IGenerator {
     _builder.append("public static void main(String[] args) {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("EventContainer container = new EventContainer();");
-    _builder.newLine();
-    _builder.append("\t\t");
     _builder.append("EventProcessor processor = new EventProcessor();");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("int tmp;");
+    _builder.append("Initializator initializator = new Initializator();");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("int start;");
+    _builder.append("processor.setEventContainer(initializator.getEventContainer());");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("IEventObserver tmpEvent;\t\t");
+    _builder.append("processor.setEOContainer(initializator.getEOContainer());");
     _builder.newLine();
     _builder.append("\t\t");
-    {
-      EList<Scheduling> _scheduling = s.getScheduling();
-      Iterable<EventScheduling> _filter = Iterables.<EventScheduling>filter(_scheduling, EventScheduling.class);
-      for(final EventScheduling sch : _filter) {
-        _builder.append(" ");
-        CharSequence _compileEventSchedulingMain = this.compileEventSchedulingMain(sch);
-        _builder.append(_compileEventSchedulingMain, "		");
-        _builder.append(" ");
-      }
-    }
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    {
-      EList<Scheduling> _scheduling_1 = s.getScheduling();
-      Iterable<ConditionalScheduling> _filter_1 = Iterables.<ConditionalScheduling>filter(_scheduling_1, ConditionalScheduling.class);
-      for(final ConditionalScheduling sch_1 : _filter_1) {
-        _builder.append(" ");
-        CharSequence _compileConditionalEventSchedulingMain = this.compileConditionalEventSchedulingMain(sch_1);
-        _builder.append(_compileConditionalEventSchedulingMain, "		");
-        _builder.append(" ");
-      }
-    }
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    _builder.append("processor.initialize(container);");
+    _builder.append("processor.setSimulationState(initializator.getSimulationSItate());");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("processor.startSimulation(); \t");
+    _builder.append("processor.startSimulation();");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -135,6 +104,14 @@ public class SimulatorGenerator implements IGenerator {
     _builder.append("}");
     _builder.newLine();
     _builder.newLine();
+    return _builder;
+  }
+  
+  /**
+   * generate initializer
+   */
+  public CharSequence generateInitializer() {
+    StringConcatenation _builder = new StringConcatenation();
     return _builder;
   }
   
@@ -238,46 +215,7 @@ public class SimulatorGenerator implements IGenerator {
     _builder.append("System.out.println(\"Hello from event ");
     String _name_3 = e.getName();
     _builder.append(_name_3, "		");
-    _builder.append(" at time \" + state.getTime() + \"I am referencing  ");
-    Entity _entity = e.getEntity();
-    String _name_4 = _entity.getName();
-    _builder.append(_name_4, "		");
-    _builder.append(" \" ); ");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
-    return _builder;
-  }
-  
-  public CharSequence compileEntity(final Entity e) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.newLine();
-    _builder.append("package simulator;");
-    _builder.newLine();
-    _builder.append("import eu.scape_project.*;");
-    _builder.newLine();
-    _builder.append("public class ");
-    String _name = e.getName();
-    _builder.append(_name, "");
-    _builder.append(" extends Entity {");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public ");
-    String _name_1 = e.getName();
-    _builder.append(_name_1, "	");
-    _builder.append("() {");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
-    _builder.append("name = \"");
-    String _name_2 = e.getName();
-    _builder.append(_name_2, "		");
-    _builder.append("\";");
+    _builder.append(" at time \" + state.getTime() ); ");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("}");

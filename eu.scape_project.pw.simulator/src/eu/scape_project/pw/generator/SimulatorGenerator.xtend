@@ -4,7 +4,6 @@
 package eu.scape_project.pw.generator
 
 import eu.scape_project.pw.simulator.ConditionalScheduling
-import eu.scape_project.pw.simulator.Entity
 import eu.scape_project.pw.simulator.Event
 import eu.scape_project.pw.simulator.EventScheduling
 import eu.scape_project.pw.simulator.Simulation
@@ -14,10 +13,13 @@ import org.eclipse.xtext.generator.IGenerator
 
 class SimulatorGenerator implements IGenerator {
 
+	InitializatorGenerator iGenerator;
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
+		iGenerator = new InitializatorGenerator()
 		for (e : resource.allContents.toIterable.filter(typeof(Simulation))) {
-			fsa.generateFile("/simulator/" + e.name + ".java", e.compile)
+			fsa.generateFile("/simulator/" + e.name + ".java", e.createMain)
 		}
+		iGenerator.generateInitializator(resource,fsa);
 		
 		for (e : resource.allContents.toIterable.filter(typeof(Event))) {
 			fsa.generateFile("/simulator/" + e.name + ".java", e.compileEvent)
@@ -27,31 +29,35 @@ class SimulatorGenerator implements IGenerator {
 			fsa.generateFile("/simulator/" + e.observes.name + "2" + e.schedule.name + ".java", e.compileConditionalScheduling)
 		}
 		
-		for (e : resource.allContents.toIterable.filter(typeof(Entity))) {
-			fsa.generateFile("/simulator/" + e.name + ".java", e.compileEntity)
-		}
+
 	}
 
-	def compile(Simulation s) '''
+	/**
+	 * generate main file 
+	 */
+	def createMain(Simulation s) '''
 		
 		package simulator;
 		import eu.scape_project.*;
 		public class «s.name» { 
 			public static void main(String[] args) {
-				EventContainer container = new EventContainer();
 				EventProcessor processor = new EventProcessor();
-				int tmp;
-				int start;
-				IEventObserver tmpEvent;		
-				«FOR sch : s.scheduling.filter(typeof(EventScheduling))» «sch.compileEventSchedulingMain» «ENDFOR»
-				«FOR sch : s.scheduling.filter(typeof(ConditionalScheduling))» «sch.compileConditionalEventSchedulingMain» «ENDFOR»
-				processor.initialize(container);
-				processor.startSimulation(); 	
+				Initializator initializator = new Initializator();
+				processor.setEventContainer(initializator.getEventContainer());
+				processor.setEOContainer(initializator.getEOContainer());
+				processor.setSimulationState(initializator.getSimulationSItate());
+				processor.startSimulation();
 			}
 		}
 		
 	'''
 	
+	
+	/**
+	 * generate initializer
+	 */
+	 def generateInitializer() '''
+	 '''
 	
 	def compileEventSchedulingMain(EventScheduling e) '''
 		tmp = «e.repeat»;
@@ -82,24 +88,11 @@ class SimulatorGenerator implements IGenerator {
 	
 			@Override
 			public void execute(SimulationState state) {
-				System.out.println("Hello from event «e.name» at time " + state.getTime() + "I am referencing  «e.entity.name» " ); 
+				System.out.println("Hello from event «e.name» at time " + state.getTime() ); 
 			}
 		}
 		
-	'''
-	
-	def compileEntity(Entity e) '''
-
-	package simulator;
-	import eu.scape_project.*;
-	public class «e.name» extends Entity {
-		
-		public «e.name»() {
-			name = "«e.name»";
-		}
-	}
-
-	'''
+	'''	
 	
 	def compileConditionalScheduling(ConditionalScheduling e) '''
 	

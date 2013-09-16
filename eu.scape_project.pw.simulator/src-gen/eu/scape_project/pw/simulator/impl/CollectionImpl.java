@@ -2,35 +2,39 @@
  */
 package eu.scape_project.pw.simulator.impl;
 
-import eu.scape_project.pw.simulator.Event;
+import eu.scape_project.pw.simulator.Collection;
+import eu.scape_project.pw.simulator.KeyValue;
 import eu.scape_project.pw.simulator.SimulatorPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Event</b></em>'.
+ * An implementation of the model object '<em><b>Collection</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link eu.scape_project.pw.simulator.impl.EventImpl#getName <em>Name</em>}</li>
- *   <li>{@link eu.scape_project.pw.simulator.impl.EventImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link eu.scape_project.pw.simulator.impl.CollectionImpl#getName <em>Name</em>}</li>
+ *   <li>{@link eu.scape_project.pw.simulator.impl.CollectionImpl#getKeyValues <em>Key Values</em>}</li>
+ *   <li>{@link eu.scape_project.pw.simulator.impl.CollectionImpl#getSubCollections <em>Sub Collections</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class EventImpl extends MinimalEObjectImpl.Container implements Event
+public class CollectionImpl extends EntityImpl implements Collection
 {
   /**
    * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -53,21 +57,31 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
+   * The cached value of the '{@link #getKeyValues() <em>Key Values</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getExpression()
+   * @see #getKeyValues()
    * @generated
    * @ordered
    */
-  protected XExpression expression;
+  protected EList<KeyValue> keyValues;
+
+  /**
+   * The cached value of the '{@link #getSubCollections() <em>Sub Collections</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSubCollections()
+   * @generated
+   * @ordered
+   */
+  protected EList<Collection> subCollections;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected EventImpl()
+  protected CollectionImpl()
   {
     super();
   }
@@ -80,7 +94,7 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
   @Override
   protected EClass eStaticClass()
   {
-    return SimulatorPackage.Literals.EVENT;
+    return SimulatorPackage.Literals.COLLECTION;
   }
 
   /**
@@ -103,7 +117,7 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SimulatorPackage.EVENT__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, SimulatorPackage.COLLECTION__NAME, oldName, name));
   }
 
   /**
@@ -111,26 +125,13 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
    * <!-- end-user-doc -->
    * @generated
    */
-  public XExpression getExpression()
+  public EList<KeyValue> getKeyValues()
   {
-    return expression;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetExpression(XExpression newExpression, NotificationChain msgs)
-  {
-    XExpression oldExpression = expression;
-    expression = newExpression;
-    if (eNotificationRequired())
+    if (keyValues == null)
     {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SimulatorPackage.EVENT__EXPRESSION, oldExpression, newExpression);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
+      keyValues = new EObjectContainmentEList<KeyValue>(KeyValue.class, this, SimulatorPackage.COLLECTION__KEY_VALUES);
     }
-    return msgs;
+    return keyValues;
   }
 
   /**
@@ -138,20 +139,13 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExpression(XExpression newExpression)
+  public EList<Collection> getSubCollections()
   {
-    if (newExpression != expression)
+    if (subCollections == null)
     {
-      NotificationChain msgs = null;
-      if (expression != null)
-        msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SimulatorPackage.EVENT__EXPRESSION, null, msgs);
-      if (newExpression != null)
-        msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SimulatorPackage.EVENT__EXPRESSION, null, msgs);
-      msgs = basicSetExpression(newExpression, msgs);
-      if (msgs != null) msgs.dispatch();
+      subCollections = new EObjectContainmentEList<Collection>(Collection.class, this, SimulatorPackage.COLLECTION__SUB_COLLECTIONS);
     }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SimulatorPackage.EVENT__EXPRESSION, newExpression, newExpression));
+    return subCollections;
   }
 
   /**
@@ -164,8 +158,10 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
   {
     switch (featureID)
     {
-      case SimulatorPackage.EVENT__EXPRESSION:
-        return basicSetExpression(null, msgs);
+      case SimulatorPackage.COLLECTION__KEY_VALUES:
+        return ((InternalEList<?>)getKeyValues()).basicRemove(otherEnd, msgs);
+      case SimulatorPackage.COLLECTION__SUB_COLLECTIONS:
+        return ((InternalEList<?>)getSubCollections()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -180,10 +176,12 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
   {
     switch (featureID)
     {
-      case SimulatorPackage.EVENT__NAME:
+      case SimulatorPackage.COLLECTION__NAME:
         return getName();
-      case SimulatorPackage.EVENT__EXPRESSION:
-        return getExpression();
+      case SimulatorPackage.COLLECTION__KEY_VALUES:
+        return getKeyValues();
+      case SimulatorPackage.COLLECTION__SUB_COLLECTIONS:
+        return getSubCollections();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -193,16 +191,22 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
-      case SimulatorPackage.EVENT__NAME:
+      case SimulatorPackage.COLLECTION__NAME:
         setName((String)newValue);
         return;
-      case SimulatorPackage.EVENT__EXPRESSION:
-        setExpression((XExpression)newValue);
+      case SimulatorPackage.COLLECTION__KEY_VALUES:
+        getKeyValues().clear();
+        getKeyValues().addAll((java.util.Collection<? extends KeyValue>)newValue);
+        return;
+      case SimulatorPackage.COLLECTION__SUB_COLLECTIONS:
+        getSubCollections().clear();
+        getSubCollections().addAll((java.util.Collection<? extends Collection>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -218,11 +222,14 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
   {
     switch (featureID)
     {
-      case SimulatorPackage.EVENT__NAME:
+      case SimulatorPackage.COLLECTION__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case SimulatorPackage.EVENT__EXPRESSION:
-        setExpression((XExpression)null);
+      case SimulatorPackage.COLLECTION__KEY_VALUES:
+        getKeyValues().clear();
+        return;
+      case SimulatorPackage.COLLECTION__SUB_COLLECTIONS:
+        getSubCollections().clear();
         return;
     }
     super.eUnset(featureID);
@@ -238,10 +245,12 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
   {
     switch (featureID)
     {
-      case SimulatorPackage.EVENT__NAME:
+      case SimulatorPackage.COLLECTION__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case SimulatorPackage.EVENT__EXPRESSION:
-        return expression != null;
+      case SimulatorPackage.COLLECTION__KEY_VALUES:
+        return keyValues != null && !keyValues.isEmpty();
+      case SimulatorPackage.COLLECTION__SUB_COLLECTIONS:
+        return subCollections != null && !subCollections.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -263,4 +272,4 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
     return result.toString();
   }
 
-} //EventImpl
+} //CollectionImpl

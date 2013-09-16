@@ -131,13 +131,13 @@ public interface SimulatorPackage extends EPackage
   int EVENT__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Entity</b></em>' reference.
+   * The feature id for the '<em><b>Expression</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EVENT__ENTITY = 1;
+  int EVENT__EXPRESSION = 1;
 
   /**
    * The number of structural features of the '<em>Event</em>' class.
@@ -159,31 +159,96 @@ public interface SimulatorPackage extends EPackage
   int ENTITY = 2;
 
   /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ENTITY__NAME = 0;
-
-  /**
-   * The feature id for the '<em><b>Type</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int ENTITY__TYPE = 1;
-
-  /**
    * The number of structural features of the '<em>Entity</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ENTITY_FEATURE_COUNT = 2;
+  int ENTITY_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link eu.scape_project.pw.simulator.impl.CollectionImpl <em>Collection</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see eu.scape_project.pw.simulator.impl.CollectionImpl
+   * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getCollection()
+   * @generated
+   */
+  int COLLECTION = 3;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COLLECTION__NAME = ENTITY_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Key Values</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COLLECTION__KEY_VALUES = ENTITY_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Sub Collections</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COLLECTION__SUB_COLLECTIONS = ENTITY_FEATURE_COUNT + 2;
+
+  /**
+   * The number of structural features of the '<em>Collection</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COLLECTION_FEATURE_COUNT = ENTITY_FEATURE_COUNT + 3;
+
+  /**
+   * The meta object id for the '{@link eu.scape_project.pw.simulator.impl.KeyValueImpl <em>Key Value</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see eu.scape_project.pw.simulator.impl.KeyValueImpl
+   * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getKeyValue()
+   * @generated
+   */
+  int KEY_VALUE = 4;
+
+  /**
+   * The feature id for the '<em><b>Key</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KEY_VALUE__KEY = 0;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KEY_VALUE__VALUE = 1;
+
+  /**
+   * The number of structural features of the '<em>Key Value</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KEY_VALUE_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link eu.scape_project.pw.simulator.impl.SchedulingImpl <em>Scheduling</em>}' class.
@@ -193,7 +258,7 @@ public interface SimulatorPackage extends EPackage
    * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getScheduling()
    * @generated
    */
-  int SCHEDULING = 3;
+  int SCHEDULING = 5;
 
   /**
    * The feature id for the '<em><b>Schedule</b></em>' reference.
@@ -221,7 +286,7 @@ public interface SimulatorPackage extends EPackage
    * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getEventScheduling()
    * @generated
    */
-  int EVENT_SCHEDULING = 4;
+  int EVENT_SCHEDULING = 6;
 
   /**
    * The feature id for the '<em><b>Schedule</b></em>' reference.
@@ -285,7 +350,7 @@ public interface SimulatorPackage extends EPackage
    * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getConditionalScheduling()
    * @generated
    */
-  int CONDITIONAL_SCHEDULING = 5;
+  int CONDITIONAL_SCHEDULING = 7;
 
   /**
    * The feature id for the '<em><b>Schedule</b></em>' reference.
@@ -400,15 +465,15 @@ public interface SimulatorPackage extends EPackage
   EAttribute getEvent_Name();
 
   /**
-   * Returns the meta object for the reference '{@link eu.scape_project.pw.simulator.Event#getEntity <em>Entity</em>}'.
+   * Returns the meta object for the containment reference '{@link eu.scape_project.pw.simulator.Event#getExpression <em>Expression</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Entity</em>'.
-   * @see eu.scape_project.pw.simulator.Event#getEntity()
+   * @return the meta object for the containment reference '<em>Expression</em>'.
+   * @see eu.scape_project.pw.simulator.Event#getExpression()
    * @see #getEvent()
    * @generated
    */
-  EReference getEvent_Entity();
+  EReference getEvent_Expression();
 
   /**
    * Returns the meta object for class '{@link eu.scape_project.pw.simulator.Entity <em>Entity</em>}'.
@@ -421,26 +486,79 @@ public interface SimulatorPackage extends EPackage
   EClass getEntity();
 
   /**
-   * Returns the meta object for the attribute '{@link eu.scape_project.pw.simulator.Entity#getName <em>Name</em>}'.
+   * Returns the meta object for class '{@link eu.scape_project.pw.simulator.Collection <em>Collection</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Collection</em>'.
+   * @see eu.scape_project.pw.simulator.Collection
+   * @generated
+   */
+  EClass getCollection();
+
+  /**
+   * Returns the meta object for the attribute '{@link eu.scape_project.pw.simulator.Collection#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see eu.scape_project.pw.simulator.Entity#getName()
-   * @see #getEntity()
+   * @see eu.scape_project.pw.simulator.Collection#getName()
+   * @see #getCollection()
    * @generated
    */
-  EAttribute getEntity_Name();
+  EAttribute getCollection_Name();
 
   /**
-   * Returns the meta object for the containment reference '{@link eu.scape_project.pw.simulator.Entity#getType <em>Type</em>}'.
+   * Returns the meta object for the containment reference list '{@link eu.scape_project.pw.simulator.Collection#getKeyValues <em>Key Values</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Type</em>'.
-   * @see eu.scape_project.pw.simulator.Entity#getType()
-   * @see #getEntity()
+   * @return the meta object for the containment reference list '<em>Key Values</em>'.
+   * @see eu.scape_project.pw.simulator.Collection#getKeyValues()
+   * @see #getCollection()
    * @generated
    */
-  EReference getEntity_Type();
+  EReference getCollection_KeyValues();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link eu.scape_project.pw.simulator.Collection#getSubCollections <em>Sub Collections</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Sub Collections</em>'.
+   * @see eu.scape_project.pw.simulator.Collection#getSubCollections()
+   * @see #getCollection()
+   * @generated
+   */
+  EReference getCollection_SubCollections();
+
+  /**
+   * Returns the meta object for class '{@link eu.scape_project.pw.simulator.KeyValue <em>Key Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Key Value</em>'.
+   * @see eu.scape_project.pw.simulator.KeyValue
+   * @generated
+   */
+  EClass getKeyValue();
+
+  /**
+   * Returns the meta object for the attribute '{@link eu.scape_project.pw.simulator.KeyValue#getKey <em>Key</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Key</em>'.
+   * @see eu.scape_project.pw.simulator.KeyValue#getKey()
+   * @see #getKeyValue()
+   * @generated
+   */
+  EAttribute getKeyValue_Key();
+
+  /**
+   * Returns the meta object for the attribute '{@link eu.scape_project.pw.simulator.KeyValue#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see eu.scape_project.pw.simulator.KeyValue#getValue()
+   * @see #getKeyValue()
+   * @generated
+   */
+  EAttribute getKeyValue_Value();
 
   /**
    * Returns the meta object for class '{@link eu.scape_project.pw.simulator.Scheduling <em>Scheduling</em>}'.
@@ -633,12 +751,12 @@ public interface SimulatorPackage extends EPackage
     EAttribute EVENT__NAME = eINSTANCE.getEvent_Name();
 
     /**
-     * The meta object literal for the '<em><b>Entity</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EVENT__ENTITY = eINSTANCE.getEvent_Entity();
+    EReference EVENT__EXPRESSION = eINSTANCE.getEvent_Expression();
 
     /**
      * The meta object literal for the '{@link eu.scape_project.pw.simulator.impl.EntityImpl <em>Entity</em>}' class.
@@ -651,20 +769,64 @@ public interface SimulatorPackage extends EPackage
     EClass ENTITY = eINSTANCE.getEntity();
 
     /**
+     * The meta object literal for the '{@link eu.scape_project.pw.simulator.impl.CollectionImpl <em>Collection</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see eu.scape_project.pw.simulator.impl.CollectionImpl
+     * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getCollection()
+     * @generated
+     */
+    EClass COLLECTION = eINSTANCE.getCollection();
+
+    /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute ENTITY__NAME = eINSTANCE.getEntity_Name();
+    EAttribute COLLECTION__NAME = eINSTANCE.getCollection_Name();
 
     /**
-     * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Key Values</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference ENTITY__TYPE = eINSTANCE.getEntity_Type();
+    EReference COLLECTION__KEY_VALUES = eINSTANCE.getCollection_KeyValues();
+
+    /**
+     * The meta object literal for the '<em><b>Sub Collections</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference COLLECTION__SUB_COLLECTIONS = eINSTANCE.getCollection_SubCollections();
+
+    /**
+     * The meta object literal for the '{@link eu.scape_project.pw.simulator.impl.KeyValueImpl <em>Key Value</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see eu.scape_project.pw.simulator.impl.KeyValueImpl
+     * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getKeyValue()
+     * @generated
+     */
+    EClass KEY_VALUE = eINSTANCE.getKeyValue();
+
+    /**
+     * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute KEY_VALUE__KEY = eINSTANCE.getKeyValue_Key();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute KEY_VALUE__VALUE = eINSTANCE.getKeyValue_Value();
 
     /**
      * The meta object literal for the '{@link eu.scape_project.pw.simulator.impl.SchedulingImpl <em>Scheduling</em>}' class.

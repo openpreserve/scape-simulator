@@ -50,6 +50,24 @@ public interface SimulatorFactory extends EFactory
   Entity createEntity();
 
   /**
+   * Returns a new object of class '<em>Collection</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Collection</em>'.
+   * @generated
+   */
+  Collection createCollection();
+
+  /**
+   * Returns a new object of class '<em>Key Value</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Key Value</em>'.
+   * @generated
+   */
+  KeyValue createKeyValue();
+
+  /**
    * Returns a new object of class '<em>Scheduling</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

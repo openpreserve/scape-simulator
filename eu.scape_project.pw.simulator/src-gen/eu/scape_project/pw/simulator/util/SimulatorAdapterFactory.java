@@ -90,6 +90,16 @@ public class SimulatorAdapterFactory extends AdapterFactoryImpl
         return createEntityAdapter();
       }
       @Override
+      public Adapter caseCollection(Collection object)
+      {
+        return createCollectionAdapter();
+      }
+      @Override
+      public Adapter caseKeyValue(KeyValue object)
+      {
+        return createKeyValueAdapter();
+      }
+      @Override
       public Adapter caseScheduling(Scheduling object)
       {
         return createSchedulingAdapter();
@@ -167,6 +177,36 @@ public class SimulatorAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEntityAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link eu.scape_project.pw.simulator.Collection <em>Collection</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see eu.scape_project.pw.simulator.Collection
+   * @generated
+   */
+  public Adapter createCollectionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link eu.scape_project.pw.simulator.KeyValue <em>Key Value</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see eu.scape_project.pw.simulator.KeyValue
+   * @generated
+   */
+  public Adapter createKeyValueAdapter()
   {
     return null;
   }

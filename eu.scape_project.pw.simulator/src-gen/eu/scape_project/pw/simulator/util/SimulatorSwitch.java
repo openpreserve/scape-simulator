@@ -93,6 +93,21 @@ public class SimulatorSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case SimulatorPackage.COLLECTION:
+      {
+        Collection collection = (Collection)theEObject;
+        T result = caseCollection(collection);
+        if (result == null) result = caseEntity(collection);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimulatorPackage.KEY_VALUE:
+      {
+        KeyValue keyValue = (KeyValue)theEObject;
+        T result = caseKeyValue(keyValue);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case SimulatorPackage.SCHEDULING:
       {
         Scheduling scheduling = (Scheduling)theEObject;
@@ -164,6 +179,38 @@ public class SimulatorSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseEntity(Entity object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Collection</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Collection</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCollection(Collection object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Key Value</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Key Value</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseKeyValue(KeyValue object)
   {
     return null;
   }

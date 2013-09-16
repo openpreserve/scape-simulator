@@ -2,10 +2,12 @@
  */
 package eu.scape_project.pw.simulator.impl;
 
+import eu.scape_project.pw.simulator.Collection;
 import eu.scape_project.pw.simulator.ConditionalScheduling;
 import eu.scape_project.pw.simulator.Entity;
 import eu.scape_project.pw.simulator.Event;
 import eu.scape_project.pw.simulator.EventScheduling;
+import eu.scape_project.pw.simulator.KeyValue;
 import eu.scape_project.pw.simulator.Scheduling;
 import eu.scape_project.pw.simulator.Simulation;
 import eu.scape_project.pw.simulator.SimulatorFactory;
@@ -18,7 +20,7 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.xbase.XbasePackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -48,6 +50,20 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
    * @generated
    */
   private EClass entityEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass collectionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass keyValueEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -119,7 +135,7 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
     isInited = true;
 
     // Initialize simple dependencies
-    TypesPackage.eINSTANCE.eClass();
+    XbasePackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theSimulatorPackage.createPackageContents();
@@ -211,7 +227,7 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getEvent_Entity()
+  public EReference getEvent_Expression()
   {
     return (EReference)eventEClass.getEStructuralFeatures().get(1);
   }
@@ -231,9 +247,9 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getEntity_Name()
+  public EClass getCollection()
   {
-    return (EAttribute)entityEClass.getEStructuralFeatures().get(0);
+    return collectionEClass;
   }
 
   /**
@@ -241,9 +257,59 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getEntity_Type()
+  public EAttribute getCollection_Name()
   {
-    return (EReference)entityEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)collectionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getCollection_KeyValues()
+  {
+    return (EReference)collectionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getCollection_SubCollections()
+  {
+    return (EReference)collectionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getKeyValue()
+  {
+    return keyValueEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getKeyValue_Key()
+  {
+    return (EAttribute)keyValueEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getKeyValue_Value()
+  {
+    return (EAttribute)keyValueEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -384,11 +450,18 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
 
     eventEClass = createEClass(EVENT);
     createEAttribute(eventEClass, EVENT__NAME);
-    createEReference(eventEClass, EVENT__ENTITY);
+    createEReference(eventEClass, EVENT__EXPRESSION);
 
     entityEClass = createEClass(ENTITY);
-    createEAttribute(entityEClass, ENTITY__NAME);
-    createEReference(entityEClass, ENTITY__TYPE);
+
+    collectionEClass = createEClass(COLLECTION);
+    createEAttribute(collectionEClass, COLLECTION__NAME);
+    createEReference(collectionEClass, COLLECTION__KEY_VALUES);
+    createEReference(collectionEClass, COLLECTION__SUB_COLLECTIONS);
+
+    keyValueEClass = createEClass(KEY_VALUE);
+    createEAttribute(keyValueEClass, KEY_VALUE__KEY);
+    createEAttribute(keyValueEClass, KEY_VALUE__VALUE);
 
     schedulingEClass = createEClass(SCHEDULING);
     createEReference(schedulingEClass, SCHEDULING__SCHEDULE);
@@ -429,13 +502,14 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
     setNsURI(eNS_URI);
 
     // Obtain other dependent packages
-    TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
+    XbasePackage theXbasePackage = (XbasePackage)EPackage.Registry.INSTANCE.getEPackage(XbasePackage.eNS_URI);
 
     // Create type parameters
 
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    collectionEClass.getESuperTypes().add(this.getEntity());
     eventSchedulingEClass.getESuperTypes().add(this.getScheduling());
     conditionalSchedulingEClass.getESuperTypes().add(this.getScheduling());
 
@@ -448,11 +522,18 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
 
     initEClass(eventEClass, Event.class, "Event", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEvent_Name(), ecorePackage.getEString(), "name", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEvent_Entity(), this.getEntity(), null, "entity", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEvent_Expression(), theXbasePackage.getXExpression(), null, "expression", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getEntity_Name(), ecorePackage.getEString(), "name", null, 0, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEntity_Type(), theTypesPackage.getJvmTypeReference(), null, "type", null, 0, 1, Entity.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(collectionEClass, Collection.class, "Collection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getCollection_Name(), ecorePackage.getEString(), "name", null, 0, 1, Collection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCollection_KeyValues(), this.getKeyValue(), null, "keyValues", null, 0, -1, Collection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCollection_SubCollections(), this.getCollection(), null, "subCollections", null, 0, -1, Collection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(keyValueEClass, KeyValue.class, "KeyValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getKeyValue_Key(), ecorePackage.getEString(), "key", null, 0, 1, KeyValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getKeyValue_Value(), ecorePackage.getEInt(), "value", null, 0, 1, KeyValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(schedulingEClass, Scheduling.class, "Scheduling", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getScheduling_Schedule(), this.getEvent(), null, "schedule", null, 0, 1, Scheduling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

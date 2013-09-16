@@ -4,6 +4,8 @@ package eu.scape_project.pw.simulator;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.xtext.xbase.XExpression;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Event</b></em>'.
@@ -13,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link eu.scape_project.pw.simulator.Event#getName <em>Name</em>}</li>
- *   <li>{@link eu.scape_project.pw.simulator.Event#getEntity <em>Entity</em>}</li>
+ *   <li>{@link eu.scape_project.pw.simulator.Event#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
  *
@@ -50,29 +52,29 @@ public interface Event extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Entity</b></em>' reference.
+   * Returns the value of the '<em><b>Expression</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Entity</em>' reference isn't clear,
+   * If the meaning of the '<em>Expression</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Entity</em>' reference.
-   * @see #setEntity(Entity)
-   * @see eu.scape_project.pw.simulator.SimulatorPackage#getEvent_Entity()
-   * @model
+   * @return the value of the '<em>Expression</em>' containment reference.
+   * @see #setExpression(XExpression)
+   * @see eu.scape_project.pw.simulator.SimulatorPackage#getEvent_Expression()
+   * @model containment="true"
    * @generated
    */
-  Entity getEntity();
+  XExpression getExpression();
 
   /**
-   * Sets the value of the '{@link eu.scape_project.pw.simulator.Event#getEntity <em>Entity</em>}' reference.
+   * Sets the value of the '{@link eu.scape_project.pw.simulator.Event#getExpression <em>Expression</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Entity</em>' reference.
-   * @see #getEntity()
+   * @param value the new value of the '<em>Expression</em>' containment reference.
+   * @see #getExpression()
    * @generated
    */
-  void setEntity(Entity value);
+  void setExpression(XExpression value);
 
 } // Event

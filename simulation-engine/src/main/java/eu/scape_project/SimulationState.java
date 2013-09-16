@@ -1,17 +1,17 @@
 package eu.scape_project;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class SimulationState {
 
 	private long time;
 	
-	private Map<String, IEntity> entities;
+	private Map<String, Object> stateVariables;
 	
 	public SimulationState() {
 		time = 0;
-		entities = new TreeMap<String, IEntity>();
+		stateVariables = new HashMap<String, Object>();
 	}
 	
 	public long getTime() {
@@ -22,11 +22,11 @@ public class SimulationState {
 		time = t;
 	}
 	
-	public void addEntity(IEntity entity)  {
-		entities.put(entity.getName(), entity);
+	public void addStateVariable(String name, Object value)  {
+		stateVariables.put(name, value);
 	}
 	
-	public IEntity getEntity(String name) {
-		return entities.get(name);
+	public Object getStateVariableValue(String name) {
+		return stateVariables.get(name);
 	}
 }

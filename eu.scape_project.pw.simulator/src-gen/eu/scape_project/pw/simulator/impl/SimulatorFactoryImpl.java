@@ -67,6 +67,8 @@ public class SimulatorFactoryImpl extends EFactoryImpl implements SimulatorFacto
       case SimulatorPackage.SIMULATION: return createSimulation();
       case SimulatorPackage.EVENT: return createEvent();
       case SimulatorPackage.ENTITY: return createEntity();
+      case SimulatorPackage.COLLECTION: return createCollection();
+      case SimulatorPackage.KEY_VALUE: return createKeyValue();
       case SimulatorPackage.SCHEDULING: return createScheduling();
       case SimulatorPackage.EVENT_SCHEDULING: return createEventScheduling();
       case SimulatorPackage.CONDITIONAL_SCHEDULING: return createConditionalScheduling();
@@ -106,6 +108,28 @@ public class SimulatorFactoryImpl extends EFactoryImpl implements SimulatorFacto
   {
     EntityImpl entity = new EntityImpl();
     return entity;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Collection createCollection()
+  {
+    CollectionImpl collection = new CollectionImpl();
+    return collection;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public KeyValue createKeyValue()
+  {
+    KeyValueImpl keyValue = new KeyValueImpl();
+    return keyValue;
   }
 
   /**
