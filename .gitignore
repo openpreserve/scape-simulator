@@ -1,0 +1,8 @@
+*.class
+*.jar
+.launch
+.settings
+.settings
+target/
+lib/
+bin/
