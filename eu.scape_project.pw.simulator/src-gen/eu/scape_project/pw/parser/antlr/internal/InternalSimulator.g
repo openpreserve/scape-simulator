@@ -572,9 +572,9 @@ ruleEventScheduling returns [EObject current=null]
     {
     	newLeafNode(otherlv_10, grammarAccess.getEventSchedulingAccess().getSemicolonKeyword_4_3());
     }
-)?(	otherlv_11='repeat' 
+)?(	otherlv_11='every' 
     {
-    	newLeafNode(otherlv_11, grammarAccess.getEventSchedulingAccess().getRepeatKeyword_5_0());
+    	newLeafNode(otherlv_11, grammarAccess.getEventSchedulingAccess().getEveryKeyword_5_0());
     }
 	otherlv_12='=' 
     {
@@ -582,39 +582,9 @@ ruleEventScheduling returns [EObject current=null]
     }
 (
 (
-		lv_repeat_13_0=RULE_INT
+		lv_every_13_0=RULE_INT
 		{
-			newLeafNode(lv_repeat_13_0, grammarAccess.getEventSchedulingAccess().getRepeatINTTerminalRuleCall_5_2_0()); 
-		}
-		{
-	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getEventSchedulingRule());
-	        }
-       		setWithLastConsumed(
-       			$current, 
-       			"repeat",
-        		lv_repeat_13_0, 
-        		"INT");
-	    }
-
-)
-)	otherlv_14=';' 
-    {
-    	newLeafNode(otherlv_14, grammarAccess.getEventSchedulingAccess().getSemicolonKeyword_5_3());
-    }
-)?(	otherlv_15='every' 
-    {
-    	newLeafNode(otherlv_15, grammarAccess.getEventSchedulingAccess().getEveryKeyword_6_0());
-    }
-	otherlv_16='=' 
-    {
-    	newLeafNode(otherlv_16, grammarAccess.getEventSchedulingAccess().getEqualsSignKeyword_6_1());
-    }
-(
-(
-		lv_every_17_0=RULE_INT
-		{
-			newLeafNode(lv_every_17_0, grammarAccess.getEventSchedulingAccess().getEveryINTTerminalRuleCall_6_2_0()); 
+			newLeafNode(lv_every_13_0, grammarAccess.getEventSchedulingAccess().getEveryINTTerminalRuleCall_5_2_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -623,18 +593,18 @@ ruleEventScheduling returns [EObject current=null]
        		setWithLastConsumed(
        			$current, 
        			"every",
-        		lv_every_17_0, 
+        		lv_every_13_0, 
         		"INT");
 	    }
 
 )
-)	otherlv_18=';' 
+)	otherlv_14=';' 
     {
-    	newLeafNode(otherlv_18, grammarAccess.getEventSchedulingAccess().getSemicolonKeyword_6_3());
+    	newLeafNode(otherlv_14, grammarAccess.getEventSchedulingAccess().getSemicolonKeyword_5_3());
     }
-)?	otherlv_19='}' 
+)?	otherlv_15='}' 
     {
-    	newLeafNode(otherlv_19, grammarAccess.getEventSchedulingAccess().getRightCurlyBracketKeyword_7());
+    	newLeafNode(otherlv_15, grammarAccess.getEventSchedulingAccess().getRightCurlyBracketKeyword_6());
     }
 )
 ;

@@ -1072,7 +1072,7 @@ public class SimulatorSemanticSequencer extends XbaseSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (schedule=[Event|ID] start=INT? end=INT? repeat=INT? every=INT?)
+	 *     (schedule=[Event|ID] start=INT? end=INT? every=INT?)
 	 */
 	protected void sequence_EventScheduling(EObject context, EventScheduling semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

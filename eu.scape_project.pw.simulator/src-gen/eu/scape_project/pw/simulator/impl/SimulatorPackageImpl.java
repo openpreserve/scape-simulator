@@ -367,19 +367,9 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getEventScheduling_Repeat()
-  {
-    return (EAttribute)eventSchedulingEClass.getEStructuralFeatures().get(2);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EAttribute getEventScheduling_Every()
   {
-    return (EAttribute)eventSchedulingEClass.getEStructuralFeatures().get(3);
+    return (EAttribute)eventSchedulingEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -469,7 +459,6 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
     eventSchedulingEClass = createEClass(EVENT_SCHEDULING);
     createEAttribute(eventSchedulingEClass, EVENT_SCHEDULING__START);
     createEAttribute(eventSchedulingEClass, EVENT_SCHEDULING__END);
-    createEAttribute(eventSchedulingEClass, EVENT_SCHEDULING__REPEAT);
     createEAttribute(eventSchedulingEClass, EVENT_SCHEDULING__EVERY);
 
     conditionalSchedulingEClass = createEClass(CONDITIONAL_SCHEDULING);
@@ -541,7 +530,6 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
     initEClass(eventSchedulingEClass, EventScheduling.class, "EventScheduling", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEventScheduling_Start(), ecorePackage.getEInt(), "start", null, 0, 1, EventScheduling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEventScheduling_End(), ecorePackage.getEInt(), "end", null, 0, 1, EventScheduling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEventScheduling_Repeat(), ecorePackage.getEInt(), "repeat", null, 0, 1, EventScheduling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getEventScheduling_Every(), ecorePackage.getEInt(), "every", null, 0, 1, EventScheduling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(conditionalSchedulingEClass, ConditionalScheduling.class, "ConditionalScheduling", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

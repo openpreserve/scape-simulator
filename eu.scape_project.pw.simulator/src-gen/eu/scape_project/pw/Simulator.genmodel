@@ -33,7 +33,6 @@
     <genClasses ecoreClass="Simulator.ecore#//EventScheduling">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//EventScheduling/start"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//EventScheduling/end"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//EventScheduling/repeat"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//EventScheduling/every"/>
     </genClasses>
     <genClasses ecoreClass="Simulator.ecore#//ConditionalScheduling">

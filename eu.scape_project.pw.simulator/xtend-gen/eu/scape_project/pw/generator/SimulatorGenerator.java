@@ -7,7 +7,6 @@ import com.google.common.collect.Iterables;
 import eu.scape_project.pw.generator.InitializatorGenerator;
 import eu.scape_project.pw.simulator.ConditionalScheduling;
 import eu.scape_project.pw.simulator.Event;
-import eu.scape_project.pw.simulator.EventScheduling;
 import eu.scape_project.pw.simulator.Simulation;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -93,7 +92,7 @@ public class SimulatorGenerator implements IGenerator {
     _builder.append("processor.setEOContainer(initializator.getEOContainer());");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("processor.setSimulationState(initializator.getSimulationSItate());");
+    _builder.append("processor.setSimulationState(initializator.getSimulationState());");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("processor.startSimulation();");
@@ -112,47 +111,6 @@ public class SimulatorGenerator implements IGenerator {
    */
   public CharSequence generateInitializer() {
     StringConcatenation _builder = new StringConcatenation();
-    return _builder;
-  }
-  
-  public CharSequence compileEventSchedulingMain(final EventScheduling e) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("tmp = ");
-    int _repeat = e.getRepeat();
-    _builder.append(_repeat, "");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
-    _builder.append("start = ");
-    int _start = e.getStart();
-    _builder.append(_start, "");
-    _builder.append(";");
-    _builder.newLineIfNotEmpty();
-    _builder.append("while (tmp>0) {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("IEvent event = new ");
-    Event _schedule = e.getSchedule();
-    String _name = _schedule.getName();
-    _builder.append(_name, "	");
-    _builder.append("();");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("event.setScheduleTime(start);");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("container.addEvent(event);");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("start += ");
-    int _every = e.getEvery();
-    _builder.append(_every, "	");
-    _builder.append("; ");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t");
-    _builder.append("tmp-=1;");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
     return _builder;
   }
   

@@ -13,7 +13,6 @@ package eu.scape_project.pw.simulator;
  * <ul>
  *   <li>{@link eu.scape_project.pw.simulator.EventScheduling#getStart <em>Start</em>}</li>
  *   <li>{@link eu.scape_project.pw.simulator.EventScheduling#getEnd <em>End</em>}</li>
- *   <li>{@link eu.scape_project.pw.simulator.EventScheduling#getRepeat <em>Repeat</em>}</li>
  *   <li>{@link eu.scape_project.pw.simulator.EventScheduling#getEvery <em>Every</em>}</li>
  * </ul>
  * </p>
@@ -75,32 +74,6 @@ public interface EventScheduling extends Scheduling
    * @generated
    */
   void setEnd(int value);
-
-  /**
-   * Returns the value of the '<em><b>Repeat</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Repeat</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Repeat</em>' attribute.
-   * @see #setRepeat(int)
-   * @see eu.scape_project.pw.simulator.SimulatorPackage#getEventScheduling_Repeat()
-   * @model
-   * @generated
-   */
-  int getRepeat();
-
-  /**
-   * Sets the value of the '{@link eu.scape_project.pw.simulator.EventScheduling#getRepeat <em>Repeat</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Repeat</em>' attribute.
-   * @see #getRepeat()
-   * @generated
-   */
-  void setRepeat(int value);
 
   /**
    * Returns the value of the '<em><b>Every</b></em>' attribute.

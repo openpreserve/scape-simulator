@@ -45,7 +45,7 @@ class SimulatorGenerator implements IGenerator {
 				Initializator initializator = new Initializator();
 				processor.setEventContainer(initializator.getEventContainer());
 				processor.setEOContainer(initializator.getEOContainer());
-				processor.setSimulationState(initializator.getSimulationSItate());
+				processor.setSimulationState(initializator.getSimulationState());
 				processor.startSimulation();
 			}
 		}
@@ -59,17 +59,7 @@ class SimulatorGenerator implements IGenerator {
 	 def generateInitializer() '''
 	 '''
 	
-	def compileEventSchedulingMain(EventScheduling e) '''
-		tmp = «e.repeat»;
-		start = «e.start»;
-		while (tmp>0) {
-			IEvent event = new «e.schedule.name»();
-			event.setScheduleTime(start);
-			container.addEvent(event);
-			start += «e.every»; 
-			tmp-=1;
-		}
-	'''
+
 	def compileConditionalEventSchedulingMain(ConditionalScheduling e) '''
 		tmpEvent = new «e.observes.name»2«e.schedule.name»();
 		processor.addEventObserver(tmpEvent);

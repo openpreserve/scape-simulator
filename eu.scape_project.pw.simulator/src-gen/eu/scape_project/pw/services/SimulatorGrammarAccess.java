@@ -274,26 +274,19 @@ public class SimulatorGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cEndINTTerminalRuleCall_4_2_0 = (RuleCall)cEndAssignment_4_2.eContents().get(0);
 		private final Keyword cSemicolonKeyword_4_3 = (Keyword)cGroup_4.eContents().get(3);
 		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
-		private final Keyword cRepeatKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Keyword cEveryKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
 		private final Keyword cEqualsSignKeyword_5_1 = (Keyword)cGroup_5.eContents().get(1);
-		private final Assignment cRepeatAssignment_5_2 = (Assignment)cGroup_5.eContents().get(2);
-		private final RuleCall cRepeatINTTerminalRuleCall_5_2_0 = (RuleCall)cRepeatAssignment_5_2.eContents().get(0);
+		private final Assignment cEveryAssignment_5_2 = (Assignment)cGroup_5.eContents().get(2);
+		private final RuleCall cEveryINTTerminalRuleCall_5_2_0 = (RuleCall)cEveryAssignment_5_2.eContents().get(0);
 		private final Keyword cSemicolonKeyword_5_3 = (Keyword)cGroup_5.eContents().get(3);
-		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
-		private final Keyword cEveryKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
-		private final Keyword cEqualsSignKeyword_6_1 = (Keyword)cGroup_6.eContents().get(1);
-		private final Assignment cEveryAssignment_6_2 = (Assignment)cGroup_6.eContents().get(2);
-		private final RuleCall cEveryINTTerminalRuleCall_6_2_0 = (RuleCall)cEveryAssignment_6_2.eContents().get(0);
-		private final Keyword cSemicolonKeyword_6_3 = (Keyword)cGroup_6.eContents().get(3);
-		private final Keyword cRightCurlyBracketKeyword_7 = (Keyword)cGroup.eContents().get(7);
+		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
 		//EventScheduling:
-		//	"schedule " schedule=[Event] "{" ("start" "=" start=INT ";")? ("end" "=" end=INT ";")? ("repeat" "=" repeat=INT ";")?
-		//	("every" "=" every=INT ";")? "}";
+		//	"schedule " schedule=[Event] "{" ("start" "=" start=INT ";")? ("end" "=" end=INT ";")? ("every" "=" every=INT ";")?
+		//	"}";
 		public ParserRule getRule() { return rule; }
 
-		//"schedule " schedule=[Event] "{" ("start" "=" start=INT ";")? ("end" "=" end=INT ";")? ("repeat" "=" repeat=INT ";")?
-		//("every" "=" every=INT ";")? "}"
+		//"schedule " schedule=[Event] "{" ("start" "=" start=INT ";")? ("end" "=" end=INT ";")? ("every" "=" every=INT ";")? "}"
 		public Group getGroup() { return cGroup; }
 
 		//"schedule "
@@ -347,44 +340,26 @@ public class SimulatorGrammarAccess extends AbstractGrammarElementFinder {
 		//";"
 		public Keyword getSemicolonKeyword_4_3() { return cSemicolonKeyword_4_3; }
 
-		//("repeat" "=" repeat=INT ";")?
+		//("every" "=" every=INT ";")?
 		public Group getGroup_5() { return cGroup_5; }
 
-		//"repeat"
-		public Keyword getRepeatKeyword_5_0() { return cRepeatKeyword_5_0; }
+		//"every"
+		public Keyword getEveryKeyword_5_0() { return cEveryKeyword_5_0; }
 
 		//"="
 		public Keyword getEqualsSignKeyword_5_1() { return cEqualsSignKeyword_5_1; }
 
-		//repeat=INT
-		public Assignment getRepeatAssignment_5_2() { return cRepeatAssignment_5_2; }
+		//every=INT
+		public Assignment getEveryAssignment_5_2() { return cEveryAssignment_5_2; }
 
 		//INT
-		public RuleCall getRepeatINTTerminalRuleCall_5_2_0() { return cRepeatINTTerminalRuleCall_5_2_0; }
+		public RuleCall getEveryINTTerminalRuleCall_5_2_0() { return cEveryINTTerminalRuleCall_5_2_0; }
 
 		//";"
 		public Keyword getSemicolonKeyword_5_3() { return cSemicolonKeyword_5_3; }
 
-		//("every" "=" every=INT ";")?
-		public Group getGroup_6() { return cGroup_6; }
-
-		//"every"
-		public Keyword getEveryKeyword_6_0() { return cEveryKeyword_6_0; }
-
-		//"="
-		public Keyword getEqualsSignKeyword_6_1() { return cEqualsSignKeyword_6_1; }
-
-		//every=INT
-		public Assignment getEveryAssignment_6_2() { return cEveryAssignment_6_2; }
-
-		//INT
-		public RuleCall getEveryINTTerminalRuleCall_6_2_0() { return cEveryINTTerminalRuleCall_6_2_0; }
-
-		//";"
-		public Keyword getSemicolonKeyword_6_3() { return cSemicolonKeyword_6_3; }
-
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_7() { return cRightCurlyBracketKeyword_7; }
+		public Keyword getRightCurlyBracketKeyword_6() { return cRightCurlyBracketKeyword_6; }
 	}
 
 	public class ConditionalSchedulingElements extends AbstractParserRuleElementFinder {
@@ -569,8 +544,8 @@ public class SimulatorGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//EventScheduling:
-	//	"schedule " schedule=[Event] "{" ("start" "=" start=INT ";")? ("end" "=" end=INT ";")? ("repeat" "=" repeat=INT ";")?
-	//	("every" "=" every=INT ";")? "}";
+	//	"schedule " schedule=[Event] "{" ("start" "=" start=INT ";")? ("end" "=" end=INT ";")? ("every" "=" every=INT ";")?
+	//	"}";
 	public EventSchedulingElements getEventSchedulingAccess() {
 		return (pEventScheduling != null) ? pEventScheduling : (pEventScheduling = new EventSchedulingElements());
 	}

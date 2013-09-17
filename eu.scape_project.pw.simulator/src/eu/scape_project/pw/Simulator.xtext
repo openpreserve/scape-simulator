@@ -28,7 +28,7 @@ Collection :
 ;
 	
 KeyValue :
-	key=ID ':' value= INT | DECIMAL | STRING
+	key=ID ':' value= INT | DECIMAL | STRING 
 ;
 
 Scheduling: EventScheduling | ConditionalScheduling;
@@ -38,7 +38,6 @@ EventScheduling :
 	'{'
 		('start''=' start=INT ';')?
 		('end' '=' end=INT ';')?
-		('repeat' '=' repeat=INT ';')?
 		('every' '=' every=INT ';')?
 			
 	'}'

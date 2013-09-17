@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <ul>
  *   <li>{@link eu.scape_project.pw.simulator.impl.EventSchedulingImpl#getStart <em>Start</em>}</li>
  *   <li>{@link eu.scape_project.pw.simulator.impl.EventSchedulingImpl#getEnd <em>End</em>}</li>
- *   <li>{@link eu.scape_project.pw.simulator.impl.EventSchedulingImpl#getRepeat <em>Repeat</em>}</li>
  *   <li>{@link eu.scape_project.pw.simulator.impl.EventSchedulingImpl#getEvery <em>Every</em>}</li>
  * </ul>
  * </p>
@@ -68,26 +67,6 @@ public class EventSchedulingImpl extends SchedulingImpl implements EventScheduli
    * @ordered
    */
   protected int end = END_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getRepeat() <em>Repeat</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getRepeat()
-   * @generated
-   * @ordered
-   */
-  protected static final int REPEAT_EDEFAULT = 0;
-
-  /**
-   * The cached value of the '{@link #getRepeat() <em>Repeat</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getRepeat()
-   * @generated
-   * @ordered
-   */
-  protected int repeat = REPEAT_EDEFAULT;
 
   /**
    * The default value of the '{@link #getEvery() <em>Every</em>}' attribute.
@@ -181,29 +160,6 @@ public class EventSchedulingImpl extends SchedulingImpl implements EventScheduli
    * <!-- end-user-doc -->
    * @generated
    */
-  public int getRepeat()
-  {
-    return repeat;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setRepeat(int newRepeat)
-  {
-    int oldRepeat = repeat;
-    repeat = newRepeat;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SimulatorPackage.EVENT_SCHEDULING__REPEAT, oldRepeat, repeat));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public int getEvery()
   {
     return every;
@@ -236,8 +192,6 @@ public class EventSchedulingImpl extends SchedulingImpl implements EventScheduli
         return getStart();
       case SimulatorPackage.EVENT_SCHEDULING__END:
         return getEnd();
-      case SimulatorPackage.EVENT_SCHEDULING__REPEAT:
-        return getRepeat();
       case SimulatorPackage.EVENT_SCHEDULING__EVERY:
         return getEvery();
     }
@@ -259,9 +213,6 @@ public class EventSchedulingImpl extends SchedulingImpl implements EventScheduli
         return;
       case SimulatorPackage.EVENT_SCHEDULING__END:
         setEnd((Integer)newValue);
-        return;
-      case SimulatorPackage.EVENT_SCHEDULING__REPEAT:
-        setRepeat((Integer)newValue);
         return;
       case SimulatorPackage.EVENT_SCHEDULING__EVERY:
         setEvery((Integer)newValue);
@@ -286,9 +237,6 @@ public class EventSchedulingImpl extends SchedulingImpl implements EventScheduli
       case SimulatorPackage.EVENT_SCHEDULING__END:
         setEnd(END_EDEFAULT);
         return;
-      case SimulatorPackage.EVENT_SCHEDULING__REPEAT:
-        setRepeat(REPEAT_EDEFAULT);
-        return;
       case SimulatorPackage.EVENT_SCHEDULING__EVERY:
         setEvery(EVERY_EDEFAULT);
         return;
@@ -310,8 +258,6 @@ public class EventSchedulingImpl extends SchedulingImpl implements EventScheduli
         return start != START_EDEFAULT;
       case SimulatorPackage.EVENT_SCHEDULING__END:
         return end != END_EDEFAULT;
-      case SimulatorPackage.EVENT_SCHEDULING__REPEAT:
-        return repeat != REPEAT_EDEFAULT;
       case SimulatorPackage.EVENT_SCHEDULING__EVERY:
         return every != EVERY_EDEFAULT;
     }
@@ -333,8 +279,6 @@ public class EventSchedulingImpl extends SchedulingImpl implements EventScheduli
     result.append(start);
     result.append(", end: ");
     result.append(end);
-    result.append(", repeat: ");
-    result.append(repeat);
     result.append(", every: ");
     result.append(every);
     result.append(')');

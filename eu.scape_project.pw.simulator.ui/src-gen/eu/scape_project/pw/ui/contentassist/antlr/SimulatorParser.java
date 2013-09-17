@@ -83,7 +83,6 @@ public class SimulatorParser extends AbstractContentAssistParser {
 					put(grammarAccess.getEventSchedulingAccess().getGroup_3(), "rule__EventScheduling__Group_3__0");
 					put(grammarAccess.getEventSchedulingAccess().getGroup_4(), "rule__EventScheduling__Group_4__0");
 					put(grammarAccess.getEventSchedulingAccess().getGroup_5(), "rule__EventScheduling__Group_5__0");
-					put(grammarAccess.getEventSchedulingAccess().getGroup_6(), "rule__EventScheduling__Group_6__0");
 					put(grammarAccess.getConditionalSchedulingAccess().getGroup(), "rule__ConditionalScheduling__Group__0");
 					put(grammarAccess.getConditionalSchedulingAccess().getGroup_4(), "rule__ConditionalScheduling__Group_4__0");
 					put(grammarAccess.getXAssignmentAccess().getGroup_0(), "rule__XAssignment__Group_0__0");
@@ -253,8 +252,7 @@ public class SimulatorParser extends AbstractContentAssistParser {
 					put(grammarAccess.getEventSchedulingAccess().getScheduleAssignment_1(), "rule__EventScheduling__ScheduleAssignment_1");
 					put(grammarAccess.getEventSchedulingAccess().getStartAssignment_3_2(), "rule__EventScheduling__StartAssignment_3_2");
 					put(grammarAccess.getEventSchedulingAccess().getEndAssignment_4_2(), "rule__EventScheduling__EndAssignment_4_2");
-					put(grammarAccess.getEventSchedulingAccess().getRepeatAssignment_5_2(), "rule__EventScheduling__RepeatAssignment_5_2");
-					put(grammarAccess.getEventSchedulingAccess().getEveryAssignment_6_2(), "rule__EventScheduling__EveryAssignment_6_2");
+					put(grammarAccess.getEventSchedulingAccess().getEveryAssignment_5_2(), "rule__EventScheduling__EveryAssignment_5_2");
 					put(grammarAccess.getConditionalSchedulingAccess().getObservesAssignment_0(), "rule__ConditionalScheduling__ObservesAssignment_0");
 					put(grammarAccess.getConditionalSchedulingAccess().getScheduleAssignment_2(), "rule__ConditionalScheduling__ScheduleAssignment_2");
 					put(grammarAccess.getConditionalSchedulingAccess().getDelayAssignment_4_2(), "rule__ConditionalScheduling__DelayAssignment_4_2");

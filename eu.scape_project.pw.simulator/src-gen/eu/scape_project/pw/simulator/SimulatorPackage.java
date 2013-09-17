@@ -316,22 +316,13 @@ public interface SimulatorPackage extends EPackage
   int EVENT_SCHEDULING__END = SCHEDULING_FEATURE_COUNT + 1;
 
   /**
-   * The feature id for the '<em><b>Repeat</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EVENT_SCHEDULING__REPEAT = SCHEDULING_FEATURE_COUNT + 2;
-
-  /**
    * The feature id for the '<em><b>Every</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EVENT_SCHEDULING__EVERY = SCHEDULING_FEATURE_COUNT + 3;
+  int EVENT_SCHEDULING__EVERY = SCHEDULING_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>Event Scheduling</em>' class.
@@ -340,7 +331,7 @@ public interface SimulatorPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EVENT_SCHEDULING_FEATURE_COUNT = SCHEDULING_FEATURE_COUNT + 4;
+  int EVENT_SCHEDULING_FEATURE_COUNT = SCHEDULING_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link eu.scape_project.pw.simulator.impl.ConditionalSchedulingImpl <em>Conditional Scheduling</em>}' class.
@@ -614,17 +605,6 @@ public interface SimulatorPackage extends EPackage
   EAttribute getEventScheduling_End();
 
   /**
-   * Returns the meta object for the attribute '{@link eu.scape_project.pw.simulator.EventScheduling#getRepeat <em>Repeat</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Repeat</em>'.
-   * @see eu.scape_project.pw.simulator.EventScheduling#getRepeat()
-   * @see #getEventScheduling()
-   * @generated
-   */
-  EAttribute getEventScheduling_Repeat();
-
-  /**
    * Returns the meta object for the attribute '{@link eu.scape_project.pw.simulator.EventScheduling#getEvery <em>Every</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -871,14 +851,6 @@ public interface SimulatorPackage extends EPackage
      * @generated
      */
     EAttribute EVENT_SCHEDULING__END = eINSTANCE.getEventScheduling_End();
-
-    /**
-     * The meta object literal for the '<em><b>Repeat</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute EVENT_SCHEDULING__REPEAT = eINSTANCE.getEventScheduling_Repeat();
 
     /**
      * The meta object literal for the '<em><b>Every</b></em>' attribute feature.
