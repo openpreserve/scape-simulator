@@ -77,6 +77,7 @@ public class SimulatorParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXImportDeclarationAccess().getAlternatives_1(), "rule__XImportDeclaration__Alternatives_1");
 					put(grammarAccess.getSimulationAccess().getGroup(), "rule__Simulation__Group__0");
 					put(grammarAccess.getEventAccess().getGroup(), "rule__Event__Group__0");
+					put(grammarAccess.getEventAccess().getGroup_3(), "rule__Event__Group_3__0");
 					put(grammarAccess.getCollectionAccess().getGroup(), "rule__Collection__Group__0");
 					put(grammarAccess.getKeyValueAccess().getGroup_0(), "rule__KeyValue__Group_0__0");
 					put(grammarAccess.getEventSchedulingAccess().getGroup(), "rule__EventScheduling__Group__0");
@@ -243,7 +244,8 @@ public class SimulatorParser extends AbstractContentAssistParser {
 					put(grammarAccess.getSimulationAccess().getEventsAssignment_6(), "rule__Simulation__EventsAssignment_6");
 					put(grammarAccess.getSimulationAccess().getSchedulingAssignment_8(), "rule__Simulation__SchedulingAssignment_8");
 					put(grammarAccess.getEventAccess().getNameAssignment_1(), "rule__Event__NameAssignment_1");
-					put(grammarAccess.getEventAccess().getExpressionAssignment_3(), "rule__Event__ExpressionAssignment_3");
+					put(grammarAccess.getEventAccess().getLeftSideAssignment_3_0(), "rule__Event__LeftSideAssignment_3_0");
+					put(grammarAccess.getEventAccess().getRightSideAssignment_3_2(), "rule__Event__RightSideAssignment_3_2");
 					put(grammarAccess.getCollectionAccess().getNameAssignment_1(), "rule__Collection__NameAssignment_1");
 					put(grammarAccess.getCollectionAccess().getKeyValuesAssignment_3(), "rule__Collection__KeyValuesAssignment_3");
 					put(grammarAccess.getCollectionAccess().getSubCollectionsAssignment_4(), "rule__Collection__SubCollectionsAssignment_4");

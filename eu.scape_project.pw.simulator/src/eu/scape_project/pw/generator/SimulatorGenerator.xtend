@@ -3,16 +3,23 @@
  */
 package eu.scape_project.pw.generator
 
+import com.google.inject.Inject
 import eu.scape_project.pw.simulator.ConditionalScheduling
 import eu.scape_project.pw.simulator.Event
-import eu.scape_project.pw.simulator.EventScheduling
 import eu.scape_project.pw.simulator.Simulation
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
+import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.compiler.ImportManager
+import org.eclipse.xtext.xbase.compiler.XbaseCompiler
+import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable
 
 class SimulatorGenerator implements IGenerator {
 
+	@Inject
+	protected XbaseCompiler xbaseCompiler
+	
 	InitializatorGenerator iGenerator;
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
 		iGenerator = new InitializatorGenerator()
@@ -53,18 +60,14 @@ class SimulatorGenerator implements IGenerator {
 	'''
 	
 	
-	/**
-	 * generate initializer
-	 */
-	 def generateInitializer() '''
-	 '''
-	
 
+	
+/* 
 	def compileConditionalEventSchedulingMain(ConditionalScheduling e) '''
 		tmpEvent = new «e.observes.name»2«e.schedule.name»();
 		processor.addEventObserver(tmpEvent);
 	'''
-	
+	*/
 	def compileEvent(Event e) '''
 		
 		package simulator;
@@ -78,11 +81,17 @@ class SimulatorGenerator implements IGenerator {
 	
 			@Override
 			public void execute(SimulationState state) {
-				System.out.println("Hello from event «e.name» at time " + state.getTime() ); 
+				
 			}
 		}
 		
 	'''	
+	
+	def compileExpression(XExpression e) {
+		
+		
+			
+	}
 	
 	def compileConditionalScheduling(ConditionalScheduling e) '''
 	

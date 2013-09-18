@@ -13,8 +13,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Event">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../../../../org.eclipse.xtext.xbase/model/Xbase.ecore#//XExpression"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftSide" eType="#//KeyValue"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightSide" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Entity"/>
   <eClassifiers xsi:type="ecore:EClass" name="Collection" eSuperTypes="#//Entity">

@@ -220,27 +220,44 @@ ruleEvent returns [EObject current=null]
     {
     	newLeafNode(otherlv_2, grammarAccess.getEventAccess().getLeftCurlyBracketKeyword_2());
     }
+((
 (
-(
-		{ 
-	        newCompositeNode(grammarAccess.getEventAccess().getExpressionXExpressionParserRuleCall_3_0()); 
-	    }
-		lv_expression_3_0=ruleXExpression		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getEventRule());
+		{
+			if ($current==null) {
+	            $current = createModelElement(grammarAccess.getEventRule());
 	        }
-       		set(
+        }
+	otherlv_3=RULE_ID
+	{
+		newLeafNode(otherlv_3, grammarAccess.getEventAccess().getLeftSideKeyValueCrossReference_3_0_0()); 
+	}
+
+)
+)	otherlv_4='=' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getEventAccess().getEqualsSignKeyword_3_1());
+    }
+(
+(
+		lv_rightSide_5_0=RULE_ID
+		{
+			newLeafNode(lv_rightSide_5_0, grammarAccess.getEventAccess().getRightSideIDTerminalRuleCall_3_2_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getEventRule());
+	        }
+       		setWithLastConsumed(
        			$current, 
-       			"expression",
-        		lv_expression_3_0, 
-        		"XExpression");
-	        afterParserOrEnumRuleCall();
+       			"rightSide",
+        		lv_rightSide_5_0, 
+        		"ID");
 	    }
 
 )
-)	otherlv_4='}' 
+))?	otherlv_6='}' 
     {
-    	newLeafNode(otherlv_4, grammarAccess.getEventAccess().getRightCurlyBracketKeyword_4());
+    	newLeafNode(otherlv_6, grammarAccess.getEventAccess().getRightCurlyBracketKeyword_4());
     }
 )
 ;

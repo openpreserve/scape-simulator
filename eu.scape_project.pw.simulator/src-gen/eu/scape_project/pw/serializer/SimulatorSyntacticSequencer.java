@@ -127,7 +127,7 @@ public class SimulatorSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	/**
 	 * Syntax:
-	 *     STRING | DECIMAL
+	 *     DECIMAL | STRING
 	 */
 	protected void emit_KeyValue_DECIMALTerminalRuleCall_1_or_STRINGTerminalRuleCall_2(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

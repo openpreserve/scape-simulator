@@ -96,15 +96,20 @@ public class SimulatorGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameValidIDParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cExpressionAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cExpressionXExpressionParserRuleCall_3_0 = (RuleCall)cExpressionAssignment_3.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Assignment cLeftSideAssignment_3_0 = (Assignment)cGroup_3.eContents().get(0);
+		private final CrossReference cLeftSideKeyValueCrossReference_3_0_0 = (CrossReference)cLeftSideAssignment_3_0.eContents().get(0);
+		private final RuleCall cLeftSideKeyValueIDTerminalRuleCall_3_0_0_1 = (RuleCall)cLeftSideKeyValueCrossReference_3_0_0.eContents().get(1);
+		private final Keyword cEqualsSignKeyword_3_1 = (Keyword)cGroup_3.eContents().get(1);
+		private final Assignment cRightSideAssignment_3_2 = (Assignment)cGroup_3.eContents().get(2);
+		private final RuleCall cRightSideIDTerminalRuleCall_3_2_0 = (RuleCall)cRightSideAssignment_3_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//Event:
-		//	"Event" name=ValidID "{" expression=XExpression "}";
+		//	"Event" name=ValidID "{" (leftSide=[KeyValue] "=" rightSide=ID)? "}";
 		public ParserRule getRule() { return rule; }
 
-		//"Event" name=ValidID "{" expression=XExpression "}"
+		//"Event" name=ValidID "{" (leftSide=[KeyValue] "=" rightSide=ID)? "}"
 		public Group getGroup() { return cGroup; }
 
 		//"Event"
@@ -119,11 +124,26 @@ public class SimulatorGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
 
-		//expression=XExpression
-		public Assignment getExpressionAssignment_3() { return cExpressionAssignment_3; }
+		//(leftSide=[KeyValue] "=" rightSide=ID)?
+		public Group getGroup_3() { return cGroup_3; }
 
-		//XExpression
-		public RuleCall getExpressionXExpressionParserRuleCall_3_0() { return cExpressionXExpressionParserRuleCall_3_0; }
+		//leftSide=[KeyValue]
+		public Assignment getLeftSideAssignment_3_0() { return cLeftSideAssignment_3_0; }
+
+		//[KeyValue]
+		public CrossReference getLeftSideKeyValueCrossReference_3_0_0() { return cLeftSideKeyValueCrossReference_3_0_0; }
+
+		//ID
+		public RuleCall getLeftSideKeyValueIDTerminalRuleCall_3_0_0_1() { return cLeftSideKeyValueIDTerminalRuleCall_3_0_0_1; }
+
+		//"="
+		public Keyword getEqualsSignKeyword_3_1() { return cEqualsSignKeyword_3_1; }
+
+		//rightSide=ID
+		public Assignment getRightSideAssignment_3_2() { return cRightSideAssignment_3_2; }
+
+		//ID
+		public RuleCall getRightSideIDTerminalRuleCall_3_2_0() { return cRightSideIDTerminalRuleCall_3_2_0; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
@@ -494,7 +514,7 @@ public class SimulatorGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Event:
-	//	"Event" name=ValidID "{" expression=XExpression "}";
+	//	"Event" name=ValidID "{" (leftSide=[KeyValue] "=" rightSide=ID)? "}";
 	public EventElements getEventAccess() {
 		return (pEvent != null) ? pEvent : (pEvent = new EventElements());
 	}

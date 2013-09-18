@@ -12,7 +12,7 @@ Simulation :
 
 Event :
 	'Event' name=ValidID '{'
-		expression = XExpression   
+		(leftSide=[KeyValue] "=" rightSide=ID)? 
 	'}' 
 ;
 

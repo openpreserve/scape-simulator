@@ -4,8 +4,6 @@ package eu.scape_project.pw.simulator;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.xbase.XExpression;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Event</b></em>'.
@@ -15,7 +13,8 @@ import org.eclipse.xtext.xbase.XExpression;
  * The following features are supported:
  * <ul>
  *   <li>{@link eu.scape_project.pw.simulator.Event#getName <em>Name</em>}</li>
- *   <li>{@link eu.scape_project.pw.simulator.Event#getExpression <em>Expression</em>}</li>
+ *   <li>{@link eu.scape_project.pw.simulator.Event#getLeftSide <em>Left Side</em>}</li>
+ *   <li>{@link eu.scape_project.pw.simulator.Event#getRightSide <em>Right Side</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,29 +51,55 @@ public interface Event extends EObject
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Expression</b></em>' containment reference.
+   * Returns the value of the '<em><b>Left Side</b></em>' reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Expression</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Left Side</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Expression</em>' containment reference.
-   * @see #setExpression(XExpression)
-   * @see eu.scape_project.pw.simulator.SimulatorPackage#getEvent_Expression()
-   * @model containment="true"
+   * @return the value of the '<em>Left Side</em>' reference.
+   * @see #setLeftSide(KeyValue)
+   * @see eu.scape_project.pw.simulator.SimulatorPackage#getEvent_LeftSide()
+   * @model
    * @generated
    */
-  XExpression getExpression();
+  KeyValue getLeftSide();
 
   /**
-   * Sets the value of the '{@link eu.scape_project.pw.simulator.Event#getExpression <em>Expression</em>}' containment reference.
+   * Sets the value of the '{@link eu.scape_project.pw.simulator.Event#getLeftSide <em>Left Side</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Expression</em>' containment reference.
-   * @see #getExpression()
+   * @param value the new value of the '<em>Left Side</em>' reference.
+   * @see #getLeftSide()
    * @generated
    */
-  void setExpression(XExpression value);
+  void setLeftSide(KeyValue value);
+
+  /**
+   * Returns the value of the '<em><b>Right Side</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Right Side</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Right Side</em>' attribute.
+   * @see #setRightSide(String)
+   * @see eu.scape_project.pw.simulator.SimulatorPackage#getEvent_RightSide()
+   * @model
+   * @generated
+   */
+  String getRightSide();
+
+  /**
+   * Sets the value of the '{@link eu.scape_project.pw.simulator.Event#getRightSide <em>Right Side</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Right Side</em>' attribute.
+   * @see #getRightSide()
+   * @generated
+   */
+  void setRightSide(String value);
 
 } // Event

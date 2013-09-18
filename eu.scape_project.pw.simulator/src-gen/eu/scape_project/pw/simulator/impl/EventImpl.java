@@ -3,18 +3,16 @@
 package eu.scape_project.pw.simulator.impl;
 
 import eu.scape_project.pw.simulator.Event;
+import eu.scape_project.pw.simulator.KeyValue;
 import eu.scape_project.pw.simulator.SimulatorPackage;
 
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.xtext.xbase.XExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +22,8 @@ import org.eclipse.xtext.xbase.XExpression;
  * The following features are implemented:
  * <ul>
  *   <li>{@link eu.scape_project.pw.simulator.impl.EventImpl#getName <em>Name</em>}</li>
- *   <li>{@link eu.scape_project.pw.simulator.impl.EventImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link eu.scape_project.pw.simulator.impl.EventImpl#getLeftSide <em>Left Side</em>}</li>
+ *   <li>{@link eu.scape_project.pw.simulator.impl.EventImpl#getRightSide <em>Right Side</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,14 +52,34 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
+   * The cached value of the '{@link #getLeftSide() <em>Left Side</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getExpression()
+   * @see #getLeftSide()
    * @generated
    * @ordered
    */
-  protected XExpression expression;
+  protected KeyValue leftSide;
+
+  /**
+   * The default value of the '{@link #getRightSide() <em>Right Side</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getRightSide()
+   * @generated
+   * @ordered
+   */
+  protected static final String RIGHT_SIDE_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getRightSide() <em>Right Side</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getRightSide()
+   * @generated
+   * @ordered
+   */
+  protected String rightSide = RIGHT_SIDE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -111,9 +130,19 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
    * <!-- end-user-doc -->
    * @generated
    */
-  public XExpression getExpression()
+  public KeyValue getLeftSide()
   {
-    return expression;
+    if (leftSide != null && leftSide.eIsProxy())
+    {
+      InternalEObject oldLeftSide = (InternalEObject)leftSide;
+      leftSide = (KeyValue)eResolveProxy(oldLeftSide);
+      if (leftSide != oldLeftSide)
+      {
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, SimulatorPackage.EVENT__LEFT_SIDE, oldLeftSide, leftSide));
+      }
+    }
+    return leftSide;
   }
 
   /**
@@ -121,16 +150,22 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetExpression(XExpression newExpression, NotificationChain msgs)
+  public KeyValue basicGetLeftSide()
   {
-    XExpression oldExpression = expression;
-    expression = newExpression;
+    return leftSide;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setLeftSide(KeyValue newLeftSide)
+  {
+    KeyValue oldLeftSide = leftSide;
+    leftSide = newLeftSide;
     if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SimulatorPackage.EVENT__EXPRESSION, oldExpression, newExpression);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
+      eNotify(new ENotificationImpl(this, Notification.SET, SimulatorPackage.EVENT__LEFT_SIDE, oldLeftSide, leftSide));
   }
 
   /**
@@ -138,20 +173,9 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExpression(XExpression newExpression)
+  public String getRightSide()
   {
-    if (newExpression != expression)
-    {
-      NotificationChain msgs = null;
-      if (expression != null)
-        msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SimulatorPackage.EVENT__EXPRESSION, null, msgs);
-      if (newExpression != null)
-        msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SimulatorPackage.EVENT__EXPRESSION, null, msgs);
-      msgs = basicSetExpression(newExpression, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SimulatorPackage.EVENT__EXPRESSION, newExpression, newExpression));
+    return rightSide;
   }
 
   /**
@@ -159,15 +183,12 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
    * <!-- end-user-doc -->
    * @generated
    */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  public void setRightSide(String newRightSide)
   {
-    switch (featureID)
-    {
-      case SimulatorPackage.EVENT__EXPRESSION:
-        return basicSetExpression(null, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+    String oldRightSide = rightSide;
+    rightSide = newRightSide;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SimulatorPackage.EVENT__RIGHT_SIDE, oldRightSide, rightSide));
   }
 
   /**
@@ -182,8 +203,11 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
     {
       case SimulatorPackage.EVENT__NAME:
         return getName();
-      case SimulatorPackage.EVENT__EXPRESSION:
-        return getExpression();
+      case SimulatorPackage.EVENT__LEFT_SIDE:
+        if (resolve) return getLeftSide();
+        return basicGetLeftSide();
+      case SimulatorPackage.EVENT__RIGHT_SIDE:
+        return getRightSide();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -201,8 +225,11 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
       case SimulatorPackage.EVENT__NAME:
         setName((String)newValue);
         return;
-      case SimulatorPackage.EVENT__EXPRESSION:
-        setExpression((XExpression)newValue);
+      case SimulatorPackage.EVENT__LEFT_SIDE:
+        setLeftSide((KeyValue)newValue);
+        return;
+      case SimulatorPackage.EVENT__RIGHT_SIDE:
+        setRightSide((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -221,8 +248,11 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
       case SimulatorPackage.EVENT__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case SimulatorPackage.EVENT__EXPRESSION:
-        setExpression((XExpression)null);
+      case SimulatorPackage.EVENT__LEFT_SIDE:
+        setLeftSide((KeyValue)null);
+        return;
+      case SimulatorPackage.EVENT__RIGHT_SIDE:
+        setRightSide(RIGHT_SIDE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -240,8 +270,10 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
     {
       case SimulatorPackage.EVENT__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case SimulatorPackage.EVENT__EXPRESSION:
-        return expression != null;
+      case SimulatorPackage.EVENT__LEFT_SIDE:
+        return leftSide != null;
+      case SimulatorPackage.EVENT__RIGHT_SIDE:
+        return RIGHT_SIDE_EDEFAULT == null ? rightSide != null : !RIGHT_SIDE_EDEFAULT.equals(rightSide);
     }
     return super.eIsSet(featureID);
   }
@@ -259,6 +291,8 @@ public class EventImpl extends MinimalEObjectImpl.Container implements Event
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");
     result.append(name);
+    result.append(", rightSide: ");
+    result.append(rightSide);
     result.append(')');
     return result.toString();
   }

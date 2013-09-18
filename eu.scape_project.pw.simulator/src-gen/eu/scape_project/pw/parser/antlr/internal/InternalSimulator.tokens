@@ -104,7 +104,7 @@ RULE_WS=11
 '&&'=33
 'delay'=29
 ';'=25
-'start'=23
+'start'=24
 'return'=89
 '==='=36
 '<>'=46
@@ -128,7 +128,7 @@ RULE_WS=11
 'try'=90
 'var'=75
 'if'=67
-':'=21
+':'=22
 '('=61
 'while'=73
 '-'=50
@@ -148,7 +148,7 @@ RULE_WS=11
 'null'=86
 'scheduling:'=17
 'typeof'=87
-'='=24
+'='=20
 '<=>'=48
 'throw'=88
 '::'=82
@@ -160,7 +160,7 @@ RULE_WS=11
 'Simulation'=13
 'case'=71
 '}'=18
-'collection'=20
+'collection'=21
 'entities:'=15
 '<='=40
 '!=='=37
@@ -170,4 +170,4 @@ RULE_WS=11
 '['=64
 '*'=51
 '&'=94
-'schedule '=22
+'schedule '=23

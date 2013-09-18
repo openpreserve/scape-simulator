@@ -4,6 +4,7 @@
 package eu.scape_project.pw.generator;
 
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 import eu.scape_project.pw.generator.InitializatorGenerator;
 import eu.scape_project.pw.simulator.ConditionalScheduling;
 import eu.scape_project.pw.simulator.Event;
@@ -14,10 +15,15 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
 @SuppressWarnings("all")
 public class SimulatorGenerator implements IGenerator {
+  @Inject
+  protected XbaseCompiler xbaseCompiler;
+  
   private InitializatorGenerator iGenerator;
   
   public void doGenerate(final Resource resource, final IFileSystemAccess fsa) {
@@ -107,30 +113,11 @@ public class SimulatorGenerator implements IGenerator {
   }
   
   /**
-   * generate initializer
+   * def compileConditionalEventSchedulingMain(ConditionalScheduling e) '''
+   * tmpEvent = new «e.observes.name»2«e.schedule.name»();
+   * processor.addEventObserver(tmpEvent);
+   * '''
    */
-  public CharSequence generateInitializer() {
-    StringConcatenation _builder = new StringConcatenation();
-    return _builder;
-  }
-  
-  public CharSequence compileConditionalEventSchedulingMain(final ConditionalScheduling e) {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("tmpEvent = new ");
-    Event _observes = e.getObserves();
-    String _name = _observes.getName();
-    _builder.append(_name, "");
-    _builder.append("2");
-    Event _schedule = e.getSchedule();
-    String _name_1 = _schedule.getName();
-    _builder.append(_name_1, "");
-    _builder.append("();");
-    _builder.newLineIfNotEmpty();
-    _builder.append("processor.addEventObserver(tmpEvent);");
-    _builder.newLine();
-    return _builder;
-  }
-  
   public CharSequence compileEvent(final Event e) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.newLine();
@@ -170,11 +157,7 @@ public class SimulatorGenerator implements IGenerator {
     _builder.append("public void execute(SimulationState state) {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("System.out.println(\"Hello from event ");
-    String _name_3 = e.getName();
-    _builder.append(_name_3, "		");
-    _builder.append(" at time \" + state.getTime() ); ");
-    _builder.newLineIfNotEmpty();
+    _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
@@ -182,6 +165,10 @@ public class SimulatorGenerator implements IGenerator {
     _builder.newLine();
     _builder.newLine();
     return _builder;
+  }
+  
+  public Object compileExpression(final XExpression e) {
+    return null;
   }
   
   public CharSequence compileConditionalScheduling(final ConditionalScheduling e) {

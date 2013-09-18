@@ -131,13 +131,22 @@ public interface SimulatorPackage extends EPackage
   int EVENT__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Expression</b></em>' containment reference.
+   * The feature id for the '<em><b>Left Side</b></em>' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EVENT__EXPRESSION = 1;
+  int EVENT__LEFT_SIDE = 1;
+
+  /**
+   * The feature id for the '<em><b>Right Side</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EVENT__RIGHT_SIDE = 2;
 
   /**
    * The number of structural features of the '<em>Event</em>' class.
@@ -146,7 +155,7 @@ public interface SimulatorPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EVENT_FEATURE_COUNT = 2;
+  int EVENT_FEATURE_COUNT = 3;
 
   /**
    * The meta object id for the '{@link eu.scape_project.pw.simulator.impl.EntityImpl <em>Entity</em>}' class.
@@ -456,15 +465,26 @@ public interface SimulatorPackage extends EPackage
   EAttribute getEvent_Name();
 
   /**
-   * Returns the meta object for the containment reference '{@link eu.scape_project.pw.simulator.Event#getExpression <em>Expression</em>}'.
+   * Returns the meta object for the reference '{@link eu.scape_project.pw.simulator.Event#getLeftSide <em>Left Side</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Expression</em>'.
-   * @see eu.scape_project.pw.simulator.Event#getExpression()
+   * @return the meta object for the reference '<em>Left Side</em>'.
+   * @see eu.scape_project.pw.simulator.Event#getLeftSide()
    * @see #getEvent()
    * @generated
    */
-  EReference getEvent_Expression();
+  EReference getEvent_LeftSide();
+
+  /**
+   * Returns the meta object for the attribute '{@link eu.scape_project.pw.simulator.Event#getRightSide <em>Right Side</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Right Side</em>'.
+   * @see eu.scape_project.pw.simulator.Event#getRightSide()
+   * @see #getEvent()
+   * @generated
+   */
+  EAttribute getEvent_RightSide();
 
   /**
    * Returns the meta object for class '{@link eu.scape_project.pw.simulator.Entity <em>Entity</em>}'.
@@ -731,12 +751,20 @@ public interface SimulatorPackage extends EPackage
     EAttribute EVENT__NAME = eINSTANCE.getEvent_Name();
 
     /**
-     * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+     * The meta object literal for the '<em><b>Left Side</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EVENT__EXPRESSION = eINSTANCE.getEvent_Expression();
+    EReference EVENT__LEFT_SIDE = eINSTANCE.getEvent_LeftSide();
+
+    /**
+     * The meta object literal for the '<em><b>Right Side</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute EVENT__RIGHT_SIDE = eINSTANCE.getEvent_RightSide();
 
     /**
      * The meta object literal for the '{@link eu.scape_project.pw.simulator.impl.EntityImpl <em>Entity</em>}' class.
