@@ -66,9 +66,18 @@ public class SimulatorFactoryImpl extends EFactoryImpl implements SimulatorFacto
     {
       case SimulatorPackage.SIMULATION: return createSimulation();
       case SimulatorPackage.EVENT: return createEvent();
+      case SimulatorPackage.EXPRESSION: return createExpression();
+      case SimulatorPackage.REXPRESSION: return createRExpression();
+      case SimulatorPackage.OEXPRESSION: return createOExpression();
+      case SimulatorPackage.PEXPRESSION: return createPExpression();
+      case SimulatorPackage.EEXPRESSION: return createEExpression();
+      case SimulatorPackage.MEXPRESSION: return createMExpression();
       case SimulatorPackage.ENTITY: return createEntity();
       case SimulatorPackage.COLLECTION: return createCollection();
       case SimulatorPackage.KEY_VALUE: return createKeyValue();
+      case SimulatorPackage.KEY_VALUE_INT: return createKeyValueInt();
+      case SimulatorPackage.KEY_VALUE_STRING: return createKeyValueString();
+      case SimulatorPackage.KEY_VALUE_DECIMAL: return createKeyValueDecimal();
       case SimulatorPackage.SCHEDULING: return createScheduling();
       case SimulatorPackage.EVENT_SCHEDULING: return createEventScheduling();
       case SimulatorPackage.CONDITIONAL_SCHEDULING: return createConditionalScheduling();
@@ -104,6 +113,72 @@ public class SimulatorFactoryImpl extends EFactoryImpl implements SimulatorFacto
    * <!-- end-user-doc -->
    * @generated
    */
+  public Expression createExpression()
+  {
+    ExpressionImpl expression = new ExpressionImpl();
+    return expression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RExpression createRExpression()
+  {
+    RExpressionImpl rExpression = new RExpressionImpl();
+    return rExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public OExpression createOExpression()
+  {
+    OExpressionImpl oExpression = new OExpressionImpl();
+    return oExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public PExpression createPExpression()
+  {
+    PExpressionImpl pExpression = new PExpressionImpl();
+    return pExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EExpression createEExpression()
+  {
+    EExpressionImpl eExpression = new EExpressionImpl();
+    return eExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public MExpression createMExpression()
+  {
+    MExpressionImpl mExpression = new MExpressionImpl();
+    return mExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Entity createEntity()
   {
     EntityImpl entity = new EntityImpl();
@@ -130,6 +205,39 @@ public class SimulatorFactoryImpl extends EFactoryImpl implements SimulatorFacto
   {
     KeyValueImpl keyValue = new KeyValueImpl();
     return keyValue;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public KeyValueInt createKeyValueInt()
+  {
+    KeyValueIntImpl keyValueInt = new KeyValueIntImpl();
+    return keyValueInt;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public KeyValueString createKeyValueString()
+  {
+    KeyValueStringImpl keyValueString = new KeyValueStringImpl();
+    return keyValueString;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public KeyValueDecimal createKeyValueDecimal()
+  {
+    KeyValueDecimalImpl keyValueDecimal = new KeyValueDecimalImpl();
+    return keyValueDecimal;
   }
 
   /**

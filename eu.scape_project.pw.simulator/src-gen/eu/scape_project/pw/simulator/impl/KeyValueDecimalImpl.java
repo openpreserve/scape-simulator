@@ -2,7 +2,7 @@
  */
 package eu.scape_project.pw.simulator.impl;
 
-import eu.scape_project.pw.simulator.KeyValue;
+import eu.scape_project.pw.simulator.KeyValueDecimal;
 import eu.scape_project.pw.simulator.SimulatorPackage;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -10,49 +10,48 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Key Value</b></em>'.
+ * An implementation of the model object '<em><b>Key Value Decimal</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link eu.scape_project.pw.simulator.impl.KeyValueImpl#getKey <em>Key</em>}</li>
+ *   <li>{@link eu.scape_project.pw.simulator.impl.KeyValueDecimalImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class KeyValueImpl extends MinimalEObjectImpl.Container implements KeyValue
+public class KeyValueDecimalImpl extends KeyValueImpl implements KeyValueDecimal
 {
   /**
-   * The default value of the '{@link #getKey() <em>Key</em>}' attribute.
+   * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getKey()
+   * @see #getValue()
    * @generated
    * @ordered
    */
-  protected static final String KEY_EDEFAULT = null;
+  protected static final String VALUE_EDEFAULT = null;
 
   /**
-   * The cached value of the '{@link #getKey() <em>Key</em>}' attribute.
+   * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getKey()
+   * @see #getValue()
    * @generated
    * @ordered
    */
-  protected String key = KEY_EDEFAULT;
+  protected String value = VALUE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected KeyValueImpl()
+  protected KeyValueDecimalImpl()
   {
     super();
   }
@@ -65,7 +64,7 @@ public class KeyValueImpl extends MinimalEObjectImpl.Container implements KeyVal
   @Override
   protected EClass eStaticClass()
   {
-    return SimulatorPackage.Literals.KEY_VALUE;
+    return SimulatorPackage.Literals.KEY_VALUE_DECIMAL;
   }
 
   /**
@@ -73,9 +72,9 @@ public class KeyValueImpl extends MinimalEObjectImpl.Container implements KeyVal
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getKey()
+  public String getValue()
   {
-    return key;
+    return value;
   }
 
   /**
@@ -83,12 +82,12 @@ public class KeyValueImpl extends MinimalEObjectImpl.Container implements KeyVal
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setKey(String newKey)
+  public void setValue(String newValue)
   {
-    String oldKey = key;
-    key = newKey;
+    String oldValue = value;
+    value = newValue;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, SimulatorPackage.KEY_VALUE__KEY, oldKey, key));
+      eNotify(new ENotificationImpl(this, Notification.SET, SimulatorPackage.KEY_VALUE_DECIMAL__VALUE, oldValue, value));
   }
 
   /**
@@ -101,8 +100,8 @@ public class KeyValueImpl extends MinimalEObjectImpl.Container implements KeyVal
   {
     switch (featureID)
     {
-      case SimulatorPackage.KEY_VALUE__KEY:
-        return getKey();
+      case SimulatorPackage.KEY_VALUE_DECIMAL__VALUE:
+        return getValue();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -117,8 +116,8 @@ public class KeyValueImpl extends MinimalEObjectImpl.Container implements KeyVal
   {
     switch (featureID)
     {
-      case SimulatorPackage.KEY_VALUE__KEY:
-        setKey((String)newValue);
+      case SimulatorPackage.KEY_VALUE_DECIMAL__VALUE:
+        setValue((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -134,8 +133,8 @@ public class KeyValueImpl extends MinimalEObjectImpl.Container implements KeyVal
   {
     switch (featureID)
     {
-      case SimulatorPackage.KEY_VALUE__KEY:
-        setKey(KEY_EDEFAULT);
+      case SimulatorPackage.KEY_VALUE_DECIMAL__VALUE:
+        setValue(VALUE_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -151,8 +150,8 @@ public class KeyValueImpl extends MinimalEObjectImpl.Container implements KeyVal
   {
     switch (featureID)
     {
-      case SimulatorPackage.KEY_VALUE__KEY:
-        return KEY_EDEFAULT == null ? key != null : !KEY_EDEFAULT.equals(key);
+      case SimulatorPackage.KEY_VALUE_DECIMAL__VALUE:
+        return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
     }
     return super.eIsSet(featureID);
   }
@@ -168,10 +167,10 @@ public class KeyValueImpl extends MinimalEObjectImpl.Container implements KeyVal
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (key: ");
-    result.append(key);
+    result.append(" (value: ");
+    result.append(value);
     result.append(')');
     return result.toString();
   }
 
-} //KeyValueImpl
+} //KeyValueDecimalImpl

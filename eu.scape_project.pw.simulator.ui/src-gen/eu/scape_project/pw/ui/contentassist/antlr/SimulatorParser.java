@@ -37,6 +37,8 @@ public class SimulatorParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
+					put(grammarAccess.getExpressionAccess().getAlternatives(), "rule__Expression__Alternatives");
+					put(grammarAccess.getOExpressionAccess().getAlternatives(), "rule__OExpression__Alternatives");
 					put(grammarAccess.getKeyValueAccess().getAlternatives(), "rule__KeyValue__Alternatives");
 					put(grammarAccess.getSchedulingAccess().getAlternatives(), "rule__Scheduling__Alternatives");
 					put(grammarAccess.getXAssignmentAccess().getAlternatives(), "rule__XAssignment__Alternatives");
@@ -77,9 +79,16 @@ public class SimulatorParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXImportDeclarationAccess().getAlternatives_1(), "rule__XImportDeclaration__Alternatives_1");
 					put(grammarAccess.getSimulationAccess().getGroup(), "rule__Simulation__Group__0");
 					put(grammarAccess.getEventAccess().getGroup(), "rule__Event__Group__0");
-					put(grammarAccess.getEventAccess().getGroup_3(), "rule__Event__Group_3__0");
+					put(grammarAccess.getRExpressionAccess().getGroup(), "rule__RExpression__Group__0");
+					put(grammarAccess.getPExpressionAccess().getGroup(), "rule__PExpression__Group__0");
+					put(grammarAccess.getEExpressionAccess().getGroup(), "rule__EExpression__Group__0");
+					put(grammarAccess.getMExpressionAccess().getGroup(), "rule__MExpression__Group__0");
+					put(grammarAccess.getIdentifierAccess().getGroup(), "rule__Identifier__Group__0");
+					put(grammarAccess.getIdentifierAccess().getGroup_1(), "rule__Identifier__Group_1__0");
 					put(grammarAccess.getCollectionAccess().getGroup(), "rule__Collection__Group__0");
-					put(grammarAccess.getKeyValueAccess().getGroup_0(), "rule__KeyValue__Group_0__0");
+					put(grammarAccess.getKeyValueIntAccess().getGroup(), "rule__KeyValueInt__Group__0");
+					put(grammarAccess.getKeyValueStringAccess().getGroup(), "rule__KeyValueString__Group__0");
+					put(grammarAccess.getKeyValueDecimalAccess().getGroup(), "rule__KeyValueDecimal__Group__0");
 					put(grammarAccess.getEventSchedulingAccess().getGroup(), "rule__EventScheduling__Group__0");
 					put(grammarAccess.getEventSchedulingAccess().getGroup_3(), "rule__EventScheduling__Group_3__0");
 					put(grammarAccess.getEventSchedulingAccess().getGroup_4(), "rule__EventScheduling__Group_4__0");
@@ -244,13 +253,24 @@ public class SimulatorParser extends AbstractContentAssistParser {
 					put(grammarAccess.getSimulationAccess().getEventsAssignment_6(), "rule__Simulation__EventsAssignment_6");
 					put(grammarAccess.getSimulationAccess().getSchedulingAssignment_8(), "rule__Simulation__SchedulingAssignment_8");
 					put(grammarAccess.getEventAccess().getNameAssignment_1(), "rule__Event__NameAssignment_1");
-					put(grammarAccess.getEventAccess().getLeftSideAssignment_3_0(), "rule__Event__LeftSideAssignment_3_0");
-					put(grammarAccess.getEventAccess().getRightSideAssignment_3_2(), "rule__Event__RightSideAssignment_3_2");
+					put(grammarAccess.getEventAccess().getExpressionAssignment_3(), "rule__Event__ExpressionAssignment_3");
+					put(grammarAccess.getRExpressionAccess().getNumberAssignment_1(), "rule__RExpression__NumberAssignment_1");
+					put(grammarAccess.getRExpressionAccess().getExpressionAssignment_3(), "rule__RExpression__ExpressionAssignment_3");
+					put(grammarAccess.getPExpressionAccess().getLeftSideAssignment_0(), "rule__PExpression__LeftSideAssignment_0");
+					put(grammarAccess.getPExpressionAccess().getRightSideAssignment_2(), "rule__PExpression__RightSideAssignment_2");
+					put(grammarAccess.getEExpressionAccess().getLeftSideAssignment_0(), "rule__EExpression__LeftSideAssignment_0");
+					put(grammarAccess.getEExpressionAccess().getRightSideAssignment_2(), "rule__EExpression__RightSideAssignment_2");
+					put(grammarAccess.getMExpressionAccess().getLeftSideAssignment_0(), "rule__MExpression__LeftSideAssignment_0");
+					put(grammarAccess.getMExpressionAccess().getRightSideAssignment_2(), "rule__MExpression__RightSideAssignment_2");
 					put(grammarAccess.getCollectionAccess().getNameAssignment_1(), "rule__Collection__NameAssignment_1");
 					put(grammarAccess.getCollectionAccess().getKeyValuesAssignment_3(), "rule__Collection__KeyValuesAssignment_3");
 					put(grammarAccess.getCollectionAccess().getSubCollectionsAssignment_4(), "rule__Collection__SubCollectionsAssignment_4");
-					put(grammarAccess.getKeyValueAccess().getKeyAssignment_0_0(), "rule__KeyValue__KeyAssignment_0_0");
-					put(grammarAccess.getKeyValueAccess().getValueAssignment_0_2(), "rule__KeyValue__ValueAssignment_0_2");
+					put(grammarAccess.getKeyValueIntAccess().getKeyAssignment_0(), "rule__KeyValueInt__KeyAssignment_0");
+					put(grammarAccess.getKeyValueIntAccess().getValueAssignment_2(), "rule__KeyValueInt__ValueAssignment_2");
+					put(grammarAccess.getKeyValueStringAccess().getKeyAssignment_0(), "rule__KeyValueString__KeyAssignment_0");
+					put(grammarAccess.getKeyValueStringAccess().getValueAssignment_2(), "rule__KeyValueString__ValueAssignment_2");
+					put(grammarAccess.getKeyValueDecimalAccess().getKeyAssignment_0(), "rule__KeyValueDecimal__KeyAssignment_0");
+					put(grammarAccess.getKeyValueDecimalAccess().getValueAssignment_2(), "rule__KeyValueDecimal__ValueAssignment_2");
 					put(grammarAccess.getEventSchedulingAccess().getScheduleAssignment_1(), "rule__EventScheduling__ScheduleAssignment_1");
 					put(grammarAccess.getEventSchedulingAccess().getStartAssignment_3_2(), "rule__EventScheduling__StartAssignment_3_2");
 					put(grammarAccess.getEventSchedulingAccess().getEndAssignment_4_2(), "rule__EventScheduling__EndAssignment_4_2");

@@ -86,6 +86,56 @@ public class SimulatorSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case SimulatorPackage.EXPRESSION:
+      {
+        Expression expression = (Expression)theEObject;
+        T result = caseExpression(expression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimulatorPackage.REXPRESSION:
+      {
+        RExpression rExpression = (RExpression)theEObject;
+        T result = caseRExpression(rExpression);
+        if (result == null) result = caseExpression(rExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimulatorPackage.OEXPRESSION:
+      {
+        OExpression oExpression = (OExpression)theEObject;
+        T result = caseOExpression(oExpression);
+        if (result == null) result = caseExpression(oExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimulatorPackage.PEXPRESSION:
+      {
+        PExpression pExpression = (PExpression)theEObject;
+        T result = casePExpression(pExpression);
+        if (result == null) result = caseOExpression(pExpression);
+        if (result == null) result = caseExpression(pExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimulatorPackage.EEXPRESSION:
+      {
+        EExpression eExpression = (EExpression)theEObject;
+        T result = caseEExpression(eExpression);
+        if (result == null) result = caseOExpression(eExpression);
+        if (result == null) result = caseExpression(eExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimulatorPackage.MEXPRESSION:
+      {
+        MExpression mExpression = (MExpression)theEObject;
+        T result = caseMExpression(mExpression);
+        if (result == null) result = caseOExpression(mExpression);
+        if (result == null) result = caseExpression(mExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case SimulatorPackage.ENTITY:
       {
         Entity entity = (Entity)theEObject;
@@ -105,6 +155,30 @@ public class SimulatorSwitch<T> extends Switch<T>
       {
         KeyValue keyValue = (KeyValue)theEObject;
         T result = caseKeyValue(keyValue);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimulatorPackage.KEY_VALUE_INT:
+      {
+        KeyValueInt keyValueInt = (KeyValueInt)theEObject;
+        T result = caseKeyValueInt(keyValueInt);
+        if (result == null) result = caseKeyValue(keyValueInt);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimulatorPackage.KEY_VALUE_STRING:
+      {
+        KeyValueString keyValueString = (KeyValueString)theEObject;
+        T result = caseKeyValueString(keyValueString);
+        if (result == null) result = caseKeyValue(keyValueString);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case SimulatorPackage.KEY_VALUE_DECIMAL:
+      {
+        KeyValueDecimal keyValueDecimal = (KeyValueDecimal)theEObject;
+        T result = caseKeyValueDecimal(keyValueDecimal);
+        if (result == null) result = caseKeyValue(keyValueDecimal);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -168,6 +242,102 @@ public class SimulatorSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseExpression(Expression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>RExpression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>RExpression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRExpression(RExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>OExpression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>OExpression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseOExpression(OExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>PExpression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>PExpression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T casePExpression(PExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>EExpression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>EExpression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEExpression(EExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>MExpression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>MExpression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMExpression(MExpression object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Entity</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -211,6 +381,54 @@ public class SimulatorSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseKeyValue(KeyValue object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Key Value Int</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Key Value Int</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseKeyValueInt(KeyValueInt object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Key Value String</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Key Value String</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseKeyValueString(KeyValueString object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Key Value Decimal</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Key Value Decimal</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseKeyValueDecimal(KeyValueDecimal object)
   {
     return null;
   }

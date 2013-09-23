@@ -5,9 +5,15 @@ import com.google.inject.Provider;
 import eu.scape_project.pw.services.SimulatorGrammarAccess;
 import eu.scape_project.pw.simulator.Collection;
 import eu.scape_project.pw.simulator.ConditionalScheduling;
+import eu.scape_project.pw.simulator.EExpression;
 import eu.scape_project.pw.simulator.Event;
 import eu.scape_project.pw.simulator.EventScheduling;
-import eu.scape_project.pw.simulator.KeyValue;
+import eu.scape_project.pw.simulator.KeyValueDecimal;
+import eu.scape_project.pw.simulator.KeyValueInt;
+import eu.scape_project.pw.simulator.KeyValueString;
+import eu.scape_project.pw.simulator.MExpression;
+import eu.scape_project.pw.simulator.PExpression;
+import eu.scape_project.pw.simulator.RExpression;
 import eu.scape_project.pw.simulator.Simulation;
 import eu.scape_project.pw.simulator.SimulatorPackage;
 import org.eclipse.emf.ecore.EObject;
@@ -85,6 +91,14 @@ public class SimulatorSemanticSequencer extends XbaseSemanticSequencer {
 					return; 
 				}
 				else break;
+			case SimulatorPackage.EEXPRESSION:
+				if(context == grammarAccess.getEExpressionRule() ||
+				   context == grammarAccess.getExpressionRule() ||
+				   context == grammarAccess.getOExpressionRule()) {
+					sequence_EExpression(context, (EExpression) semanticObject); 
+					return; 
+				}
+				else break;
 			case SimulatorPackage.EVENT:
 				if(context == grammarAccess.getEventRule()) {
 					sequence_Event(context, (Event) semanticObject); 
@@ -98,9 +112,47 @@ public class SimulatorSemanticSequencer extends XbaseSemanticSequencer {
 					return; 
 				}
 				else break;
-			case SimulatorPackage.KEY_VALUE:
-				if(context == grammarAccess.getKeyValueRule()) {
-					sequence_KeyValue(context, (KeyValue) semanticObject); 
+			case SimulatorPackage.KEY_VALUE_DECIMAL:
+				if(context == grammarAccess.getKeyValueRule() ||
+				   context == grammarAccess.getKeyValueDecimalRule()) {
+					sequence_KeyValueDecimal(context, (KeyValueDecimal) semanticObject); 
+					return; 
+				}
+				else break;
+			case SimulatorPackage.KEY_VALUE_INT:
+				if(context == grammarAccess.getKeyValueRule() ||
+				   context == grammarAccess.getKeyValueIntRule()) {
+					sequence_KeyValueInt(context, (KeyValueInt) semanticObject); 
+					return; 
+				}
+				else break;
+			case SimulatorPackage.KEY_VALUE_STRING:
+				if(context == grammarAccess.getKeyValueRule() ||
+				   context == grammarAccess.getKeyValueStringRule()) {
+					sequence_KeyValueString(context, (KeyValueString) semanticObject); 
+					return; 
+				}
+				else break;
+			case SimulatorPackage.MEXPRESSION:
+				if(context == grammarAccess.getExpressionRule() ||
+				   context == grammarAccess.getMExpressionRule() ||
+				   context == grammarAccess.getOExpressionRule()) {
+					sequence_MExpression(context, (MExpression) semanticObject); 
+					return; 
+				}
+				else break;
+			case SimulatorPackage.PEXPRESSION:
+				if(context == grammarAccess.getExpressionRule() ||
+				   context == grammarAccess.getOExpressionRule() ||
+				   context == grammarAccess.getPExpressionRule()) {
+					sequence_PExpression(context, (PExpression) semanticObject); 
+					return; 
+				}
+				else break;
+			case SimulatorPackage.REXPRESSION:
+				if(context == grammarAccess.getExpressionRule() ||
+				   context == grammarAccess.getRExpressionRule()) {
+					sequence_RExpression(context, (RExpression) semanticObject); 
 					return; 
 				}
 				else break;
@@ -1072,6 +1124,25 @@ public class SimulatorSemanticSequencer extends XbaseSemanticSequencer {
 	
 	/**
 	 * Constraint:
+	 *     (leftSide=Identifier rightSide=INT)
+	 */
+	protected void sequence_EExpression(EObject context, EExpression semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, SimulatorPackage.Literals.OEXPRESSION__LEFT_SIDE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimulatorPackage.Literals.OEXPRESSION__LEFT_SIDE));
+			if(transientValues.isValueTransient(semanticObject, SimulatorPackage.Literals.OEXPRESSION__RIGHT_SIDE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimulatorPackage.Literals.OEXPRESSION__RIGHT_SIDE));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getEExpressionAccess().getLeftSideIdentifierParserRuleCall_0_0(), semanticObject.getLeftSide());
+		feeder.accept(grammarAccess.getEExpressionAccess().getRightSideINTTerminalRuleCall_2_0(), semanticObject.getRightSide());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (schedule=[Event|ID] start=INT? end=INT? every=INT?)
 	 */
 	protected void sequence_EventScheduling(EObject context, EventScheduling semanticObject) {
@@ -1081,29 +1152,124 @@ public class SimulatorSemanticSequencer extends XbaseSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (name=ValidID (leftSide=[KeyValue|ID] rightSide=ID)?)
+	 *     (name=ValidID expression=Expression)
 	 */
 	protected void sequence_Event(EObject context, Event semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, SimulatorPackage.Literals.EVENT__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimulatorPackage.Literals.EVENT__NAME));
+			if(transientValues.isValueTransient(semanticObject, SimulatorPackage.Literals.EVENT__EXPRESSION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimulatorPackage.Literals.EVENT__EXPRESSION));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getEventAccess().getNameValidIDParserRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getEventAccess().getExpressionExpressionParserRuleCall_3_0(), semanticObject.getExpression());
+		feeder.finish();
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (key=ID value=INT)?
+	 *     (key=ID value=DECIMAL)
 	 */
-	protected void sequence_KeyValue(EObject context, KeyValue semanticObject) {
+	protected void sequence_KeyValueDecimal(EObject context, KeyValueDecimal semanticObject) {
 		if(errorAcceptor != null) {
 			if(transientValues.isValueTransient(semanticObject, SimulatorPackage.Literals.KEY_VALUE__KEY) == ValueTransient.YES)
 				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimulatorPackage.Literals.KEY_VALUE__KEY));
-			if(transientValues.isValueTransient(semanticObject, SimulatorPackage.Literals.KEY_VALUE__VALUE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimulatorPackage.Literals.KEY_VALUE__VALUE));
+			if(transientValues.isValueTransient(semanticObject, SimulatorPackage.Literals.KEY_VALUE_DECIMAL__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimulatorPackage.Literals.KEY_VALUE_DECIMAL__VALUE));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getKeyValueAccess().getKeyIDTerminalRuleCall_0_0_0(), semanticObject.getKey());
-		feeder.accept(grammarAccess.getKeyValueAccess().getValueINTTerminalRuleCall_0_2_0(), semanticObject.getValue());
+		feeder.accept(grammarAccess.getKeyValueDecimalAccess().getKeyIDTerminalRuleCall_0_0(), semanticObject.getKey());
+		feeder.accept(grammarAccess.getKeyValueDecimalAccess().getValueDECIMALTerminalRuleCall_2_0(), semanticObject.getValue());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (key=ID value=INT)
+	 */
+	protected void sequence_KeyValueInt(EObject context, KeyValueInt semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, SimulatorPackage.Literals.KEY_VALUE__KEY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimulatorPackage.Literals.KEY_VALUE__KEY));
+			if(transientValues.isValueTransient(semanticObject, SimulatorPackage.Literals.KEY_VALUE_INT__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimulatorPackage.Literals.KEY_VALUE_INT__VALUE));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getKeyValueIntAccess().getKeyIDTerminalRuleCall_0_0(), semanticObject.getKey());
+		feeder.accept(grammarAccess.getKeyValueIntAccess().getValueINTTerminalRuleCall_2_0(), semanticObject.getValue());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (key=ID value=STRING)
+	 */
+	protected void sequence_KeyValueString(EObject context, KeyValueString semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, SimulatorPackage.Literals.KEY_VALUE__KEY) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimulatorPackage.Literals.KEY_VALUE__KEY));
+			if(transientValues.isValueTransient(semanticObject, SimulatorPackage.Literals.KEY_VALUE_STRING__VALUE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimulatorPackage.Literals.KEY_VALUE_STRING__VALUE));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getKeyValueStringAccess().getKeyIDTerminalRuleCall_0_0(), semanticObject.getKey());
+		feeder.accept(grammarAccess.getKeyValueStringAccess().getValueSTRINGTerminalRuleCall_2_0(), semanticObject.getValue());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (leftSide=Identifier rightSide=INT)
+	 */
+	protected void sequence_MExpression(EObject context, MExpression semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, SimulatorPackage.Literals.OEXPRESSION__LEFT_SIDE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimulatorPackage.Literals.OEXPRESSION__LEFT_SIDE));
+			if(transientValues.isValueTransient(semanticObject, SimulatorPackage.Literals.OEXPRESSION__RIGHT_SIDE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimulatorPackage.Literals.OEXPRESSION__RIGHT_SIDE));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getMExpressionAccess().getLeftSideIdentifierParserRuleCall_0_0(), semanticObject.getLeftSide());
+		feeder.accept(grammarAccess.getMExpressionAccess().getRightSideINTTerminalRuleCall_2_0(), semanticObject.getRightSide());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (leftSide=Identifier rightSide=INT)
+	 */
+	protected void sequence_PExpression(EObject context, PExpression semanticObject) {
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, SimulatorPackage.Literals.OEXPRESSION__LEFT_SIDE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimulatorPackage.Literals.OEXPRESSION__LEFT_SIDE));
+			if(transientValues.isValueTransient(semanticObject, SimulatorPackage.Literals.OEXPRESSION__RIGHT_SIDE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, SimulatorPackage.Literals.OEXPRESSION__RIGHT_SIDE));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getPExpressionAccess().getLeftSideIdentifierParserRuleCall_0_0(), semanticObject.getLeftSide());
+		feeder.accept(grammarAccess.getPExpressionAccess().getRightSideINTTerminalRuleCall_2_0(), semanticObject.getRightSide());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (number=INT expression+=Expression+)
+	 */
+	protected void sequence_RExpression(EObject context, RExpression semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

@@ -131,22 +131,13 @@ public interface SimulatorPackage extends EPackage
   int EVENT__NAME = 0;
 
   /**
-   * The feature id for the '<em><b>Left Side</b></em>' reference.
+   * The feature id for the '<em><b>Expression</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int EVENT__LEFT_SIDE = 1;
-
-  /**
-   * The feature id for the '<em><b>Right Side</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int EVENT__RIGHT_SIDE = 2;
+  int EVENT__EXPRESSION = 1;
 
   /**
    * The number of structural features of the '<em>Event</em>' class.
@@ -155,7 +146,211 @@ public interface SimulatorPackage extends EPackage
    * @generated
    * @ordered
    */
-  int EVENT_FEATURE_COUNT = 3;
+  int EVENT_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link eu.scape_project.pw.simulator.impl.ExpressionImpl <em>Expression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see eu.scape_project.pw.simulator.impl.ExpressionImpl
+   * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getExpression()
+   * @generated
+   */
+  int EXPRESSION = 2;
+
+  /**
+   * The number of structural features of the '<em>Expression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EXPRESSION_FEATURE_COUNT = 0;
+
+  /**
+   * The meta object id for the '{@link eu.scape_project.pw.simulator.impl.RExpressionImpl <em>RExpression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see eu.scape_project.pw.simulator.impl.RExpressionImpl
+   * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getRExpression()
+   * @generated
+   */
+  int REXPRESSION = 3;
+
+  /**
+   * The feature id for the '<em><b>Number</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REXPRESSION__NUMBER = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Expression</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REXPRESSION__EXPRESSION = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>RExpression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int REXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link eu.scape_project.pw.simulator.impl.OExpressionImpl <em>OExpression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see eu.scape_project.pw.simulator.impl.OExpressionImpl
+   * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getOExpression()
+   * @generated
+   */
+  int OEXPRESSION = 4;
+
+  /**
+   * The feature id for the '<em><b>Left Side</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OEXPRESSION__LEFT_SIDE = EXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Right Side</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OEXPRESSION__RIGHT_SIDE = EXPRESSION_FEATURE_COUNT + 1;
+
+  /**
+   * The number of structural features of the '<em>OExpression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OEXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+  /**
+   * The meta object id for the '{@link eu.scape_project.pw.simulator.impl.PExpressionImpl <em>PExpression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see eu.scape_project.pw.simulator.impl.PExpressionImpl
+   * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getPExpression()
+   * @generated
+   */
+  int PEXPRESSION = 5;
+
+  /**
+   * The feature id for the '<em><b>Left Side</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PEXPRESSION__LEFT_SIDE = OEXPRESSION__LEFT_SIDE;
+
+  /**
+   * The feature id for the '<em><b>Right Side</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PEXPRESSION__RIGHT_SIDE = OEXPRESSION__RIGHT_SIDE;
+
+  /**
+   * The number of structural features of the '<em>PExpression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int PEXPRESSION_FEATURE_COUNT = OEXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link eu.scape_project.pw.simulator.impl.EExpressionImpl <em>EExpression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see eu.scape_project.pw.simulator.impl.EExpressionImpl
+   * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getEExpression()
+   * @generated
+   */
+  int EEXPRESSION = 6;
+
+  /**
+   * The feature id for the '<em><b>Left Side</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EEXPRESSION__LEFT_SIDE = OEXPRESSION__LEFT_SIDE;
+
+  /**
+   * The feature id for the '<em><b>Right Side</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EEXPRESSION__RIGHT_SIDE = OEXPRESSION__RIGHT_SIDE;
+
+  /**
+   * The number of structural features of the '<em>EExpression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EEXPRESSION_FEATURE_COUNT = OEXPRESSION_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link eu.scape_project.pw.simulator.impl.MExpressionImpl <em>MExpression</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see eu.scape_project.pw.simulator.impl.MExpressionImpl
+   * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getMExpression()
+   * @generated
+   */
+  int MEXPRESSION = 7;
+
+  /**
+   * The feature id for the '<em><b>Left Side</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MEXPRESSION__LEFT_SIDE = OEXPRESSION__LEFT_SIDE;
+
+  /**
+   * The feature id for the '<em><b>Right Side</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MEXPRESSION__RIGHT_SIDE = OEXPRESSION__RIGHT_SIDE;
+
+  /**
+   * The number of structural features of the '<em>MExpression</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MEXPRESSION_FEATURE_COUNT = OEXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link eu.scape_project.pw.simulator.impl.EntityImpl <em>Entity</em>}' class.
@@ -165,7 +360,7 @@ public interface SimulatorPackage extends EPackage
    * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getEntity()
    * @generated
    */
-  int ENTITY = 2;
+  int ENTITY = 8;
 
   /**
    * The number of structural features of the '<em>Entity</em>' class.
@@ -184,7 +379,7 @@ public interface SimulatorPackage extends EPackage
    * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getCollection()
    * @generated
    */
-  int COLLECTION = 3;
+  int COLLECTION = 9;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -230,7 +425,7 @@ public interface SimulatorPackage extends EPackage
    * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getKeyValue()
    * @generated
    */
-  int KEY_VALUE = 4;
+  int KEY_VALUE = 10;
 
   /**
    * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -242,22 +437,124 @@ public interface SimulatorPackage extends EPackage
   int KEY_VALUE__KEY = 0;
 
   /**
-   * The feature id for the '<em><b>Value</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int KEY_VALUE__VALUE = 1;
-
-  /**
    * The number of structural features of the '<em>Key Value</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int KEY_VALUE_FEATURE_COUNT = 2;
+  int KEY_VALUE_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link eu.scape_project.pw.simulator.impl.KeyValueIntImpl <em>Key Value Int</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see eu.scape_project.pw.simulator.impl.KeyValueIntImpl
+   * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getKeyValueInt()
+   * @generated
+   */
+  int KEY_VALUE_INT = 11;
+
+  /**
+   * The feature id for the '<em><b>Key</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KEY_VALUE_INT__KEY = KEY_VALUE__KEY;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KEY_VALUE_INT__VALUE = KEY_VALUE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Key Value Int</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KEY_VALUE_INT_FEATURE_COUNT = KEY_VALUE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link eu.scape_project.pw.simulator.impl.KeyValueStringImpl <em>Key Value String</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see eu.scape_project.pw.simulator.impl.KeyValueStringImpl
+   * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getKeyValueString()
+   * @generated
+   */
+  int KEY_VALUE_STRING = 12;
+
+  /**
+   * The feature id for the '<em><b>Key</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KEY_VALUE_STRING__KEY = KEY_VALUE__KEY;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KEY_VALUE_STRING__VALUE = KEY_VALUE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Key Value String</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KEY_VALUE_STRING_FEATURE_COUNT = KEY_VALUE_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link eu.scape_project.pw.simulator.impl.KeyValueDecimalImpl <em>Key Value Decimal</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see eu.scape_project.pw.simulator.impl.KeyValueDecimalImpl
+   * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getKeyValueDecimal()
+   * @generated
+   */
+  int KEY_VALUE_DECIMAL = 13;
+
+  /**
+   * The feature id for the '<em><b>Key</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KEY_VALUE_DECIMAL__KEY = KEY_VALUE__KEY;
+
+  /**
+   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KEY_VALUE_DECIMAL__VALUE = KEY_VALUE_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Key Value Decimal</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int KEY_VALUE_DECIMAL_FEATURE_COUNT = KEY_VALUE_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link eu.scape_project.pw.simulator.impl.SchedulingImpl <em>Scheduling</em>}' class.
@@ -267,7 +564,7 @@ public interface SimulatorPackage extends EPackage
    * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getScheduling()
    * @generated
    */
-  int SCHEDULING = 5;
+  int SCHEDULING = 14;
 
   /**
    * The feature id for the '<em><b>Schedule</b></em>' reference.
@@ -295,7 +592,7 @@ public interface SimulatorPackage extends EPackage
    * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getEventScheduling()
    * @generated
    */
-  int EVENT_SCHEDULING = 6;
+  int EVENT_SCHEDULING = 15;
 
   /**
    * The feature id for the '<em><b>Schedule</b></em>' reference.
@@ -350,7 +647,7 @@ public interface SimulatorPackage extends EPackage
    * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getConditionalScheduling()
    * @generated
    */
-  int CONDITIONAL_SCHEDULING = 7;
+  int CONDITIONAL_SCHEDULING = 16;
 
   /**
    * The feature id for the '<em><b>Schedule</b></em>' reference.
@@ -465,26 +762,119 @@ public interface SimulatorPackage extends EPackage
   EAttribute getEvent_Name();
 
   /**
-   * Returns the meta object for the reference '{@link eu.scape_project.pw.simulator.Event#getLeftSide <em>Left Side</em>}'.
+   * Returns the meta object for the containment reference '{@link eu.scape_project.pw.simulator.Event#getExpression <em>Expression</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Left Side</em>'.
-   * @see eu.scape_project.pw.simulator.Event#getLeftSide()
+   * @return the meta object for the containment reference '<em>Expression</em>'.
+   * @see eu.scape_project.pw.simulator.Event#getExpression()
    * @see #getEvent()
    * @generated
    */
-  EReference getEvent_LeftSide();
+  EReference getEvent_Expression();
 
   /**
-   * Returns the meta object for the attribute '{@link eu.scape_project.pw.simulator.Event#getRightSide <em>Right Side</em>}'.
+   * Returns the meta object for class '{@link eu.scape_project.pw.simulator.Expression <em>Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Expression</em>'.
+   * @see eu.scape_project.pw.simulator.Expression
+   * @generated
+   */
+  EClass getExpression();
+
+  /**
+   * Returns the meta object for class '{@link eu.scape_project.pw.simulator.RExpression <em>RExpression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>RExpression</em>'.
+   * @see eu.scape_project.pw.simulator.RExpression
+   * @generated
+   */
+  EClass getRExpression();
+
+  /**
+   * Returns the meta object for the attribute '{@link eu.scape_project.pw.simulator.RExpression#getNumber <em>Number</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Number</em>'.
+   * @see eu.scape_project.pw.simulator.RExpression#getNumber()
+   * @see #getRExpression()
+   * @generated
+   */
+  EAttribute getRExpression_Number();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link eu.scape_project.pw.simulator.RExpression#getExpression <em>Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Expression</em>'.
+   * @see eu.scape_project.pw.simulator.RExpression#getExpression()
+   * @see #getRExpression()
+   * @generated
+   */
+  EReference getRExpression_Expression();
+
+  /**
+   * Returns the meta object for class '{@link eu.scape_project.pw.simulator.OExpression <em>OExpression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>OExpression</em>'.
+   * @see eu.scape_project.pw.simulator.OExpression
+   * @generated
+   */
+  EClass getOExpression();
+
+  /**
+   * Returns the meta object for the attribute '{@link eu.scape_project.pw.simulator.OExpression#getLeftSide <em>Left Side</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Left Side</em>'.
+   * @see eu.scape_project.pw.simulator.OExpression#getLeftSide()
+   * @see #getOExpression()
+   * @generated
+   */
+  EAttribute getOExpression_LeftSide();
+
+  /**
+   * Returns the meta object for the attribute '{@link eu.scape_project.pw.simulator.OExpression#getRightSide <em>Right Side</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Right Side</em>'.
-   * @see eu.scape_project.pw.simulator.Event#getRightSide()
-   * @see #getEvent()
+   * @see eu.scape_project.pw.simulator.OExpression#getRightSide()
+   * @see #getOExpression()
    * @generated
    */
-  EAttribute getEvent_RightSide();
+  EAttribute getOExpression_RightSide();
+
+  /**
+   * Returns the meta object for class '{@link eu.scape_project.pw.simulator.PExpression <em>PExpression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>PExpression</em>'.
+   * @see eu.scape_project.pw.simulator.PExpression
+   * @generated
+   */
+  EClass getPExpression();
+
+  /**
+   * Returns the meta object for class '{@link eu.scape_project.pw.simulator.EExpression <em>EExpression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>EExpression</em>'.
+   * @see eu.scape_project.pw.simulator.EExpression
+   * @generated
+   */
+  EClass getEExpression();
+
+  /**
+   * Returns the meta object for class '{@link eu.scape_project.pw.simulator.MExpression <em>MExpression</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>MExpression</em>'.
+   * @see eu.scape_project.pw.simulator.MExpression
+   * @generated
+   */
+  EClass getMExpression();
 
   /**
    * Returns the meta object for class '{@link eu.scape_project.pw.simulator.Entity <em>Entity</em>}'.
@@ -561,15 +951,67 @@ public interface SimulatorPackage extends EPackage
   EAttribute getKeyValue_Key();
 
   /**
-   * Returns the meta object for the attribute '{@link eu.scape_project.pw.simulator.KeyValue#getValue <em>Value</em>}'.
+   * Returns the meta object for class '{@link eu.scape_project.pw.simulator.KeyValueInt <em>Key Value Int</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Key Value Int</em>'.
+   * @see eu.scape_project.pw.simulator.KeyValueInt
+   * @generated
+   */
+  EClass getKeyValueInt();
+
+  /**
+   * Returns the meta object for the attribute '{@link eu.scape_project.pw.simulator.KeyValueInt#getValue <em>Value</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Value</em>'.
-   * @see eu.scape_project.pw.simulator.KeyValue#getValue()
-   * @see #getKeyValue()
+   * @see eu.scape_project.pw.simulator.KeyValueInt#getValue()
+   * @see #getKeyValueInt()
    * @generated
    */
-  EAttribute getKeyValue_Value();
+  EAttribute getKeyValueInt_Value();
+
+  /**
+   * Returns the meta object for class '{@link eu.scape_project.pw.simulator.KeyValueString <em>Key Value String</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Key Value String</em>'.
+   * @see eu.scape_project.pw.simulator.KeyValueString
+   * @generated
+   */
+  EClass getKeyValueString();
+
+  /**
+   * Returns the meta object for the attribute '{@link eu.scape_project.pw.simulator.KeyValueString#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see eu.scape_project.pw.simulator.KeyValueString#getValue()
+   * @see #getKeyValueString()
+   * @generated
+   */
+  EAttribute getKeyValueString_Value();
+
+  /**
+   * Returns the meta object for class '{@link eu.scape_project.pw.simulator.KeyValueDecimal <em>Key Value Decimal</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Key Value Decimal</em>'.
+   * @see eu.scape_project.pw.simulator.KeyValueDecimal
+   * @generated
+   */
+  EClass getKeyValueDecimal();
+
+  /**
+   * Returns the meta object for the attribute '{@link eu.scape_project.pw.simulator.KeyValueDecimal#getValue <em>Value</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Value</em>'.
+   * @see eu.scape_project.pw.simulator.KeyValueDecimal#getValue()
+   * @see #getKeyValueDecimal()
+   * @generated
+   */
+  EAttribute getKeyValueDecimal_Value();
 
   /**
    * Returns the meta object for class '{@link eu.scape_project.pw.simulator.Scheduling <em>Scheduling</em>}'.
@@ -751,12 +1193,66 @@ public interface SimulatorPackage extends EPackage
     EAttribute EVENT__NAME = eINSTANCE.getEvent_Name();
 
     /**
-     * The meta object literal for the '<em><b>Left Side</b></em>' reference feature.
+     * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference EVENT__LEFT_SIDE = eINSTANCE.getEvent_LeftSide();
+    EReference EVENT__EXPRESSION = eINSTANCE.getEvent_Expression();
+
+    /**
+     * The meta object literal for the '{@link eu.scape_project.pw.simulator.impl.ExpressionImpl <em>Expression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see eu.scape_project.pw.simulator.impl.ExpressionImpl
+     * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getExpression()
+     * @generated
+     */
+    EClass EXPRESSION = eINSTANCE.getExpression();
+
+    /**
+     * The meta object literal for the '{@link eu.scape_project.pw.simulator.impl.RExpressionImpl <em>RExpression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see eu.scape_project.pw.simulator.impl.RExpressionImpl
+     * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getRExpression()
+     * @generated
+     */
+    EClass REXPRESSION = eINSTANCE.getRExpression();
+
+    /**
+     * The meta object literal for the '<em><b>Number</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute REXPRESSION__NUMBER = eINSTANCE.getRExpression_Number();
+
+    /**
+     * The meta object literal for the '<em><b>Expression</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference REXPRESSION__EXPRESSION = eINSTANCE.getRExpression_Expression();
+
+    /**
+     * The meta object literal for the '{@link eu.scape_project.pw.simulator.impl.OExpressionImpl <em>OExpression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see eu.scape_project.pw.simulator.impl.OExpressionImpl
+     * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getOExpression()
+     * @generated
+     */
+    EClass OEXPRESSION = eINSTANCE.getOExpression();
+
+    /**
+     * The meta object literal for the '<em><b>Left Side</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute OEXPRESSION__LEFT_SIDE = eINSTANCE.getOExpression_LeftSide();
 
     /**
      * The meta object literal for the '<em><b>Right Side</b></em>' attribute feature.
@@ -764,7 +1260,37 @@ public interface SimulatorPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute EVENT__RIGHT_SIDE = eINSTANCE.getEvent_RightSide();
+    EAttribute OEXPRESSION__RIGHT_SIDE = eINSTANCE.getOExpression_RightSide();
+
+    /**
+     * The meta object literal for the '{@link eu.scape_project.pw.simulator.impl.PExpressionImpl <em>PExpression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see eu.scape_project.pw.simulator.impl.PExpressionImpl
+     * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getPExpression()
+     * @generated
+     */
+    EClass PEXPRESSION = eINSTANCE.getPExpression();
+
+    /**
+     * The meta object literal for the '{@link eu.scape_project.pw.simulator.impl.EExpressionImpl <em>EExpression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see eu.scape_project.pw.simulator.impl.EExpressionImpl
+     * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getEExpression()
+     * @generated
+     */
+    EClass EEXPRESSION = eINSTANCE.getEExpression();
+
+    /**
+     * The meta object literal for the '{@link eu.scape_project.pw.simulator.impl.MExpressionImpl <em>MExpression</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see eu.scape_project.pw.simulator.impl.MExpressionImpl
+     * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getMExpression()
+     * @generated
+     */
+    EClass MEXPRESSION = eINSTANCE.getMExpression();
 
     /**
      * The meta object literal for the '{@link eu.scape_project.pw.simulator.impl.EntityImpl <em>Entity</em>}' class.
@@ -829,12 +1355,58 @@ public interface SimulatorPackage extends EPackage
     EAttribute KEY_VALUE__KEY = eINSTANCE.getKeyValue_Key();
 
     /**
+     * The meta object literal for the '{@link eu.scape_project.pw.simulator.impl.KeyValueIntImpl <em>Key Value Int</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see eu.scape_project.pw.simulator.impl.KeyValueIntImpl
+     * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getKeyValueInt()
+     * @generated
+     */
+    EClass KEY_VALUE_INT = eINSTANCE.getKeyValueInt();
+
+    /**
      * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute KEY_VALUE__VALUE = eINSTANCE.getKeyValue_Value();
+    EAttribute KEY_VALUE_INT__VALUE = eINSTANCE.getKeyValueInt_Value();
+
+    /**
+     * The meta object literal for the '{@link eu.scape_project.pw.simulator.impl.KeyValueStringImpl <em>Key Value String</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see eu.scape_project.pw.simulator.impl.KeyValueStringImpl
+     * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getKeyValueString()
+     * @generated
+     */
+    EClass KEY_VALUE_STRING = eINSTANCE.getKeyValueString();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute KEY_VALUE_STRING__VALUE = eINSTANCE.getKeyValueString_Value();
+
+    /**
+     * The meta object literal for the '{@link eu.scape_project.pw.simulator.impl.KeyValueDecimalImpl <em>Key Value Decimal</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see eu.scape_project.pw.simulator.impl.KeyValueDecimalImpl
+     * @see eu.scape_project.pw.simulator.impl.SimulatorPackageImpl#getKeyValueDecimal()
+     * @generated
+     */
+    EClass KEY_VALUE_DECIMAL = eINSTANCE.getKeyValueDecimal();
+
+    /**
+     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute KEY_VALUE_DECIMAL__VALUE = eINSTANCE.getKeyValueDecimal_Value();
 
     /**
      * The meta object literal for the '{@link eu.scape_project.pw.simulator.impl.SchedulingImpl <em>Scheduling</em>}' class.

@@ -4,10 +4,19 @@ package eu.scape_project.pw.simulator.impl;
 
 import eu.scape_project.pw.simulator.Collection;
 import eu.scape_project.pw.simulator.ConditionalScheduling;
+import eu.scape_project.pw.simulator.EExpression;
 import eu.scape_project.pw.simulator.Entity;
 import eu.scape_project.pw.simulator.Event;
 import eu.scape_project.pw.simulator.EventScheduling;
+import eu.scape_project.pw.simulator.Expression;
 import eu.scape_project.pw.simulator.KeyValue;
+import eu.scape_project.pw.simulator.KeyValueDecimal;
+import eu.scape_project.pw.simulator.KeyValueInt;
+import eu.scape_project.pw.simulator.KeyValueString;
+import eu.scape_project.pw.simulator.MExpression;
+import eu.scape_project.pw.simulator.OExpression;
+import eu.scape_project.pw.simulator.PExpression;
+import eu.scape_project.pw.simulator.RExpression;
 import eu.scape_project.pw.simulator.Scheduling;
 import eu.scape_project.pw.simulator.Simulation;
 import eu.scape_project.pw.simulator.SimulatorFactory;
@@ -47,6 +56,48 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass expressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass rExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass oExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass pExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass eExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass mExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass entityEClass = null;
 
   /**
@@ -62,6 +113,27 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
    * @generated
    */
   private EClass keyValueEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass keyValueIntEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass keyValueStringEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass keyValueDecimalEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -222,7 +294,7 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getEvent_LeftSide()
+  public EReference getEvent_Expression()
   {
     return (EReference)eventEClass.getEStructuralFeatures().get(1);
   }
@@ -232,9 +304,99 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getEvent_RightSide()
+  public EClass getExpression()
   {
-    return (EAttribute)eventEClass.getEStructuralFeatures().get(2);
+    return expressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getRExpression()
+  {
+    return rExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getRExpression_Number()
+  {
+    return (EAttribute)rExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getRExpression_Expression()
+  {
+    return (EReference)rExpressionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getOExpression()
+  {
+    return oExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getOExpression_LeftSide()
+  {
+    return (EAttribute)oExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getOExpression_RightSide()
+  {
+    return (EAttribute)oExpressionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getPExpression()
+  {
+    return pExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEExpression()
+  {
+    return eExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getMExpression()
+  {
+    return mExpressionEClass;
   }
 
   /**
@@ -312,9 +474,59 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getKeyValue_Value()
+  public EClass getKeyValueInt()
   {
-    return (EAttribute)keyValueEClass.getEStructuralFeatures().get(1);
+    return keyValueIntEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getKeyValueInt_Value()
+  {
+    return (EAttribute)keyValueIntEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getKeyValueString()
+  {
+    return keyValueStringEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getKeyValueString_Value()
+  {
+    return (EAttribute)keyValueStringEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getKeyValueDecimal()
+  {
+    return keyValueDecimalEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getKeyValueDecimal_Value()
+  {
+    return (EAttribute)keyValueDecimalEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -445,8 +657,23 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
 
     eventEClass = createEClass(EVENT);
     createEAttribute(eventEClass, EVENT__NAME);
-    createEReference(eventEClass, EVENT__LEFT_SIDE);
-    createEAttribute(eventEClass, EVENT__RIGHT_SIDE);
+    createEReference(eventEClass, EVENT__EXPRESSION);
+
+    expressionEClass = createEClass(EXPRESSION);
+
+    rExpressionEClass = createEClass(REXPRESSION);
+    createEAttribute(rExpressionEClass, REXPRESSION__NUMBER);
+    createEReference(rExpressionEClass, REXPRESSION__EXPRESSION);
+
+    oExpressionEClass = createEClass(OEXPRESSION);
+    createEAttribute(oExpressionEClass, OEXPRESSION__LEFT_SIDE);
+    createEAttribute(oExpressionEClass, OEXPRESSION__RIGHT_SIDE);
+
+    pExpressionEClass = createEClass(PEXPRESSION);
+
+    eExpressionEClass = createEClass(EEXPRESSION);
+
+    mExpressionEClass = createEClass(MEXPRESSION);
 
     entityEClass = createEClass(ENTITY);
 
@@ -457,7 +684,15 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
 
     keyValueEClass = createEClass(KEY_VALUE);
     createEAttribute(keyValueEClass, KEY_VALUE__KEY);
-    createEAttribute(keyValueEClass, KEY_VALUE__VALUE);
+
+    keyValueIntEClass = createEClass(KEY_VALUE_INT);
+    createEAttribute(keyValueIntEClass, KEY_VALUE_INT__VALUE);
+
+    keyValueStringEClass = createEClass(KEY_VALUE_STRING);
+    createEAttribute(keyValueStringEClass, KEY_VALUE_STRING__VALUE);
+
+    keyValueDecimalEClass = createEClass(KEY_VALUE_DECIMAL);
+    createEAttribute(keyValueDecimalEClass, KEY_VALUE_DECIMAL__VALUE);
 
     schedulingEClass = createEClass(SCHEDULING);
     createEReference(schedulingEClass, SCHEDULING__SCHEDULE);
@@ -501,7 +736,15 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    rExpressionEClass.getESuperTypes().add(this.getExpression());
+    oExpressionEClass.getESuperTypes().add(this.getExpression());
+    pExpressionEClass.getESuperTypes().add(this.getOExpression());
+    eExpressionEClass.getESuperTypes().add(this.getOExpression());
+    mExpressionEClass.getESuperTypes().add(this.getOExpression());
     collectionEClass.getESuperTypes().add(this.getEntity());
+    keyValueIntEClass.getESuperTypes().add(this.getKeyValue());
+    keyValueStringEClass.getESuperTypes().add(this.getKeyValue());
+    keyValueDecimalEClass.getESuperTypes().add(this.getKeyValue());
     eventSchedulingEClass.getESuperTypes().add(this.getScheduling());
     conditionalSchedulingEClass.getESuperTypes().add(this.getScheduling());
 
@@ -514,8 +757,23 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
 
     initEClass(eventEClass, Event.class, "Event", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getEvent_Name(), ecorePackage.getEString(), "name", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getEvent_LeftSide(), this.getKeyValue(), null, "leftSide", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getEvent_RightSide(), ecorePackage.getEString(), "rightSide", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getEvent_Expression(), this.getExpression(), null, "expression", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(rExpressionEClass, RExpression.class, "RExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getRExpression_Number(), ecorePackage.getEInt(), "number", null, 0, 1, RExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getRExpression_Expression(), this.getExpression(), null, "expression", null, 0, -1, RExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(oExpressionEClass, OExpression.class, "OExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getOExpression_LeftSide(), ecorePackage.getEString(), "leftSide", null, 0, 1, OExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getOExpression_RightSide(), ecorePackage.getEInt(), "rightSide", null, 0, 1, OExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(pExpressionEClass, PExpression.class, "PExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(eExpressionEClass, EExpression.class, "EExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(mExpressionEClass, MExpression.class, "MExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(entityEClass, Entity.class, "Entity", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -526,7 +784,15 @@ public class SimulatorPackageImpl extends EPackageImpl implements SimulatorPacka
 
     initEClass(keyValueEClass, KeyValue.class, "KeyValue", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getKeyValue_Key(), ecorePackage.getEString(), "key", null, 0, 1, KeyValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getKeyValue_Value(), ecorePackage.getEInt(), "value", null, 0, 1, KeyValue.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(keyValueIntEClass, KeyValueInt.class, "KeyValueInt", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getKeyValueInt_Value(), ecorePackage.getEInt(), "value", null, 0, 1, KeyValueInt.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(keyValueStringEClass, KeyValueString.class, "KeyValueString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getKeyValueString_Value(), ecorePackage.getEString(), "value", null, 0, 1, KeyValueString.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(keyValueDecimalEClass, KeyValueDecimal.class, "KeyValueDecimal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getKeyValueDecimal_Value(), ecorePackage.getEString(), "value", null, 0, 1, KeyValueDecimal.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(schedulingEClass, Scheduling.class, "Scheduling", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getScheduling_Schedule(), this.getEvent(), null, "schedule", null, 0, 1, Scheduling.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

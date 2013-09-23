@@ -26,7 +26,7 @@ public class SimulationState {
 		stateVariables.put(name, value);
 	}
 	
-	public Object getStateVariableValue(String name) {
+	public Object getStateVariable(String name) {
 		return stateVariables.get(name);
 	}
 }

@@ -8,19 +8,37 @@ import eu.scape_project.pw.simulator.Entity;
 import eu.scape_project.pw.simulator.Event;
 import eu.scape_project.pw.simulator.EventScheduling;
 import eu.scape_project.pw.simulator.KeyValue;
+import eu.scape_project.pw.simulator.KeyValueDecimal;
+import eu.scape_project.pw.simulator.KeyValueInt;
+import eu.scape_project.pw.simulator.KeyValueString;
 import eu.scape_project.pw.simulator.Scheduling;
 import eu.scape_project.pw.simulator.Simulation;
+import java.util.HashMap;
+import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.IFileSystemAccess;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
 @SuppressWarnings("all")
 public class InitializatorGenerator {
   private Resource res;
+  
+  private Map<String,String> types = new Function0<Map<String,String>>() {
+    public Map<String,String> apply() {
+      HashMap<String,String> _hashMap = new HashMap<String,String>();
+      return _hashMap;
+    }
+  }.apply();
+  
+  public String getVarType(final String name) {
+    String _get = this.types.get(name);
+    return _get;
+  }
   
   public void generateInitializator(final Resource resource, final IFileSystemAccess fsa) {
     this.res = resource;
@@ -167,19 +185,68 @@ public class InitializatorGenerator {
     }
     EList<KeyValue> _keyValues = col.getKeyValues();
     for (final KeyValue k : _keyValues) {
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("state.addStateVariable(\"");
-      String _plus_2 = (tempName + ".");
-      String _key = k.getKey();
-      String _plus_3 = (_plus_2 + _key);
-      _builder_1.append(_plus_3, "");
-      _builder_1.append("\" , ");
-      int _value = k.getValue();
-      _builder_1.append(_value, "");
-      _builder_1.append(");");
-      _builder_1.newLineIfNotEmpty();
-      String _plus_4 = (temp + _builder_1);
-      temp = _plus_4;
+      if ((k instanceof KeyValueInt)) {
+        KeyValueInt t = ((KeyValueInt) k);
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("state.addStateVariable(\"");
+        String _plus_2 = (tempName + ".");
+        String _key = k.getKey();
+        String _plus_3 = (_plus_2 + _key);
+        _builder_1.append(_plus_3, "");
+        _builder_1.append("\" ,");
+        int _value = t.getValue();
+        _builder_1.append(_value, "");
+        _builder_1.append(" );");
+        _builder_1.newLineIfNotEmpty();
+        String _plus_4 = (temp + _builder_1);
+        temp = _plus_4;
+        String _plus_5 = (tempName + ".");
+        String _key_1 = k.getKey();
+        String _plus_6 = (_plus_5 + _key_1);
+        this.types.put(_plus_6, "int");
+      } else {
+        if ((k instanceof KeyValueString)) {
+          KeyValueString t_1 = ((KeyValueString) k);
+          StringConcatenation _builder_2 = new StringConcatenation();
+          _builder_2.append("state.addStateVariable(\"");
+          String _plus_7 = (tempName + ".");
+          String _key_2 = k.getKey();
+          String _plus_8 = (_plus_7 + _key_2);
+          _builder_2.append(_plus_8, "");
+          _builder_2.append("\" ,\"");
+          String _value_1 = t_1.getValue();
+          _builder_2.append(_value_1, "");
+          _builder_2.append("\" );");
+          _builder_2.newLineIfNotEmpty();
+          String _plus_9 = (temp + _builder_2);
+          temp = _plus_9;
+          String _plus_10 = (tempName + ".");
+          String _key_3 = k.getKey();
+          String _plus_11 = (_plus_10 + _key_3);
+          this.types.put(_plus_11, "String");
+        } else {
+          if ((k instanceof KeyValueDecimal)) {
+            KeyValueDecimal t_2 = ((KeyValueDecimal) k);
+            StringConcatenation _builder_3 = new StringConcatenation();
+            _builder_3.append("state.addStateVariable(\"");
+            String _plus_12 = (tempName + ".");
+            String _key_4 = k.getKey();
+            String _plus_13 = (_plus_12 + _key_4);
+            _builder_3.append(_plus_13, "");
+            _builder_3.append("\" ,");
+            String _value_2 = t_2.getValue();
+            _builder_3.append(_value_2, "");
+            _builder_3.append(" );");
+            _builder_3.newLineIfNotEmpty();
+            String _plus_14 = (temp + _builder_3);
+            temp = _plus_14;
+            String _plus_15 = (tempName + ".");
+            String _key_5 = k.getKey();
+            String _plus_16 = (_plus_15 + _key_5);
+            this.types.put(_plus_16, "float");
+          }
+        }
+      }
     }
     EList<Collection> _subCollections = col.getSubCollections();
     boolean _equals_1 = Objects.equal(_subCollections, null);
@@ -189,8 +256,8 @@ public class InitializatorGenerator {
       EList<Collection> _subCollections_1 = col.getSubCollections();
       for (final Collection s : _subCollections_1) {
         Object _passEntity = this.passEntity(s, tempName);
-        String _plus_5 = (temp + _passEntity);
-        temp = _plus_5;
+        String _plus_17 = (temp + _passEntity);
+        temp = _plus_17;
       }
       return temp;
     }

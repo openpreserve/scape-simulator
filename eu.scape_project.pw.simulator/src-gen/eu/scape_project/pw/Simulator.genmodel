@@ -15,9 +15,20 @@
     </genClasses>
     <genClasses ecoreClass="Simulator.ecore#//Event">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//Event/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Simulator.ecore#//Event/leftSide"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//Event/rightSide"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Simulator.ecore#//Event/expression"/>
     </genClasses>
+    <genClasses ecoreClass="Simulator.ecore#//Expression"/>
+    <genClasses ecoreClass="Simulator.ecore#//RExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//RExpression/number"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Simulator.ecore#//RExpression/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Simulator.ecore#//OExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//OExpression/leftSide"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//OExpression/rightSide"/>
+    </genClasses>
+    <genClasses ecoreClass="Simulator.ecore#//PExpression"/>
+    <genClasses ecoreClass="Simulator.ecore#//EExpression"/>
+    <genClasses ecoreClass="Simulator.ecore#//MExpression"/>
     <genClasses ecoreClass="Simulator.ecore#//Entity"/>
     <genClasses ecoreClass="Simulator.ecore#//Collection">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//Collection/name"/>
@@ -26,7 +37,15 @@
     </genClasses>
     <genClasses ecoreClass="Simulator.ecore#//KeyValue">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//KeyValue/key"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//KeyValue/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Simulator.ecore#//KeyValueInt">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//KeyValueInt/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Simulator.ecore#//KeyValueString">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//KeyValueString/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Simulator.ecore#//KeyValueDecimal">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Simulator.ecore#//KeyValueDecimal/value"/>
     </genClasses>
     <genClasses ecoreClass="Simulator.ecore#//Scheduling">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Simulator.ecore#//Scheduling/schedule"/>

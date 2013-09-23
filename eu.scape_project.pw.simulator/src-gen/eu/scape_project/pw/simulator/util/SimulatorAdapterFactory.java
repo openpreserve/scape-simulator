@@ -85,6 +85,36 @@ public class SimulatorAdapterFactory extends AdapterFactoryImpl
         return createEventAdapter();
       }
       @Override
+      public Adapter caseExpression(Expression object)
+      {
+        return createExpressionAdapter();
+      }
+      @Override
+      public Adapter caseRExpression(RExpression object)
+      {
+        return createRExpressionAdapter();
+      }
+      @Override
+      public Adapter caseOExpression(OExpression object)
+      {
+        return createOExpressionAdapter();
+      }
+      @Override
+      public Adapter casePExpression(PExpression object)
+      {
+        return createPExpressionAdapter();
+      }
+      @Override
+      public Adapter caseEExpression(EExpression object)
+      {
+        return createEExpressionAdapter();
+      }
+      @Override
+      public Adapter caseMExpression(MExpression object)
+      {
+        return createMExpressionAdapter();
+      }
+      @Override
       public Adapter caseEntity(Entity object)
       {
         return createEntityAdapter();
@@ -98,6 +128,21 @@ public class SimulatorAdapterFactory extends AdapterFactoryImpl
       public Adapter caseKeyValue(KeyValue object)
       {
         return createKeyValueAdapter();
+      }
+      @Override
+      public Adapter caseKeyValueInt(KeyValueInt object)
+      {
+        return createKeyValueIntAdapter();
+      }
+      @Override
+      public Adapter caseKeyValueString(KeyValueString object)
+      {
+        return createKeyValueStringAdapter();
+      }
+      @Override
+      public Adapter caseKeyValueDecimal(KeyValueDecimal object)
+      {
+        return createKeyValueDecimalAdapter();
       }
       @Override
       public Adapter caseScheduling(Scheduling object)
@@ -167,6 +212,96 @@ public class SimulatorAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link eu.scape_project.pw.simulator.Expression <em>Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see eu.scape_project.pw.simulator.Expression
+   * @generated
+   */
+  public Adapter createExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link eu.scape_project.pw.simulator.RExpression <em>RExpression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see eu.scape_project.pw.simulator.RExpression
+   * @generated
+   */
+  public Adapter createRExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link eu.scape_project.pw.simulator.OExpression <em>OExpression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see eu.scape_project.pw.simulator.OExpression
+   * @generated
+   */
+  public Adapter createOExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link eu.scape_project.pw.simulator.PExpression <em>PExpression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see eu.scape_project.pw.simulator.PExpression
+   * @generated
+   */
+  public Adapter createPExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link eu.scape_project.pw.simulator.EExpression <em>EExpression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see eu.scape_project.pw.simulator.EExpression
+   * @generated
+   */
+  public Adapter createEExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link eu.scape_project.pw.simulator.MExpression <em>MExpression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see eu.scape_project.pw.simulator.MExpression
+   * @generated
+   */
+  public Adapter createMExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link eu.scape_project.pw.simulator.Entity <em>Entity</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -207,6 +342,51 @@ public class SimulatorAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createKeyValueAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link eu.scape_project.pw.simulator.KeyValueInt <em>Key Value Int</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see eu.scape_project.pw.simulator.KeyValueInt
+   * @generated
+   */
+  public Adapter createKeyValueIntAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link eu.scape_project.pw.simulator.KeyValueString <em>Key Value String</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see eu.scape_project.pw.simulator.KeyValueString
+   * @generated
+   */
+  public Adapter createKeyValueStringAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link eu.scape_project.pw.simulator.KeyValueDecimal <em>Key Value Decimal</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see eu.scape_project.pw.simulator.KeyValueDecimal
+   * @generated
+   */
+  public Adapter createKeyValueDecimalAdapter()
   {
     return null;
   }

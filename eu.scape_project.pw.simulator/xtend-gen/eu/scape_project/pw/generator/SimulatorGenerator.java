@@ -3,19 +3,26 @@
  */
 package eu.scape_project.pw.generator;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import eu.scape_project.pw.generator.InitializatorGenerator;
 import eu.scape_project.pw.simulator.ConditionalScheduling;
+import eu.scape_project.pw.simulator.EExpression;
 import eu.scape_project.pw.simulator.Event;
+import eu.scape_project.pw.simulator.Expression;
+import eu.scape_project.pw.simulator.MExpression;
+import eu.scape_project.pw.simulator.OExpression;
+import eu.scape_project.pw.simulator.PExpression;
+import eu.scape_project.pw.simulator.RExpression;
 import eu.scape_project.pw.simulator.Simulation;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
-import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 
@@ -157,7 +164,10 @@ public class SimulatorGenerator implements IGenerator {
     _builder.append("public void execute(SimulationState state) {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.newLine();
+    Expression _expression = e.getExpression();
+    String _compileExpression = this.compileExpression(_expression);
+    _builder.append(_compileExpression, "		");
+    _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("}");
     _builder.newLine();
@@ -167,8 +177,253 @@ public class SimulatorGenerator implements IGenerator {
     return _builder;
   }
   
-  public Object compileExpression(final XExpression e) {
-    return null;
+  public String compileExpression(final Expression e) {
+    String _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (e instanceof RExpression) {
+        final RExpression _rExpression = (RExpression)e;
+        _matched=true;
+        String _compileRExpression = this.compileRExpression(_rExpression);
+        _switchResult = _compileRExpression;
+      }
+    }
+    if (!_matched) {
+      if (e instanceof OExpression) {
+        final OExpression _oExpression = (OExpression)e;
+        _matched=true;
+        String _compileOExpression = this.compileOExpression(_oExpression);
+        _switchResult = _compileOExpression;
+      }
+    }
+    return _switchResult;
+  }
+  
+  public String compileRExpression(final RExpression r) {
+    String _xblockexpression = null;
+    {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("for (int i=0; i<");
+      int _number = r.getNumber();
+      String _plus = (_builder.toString() + Integer.valueOf(_number));
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append(";) {");
+      _builder_1.newLine();
+      String temp = (_plus + _builder_1);
+      EList<Expression> _expression = r.getExpression();
+      for (final Expression e : _expression) {
+        Object _compileExpression = this.compileExpression(e);
+        String _plus_1 = (temp + _compileExpression);
+        temp = _plus_1;
+      }
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("}");
+      String _plus_2 = (temp + _builder_2);
+      String _temp = temp = _plus_2;
+      _xblockexpression = (_temp);
+    }
+    return _xblockexpression;
+  }
+  
+  public String compileOExpression(final OExpression o) {
+    String _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (o instanceof PExpression) {
+        final PExpression _pExpression = (PExpression)o;
+        _matched=true;
+        String _compilePExpression = this.compilePExpression(_pExpression);
+        _switchResult = _compilePExpression;
+      }
+    }
+    if (!_matched) {
+      if (o instanceof MExpression) {
+        final MExpression _mExpression = (MExpression)o;
+        _matched=true;
+        String _compileMExpression = this.compileMExpression(_mExpression);
+        _switchResult = _compileMExpression;
+      }
+    }
+    if (!_matched) {
+      if (o instanceof EExpression) {
+        final EExpression _eExpression = (EExpression)o;
+        _matched=true;
+        String _compileEExpression = this.compileEExpression(_eExpression);
+        _switchResult = _compileEExpression;
+      }
+    }
+    return _switchResult;
+  }
+  
+  public String compilePExpression(final PExpression p) {
+    String _xblockexpression = null;
+    {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("state.addStateVariable(\"");
+      String temp = _builder.toString();
+      String _leftSide = p.getLeftSide();
+      String _plus = (temp + _leftSide);
+      temp = _plus;
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("\",");
+      String _plus_1 = (temp + _builder_1);
+      temp = _plus_1;
+      String _leftSide_1 = p.getLeftSide();
+      String _varType = this.iGenerator.getVarType(_leftSide_1);
+      boolean _equals = Objects.equal(_varType, "int");
+      if (_equals) {
+        StringConcatenation _builder_2 = new StringConcatenation();
+        _builder_2.append("((Integer)state.getStateVariable(\"");
+        String _plus_2 = (temp + _builder_2);
+        String _leftSide_2 = p.getLeftSide();
+        String _plus_3 = (_plus_2 + _leftSide_2);
+        StringConcatenation _builder_3 = new StringConcatenation();
+        _builder_3.append("\")).intValue()");
+        String _plus_4 = (_plus_3 + _builder_3);
+        temp = _plus_4;
+      } else {
+        String _leftSide_3 = p.getLeftSide();
+        String _varType_1 = this.iGenerator.getVarType(_leftSide_3);
+        boolean _equals_1 = Objects.equal(_varType_1, "float");
+        if (_equals_1) {
+          StringConcatenation _builder_4 = new StringConcatenation();
+          _builder_4.append("((Double)state.getStateVariable(\"");
+          String _plus_5 = (temp + _builder_4);
+          String _leftSide_4 = p.getLeftSide();
+          String _plus_6 = (_plus_5 + _leftSide_4);
+          StringConcatenation _builder_5 = new StringConcatenation();
+          _builder_5.append("\")).doubleValue()");
+          String _plus_7 = (_plus_6 + _builder_5);
+          temp = _plus_7;
+        } else {
+          String _leftSide_5 = p.getLeftSide();
+          String _varType_2 = this.iGenerator.getVarType(_leftSide_5);
+          boolean _equals_2 = Objects.equal(_varType_2, "String");
+          if (_equals_2) {
+            StringConcatenation _builder_6 = new StringConcatenation();
+            _builder_6.append("((String)state.getStateVariable(\"");
+            String _plus_8 = (temp + _builder_6);
+            String _leftSide_6 = p.getLeftSide();
+            String _plus_9 = (_plus_8 + _leftSide_6);
+            StringConcatenation _builder_7 = new StringConcatenation();
+            _builder_7.append("\"))");
+            String _plus_10 = (_plus_9 + _builder_7);
+            temp = _plus_10;
+          }
+        }
+      }
+      StringConcatenation _builder_8 = new StringConcatenation();
+      _builder_8.append("+");
+      String _plus_11 = (temp + _builder_8);
+      int _rightSide = p.getRightSide();
+      String _string = Integer.valueOf(_rightSide).toString();
+      String _plus_12 = (_plus_11 + _string);
+      StringConcatenation _builder_9 = new StringConcatenation();
+      _builder_9.append(");");
+      String _plus_13 = (_plus_12 + _builder_9);
+      String _plus_14 = (_plus_13 + "\n");
+      temp = _plus_14;
+      _xblockexpression = (temp);
+    }
+    return _xblockexpression;
+  }
+  
+  public String compileMExpression(final MExpression p) {
+    String _xblockexpression = null;
+    {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("state.addStateVariable(\"");
+      String temp = _builder.toString();
+      String _leftSide = p.getLeftSide();
+      String _plus = (temp + _leftSide);
+      temp = _plus;
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("\",");
+      String _plus_1 = (temp + _builder_1);
+      temp = _plus_1;
+      String _leftSide_1 = p.getLeftSide();
+      String _varType = this.iGenerator.getVarType(_leftSide_1);
+      boolean _equals = Objects.equal(_varType, "int");
+      if (_equals) {
+        StringConcatenation _builder_2 = new StringConcatenation();
+        _builder_2.append("((Integer)state.getStateVariable(\"");
+        String _plus_2 = (temp + _builder_2);
+        String _leftSide_2 = p.getLeftSide();
+        String _plus_3 = (_plus_2 + _leftSide_2);
+        StringConcatenation _builder_3 = new StringConcatenation();
+        _builder_3.append("\")).intValue()");
+        String _plus_4 = (_plus_3 + _builder_3);
+        temp = _plus_4;
+      } else {
+        String _leftSide_3 = p.getLeftSide();
+        String _varType_1 = this.iGenerator.getVarType(_leftSide_3);
+        boolean _equals_1 = Objects.equal(_varType_1, "float");
+        if (_equals_1) {
+          StringConcatenation _builder_4 = new StringConcatenation();
+          _builder_4.append("((Double)state.getStateVariable(\"");
+          String _plus_5 = (temp + _builder_4);
+          String _leftSide_4 = p.getLeftSide();
+          String _plus_6 = (_plus_5 + _leftSide_4);
+          StringConcatenation _builder_5 = new StringConcatenation();
+          _builder_5.append("\")).doubleValue()");
+          String _plus_7 = (_plus_6 + _builder_5);
+          temp = _plus_7;
+        } else {
+          String _leftSide_5 = p.getLeftSide();
+          String _varType_2 = this.iGenerator.getVarType(_leftSide_5);
+          boolean _equals_2 = Objects.equal(_varType_2, "String");
+          if (_equals_2) {
+            StringConcatenation _builder_6 = new StringConcatenation();
+            _builder_6.append("((String)state.getStateVariable(\"");
+            String _plus_8 = (temp + _builder_6);
+            String _leftSide_6 = p.getLeftSide();
+            String _plus_9 = (_plus_8 + _leftSide_6);
+            StringConcatenation _builder_7 = new StringConcatenation();
+            _builder_7.append("\"))");
+            String _plus_10 = (_plus_9 + _builder_7);
+            temp = _plus_10;
+          }
+        }
+      }
+      StringConcatenation _builder_8 = new StringConcatenation();
+      _builder_8.append("-");
+      String _plus_11 = (temp + _builder_8);
+      int _rightSide = p.getRightSide();
+      String _string = Integer.valueOf(_rightSide).toString();
+      String _plus_12 = (_plus_11 + _string);
+      StringConcatenation _builder_9 = new StringConcatenation();
+      _builder_9.append(");");
+      String _plus_13 = (_plus_12 + _builder_9);
+      String _plus_14 = (_plus_13 + "\n");
+      temp = _plus_14;
+      _xblockexpression = (temp);
+    }
+    return _xblockexpression;
+  }
+  
+  public String compileEExpression(final EExpression p) {
+    String _xblockexpression = null;
+    {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("state.addStateVariable(\"");
+      String temp = _builder.toString();
+      String _leftSide = p.getLeftSide();
+      String _plus = (temp + _leftSide);
+      temp = _plus;
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("\",");
+      String _plus_1 = (temp + _builder_1);
+      temp = _plus_1;
+      int _rightSide = p.getRightSide();
+      String _string = Integer.valueOf(_rightSide).toString();
+      String _plus_2 = (temp + _string);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append(");");
+      String _plus_3 = (_plus_2 + _builder_2);
+      temp = _plus_3;
+      _xblockexpression = (temp);
+    }
+    return _xblockexpression;
   }
   
   public CharSequence compileConditionalScheduling(final ConditionalScheduling e) {

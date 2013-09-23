@@ -41,6 +41,60 @@ public interface SimulatorFactory extends EFactory
   Event createEvent();
 
   /**
+   * Returns a new object of class '<em>Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Expression</em>'.
+   * @generated
+   */
+  Expression createExpression();
+
+  /**
+   * Returns a new object of class '<em>RExpression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>RExpression</em>'.
+   * @generated
+   */
+  RExpression createRExpression();
+
+  /**
+   * Returns a new object of class '<em>OExpression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>OExpression</em>'.
+   * @generated
+   */
+  OExpression createOExpression();
+
+  /**
+   * Returns a new object of class '<em>PExpression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>PExpression</em>'.
+   * @generated
+   */
+  PExpression createPExpression();
+
+  /**
+   * Returns a new object of class '<em>EExpression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>EExpression</em>'.
+   * @generated
+   */
+  EExpression createEExpression();
+
+  /**
+   * Returns a new object of class '<em>MExpression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>MExpression</em>'.
+   * @generated
+   */
+  MExpression createMExpression();
+
+  /**
    * Returns a new object of class '<em>Entity</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -66,6 +120,33 @@ public interface SimulatorFactory extends EFactory
    * @generated
    */
   KeyValue createKeyValue();
+
+  /**
+   * Returns a new object of class '<em>Key Value Int</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Key Value Int</em>'.
+   * @generated
+   */
+  KeyValueInt createKeyValueInt();
+
+  /**
+   * Returns a new object of class '<em>Key Value String</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Key Value String</em>'.
+   * @generated
+   */
+  KeyValueString createKeyValueString();
+
+  /**
+   * Returns a new object of class '<em>Key Value Decimal</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Key Value Decimal</em>'.
+   * @generated
+   */
+  KeyValueDecimal createKeyValueDecimal();
 
   /**
    * Returns a new object of class '<em>Scheduling</em>'.

@@ -4,13 +4,23 @@ import eu.scape_project.pw.simulator.Collection
 import eu.scape_project.pw.simulator.ConditionalScheduling
 import eu.scape_project.pw.simulator.EventScheduling
 import eu.scape_project.pw.simulator.KeyValue
+import eu.scape_project.pw.simulator.KeyValueDecimal
+import eu.scape_project.pw.simulator.KeyValueInt
+import eu.scape_project.pw.simulator.KeyValueString
 import eu.scape_project.pw.simulator.Simulation
+import java.util.HashMap
+import java.util.Map
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IFileSystemAccess
 
 class InitializatorGenerator {
 	
 	Resource res;
+	Map<String, String> types = new HashMap<String,String>(); 
+	
+	def getVarType(String name) {
+		types.get(name)
+	}
 	
 	def generateInitializator(Resource resource, IFileSystemAccess fsa) {
 		res = resource;
@@ -74,10 +84,28 @@ class InitializatorGenerator {
 			tempName = name + "." + col.name
 		}
 		for (k : col.keyValues) {
-			temp = temp + 
-			'''
-				state.addStateVariable("«tempName+"."+k.key»" , «k.value»);
-			'''
+			if (k instanceof KeyValueInt) {
+				var t = k as KeyValueInt
+				temp = temp + 
+				'''
+					state.addStateVariable("«tempName+"."+k.key»" ,«t.value» );
+				'''
+				types.put(tempName+"."+k.key, "int")
+			}else if (k instanceof KeyValueString) {
+				var t = k as KeyValueString
+				temp = temp + 
+				'''
+					state.addStateVariable("«tempName+"."+k.key»" ,"«t.value»" );
+				'''
+				types.put(tempName+"."+k.key, "String")
+			}else if (k instanceof KeyValueDecimal) {
+				var t = k as KeyValueDecimal
+				temp = temp + 
+				'''
+					state.addStateVariable("«tempName+"."+k.key»" ,«t.value» );
+				'''
+				types.put(tempName+"."+k.key, "float")
+			}
 		} 
 			
 		if (col.subCollections==null) {

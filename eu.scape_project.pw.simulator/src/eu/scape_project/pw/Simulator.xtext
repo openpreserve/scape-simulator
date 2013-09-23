@@ -11,10 +11,26 @@ Simulation :
 ;
 
 Event :
-	'Event' name=ValidID '{'
-		(leftSide=[KeyValue] "=" rightSide=ID)? 
+	'event' name=ValidID '{'
+		expression=Expression
+	'}'
+;
+
+Expression: RExpression | OExpression; 
+
+RExpression : 
+	'repeat' number=INT '{'
+		(expression+=Expression)+
 	'}' 
 ;
+
+OExpression : PExpression | EExpression | MExpression;
+
+PExpression : leftSide=Identifier '+=' rightSide=INT;
+EExpression : leftSide=Identifier '=' rightSide=INT;
+MExpression : leftSide=Identifier '-=' rightSide=INT;
+
+Identifier : ID ('.' ID) * ;
 
 Entity : Collection ; 
 
@@ -27,9 +43,11 @@ Collection :
 	'}' 
 ;
 	
-KeyValue :
-	key=ID ':' value= INT | DECIMAL | STRING 
-;
+KeyValue : KeyValueInt | KeyValueString | KeyValueDecimal;
+
+KeyValueInt : key=ID ':' value=INT;
+KeyValueString :key=ID ':' value=STRING;
+KeyValueDecimal:key=ID ':' value=DECIMAL;
 
 Scheduling: EventScheduling | ConditionalScheduling;
 
