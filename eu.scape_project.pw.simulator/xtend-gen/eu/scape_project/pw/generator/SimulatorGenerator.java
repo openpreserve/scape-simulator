@@ -207,7 +207,7 @@ public class SimulatorGenerator implements IGenerator {
       int _number = r.getNumber();
       String _plus = (_builder.toString() + Integer.valueOf(_number));
       StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append(";) {");
+      _builder_1.append("; i++) {");
       _builder_1.newLine();
       String temp = (_plus + _builder_1);
       EList<Expression> _expression = r.getExpression();

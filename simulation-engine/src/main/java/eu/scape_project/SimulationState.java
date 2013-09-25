@@ -1,6 +1,8 @@
 package eu.scape_project;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class SimulationState {
@@ -29,4 +31,10 @@ public class SimulationState {
 	public Object getStateVariable(String name) {
 		return stateVariables.get(name);
 	}
+	
+	public Iterator getIterator() {
+		return Collections.unmodifiableMap(stateVariables).entrySet().iterator();
+	}
+	
+	
 }

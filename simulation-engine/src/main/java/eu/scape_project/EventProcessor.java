@@ -14,13 +14,20 @@ public class EventProcessor {
 	
 	private SimulationState state;
 	
-	public EventProcessor() { }
+	private Recorder recorder;
+	
+	public EventProcessor() { 
+		recorder = new Recorder();
+	}
 	
 	
 	public void startSimulation() {
 		
 		while (!eventContainer.isEmpty()){
 			IEvent event = eventContainer.getNextEvent();
+			if (state.getTime() != event.getScheduleTime()) {
+				recorder.record(state);
+			}
 			state.setTime(event.getScheduleTime());
 			event.execute(state);
 			List<IEventObserver> tmp = eOContainer.get(event.getName());
@@ -30,7 +37,7 @@ public class EventProcessor {
 				}
 			}
 		}
-		
+		recorder.dump();
 	}
 
 

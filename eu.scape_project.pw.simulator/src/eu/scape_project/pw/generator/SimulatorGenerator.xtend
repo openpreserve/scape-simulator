@@ -105,7 +105,7 @@ class SimulatorGenerator implements IGenerator {
 		
 		var temp=
 			'''
-				for (int i=0; i<''' + r.number + ''';) {
+				for (int i=0; i<''' + r.number + '''; i++) {
 			'''
 		for (e:r.expression) {
 			temp = temp + compileExpression(e)

@@ -39,4 +39,8 @@ public class EventContainer {
 		return events.isEmpty();
 		
 	}
+	
+	public int size() {
+		return events.size();
+	}
 }
