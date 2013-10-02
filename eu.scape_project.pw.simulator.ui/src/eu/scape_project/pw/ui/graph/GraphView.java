@@ -14,8 +14,6 @@ public class GraphView extends ViewPart {
        label.setText("Hello Simulator");
     }
     public void setFocus() {
-       // set focus to my widget.  For a label, this doesn't
-       // make much sense, but for more complex sets of widgets
-       // you would decide which one gets the focus.
+
     }
  }
