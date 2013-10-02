@@ -4,12 +4,12 @@
 
   <parent>
     <relativePath>../eu.scape_project.pw.simulator.releng/pom.xml</relativePath>
-    <groupId>eu.scape_project.pw.simulator</groupId>
+    <groupId>eu.scape-project.pw.simulator</groupId>
     <artifactId>parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>eu.scape_project.pw.simulator</artifactId>
+  <artifactId>eu.scape-project.pw.simulator</artifactId>
   <packaging>eclipse-plugin</packaging>
 
   <name>Simulator core language services</name>

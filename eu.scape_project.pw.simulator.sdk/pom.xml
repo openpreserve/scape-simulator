@@ -4,12 +4,12 @@
 
   <parent>
     <relativePath>../eu.scape_project.pw.simulator.releng/pom.xml</relativePath>
-    <groupId>eu.scape_project.pw.simulator</groupId>
+    <groupId>eu.scape-project.pw.simulator</groupId>
     <artifactId>parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>eu.scape_project.pw.simulator.sdk</artifactId>
+  <artifactId>eu.scape-project.pw.simulator.sdk</artifactId>
   <packaging>eclipse-feature</packaging>
 
   <name>Simulator example feature</name>
