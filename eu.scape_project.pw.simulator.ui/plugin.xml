@@ -319,5 +319,18 @@
             extensions="sim">
     </provider>
   </extension>
+  
+  <extension point="org.eclipse.ui.views">
+  		<category
+			name="Scape Simulator"
+			id="eu.scape_project.pw">
+		</category>
+		<view
+			name="Simulator View"
+			category="eu.scape_project.pw"
+			class="eu.scape_project.pw.ui.graph.GraphView"
+			id="eu.scape_project.pw.Simulator">
+		</view>
+	</extension>
 
 </plugin>
