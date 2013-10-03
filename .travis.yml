@@ -5,7 +5,7 @@ jdk:
   - openjdk6
 
 install:
-  - cd ./simulator-engine
+  - cd ./simulation-engine
   - mvn install -DskipTests=true
   - mvn test
   
