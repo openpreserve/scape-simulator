@@ -15,6 +15,9 @@
   </modules>
 
   <properties>
+		<jdk.source.version>1.6</jdk.source.version>
+		<jdk.target.version>1.6</jdk.target.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <tycho-version>0.15.0</tycho-version>
     <!-- this is only required if you use the eclipselabs unittesting plugin; remove otherwise -->
     <eclipselabs-site>http://xtext-utils.eclipselabs.org.codespot.com/git.distribution/releases/unittesting-0.9.x</eclipselabs-site>
