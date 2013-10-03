@@ -11,7 +11,7 @@
     <module>../eu.scape_project.pw.simulator.tests</module>
     <module>../eu.scape_project.pw.simulator.sdk</module>
     <module>../eu.scape_project.pw.simulator.updatesite</module>
-    <module>../eu.scape_project.pw.simulator.simulation-engine</module>
+    <module>../simulation-engine</module>
   </modules>
 
   <properties>
