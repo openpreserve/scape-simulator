@@ -10,7 +10,7 @@
   </parent>
 
   <artifactId>eu.scape-project.pw.simulator.sdk</artifactId>
-  <packaging>eclipse-feature</packaging>
+  <!--<packaging>eclipse-feature</packaging>-->
 
   <name>Simulator example feature</name>
 </project>

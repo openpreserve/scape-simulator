@@ -10,7 +10,7 @@
   </parent>
 
   <artifactId>eu.scape-project.pw.simulator.updatesite</artifactId>
-  <packaging>eclipse-repository</packaging>
+  <!-- <packaging>eclipse-repository</packaging>-->
 
   <name>Simulator Update Site</name>
 </project>

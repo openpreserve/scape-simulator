@@ -4,7 +4,7 @@
     editorDirectory="/eu.scape_project.pw.simulator.editor/src" modelPluginID="eu.scape_project.pw.simulator"
     forceOverwrite="true" modelName="Simulator" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="eu.scape_project.pw.simulator.edit"
-    editorPluginID="eu.scape_project.pw.simulator.editor" runtimeVersion="2.8">
+    editorPluginID="eu.scape_project.pw.simulator.editor" runtimeVersion="2.9">
   <genPackages prefix="Simulator" basePackage="eu.scape_project.pw" disposableProviderFactory="true"
       ecorePackage="Simulator.ecore#/">
     <genClasses ecoreClass="Simulator.ecore#//Simulation">

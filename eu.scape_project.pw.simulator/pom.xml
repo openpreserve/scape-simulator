@@ -10,7 +10,7 @@
   </parent>
 
   <artifactId>eu.scape-project.pw.simulator</artifactId>
-  <packaging>eclipse-plugin</packaging>
+  <!--<packaging>eclipse-plugin</packaging>-->
 
   <name>Simulator core language services</name>
 </project>

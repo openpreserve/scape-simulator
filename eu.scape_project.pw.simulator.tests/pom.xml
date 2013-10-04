@@ -10,7 +10,7 @@
   </parent>
 
   <artifactId>eu.scape-project.pw.simulator.tests</artifactId>
-  <packaging>eclipse-test-plugin</packaging>
+  <!--<packaging>eclipse-test-plugin</packaging>-->
 
   <name>Simulator tests</name>
   

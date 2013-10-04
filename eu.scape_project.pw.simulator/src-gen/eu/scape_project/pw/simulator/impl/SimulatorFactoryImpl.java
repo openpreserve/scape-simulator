@@ -30,7 +30,7 @@ public class SimulatorFactoryImpl extends EFactoryImpl implements SimulatorFacto
   {
     try
     {
-      SimulatorFactory theSimulatorFactory = (SimulatorFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.scape_project.eu/pw/Simulator"); 
+      SimulatorFactory theSimulatorFactory = (SimulatorFactory)EPackage.Registry.INSTANCE.getEFactory(SimulatorPackage.eNS_URI);
       if (theSimulatorFactory != null)
       {
         return theSimulatorFactory;
