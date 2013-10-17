@@ -30,7 +30,7 @@ public class InitializatorGenerator {
   
   private Map<String,String> types = new Function0<Map<String,String>>() {
     public Map<String,String> apply() {
-      HashMap<String,String> _hashMap = new HashMap<String, String>();
+      HashMap<String,String> _hashMap = new HashMap<String,String>();
       return _hashMap;
     }
   }.apply();
