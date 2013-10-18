@@ -329,7 +329,7 @@
 			name="Simulator View"
 			category="eu.scape_project.pw"
 			class="eu.scape_project.pw.ui.graph.GraphView"
-			id="eu.scape_project.pw.Simulator">
+			id="eu.scape_project.pw.Simulator.view">
 		</view>
 	</extension>
 

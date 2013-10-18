@@ -4,12 +4,12 @@
 
   <parent>
     <relativePath>../eu.scape_project.pw.simulator.releng/pom.xml</relativePath>
-    <groupId>eu.scape-project.pw.simulator</groupId>
+    <groupId>eu.scape_project.pw.simulator</groupId>
     <artifactId>parent</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
 
-  <artifactId>eu.scape-project.pw.simulator.updatesite</artifactId>
+  <artifactId>eu.scape_project.pw.simulator.updatesite</artifactId>
   <!-- <packaging>eclipse-repository</packaging>-->
 
   <name>Simulator Update Site</name>

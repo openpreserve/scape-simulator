@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
   <modelVersion>4.0.0</modelVersion>
-  <groupId>eu.scape-project.pw.simulator</groupId>
+  <groupId>eu.scape_project.pw.simulator</groupId>
   <artifactId>parent</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
@@ -25,9 +25,9 @@
 
   <repositories>
     <repository>
-      <id>juno</id>
+      <id>kepler</id>
       <layout>p2</layout>
-      <url>http://download.eclipse.org/releases/juno</url>
+      <url>http://download.eclipse.org/releases/kepler</url>
     </repository>
 
     <!-- this is only required if you use the eclipselabs unittesting plugin; remove otherwise -->
