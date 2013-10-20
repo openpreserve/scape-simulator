@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<plugin>
+
+    <extension
+            point="org.eclipse.ui.editors">
+        <editor
+            class="eu.scape_project.pw.ui.SimulatorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="sim"
+            id="eu.scape_project.pw.Simulator"
+            name="Simulator Editor">
+        </editor>
+    </extension>
+    <extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="eu.scape_project.pw.ui.SimulatorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="eu.scape_project.pw.Simulator.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
+            class="eu.scape_project.pw.ui.SimulatorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="eu.scape_project.pw.Simulator.validate">
+         <activeWhen>
+            <reference
+                    definitionId="eu.scape_project.pw.Simulator.Editor.opened">
+            </reference>
+         </activeWhen>
+      </handler>
+    </extension>
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="eu.scape_project.pw.Simulator.Editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="eu.scape_project.pw.Simulator" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            class="eu.scape_project.pw.ui.SimulatorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="eu.scape_project.pw.Simulator"
+            name="Simulator">
+            <keywordReference id="eu.scape_project.pw.ui.keyword_Simulator"/>
+        </page>
+        <page
+            category="eu.scape_project.pw.Simulator"
+            class="eu.scape_project.pw.ui.SimulatorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="eu.scape_project.pw.Simulator.coloring"
+            name="Syntax Coloring">
+            <keywordReference id="eu.scape_project.pw.ui.keyword_Simulator"/>
+        </page>
+        <page
+            category="eu.scape_project.pw.Simulator"
+            class="eu.scape_project.pw.ui.SimulatorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="eu.scape_project.pw.Simulator.templates"
+            name="Templates">
+            <keywordReference id="eu.scape_project.pw.ui.keyword_Simulator"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            class="eu.scape_project.pw.ui.SimulatorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="eu.scape_project.pw.Simulator"
+            name="Simulator">
+            <keywordReference id="eu.scape_project.pw.ui.keyword_Simulator"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="eu.scape_project.pw.ui.keyword_Simulator"
+            label="Simulator"/>
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="eu.scape_project.pw.Simulator.validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+             <command
+                 commandId="eu.scape_project.pw.Simulator.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="eu.scape_project.pw.Simulator.Editor.opened">
+                </reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="eu.scape_project.pw.Simulator.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="eu.scape_project.pw.ui.SimulatorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="eu.scape_project.pw.Simulator.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>   
+
+<!-- adding resource factories -->
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="eu.scape_project.pw.ui.SimulatorExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="sim">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="eu.scape_project.pw.ui.SimulatorExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="sim">
+        </resourceServiceProvider>
+    </extension>
+
+
+    <!-- marker definitions for eu.scape_project.pw.Simulator -->
+    <extension
+            id="simulator.check.fast"
+            name="Simulator Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="simulator.check.normal"
+            name="Simulator Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="simulator.check.expensive"
+            name="Simulator Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
+
+   <extension
+         point="org.eclipse.xtext.builder.participant">
+      <participant
+            class="eu.scape_project.pw.ui.SimulatorExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
+      </participant>
+   </extension>
+   <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            category="eu.scape_project.pw.Simulator"
+            class="eu.scape_project.pw.ui.SimulatorExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            id="eu.scape_project.pw.Simulator.compiler.preferencePage"
+            name="Compiler">
+            <keywordReference id="eu.scape_project.pw.ui.keyword_Simulator"/>
+        </page>
+    </extension>
+    <extension
+            point="org.eclipse.ui.propertyPages">
+        <page
+            category="eu.scape_project.pw.Simulator"
+            class="eu.scape_project.pw.ui.SimulatorExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
+            id="eu.scape_project.pw.Simulator.compiler.propertyPage"
+            name="Compiler">
+            <keywordReference id="eu.scape_project.pw.ui.keyword_Simulator"/>
+            <enabledWhen>
+	            <adapt type="org.eclipse.core.resources.IProject"/>
+			</enabledWhen>
+	        <filter name="projectNature" value="org.eclipse.xtext.ui.shared.xtextNature"/>
+        </page>
+    </extension>
+
+	<!-- Quick Outline -->
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler 
+			class="eu.scape_project.pw.ui.SimulatorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.outline.quickoutline.ShowQuickOutlineActionHandler"
+			commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline">
+			<activeWhen>
+				<reference
+					definitionId="eu.scape_project.pw.Simulator.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+	<extension
+		point="org.eclipse.ui.commands">
+		<command
+			description="Open the quick outline."
+			id="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+			name="Quick Outline">
+		</command>
+	</extension>
+	<extension point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.editor.outline.QuickOutline"
+				style="push"
+				tooltip="Open Quick Outline">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="eu.scape_project.pw.Simulator.Editor.opened"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+    <!-- quickfix marker resolution generator for eu.scape_project.pw.Simulator -->
+    <extension
+            point="org.eclipse.ui.ide.markerResolution">
+        <markerResolutionGenerator
+            class="eu.scape_project.pw.ui.SimulatorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="eu.scape_project.pw.ui.simulator.check.fast">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="eu.scape_project.pw.ui.SimulatorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="eu.scape_project.pw.ui.simulator.check.normal">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+        <markerResolutionGenerator
+            class="eu.scape_project.pw.ui.SimulatorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator"
+            markerType="eu.scape_project.pw.ui.simulator.check.expensive">
+            <attribute
+                name="FIXABLE_KEY"
+                value="true">
+            </attribute>
+        </markerResolutionGenerator>
+    </extension>
+   	<!-- Rename Refactoring -->
+	<extension point="org.eclipse.ui.handlers">
+		<handler 
+			class="eu.scape_project.pw.ui.SimulatorExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler"
+			commandId="org.eclipse.xtext.ui.refactoring.RenameElement">
+			<activeWhen>
+				<reference
+					definitionId="eu.scape_project.pw.Simulator.Editor.opened">
+				</reference>
+			</activeWhen>
+		</handler>
+	</extension>
+    <extension point="org.eclipse.ui.menus">
+         <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+         <command commandId="org.eclipse.xtext.ui.refactoring.RenameElement"
+               style="push">
+            <visibleWhen checkEnabled="false">
+               <reference
+                     definitionId="eu.scape_project.pw.Simulator.Editor.opened">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension point="org.eclipse.ui.preferencePages">
+	    <page
+	        category="eu.scape_project.pw.Simulator"
+	        class="eu.scape_project.pw.ui.SimulatorExecutableExtensionFactory:org.eclipse.xtext.ui.refactoring.ui.RefactoringPreferencePage"
+	        id="eu.scape_project.pw.Simulator.refactoring"
+	        name="Refactoring">
+	        <keywordReference id="eu.scape_project.pw.ui.keyword_Simulator"/>
+	    </page>
+	</extension>
+
+  <extension point="org.eclipse.compare.contentViewers">
+    <viewer id="eu.scape_project.pw.Simulator.compare.contentViewers"
+            class="eu.scape_project.pw.ui.SimulatorExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="sim">
+    </viewer>
+  </extension>
+  <extension point="org.eclipse.compare.contentMergeViewers">
+    <viewer id="eu.scape_project.pw.Simulator.compare.contentMergeViewers"
+            class="eu.scape_project.pw.ui.SimulatorExecutableExtensionFactory:org.eclipse.xtext.ui.compare.InjectableViewerCreator"
+            extensions="sim" label="Simulator Compare">
+     </viewer>
+  </extension>
+  <extension point="org.eclipse.ui.editors.documentProviders">
+    <provider id="eu.scape_project.pw.Simulator.editors.documentProviders"
+            class="eu.scape_project.pw.ui.SimulatorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.model.XtextDocumentProvider"
+            extensions="sim">
+    </provider>
+  </extension>
+  
+  <extension point="org.eclipse.ui.views">
+  		<category
+			name="Scape Simulator"
+			id="eu.scape_project.pw">
+		</category>
+		<view
+			name="Simulator View"
+			category="eu.scape_project.pw"
+			class="eu.scape_project.pw.ui.graph.GraphView"
+			id="eu.scape_project.pw.Simulator.view">
+		</view>
+	</extension>
+
+</plugin>
