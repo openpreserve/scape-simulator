@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<site>
-   <feature url="features/eu.scape_project.pw.simulator.sdk_1.0.0.qualifier.jar" id="eu.scape_project.pw.simulator.sdk" version="1.0.0.qualifier">
-      <category name="eu.scape_project.pw.simulator"/>
-   </feature>
-   <category-def name="eu.scape_project.pw.simulator" label="Simulator"/>
-</site>
