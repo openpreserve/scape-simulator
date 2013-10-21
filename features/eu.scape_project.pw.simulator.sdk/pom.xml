@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
-  <modelVersion>4.0.0</modelVersion>
-
-  <parent>
-    <relativePath>../eu.scape_project.pw.simulator.releng/pom.xml</relativePath>
-    <groupId>eu.scape_project.pw.simulator</groupId>
-    <artifactId>parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-  </parent>
-
-  <artifactId>eu.scape_project.pw.simulator.sdk</artifactId>
-  <!--<packaging>eclipse-feature</packaging>-->
-
-  <name>Simulator example feature</name>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<relativePath>../../pom.xml</relativePath>
+		<groupId>eu.scape_project.pw.simulator</groupId>
+		<artifactId>parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>eu.scape_project.pw.simulator.sdk</artifactId>
+	<version>1.0.0.qualifier</version>
+	<packaging>eclipse-feature</packaging>
 </project>

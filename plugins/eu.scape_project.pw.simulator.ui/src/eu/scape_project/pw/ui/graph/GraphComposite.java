@@ -38,7 +38,6 @@ public class GraphComposite extends Composite {
 		//chartCanvas.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_CYAN));
 		dropDown.addSelectionListener(new SelectionListener() {
 
-			@Override
 			public void widgetSelected(SelectionEvent e) {
 				label.setText(dropDown.getItem(dropDown.getSelectionIndex()));
 				cLoader.load(dropDown.getItem(dropDown.getSelectionIndex()));
@@ -47,7 +46,7 @@ public class GraphComposite extends Composite {
 				layout();
 			}
 
-			@Override
+			
 			public void widgetDefaultSelected(SelectionEvent e) {
 				// TODO Auto-generated method stub
 				

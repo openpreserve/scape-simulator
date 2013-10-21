@@ -39,13 +39,48 @@
 						</goals>
 						<configuration>
 							<!-- no ${basedir} here, or it wil results in a MWE2 error "Cannot create a resource for 'c:/ckl/<...>/src/de/ckl/xtext/tycho/GenerateTycho.mwe2'; a registered resource factory is needed-->
-							<workflowDescriptor>src/de/ckl/xtext/tycho/GenerateTycho.mwe2</workflowDescriptor>
+							<workflowDescriptor>src/eu/scape_project/pw/GenerateSimulator.mwe2</workflowDescriptor>
 							<workflowEngine>mwe2</workflowEngine>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.fornax.toolsupport
+										</groupId>
+										<artifactId>
+											fornax-oaw-m2-plugin
+										</artifactId>
+										<versionRange>
+											[3.4.0,)
+										</versionRange>
+										<goals>
+											<goal>run-workflow</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 </project>
 

@@ -3,7 +3,7 @@
 .launch
 .settings
 .settings
-.DS_Store
+.project
 target/
 lib/
 bin/

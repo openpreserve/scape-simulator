@@ -2,3 +2,5 @@ bin/**
 xtend-gen/**
 src-gen/**
 target/**
+.project
+.classpath
