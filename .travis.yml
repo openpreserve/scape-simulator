@@ -10,7 +10,6 @@ install:
   - mvn test
   
 before_script:
-  - cd ../eu.scape_project.pw.simulator.releng
   - mvn install -DskipTests=true
 
 script:
