@@ -1,6 +1,5 @@
-package eu.scape_project;
+package eu.scape_project.pw.simulator.engine.model;
 
-import java.util.List;
 
 public abstract class Event implements IEvent {
 

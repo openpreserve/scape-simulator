@@ -1,8 +1,10 @@
-package eu.scape_project;
+package eu.scape_project.pw.simulator.engine.model;
+
+import eu.scape_project.ISimulationState;
 
 public interface IEvent extends Comparable<IEvent> {
 
-	void execute(SimulationState state);
+	void execute(ISimulationState state);
 	
 	long getScheduleTime();
 	

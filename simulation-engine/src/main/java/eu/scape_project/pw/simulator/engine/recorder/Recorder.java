@@ -1,5 +1,6 @@
-package eu.scape_project;
+package eu.scape_project.pw.simulator.engine.recorder;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,15 +10,20 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-public class Recorder {
+import eu.scape_project.ISimulationProperties;
+import eu.scape_project.ISimulationState;
+
+public class Recorder implements IRecorder {
 
 	private Map<String, List<Record>> records;
 
+	private ISimulationProperties properties; 
+	
 	public Recorder() {
 		records = new HashMap<String, List<Record>>();
 	}
 
-	public void record(SimulationState state) {
+	public void record(ISimulationState state) {
 		Iterator it = state.getIterator();
 
 		while (it.hasNext()) {
@@ -31,6 +37,42 @@ public class Recorder {
 				addRecordToNewName(name, value, state.getTime());
 			}
 		}
+	}
+
+	@Override
+	public void startSimulation(ISimulationProperties properties) {
+		this.properties = properties;
+		File out = new File("output");
+		if (!out.exists()) {
+			out.mkdir();
+		}
+		File main = new File("output/" + properties.getName());
+		if (main.exists()) {
+			File[] files = main.listFiles();
+			for (File f : files) {
+				f.delete();
+			}
+		} else {
+			main.mkdir();
+		}
+
+	}
+
+	@Override
+	public void startRun(ISimulationState state, int run) {
+		record(state);
+	}
+
+	@Override
+	public void stopRun(ISimulationState state, int run) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void stopSimulation(ISimulationProperties properties) {
+		// TODO Auto-generated method stub
+
 	}
 
 	public void dump() {
@@ -57,17 +99,19 @@ public class Recorder {
 	}
 
 	private void dumpToFile(String key, List<Record> values) {
-		
+
 		try {
-			PrintWriter writer = new PrintWriter(new FileWriter("output/"+key+".txt"));
+			PrintWriter writer = new PrintWriter(new FileWriter("output/"
+					+ properties.getName() + "/" + key + ".txt", true));
 			int i = 0;
-			while (i<values.size()) {
+			while (i < values.size()) {
 				String current = values.get(i).getValue();
-				if (i<values.size()-1) {
-					for (long j=values.get(i).getTime(); j<values.get(i+1).getTime(); j++) {
+				if (i < values.size() - 1) {
+					for (long j = values.get(i).getTime(); j < values
+							.get(i + 1).getTime(); j++) {
 						writer.write(j + "-" + current + " ");
 					}
-				}else {
+				} else {
 					writer.write(values.get(i).getTime() + "-" + current + " ");
 				}
 				i++;
@@ -77,7 +121,6 @@ public class Recorder {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
 	}
 }

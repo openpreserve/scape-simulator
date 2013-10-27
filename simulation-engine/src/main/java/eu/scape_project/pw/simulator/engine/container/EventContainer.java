@@ -1,9 +1,11 @@
-package eu.scape_project;
+package eu.scape_project.pw.simulator.engine.container;
 
 import java.util.Collection;
 import java.util.PriorityQueue;
 
-public class EventContainer {
+import eu.scape_project.pw.simulator.engine.model.IEvent;
+
+public class EventContainer implements IEventContainer{
 
 	PriorityQueue<IEvent> events;
 

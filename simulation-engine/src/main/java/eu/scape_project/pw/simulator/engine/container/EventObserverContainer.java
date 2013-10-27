@@ -1,11 +1,13 @@
-package eu.scape_project;
+package eu.scape_project.pw.simulator.engine.container;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class EventObserverContainer {
+import eu.scape_project.pw.simulator.engine.model.IEventObserver;
+
+public class EventObserverContainer implements IEventObserverContainer {
 
 	private Map<String, List<IEventObserver>> observers;
 

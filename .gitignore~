@@ -1,6 +1,0 @@
-*.class
-.classpath
-.settings
-target/
-lib/
-bin/

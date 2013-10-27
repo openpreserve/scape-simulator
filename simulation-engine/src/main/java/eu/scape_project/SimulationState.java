@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class SimulationState {
+public class SimulationState implements ISimulationState{
 
 	private long time;
 	
