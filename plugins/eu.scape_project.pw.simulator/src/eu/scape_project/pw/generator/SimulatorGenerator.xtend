@@ -22,26 +22,44 @@ class SimulatorGenerator implements IGenerator {
 
 	@Inject
 	protected XbaseCompiler xbaseCompiler
-	
+
 	InitializatorGenerator iGenerator;
-	
+
 	override void doGenerate(Resource resource, IFileSystemAccess fsa) {
 		iGenerator = new InitializatorGenerator()
 		for (e : resource.allContents.toIterable.filter(typeof(Simulation))) {
+			fsa.generateFile("/simulator/" + e.name + "SimulationProperties.java", e.createProperties)
 			fsa.generateFile("/simulator/" + e.name + ".java", e.createMain)
+			fsa.generateFile("/simulator/" + e.name + "SimulationModule.java", e.createModule)
 		}
-		iGenerator.generateInitializator(resource,fsa);
-		
+		iGenerator.generateInitializator(resource, fsa);
+
 		for (e : resource.allContents.toIterable.filter(typeof(Event))) {
 			fsa.generateFile("/simulator/" + e.name + ".java", e.compileEvent)
 		}
-		
+
 		for (e : resource.allContents.toIterable.filter(typeof(ConditionalScheduling))) {
-			fsa.generateFile("/simulator/" + e.observes.name + "2" + e.schedule.name + ".java", e.compileConditionalScheduling)
+			fsa.generateFile("/simulator/" + e.observes.name + "2" + e.schedule.name + ".java",
+				e.compileConditionalScheduling)
 		}
-		
 
 	}
+
+	/**
+ 	 * 
+ 	 */
+	def createProperties(Simulation s) '''
+			package simulator;
+		import eu.scape_project.*;
+		
+		public class «s.name»SimulationProperties extends SimulationProperties {
+			
+			«s.name»SimulationProperties() {
+				name=«s.name»;
+				numberOfRuns = «s.runs»;		
+			}
+		}
+	'''
 
 	/**
 	 * generate main file 
@@ -62,11 +80,28 @@ class SimulatorGenerator implements IGenerator {
 		}
 		
 	'''
-	
-	
 
-	
-/* 
+	def createModule(Simulation s) '''
+		package simulator;
+		import eu.scape_project.*;
+		
+		public class «s.name»SimulationModule extends SimulationEngineModule {
+			
+			«s.name»SimulationModule() {	
+			}
+			
+			@Override
+			protected void configure() {
+				super.configure();
+				bind(IEventContainerFactory.class).to(«s.name»EventContainerFactory.class);
+				bind(IEventObserverContainerFactory.class).to(«s.name»EventObserverContainerFactory.class);
+				bind(ISimulationStateFactory.class).to(«s.name»SimulationStateFactory.class);
+				bind(ISimulationProperties.class).to(«s.name»SimulationProperties.class);
+			}
+		}
+	'''
+
+	/* 
 	def compileConditionalEventSchedulingMain(ConditionalScheduling e) '''
 		tmpEvent = new «e.observes.name»2«e.schedule.name»();
 		processor.addEventObserver(tmpEvent);
@@ -78,105 +113,103 @@ class SimulatorGenerator implements IGenerator {
 		import eu.scape_project.*;
 		public class «e.name» extends Event{ 
 			 	
-
+		
 			public «e.name»() {
-				name = "«e.name»";
+			name = "«e.name»";
 			}
-	
-			@Override
-			public void execute(SimulationState state) {
-				«compileExpression(e.expression)»
-			}
+		
+				@Override
+				public void execute(SimulationState state) {
+					«compileExpression(e.expression)»
+				}
 		}
 		
-	'''	
-	
+	'''
+
 	def compileExpression(Expression e) {
-		
+
 		switch e {
-			RExpression : compileRExpression(e)
-			OExpression : compileOExpression(e)
+			RExpression: compileRExpression(e)
+			OExpression: compileOExpression(e)
 		}
-			
-			
+
 	}
-	
+
 	def compileRExpression(RExpression r) {
-		
-		var temp=
+
+		var temp = '''
+		for (int i=0; i<''' + r.number + '''; i++) {
 			'''
-				for (int i=0; i<''' + r.number + '''; i++) {
-			'''
-		for (e:r.expression) {
+		for (e : r.expression) {
 			temp = temp + compileExpression(e)
 		}
-		temp = temp + '''}''' 	
+		temp = temp + '''}'''
 	}
-	
-	def compileOExpression(OExpression o){
+
+	def compileOExpression(OExpression o) {
 		switch o {
-			PExpression : compilePExpression(o)
-			MExpression : compileMExpression(o)
-			EExpression : compileEExpression(o)
+			PExpression: compilePExpression(o)
+			MExpression: compileMExpression(o)
+			EExpression: compileEExpression(o)
 		}
 	}
-	
+
 	def compilePExpression(PExpression p) {
-		var temp ='''state.addStateVariable("'''
+		var temp = '''state.addStateVariable("'''
 		temp = temp + p.leftSide
 		temp = temp + '''",'''
-		if (iGenerator.getVarType(p.leftSide) == "int"){
-			temp = temp + '''((Integer)state.getStateVariable("'''+ p.leftSide +'''")).intValue()'''
-		} else if (iGenerator.getVarType(p.leftSide) == "float"){
-			temp = temp + '''((Double)state.getStateVariable("'''+ p.leftSide +'''")).doubleValue()'''
+		if (iGenerator.getVarType(p.leftSide) == "int") {
+			temp = temp + '''((Integer)state.getStateVariable("''' + p.leftSide + '''")).intValue()'''
+		} else if (iGenerator.getVarType(p.leftSide) == "float") {
+			temp = temp + '''((Double)state.getStateVariable("''' + p.leftSide + '''")).doubleValue()'''
 		} else if (iGenerator.getVarType(p.leftSide) == "String") {
-			temp = temp + '''((String)state.getStateVariable("'''+ p.leftSide +'''"))'''
+			temp = temp + '''((String)state.getStateVariable("''' + p.leftSide + '''"))'''
 		}
 		temp = temp + '''+''' + p.rightSide.toString + ''');''' + "\n"
 		temp
 	}
-	
+
 	def compileMExpression(MExpression p) {
-		var temp ='''state.addStateVariable("'''
+		var temp = '''state.addStateVariable("'''
 		temp = temp + p.leftSide
 		temp = temp + '''",'''
-		if (iGenerator.getVarType(p.leftSide) == "int"){
-			temp = temp + '''((Integer)state.getStateVariable("'''+ p.leftSide +'''")).intValue()'''
-		} else if (iGenerator.getVarType(p.leftSide) == "float"){
-			temp = temp + '''((Double)state.getStateVariable("'''+ p.leftSide +'''")).doubleValue()'''
+		if (iGenerator.getVarType(p.leftSide) == "int") {
+			temp = temp + '''((Integer)state.getStateVariable("''' + p.leftSide + '''")).intValue()'''
+		} else if (iGenerator.getVarType(p.leftSide) == "float") {
+			temp = temp + '''((Double)state.getStateVariable("''' + p.leftSide + '''")).doubleValue()'''
 		} else if (iGenerator.getVarType(p.leftSide) == "String") {
-			temp = temp + '''((String)state.getStateVariable("'''+ p.leftSide +'''"))'''
+			temp = temp + '''((String)state.getStateVariable("''' + p.leftSide + '''"))'''
 		}
 		temp = temp + '''-''' + p.rightSide.toString + ''');''' + "\n"
 		temp
 	}
-	
+
 	def compileEExpression(EExpression p) {
-		var temp ='''state.addStateVariable("'''
+		var temp = '''state.addStateVariable("'''
 		temp = temp + p.leftSide
 		temp = temp + '''",'''
 		temp = temp + p.rightSide.toString + ''');'''
 		temp
 	}
-	
+
 	def compileConditionalScheduling(ConditionalScheduling e) '''
-	
-	package simulator;
-	import eu.scape_project.*;
-	public class «e.observes.name»2«e.schedule.name» extends EventObserver {
 		
-		public «e.observes.name»2«e.schedule.name» () {
-			observedEvent = "«e.observes.name»";
-		}
-		
-		@Override
-		public IEvent schedules(SimulationState state) { 
-		
-		 long currentTime = state.getTime();
-		 IEvent tmp = new «e.schedule.name»();
-		 tmp.setScheduleTime(currentTime + «e.delay»);
-		 return tmp;	
+		package simulator;
+		import eu.scape_project.*;
+		public class «e.observes.name»2«e.schedule.name» extends EventObserver {
+			
+			public «e.observes.name»2«e.schedule.name» () {
+				observedEvent = "«e.observes.name»";
+			}
+			
+			@Override
+			public IEvent schedules(SimulationState state) { 
+			
+			 long currentTime = state.getTime();
+			 IEvent tmp = new «e.schedule.name»();
+			 tmp.setScheduleTime(currentTime + «e.delay»);
+			 return tmp;	
+			} 
 		} 
-	} 
 	'''
 }

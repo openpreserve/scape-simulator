@@ -7,15 +7,18 @@ import com.google.inject.Inject;
 import eu.scape_project.pw.simulator.engine.container.IEventContainer;
 import eu.scape_project.pw.simulator.engine.container.IEventContainerFactory;
 import eu.scape_project.pw.simulator.engine.container.IEventObserverContainer;
+import eu.scape_project.pw.simulator.engine.container.IEventObserverContainerFactory;
 import eu.scape_project.pw.simulator.engine.model.IEvent;
 import eu.scape_project.pw.simulator.engine.model.IEventObserver;
 import eu.scape_project.pw.simulator.engine.recorder.IRecorder;
+import eu.scape_project.pw.simulator.engine.state.ISimulationState;
+import eu.scape_project.pw.simulator.engine.state.ISimulationStateFactory;
 
 public class EventProcessor {
 
 	private final IEventContainerFactory eventContainerFactory;
 
-	private final IEventObserverContainer eOContainer;
+	private final IEventObserverContainerFactory eOFactory;
 
 	private final IRecorder recorder;
 
@@ -25,24 +28,26 @@ public class EventProcessor {
 
 	@Inject
 	public EventProcessor(IEventContainerFactory eventContainerFactory,
-			IEventObserverContainer eOContainer, IRecorder recorder,
+			IEventObserverContainerFactory eOFactory, IRecorder recorder,
 			ISimulationProperties properties,
 			ISimulationStateFactory simulationStateFactory) {
 		this.eventContainerFactory = eventContainerFactory;
-		this.eOContainer = eOContainer;
+		this.eOFactory = eOFactory;
 		this.recorder = recorder;
 		this.properties = properties;
 		this.simulationStateFactory = simulationStateFactory;
 	}
 
 	public void startSimulation() {
-
 		recorder.startSimulation(properties);
 		for (int simulationRun = 0; simulationRun < properties
 				.getNumberOfRuns(); simulationRun++) {
+			IEventObserverContainer eOContainer = eOFactory
+					.getEventObserverContainer();
 			IEventContainer eventContainer = eventContainerFactory
 					.getEventContainer();
-			ISimulationState state = simulationStateFactory.getSimulationState();
+			ISimulationState state = simulationStateFactory
+					.getSimulationState();
 			recorder.startRun(state, simulationRun);
 			while (!eventContainer.isEmpty()) {
 				IEvent event = eventContainer.getNextEvent();
@@ -62,18 +67,13 @@ public class EventProcessor {
 		}
 		recorder.stopSimulation(properties);
 	}
-/*
-	public IEventContainerFactory getEventContainer() {
-		return eventContainerFactory;
-	}
-
-	public IEventObserverContainer getEOContainer() {
-		return eOContainer;
-	}
-
-	public ISimulationState getSimulationState() {
-		return state;
-	}
-*/
+	/*
+	 * public IEventContainerFactory getEventContainer() { return
+	 * eventContainerFactory; }
+	 * 
+	 * public IEventObserverContainer getEOContainer() { return eOContainer; }
+	 * 
+	 * public ISimulationState getSimulationState() { return state; }
+	 */
 
 }

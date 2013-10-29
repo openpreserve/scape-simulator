@@ -13,9 +13,6 @@ public class SimulatorEngineModule extends AbstractModule{
 
 	@Override
 	protected void configure() {
-		
-		bind(IEventContainer.class).to(EventContainer.class);
-		bind(IEventObserverContainer.class).to(EventObserverContainer.class);
 		bind(IRecorder.class).to(Recorder.class);
 		
 	}

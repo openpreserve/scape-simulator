@@ -11,14 +11,14 @@ import java.util.List;
 import java.util.Map;
 
 import eu.scape_project.ISimulationProperties;
-import eu.scape_project.ISimulationState;
+import eu.scape_project.pw.simulator.engine.state.ISimulationState;
 
 public class Recorder implements IRecorder {
 
 	private Map<String, List<Record>> records;
 
-	private ISimulationProperties properties; 
-	
+	private ISimulationProperties properties;
+
 	public Recorder() {
 		records = new HashMap<String, List<Record>>();
 	}

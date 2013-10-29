@@ -1,4 +1,4 @@
-package eu.scape_project;
+package eu.scape_project.pw.simulator.engine.state;
 
 import java.util.Iterator;
 

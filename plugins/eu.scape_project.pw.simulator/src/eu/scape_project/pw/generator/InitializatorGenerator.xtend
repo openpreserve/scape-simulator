@@ -14,124 +14,117 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IFileSystemAccess
 
 class InitializatorGenerator {
-	
-	Resource res;
-	Map<String, String> types = new HashMap<String,String>(); 
-	
+
+	//Resource res;
+	Map<String, String> types = new HashMap<String, String>();
+
 	def getVarType(String name) {
 		types.get(name)
 	}
-	
+
 	def generateInitializator(Resource resource, IFileSystemAccess fsa) {
-		res = resource;
-		fsa.generateFile("/simulator/Initializator.java", generate)
-		for (e : resource.allContents.toIterable.filter(typeof(KeyValue))) {
+		//res = resource;
+
+		for (e : resource.allContents.toIterable.filter(typeof(Simulation))) {
+
+			//generate SimulatorStateFactory
+			fsa.generateFile("/simulator/" + e.name + "SimulatorStateFactory.java", generateSimulatorStateFactory(e))
+
+			//generate EventContainerFactory
+			fsa.generateFile("/simulator/" + e.name + "EventContainerFactory.java", generateEventContainerFactory(e))
+
+			//generate EventContainerFactory
+			fsa.generateFile("/simulator/" + e.name + "EventObserverContainerFactory.java",
+				generateEventObserverContainerFactory(e))
 		}
 	}
-	
-	def String generate() 
-	'''
-	package simulator;
+
+	def generateSimulatorStateFactory(Simulation e) '''
+		package simulator;
 		import eu.scape_project.*;
-		public class Initializator {
-			private EventContainer eventContainer; 
-			private EventObserverContainer eOContainer;
-			private SimulationState state;
+		
+		public class «e.name»SimulatorStateFactory extends AbstractSimulationStateFactory {
 			
-			public Initializator() {
-				eventContainer = new EventContainer();
-				eOContainer = new EventObserverContainer();
-				state = new SimulationState();
-				generateSimulationState();
-				generateEventContainer();
-				generateEventObserverContainer();
+			@Override 
+			protected void initialize() {
+			«generateSimulationState(e)»
 			}
-			
-			public EventContainer getEventContainer(){return eventContainer;}
-			public EventObserverContainer getEOContainer() {return eOContainer;}
-			public SimulationState getSimulationState() { return state; } 
-			
-			private void generateSimulationState() {
-				«generateSimulationState»
-			   
-			}
-			
-			private void generateEventContainer() {
-				«generateEventContainer»
-			}
-			
-			private void generateEventObserverContainer() {
-				«generateEventObserverContainer»
-			}
-		}
+		}	
 	'''
-	def generateSimulationState() {
+
+	def generateSimulationState(Simulation e) {
 		var temp = ''''''
-		for (e : res.allContents.toIterable.filter(typeof(Simulation))) {
-			for (ent : e.entities.filter(typeof(Collection))) {
-			  temp = temp + passEntity(ent, "")
-			}
+		for (ent : e.entities.filter(typeof(Collection))) {
+			temp = temp + passEntity(ent, "")
 		}
 		return temp
 	}
-	
+
 	def passEntity(Collection col, String name) {
 		var temp = '''''';
-		var tempName = ""; 
+		var tempName = "";
 		if (name == "") {
 			tempName = col.name
-		}else {
+		} else {
 			tempName = name + "." + col.name
 		}
 		for (k : col.keyValues) {
 			if (k instanceof KeyValueInt) {
 				var t = k as KeyValueInt
-				temp = temp + 
+				temp = temp + '''
+					state.addStateVariable("«tempName + "." + k.key»" ,«t.value» );
 				'''
-					state.addStateVariable("«tempName+"."+k.key»" ,«t.value» );
-				'''
-				types.put(tempName+"."+k.key, "int")
-			}else if (k instanceof KeyValueString) {
+				types.put(tempName + "." + k.key, "int")
+			} else if (k instanceof KeyValueString) {
 				var t = k as KeyValueString
-				temp = temp + 
+				temp = temp + '''
+					state.addStateVariable("«tempName + "." + k.key»" ,"«t.value»" );
 				'''
-					state.addStateVariable("«tempName+"."+k.key»" ,"«t.value»" );
-				'''
-				types.put(tempName+"."+k.key, "String")
-			}else if (k instanceof KeyValueDecimal) {
+				types.put(tempName + "." + k.key, "String")
+			} else if (k instanceof KeyValueDecimal) {
 				var t = k as KeyValueDecimal
-				temp = temp + 
+				temp = temp + '''
+					state.addStateVariable("«tempName + "." + k.key»" ,«t.value» );
 				'''
-					state.addStateVariable("«tempName+"."+k.key»" ,«t.value» );
-				'''
-				types.put(tempName+"."+k.key, "float")
+				types.put(tempName + "." + k.key, "float")
 			}
-		} 
-			
-		if (col.subCollections==null) {
+		}
+
+		if (col.subCollections == null) {
 			return temp
-		}else {
+		} else {
 			for (s : col.subCollections) {
-				temp = temp + passEntity(s,tempName)
+				temp = temp + passEntity(s, tempName)
 			}
 			return temp
 		}
-		
+
 	}
-	
-	def generateEventContainer() {
+
+	def generateEventContainerFactory(Simulation e) '''
+		package simulator;
+			import eu.scape_project.*;
+			
+			public class «e.name»EventContainerFactory extends AbstractEventContainerFactory {
+				
+				@Override 
+				protected void initialize() {
+				«generateEventContainer(e)»
+				}
+			}	
+	'''
+
+	def generateEventContainer(Simulation e) {
 		var temp = '''
-				int current = 0; 
-			'''
-		for (e : res.allContents.toIterable.filter(typeof(Simulation))) {
-			for (sch : e.scheduling.filter(typeof(EventScheduling))) {
-			  temp = temp + generateEventSchedules(sch)
-			}
+			int current = 0; 
+		'''
+		for (sch : e.scheduling.filter(typeof(EventScheduling))) {
+			temp = temp + generateEventSchedules(sch)
 		}
 		return temp
 	}
-	
-	def generateEventSchedules(EventScheduling es){
+
+	def generateEventSchedules(EventScheduling es) {
 		var temp = ''' 
 			// scheduling «es.schedule.name» event
 			current = «es.start»;
@@ -141,19 +134,29 @@ class InitializatorGenerator {
 				eventContainer.addEvent(tmp);
 				current = current + «es.every»;
 			} 
-			'''
+		'''
 		return temp
 	}
-	
-	def generateEventObserverContainer() {
-		var temp = ''''''
-		for (e : res.allContents.toIterable.filter(typeof(Simulation))) {
-			for (sch : e.scheduling.filter(typeof(ConditionalScheduling))) {
-			  temp = temp + 
-			  		'''
-			  			eOContainer.addEventObserver(new «sch.observes.name»2«sch.schedule.name»());
-			  		'''
+
+	def generateEventObserverContainerFactory(Simulation e) '''
+		package simulator;
+		import eu.scape_project.*;
+		
+		public class «e.name»EventObserverContainerFactory extends AbstractEventObserverContainerFactory {
+			
+			@Override 
+			protected void initialize() {
+			«generateEventObserverContainer(e)»
 			}
+		}
+	'''
+
+	def generateEventObserverContainer(Simulation e) {
+		var temp = ''''''
+		for (sch : e.scheduling.filter(typeof(ConditionalScheduling))) {
+			temp = temp + '''
+				eOContainer.addEventObserver(new «sch.observes.name»2«sch.schedule.name»());
+			'''
 		}
 		return temp
 	}
