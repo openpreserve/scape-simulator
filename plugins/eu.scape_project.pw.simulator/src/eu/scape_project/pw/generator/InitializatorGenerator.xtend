@@ -23,8 +23,8 @@ class InitializatorGenerator {
 	}
 
 	def generateInitializator(Resource resource, IFileSystemAccess fsa) {
-		//res = resource;
 
+		//res = resource;
 		for (e : resource.allContents.toIterable.filter(typeof(Simulation))) {
 
 			//generate SimulatorStateFactory
@@ -41,7 +41,7 @@ class InitializatorGenerator {
 
 	def generateSimulatorStateFactory(Simulation e) '''
 		package simulator;
-		import eu.scape_project.*;
+		import eu.scape_project.pw.simulator.engine.state.AbstractSimulationStateFactory;
 		
 		public class «e.name»SimulatorStateFactory extends AbstractSimulationStateFactory {
 			
@@ -103,15 +103,16 @@ class InitializatorGenerator {
 
 	def generateEventContainerFactory(Simulation e) '''
 		package simulator;
-			import eu.scape_project.*;
+		import eu.scape_project.pw.simulator.engine.container.AbstractEventContainerFactory;
+		import eu.scape_project.pw.simulator.engine.model.IEvent;
 			
-			public class «e.name»EventContainerFactory extends AbstractEventContainerFactory {
+		public class «e.name»EventContainerFactory extends AbstractEventContainerFactory {
 				
-				@Override 
-				protected void initialize() {
+			@Override 
+			protected void initialize() {
 				«generateEventContainer(e)»
-				}
-			}	
+			}
+		}	
 	'''
 
 	def generateEventContainer(Simulation e) {
@@ -140,7 +141,7 @@ class InitializatorGenerator {
 
 	def generateEventObserverContainerFactory(Simulation e) '''
 		package simulator;
-		import eu.scape_project.*;
+		import eu.scape_project.pw.simulator.engine.container.AbstractEventObserverContainerFactory;
 		
 		public class «e.name»EventObserverContainerFactory extends AbstractEventObserverContainerFactory {
 			

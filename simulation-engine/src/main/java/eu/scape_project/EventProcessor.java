@@ -10,11 +10,12 @@ import eu.scape_project.pw.simulator.engine.container.IEventObserverContainer;
 import eu.scape_project.pw.simulator.engine.container.IEventObserverContainerFactory;
 import eu.scape_project.pw.simulator.engine.model.IEvent;
 import eu.scape_project.pw.simulator.engine.model.IEventObserver;
+import eu.scape_project.pw.simulator.engine.model.IEventProcessor;
 import eu.scape_project.pw.simulator.engine.recorder.IRecorder;
 import eu.scape_project.pw.simulator.engine.state.ISimulationState;
 import eu.scape_project.pw.simulator.engine.state.ISimulationStateFactory;
 
-public class EventProcessor {
+public class EventProcessor implements IEventProcessor{
 
 	private final IEventContainerFactory eventContainerFactory;
 
@@ -38,10 +39,12 @@ public class EventProcessor {
 		this.simulationStateFactory = simulationStateFactory;
 	}
 
+	@Override
 	public void startSimulation() {
 		recorder.startSimulation(properties);
 		for (int simulationRun = 0; simulationRun < properties
 				.getNumberOfRuns(); simulationRun++) {
+			System.out.println("Runnning " + simulationRun + "run");
 			IEventObserverContainer eOContainer = eOFactory
 					.getEventObserverContainer();
 			IEventContainer eventContainer = eventContainerFactory

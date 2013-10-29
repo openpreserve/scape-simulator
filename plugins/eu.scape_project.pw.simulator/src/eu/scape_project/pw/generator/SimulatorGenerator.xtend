@@ -30,7 +30,7 @@ class SimulatorGenerator implements IGenerator {
 		for (e : resource.allContents.toIterable.filter(typeof(Simulation))) {
 			fsa.generateFile("/simulator/" + e.name + "SimulationProperties.java", e.createProperties)
 			fsa.generateFile("/simulator/" + e.name + ".java", e.createMain)
-			fsa.generateFile("/simulator/" + e.name + "SimulationModule.java", e.createModule)
+			fsa.generateFile("/simulator/" + e.name + "SimulatorModule.java", e.createModule)
 		}
 		iGenerator.generateInitializator(resource, fsa);
 
@@ -49,13 +49,13 @@ class SimulatorGenerator implements IGenerator {
  	 * 
  	 */
 	def createProperties(Simulation s) '''
-			package simulator;
-		import eu.scape_project.*;
+		package simulator;
+		import eu.scape_project.SimulationProperties;
 		
 		public class «s.name»SimulationProperties extends SimulationProperties {
 			
 			«s.name»SimulationProperties() {
-				name=«s.name»;
+				name="«s.name»";
 				numberOfRuns = «s.runs»;		
 			}
 		}
@@ -67,14 +67,14 @@ class SimulatorGenerator implements IGenerator {
 	def createMain(Simulation s) '''
 		
 		package simulator;
-		import eu.scape_project.*;
+		import com.google.inject.Guice;
+		import com.google.inject.Injector;
+		import eu.scape_project.pw.simulator.engine.model.IEventProcessor;
+		
 		public class «s.name» { 
 			public static void main(String[] args) {
-				EventProcessor processor = new EventProcessor();
-				Initializator initializator = new Initializator();
-				processor.setEventContainer(initializator.getEventContainer());
-				processor.setEOContainer(initializator.getEOContainer());
-				processor.setSimulationState(initializator.getSimulationState());
+				Injector injector = Guice.createInjector(new «s.name»SimulatorModule());
+    			IEventProcessor processor = injector.getInstance(IEventProcessor.class); 
 				processor.startSimulation();
 			}
 		}
@@ -83,11 +83,15 @@ class SimulatorGenerator implements IGenerator {
 
 	def createModule(Simulation s) '''
 		package simulator;
-		import eu.scape_project.*;
+		import eu.scape_project.ISimulationProperties;
+		import eu.scape_project.pw.simulator.engine.container.IEventContainerFactory;
+		import eu.scape_project.pw.simulator.engine.container.IEventObserverContainerFactory;
+		import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
+		import eu.scape_project.pw.simulator.engine.state.ISimulationStateFactory;
 		
-		public class «s.name»SimulationModule extends SimulationEngineModule {
+		public class «s.name»SimulatorModule extends SimulatorEngineModule {
 			
-			«s.name»SimulationModule() {	
+			«s.name»SimulatorModule() {	
 			}
 			
 			@Override
@@ -95,22 +99,18 @@ class SimulatorGenerator implements IGenerator {
 				super.configure();
 				bind(IEventContainerFactory.class).to(«s.name»EventContainerFactory.class);
 				bind(IEventObserverContainerFactory.class).to(«s.name»EventObserverContainerFactory.class);
-				bind(ISimulationStateFactory.class).to(«s.name»SimulationStateFactory.class);
+				bind(ISimulationStateFactory.class).to(«s.name»SimulatorStateFactory.class);
 				bind(ISimulationProperties.class).to(«s.name»SimulationProperties.class);
 			}
 		}
 	'''
 
-	/* 
-	def compileConditionalEventSchedulingMain(ConditionalScheduling e) '''
-		tmpEvent = new «e.observes.name»2«e.schedule.name»();
-		processor.addEventObserver(tmpEvent);
-	'''
-	*/
 	def compileEvent(Event e) '''
 		
 		package simulator;
-		import eu.scape_project.*;
+		import eu.scape_project.pw.simulator.engine.model.Event;
+		import eu.scape_project.pw.simulator.engine.state.ISimulationState;
+		
 		public class «e.name» extends Event{ 
 			 	
 		
@@ -119,7 +119,7 @@ class SimulatorGenerator implements IGenerator {
 			}
 		
 				@Override
-				public void execute(SimulationState state) {
+				public void execute(ISimulationState state) {
 					«compileExpression(e.expression)»
 				}
 		}
