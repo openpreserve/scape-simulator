@@ -71,7 +71,7 @@ public class Recorder implements IRecorder {
 
 	@Override
 	public void stopSimulation(ISimulationProperties properties) {
-		// TODO Auto-generated method stub
+		dump();
 
 	}
 
