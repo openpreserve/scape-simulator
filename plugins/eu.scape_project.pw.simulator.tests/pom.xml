@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<relativePath>../../pom.xml</relativePath>
-		<groupId>eu.scape_project.pw.simulator</groupId>
+		<groupId>eu.scape-project.pw.simulator</groupId>
 		<artifactId>parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
