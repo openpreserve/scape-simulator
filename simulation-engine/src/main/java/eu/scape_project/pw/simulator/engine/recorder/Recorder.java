@@ -1,6 +1,9 @@
 package eu.scape_project.pw.simulator.engine.recorder;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,6 +21,8 @@ public class Recorder implements IRecorder {
 	private Map<String, List<Record>> records;
 
 	private ISimulationProperties properties;
+
+	private int currentRun;
 
 	public Recorder() {
 		records = new HashMap<String, List<Record>>();
@@ -60,29 +65,65 @@ public class Recorder implements IRecorder {
 
 	@Override
 	public void startRun(ISimulationState state, int run) {
+		currentRun = run;
 		record(state);
 	}
 
 	@Override
 	public void stopRun(ISimulationState state, int run) {
-		// TODO Auto-generated method stub
-
+		dump();
 	}
 
 	@Override
 	public void stopSimulation(ISimulationProperties properties) {
-		dump();
+		File main = new File("output/" + properties.getName());
+		File[] files = main.listFiles();
+		for (File f : files) {
+			try {
+				BufferedReader br = new BufferedReader(new FileReader(f));
+				String line;
+				br.readLine();
+				String scale = br.readLine();
+				if (scale.endsWith("NUMERIC")) {
+					IOperation average = new AvgOperation();
+					IOperation max = new MaxOperation();
+					IOperation min = new MinOperation();
+					while ((line = br.readLine()) != null) {
+						String[] str = line.split(": ");
+						average.addListOfRecord(str[1]);
+						max.addListOfRecord(str[1]);
+						min.addListOfRecord(str[1]);
+					}
+					br.close();
+					PrintWriter writer = new PrintWriter(
+							new FileWriter(f, true));
+					writer.write(average.getOperationName() + ": "
+							+ average.getResult()
+							+ System.getProperty("line.separator"));
+					writer.write(max.getOperationName() + ": "
+							+ max.getResult()
+							+ System.getProperty("line.separator"));
+					writer.write(min.getOperationName() + ": "
+							+ min.getResult()
+							+ System.getProperty("line.separator"));
+					writer.close();
+				}
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 	}
 
 	public void dump() {
 		for (Map.Entry<String, List<Record>> entry : records.entrySet()) {
-			System.out.print(entry.getKey() + ":");
+
 			dumpToFile(entry.getKey(), entry.getValue());
-			for (Record r : entry.getValue()) {
-				System.out.print(" " + r.getTime() + "-" + r.getValue());
-			}
-			System.out.print("\n");
+
 		}
 		records.clear();
 	}
@@ -101,9 +142,21 @@ public class Recorder implements IRecorder {
 	private void dumpToFile(String key, List<Record> values) {
 
 		try {
-			PrintWriter writer = new PrintWriter(new FileWriter("output/"
-					+ properties.getName() + "/" + key + ".txt", true));
+			File f = new File("output/" + properties.getName() + "/" + key
+					+ ".txt");
+			PrintWriter writer = null;
+			if (!f.exists()) {
+				writer = new PrintWriter(new FileWriter(f));
+				writer.write("Name:" + key
+						+ System.getProperty("line.separator"));
+				writer.write("Scale:" + determineScale(values)
+						+ System.getProperty("line.separator"));
+			} else {
+				writer = new PrintWriter(new FileWriter(f, true));
+			}
+
 			int i = 0;
+			writer.write(currentRun + ": ");
 			while (i < values.size()) {
 				String current = values.get(i).getValue();
 				if (i < values.size() - 1) {
@@ -116,11 +169,20 @@ public class Recorder implements IRecorder {
 				}
 				i++;
 			}
+			writer.write(System.getProperty("line.separator"));
 			writer.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
+	}
+
+	private String determineScale(List<Record> values) {
+		String value = values.get(0).getValue();
+		if (value.matches("-?\\d+(\\.\\d+)?")) {
+			return "NUMERIC";
+		}
+		return "ORDINAL";
 	}
 }

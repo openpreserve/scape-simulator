@@ -44,7 +44,7 @@ public class EventProcessor implements IEventProcessor{
 		recorder.startSimulation(properties);
 		for (int simulationRun = 0; simulationRun < properties
 				.getNumberOfRuns(); simulationRun++) {
-			System.out.println("Runnning " + simulationRun + "run");
+			System.out.println("Runnning " + simulationRun + " run");
 			IEventObserverContainer eOContainer = eOFactory
 					.getEventObserverContainer();
 			IEventContainer eventContainer = eventContainerFactory
