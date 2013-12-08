@@ -5,6 +5,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionEvent;
@@ -18,55 +19,57 @@ import org.eclipse.swt.widgets.Label;
 import eu.scape_project.pw.ui.graph.components.MeasureContentProvider;
 import eu.scape_project.pw.ui.graph.components.MeasureLabelProvider;
 import eu.scape_project.pw.ui.graph.components.MeasureTreeGenerator;
+import eu.scape_project.pw.ui.graph.model.INode;
 
 public class GraphComposite extends Composite {
 
 	private Combo dropDown;
 
 	private Label label;
-	
+
 	private ChartCanvas chartCanvas;
-	
-	private ChartLoader cLoader ;
+
+	private ChartLoader cLoader;
 
 	private TreeViewer viewer;
-	
+
 	private MeasureTreeGenerator generator;
-	
+
 	public GraphComposite(Composite parent, int style) {
 		super(parent, style);
 		this.setLayout(new GridLayout());
 		cLoader = new ChartLoader();
 		generator = new MeasureTreeGenerator();
-		//dropDown = new Combo(this, SWT.DROP_DOWN);
-		//fillDropDown();
-		//label = new Label(this, 0);
-		//label.setText("Hello World");
+		// dropDown = new Combo(this, SWT.DROP_DOWN);
+		// fillDropDown();
+		label = new Label(this, 0);
+		label.setText("Hello World");
 		viewer = new TreeViewer(this, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 		viewer.setContentProvider(new MeasureContentProvider());
 		viewer.setLabelProvider(new MeasureLabelProvider());
 		viewer.setInput(generator.getMeasureTree());
-		viewer.getTree().setLayoutData(new GridData(400,200));
-		chartCanvas = new ChartCanvas(this,SWT.NONE);
-		chartCanvas.setLayoutData(new GridData(600,400));
-		//chartCanvas.setBackground(Display.getCurrent().getSystemColor(SWT.COLOR_CYAN));
-//		dropDown.addSelectionListener(new SelectionListener() {
-//
-//			public void widgetSelected(SelectionEvent e) {
-//				label.setText(dropDown.getItem(dropDown.getSelectionIndex()));
-//				cLoader.load(dropDown.getItem(dropDown.getSelectionIndex()));
-//				chartCanvas.setChart(cLoader.getChart());
-//				chartCanvas.redraw();
-//				layout();
-//			}
-//
-//			
-//			public void widgetDefaultSelected(SelectionEvent e) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//			
-//		});
+		viewer.getTree().setLayoutData(new GridData(400, 200));
+		chartCanvas = new ChartCanvas(this, SWT.NONE);
+		chartCanvas.setLayoutData(new GridData(600, 400));
+		viewer.getTree().addSelectionListener(new SelectionListener() {
+
+			public void widgetSelected(SelectionEvent e) {
+				IStructuredSelection s = (IStructuredSelection) viewer
+						.getSelection();
+				INode node = (INode) s.getFirstElement();
+				label.setText(node.getName());
+				// cLoader.load(dropDown.getItem(dropDown.getSelectionIndex()));
+				// chartCanvas.setChart(cLoader.getChart());
+				// chartCanvas.redraw();
+				// layout();
+			}
+
+			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+		});
 	}
 
 	private void fillDropDown() {
