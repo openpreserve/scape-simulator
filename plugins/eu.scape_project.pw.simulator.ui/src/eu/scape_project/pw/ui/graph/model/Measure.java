@@ -1,13 +1,18 @@
 package eu.scape_project.pw.ui.graph.model;
 
+import org.eclipse.core.resources.IFile;
+
 public class Measure implements INode {
 
 	private String name; 
 	
 	private INode parent; 
 	
-	public Measure(String name) {
+	private IFile file;
+	
+	public Measure(String name, IFile file) {
 		this.name = name;
+		this.file = file;
 	}
 	
 	public String getName() {
@@ -28,6 +33,10 @@ public class Measure implements INode {
 
 	public void addChildren(INode child) {
 		
+	}
+	
+	public IFile getFile() {
+		return file;
 	}
 
 }

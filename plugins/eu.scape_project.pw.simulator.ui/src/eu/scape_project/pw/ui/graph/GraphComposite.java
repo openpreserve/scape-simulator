@@ -20,6 +20,7 @@ import eu.scape_project.pw.ui.graph.components.MeasureContentProvider;
 import eu.scape_project.pw.ui.graph.components.MeasureLabelProvider;
 import eu.scape_project.pw.ui.graph.components.MeasureTreeGenerator;
 import eu.scape_project.pw.ui.graph.model.INode;
+import eu.scape_project.pw.ui.graph.model.Measure;
 
 public class GraphComposite extends Composite {
 
@@ -37,13 +38,15 @@ public class GraphComposite extends Composite {
 
 	public GraphComposite(Composite parent, int style) {
 		super(parent, style);
-		this.setLayout(new GridLayout());
+		GridLayout gridLayout = new GridLayout();
+		gridLayout.numColumns = 2;
+		this.setLayout(gridLayout);
 		cLoader = new ChartLoader();
 		generator = new MeasureTreeGenerator();
 		// dropDown = new Combo(this, SWT.DROP_DOWN);
 		// fillDropDown();
-		label = new Label(this, 0);
-		label.setText("Hello World");
+		//label = new Label(this, 0);
+		//label.setText("Hello World");
 		viewer = new TreeViewer(this, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
 		viewer.setContentProvider(new MeasureContentProvider());
 		viewer.setLabelProvider(new MeasureLabelProvider());
@@ -57,11 +60,13 @@ public class GraphComposite extends Composite {
 				IStructuredSelection s = (IStructuredSelection) viewer
 						.getSelection();
 				INode node = (INode) s.getFirstElement();
-				label.setText(node.getName());
-				// cLoader.load(dropDown.getItem(dropDown.getSelectionIndex()));
-				// chartCanvas.setChart(cLoader.getChart());
-				// chartCanvas.redraw();
-				// layout();
+				if (node instanceof Measure) {
+					cLoader.load((Measure) node);
+					chartCanvas.setChart(cLoader.getChart());
+					chartCanvas.redraw();
+					layout();
+
+				}
 			}
 
 			public void widgetDefaultSelected(SelectionEvent e) {
