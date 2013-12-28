@@ -3,14 +3,16 @@ jdk:
   - oraclejdk7
   - openjdk7
   - openjdk6
-
-install:
-  - cd ./simulation-engine
-  - mvn install -DskipTests=true
-  - mvn test
   
 before_script:
+  - cd ./simulation-engine
+  - mvn install -DskipTests=true
+  - cd ..
+  - cd ./eclipse-plugin
   - mvn install -DskipTests=true
 
 script:
+  - cd ./simulation-engine
+  - mvn test
+  - cd ./eclipse-plugin
   - mvn test
