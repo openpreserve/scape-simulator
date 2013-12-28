@@ -8,7 +8,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module>simulation-engine</module>
 		<module>plugins/eu.scape_project.pw.simulator</module>
 		<module>plugins/eu.scape_project.pw.simulator.ui</module>
 		<module>plugins/eu.scape_project.pw.simulator.tests</module>
