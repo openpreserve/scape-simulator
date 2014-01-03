@@ -1,7 +1,7 @@
 package eu.scape_project.pw.simulator.engine.recorder;
 
-import eu.scape_project.ISimulationProperties;
-import eu.scape_project.pw.simulator.engine.state.ISimulationState;
+import eu.scape_project.pw.simulator.engine.model.ISimulationProperties;
+import eu.scape_project.pw.simulator.engine.model.state.ISimulationState;
 
 public interface IRecorder {
 

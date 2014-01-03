@@ -13,8 +13,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import eu.scape_project.ISimulationProperties;
-import eu.scape_project.pw.simulator.engine.state.ISimulationState;
+import eu.scape_project.pw.simulator.engine.model.ISimulationProperties;
+import eu.scape_project.pw.simulator.engine.model.state.ISimulationState;
 
 public class Recorder implements IRecorder {
 

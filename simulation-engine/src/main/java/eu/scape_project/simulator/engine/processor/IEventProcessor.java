@@ -1,4 +1,4 @@
-package eu.scape_project.pw.simulator.engine.model;
+package eu.scape_project.simulator.engine.processor;
 
 public interface IEventProcessor {
 

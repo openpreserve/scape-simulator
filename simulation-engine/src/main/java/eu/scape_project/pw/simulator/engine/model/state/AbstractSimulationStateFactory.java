@@ -1,4 +1,5 @@
-package eu.scape_project.pw.simulator.engine.state;
+package eu.scape_project.pw.simulator.engine.model.state;
+
 
 public abstract class AbstractSimulationStateFactory implements ISimulationStateFactory {
 

@@ -1,4 +1,4 @@
-package eu.scape_project;
+package eu.scape_project.simulator.engine.processor;
 
 import java.util.List;
 
@@ -10,10 +10,10 @@ import eu.scape_project.pw.simulator.engine.container.IEventObserverContainer;
 import eu.scape_project.pw.simulator.engine.container.IEventObserverContainerFactory;
 import eu.scape_project.pw.simulator.engine.model.IEvent;
 import eu.scape_project.pw.simulator.engine.model.IEventObserver;
-import eu.scape_project.pw.simulator.engine.model.IEventProcessor;
+import eu.scape_project.pw.simulator.engine.model.ISimulationProperties;
+import eu.scape_project.pw.simulator.engine.model.state.ISimulationState;
+import eu.scape_project.pw.simulator.engine.model.state.ISimulationStateFactory;
 import eu.scape_project.pw.simulator.engine.recorder.IRecorder;
-import eu.scape_project.pw.simulator.engine.state.ISimulationState;
-import eu.scape_project.pw.simulator.engine.state.ISimulationStateFactory;
 
 public class EventProcessor implements IEventProcessor{
 
