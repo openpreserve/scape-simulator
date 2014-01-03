@@ -2,6 +2,9 @@ package eu.scape_project.simulator.engine.processor;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.inject.Inject;
 
 import eu.scape_project.pw.simulator.engine.container.IEventContainer;
@@ -16,6 +19,8 @@ import eu.scape_project.pw.simulator.engine.model.state.ISimulationStateFactory;
 import eu.scape_project.pw.simulator.engine.recorder.IRecorder;
 
 public class EventProcessor implements IEventProcessor{
+	
+	private static Logger LOG = LoggerFactory.getLogger(EventProcessor.class);
 
 	private final IEventContainerFactory eventContainerFactory;
 
@@ -44,7 +49,7 @@ public class EventProcessor implements IEventProcessor{
 		recorder.startSimulation(properties);
 		for (int simulationRun = 0; simulationRun < properties
 				.getNumberOfRuns(); simulationRun++) {
-			System.out.println("Runnning " + simulationRun + " run");
+			LOG.info("Runnning " + simulationRun + " run");
 			IEventObserverContainer eOContainer = eOFactory
 					.getEventObserverContainer();
 			IEventContainer eventContainer = eventContainerFactory
@@ -70,13 +75,5 @@ public class EventProcessor implements IEventProcessor{
 		}
 		recorder.stopSimulation(properties);
 	}
-	/*
-	 * public IEventContainerFactory getEventContainer() { return
-	 * eventContainerFactory; }
-	 * 
-	 * public IEventObserverContainer getEOContainer() { return eOContainer; }
-	 * 
-	 * public ISimulationState getSimulationState() { return state; }
-	 */
 
 }
