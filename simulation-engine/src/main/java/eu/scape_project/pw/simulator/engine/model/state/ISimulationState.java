@@ -2,6 +2,8 @@ package eu.scape_project.pw.simulator.engine.model.state;
 
 import java.util.Iterator;
 
+import eu.scape_project.pw.simulator.engine.model.state.utils.IOperator;
+
 public interface ISimulationState {
 
 	long getTime();
@@ -12,5 +14,7 @@ public interface ISimulationState {
 	
 	Object getStateVariable(String name);
 	
-	public Iterator getIterator();
+	void addAutoVariable(String name, IOperator operator);
+	
+	Iterator getIterator();
 }
