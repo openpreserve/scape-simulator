@@ -50,7 +50,7 @@ class SimulatorGenerator implements IGenerator {
  	 */
 	def createProperties(Simulation s) '''
 		package simulator;
-		import eu.scape_project.SimulationProperties;
+		import eu.scape_project.pw.simulator.engine.model.SimulationProperties;
 		
 		public class «s.name»SimulationProperties extends SimulationProperties {
 			
@@ -69,12 +69,13 @@ class SimulatorGenerator implements IGenerator {
 		package simulator;
 		import com.google.inject.Guice;
 		import com.google.inject.Injector;
-		import eu.scape_project.pw.simulator.engine.model.IEventProcessor;
+		
+		import eu.scape_project.simulator.engine.processor.IEventProcessor;
 		
 		public class «s.name» { 
 			public static void main(String[] args) {
 				Injector injector = Guice.createInjector(new «s.name»SimulatorModule());
-    			IEventProcessor processor = injector.getInstance(IEventProcessor.class); 
+							IEventProcessor processor = injector.getInstance(IEventProcessor.class); 
 				processor.startSimulation();
 			}
 		}
@@ -83,11 +84,11 @@ class SimulatorGenerator implements IGenerator {
 
 	def createModule(Simulation s) '''
 		package simulator;
-		import eu.scape_project.ISimulationProperties;
 		import eu.scape_project.pw.simulator.engine.container.IEventContainerFactory;
 		import eu.scape_project.pw.simulator.engine.container.IEventObserverContainerFactory;
+		import eu.scape_project.pw.simulator.engine.model.ISimulationProperties;
+		import eu.scape_project.pw.simulator.engine.model.state.ISimulationStateFactory;
 		import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
-		import eu.scape_project.pw.simulator.engine.state.ISimulationStateFactory;
 		
 		public class «s.name»SimulatorModule extends SimulatorEngineModule {
 			
@@ -109,7 +110,7 @@ class SimulatorGenerator implements IGenerator {
 		
 		package simulator;
 		import eu.scape_project.pw.simulator.engine.model.Event;
-		import eu.scape_project.pw.simulator.engine.state.ISimulationState;
+		import eu.scape_project.pw.simulator.engine.model.state.ISimulationState;
 		
 		public class «e.name» extends Event{ 
 			 	

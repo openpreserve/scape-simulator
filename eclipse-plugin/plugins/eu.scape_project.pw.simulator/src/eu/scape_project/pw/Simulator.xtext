@@ -31,25 +31,28 @@ PExpression : leftSide=Identifier '+=' rightSide=INT;
 EExpression : leftSide=Identifier '=' rightSide=INT;
 MExpression : leftSide=Identifier '-=' rightSide=INT;
 
-Identifier : ID ('.' ID) * ;
+Identifier : ID ('.' ID) * '.' ATTRIBUTES;
+
+ATTRIBUTES: 'size';
 
 Entity : Collection ; 
 
 Collection : 
 	'collection' name=ID '{' 
 		
-		(keyValues+=KeyValue)*
+		('size' '=' size=INT)?
 		(subCollections+=Collection)*	
 		
 	'}' 
 ;
-	
+
+/* 	
 KeyValue : KeyValueInt | KeyValueString | KeyValueDecimal;
 
 KeyValueInt : key=ID ':' value=INT;
 KeyValueString :key=ID ':' value=STRING;
 KeyValueDecimal:key=ID ':' value=DECIMAL;
-
+*/
 Scheduling: EventScheduling | ConditionalScheduling;
 
 EventScheduling :
