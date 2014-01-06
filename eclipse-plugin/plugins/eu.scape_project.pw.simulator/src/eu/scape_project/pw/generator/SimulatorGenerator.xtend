@@ -9,10 +9,13 @@ import eu.scape_project.pw.simulator.EExpression
 import eu.scape_project.pw.simulator.Event
 import eu.scape_project.pw.simulator.Expression
 import eu.scape_project.pw.simulator.MExpression
+import eu.scape_project.pw.simulator.Normal
 import eu.scape_project.pw.simulator.OExpression
 import eu.scape_project.pw.simulator.PExpression
 import eu.scape_project.pw.simulator.RExpression
+import eu.scape_project.pw.simulator.RightSide
 import eu.scape_project.pw.simulator.Simulation
+import eu.scape_project.pw.simulator.Uniform
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
@@ -111,6 +114,7 @@ class SimulatorGenerator implements IGenerator {
 		package simulator;
 		import eu.scape_project.pw.simulator.engine.model.Event;
 		import eu.scape_project.pw.simulator.engine.model.state.ISimulationState;
+		import eu.scape_project.pw.simulator.engine.utils.RandomNumberGenerator;
 		
 		public class «e.name» extends Event{ 
 			 	
@@ -166,7 +170,7 @@ class SimulatorGenerator implements IGenerator {
 		} else if (iGenerator.getVarType(p.leftSide) == "String") {
 			temp = temp + '''((String)state.getStateVariable("''' + p.leftSide + '''"))'''
 		}
-		temp = temp + '''+''' + p.rightSide.toString + ''');''' + "\n"
+		temp = temp + '''+''' + compileRightSide(p.rightSide) + ''');''' + "\n"
 		temp
 	}
 
@@ -181,7 +185,7 @@ class SimulatorGenerator implements IGenerator {
 		} else if (iGenerator.getVarType(p.leftSide) == "String") {
 			temp = temp + '''((String)state.getStateVariable("''' + p.leftSide + '''"))'''
 		}
-		temp = temp + '''-''' + p.rightSide.toString + ''');''' + "\n"
+		temp = temp + '''-''' + compileRightSide(p.rightSide) + ''');''' + "\n"
 		temp
 	}
 
@@ -189,10 +193,26 @@ class SimulatorGenerator implements IGenerator {
 		var temp = '''state.addStateVariable("'''
 		temp = temp + p.leftSide
 		temp = temp + '''",'''
-		temp = temp + p.rightSide.toString + ''');'''
+		temp = temp + compileRightSide(p.rightSide) + ''');'''
 		temp
 	}
 
+	def compileRightSide(RightSide rs) {
+		switch rs {
+			Uniform: compileRandom(rs)
+			Normal: compileRandom(rs)
+		}
+	}
+
+	def compileRandom(Uniform u) {
+		var temp = '''RandomNumberGenerator.uniform(«u.a»,«u.b»)'''
+		temp
+	}
+	def compileRandom(Normal n) {
+		var temp = '''RandomNumberGenerator.normal(«n.mean»,«n.std»)'''
+		temp
+	}
+	
 	def compileConditionalScheduling(ConditionalScheduling e) '''
 		
 		package simulator;

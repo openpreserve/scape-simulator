@@ -27,13 +27,23 @@ RExpression :
 
 OExpression : PExpression | EExpression | MExpression;
 
-PExpression : leftSide=Identifier '+=' rightSide=INT;
-EExpression : leftSide=Identifier '=' rightSide=INT;
-MExpression : leftSide=Identifier '-=' rightSide=INT;
+PExpression : leftSide=Identifier '+=' rightSide=RightSide;
+EExpression : leftSide=Identifier '=' rightSide=RightSide;
+MExpression : leftSide=Identifier '-=' rightSide=RightSide;
 
 Identifier : ID ('.' ID) * '.' ATTRIBUTES;
 
 ATTRIBUTES: 'size';
+
+RightSide : Random;
+
+Descrete : INT;
+
+Random : Uniform | Normal;
+
+Uniform: 'Uniform''('a=INT','b=INT')';
+
+Normal: 'Normal''('mean=INT','std=INT')';
 
 Entity : Collection ; 
 
