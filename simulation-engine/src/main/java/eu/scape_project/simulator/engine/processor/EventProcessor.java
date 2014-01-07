@@ -47,9 +47,10 @@ public class EventProcessor implements IEventProcessor{
 	@Override
 	public void startSimulation() {
 		recorder.startSimulation(properties);
+		LOG.info("Starting simulation!!!");
 		for (int simulationRun = 0; simulationRun < properties
 				.getNumberOfRuns(); simulationRun++) {
-			LOG.info("Runnning " + simulationRun + " run");
+			LOG.info("Simulation run " + (simulationRun + 1) + "/" + properties.getNumberOfRuns());
 			IEventObserverContainer eOContainer = eOFactory
 					.getEventObserverContainer();
 			IEventContainer eventContainer = eventContainerFactory

@@ -124,7 +124,7 @@ class SimulatorGenerator implements IGenerator {
 			}
 		
 				@Override
-				public void execute(ISimulationState state) {
+				protected void run(ISimulationState state) {
 					«compileExpression(e.expression)»
 				}
 		}
