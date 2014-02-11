@@ -56,14 +56,8 @@ Collection :
 	'}' 
 ;
 
-/* 	
-KeyValue : KeyValueInt | KeyValueString | KeyValueDecimal;
 
-KeyValueInt : key=ID ':' value=INT;
-KeyValueString :key=ID ':' value=STRING;
-KeyValueDecimal:key=ID ':' value=DECIMAL;
-*/
-Scheduling: EventScheduling | ConditionalScheduling;
+Scheduling: EventScheduling | ObserverScheduling | ConditionalScheduling;
 
 EventScheduling :
 	'schedule ' schedule=[Event] 
@@ -75,8 +69,23 @@ EventScheduling :
 	'}'
 ;
 
-ConditionalScheduling: 
+ObserverScheduling: 
 	observes=[Event] '=>' schedule=[Event] '{'
 			('delay' '=' delay=INT ';')?
 		'}'
 ;
+
+ConditionalScheduling : 
+	'condition' name=ValidID 'when' (condition=Condition) '=>' schedule=[Event]
+	'endcondition'
+;
+
+Condition: 
+	leftSide=Identifier operator=Opt rightSide=INT 
+;
+
+Opt : Greater | Smaller | Equal ;
+
+Greater : '>';
+Smaller : '<';
+Equal : '==';

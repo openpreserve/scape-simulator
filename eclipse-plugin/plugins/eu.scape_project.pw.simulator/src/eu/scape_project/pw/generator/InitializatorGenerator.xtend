@@ -3,6 +3,7 @@ package eu.scape_project.pw.generator
 import eu.scape_project.pw.simulator.Collection
 import eu.scape_project.pw.simulator.ConditionalScheduling
 import eu.scape_project.pw.simulator.EventScheduling
+import eu.scape_project.pw.simulator.ObserverScheduling
 import eu.scape_project.pw.simulator.Simulation
 import java.util.ArrayList
 import java.util.HashMap
@@ -36,6 +37,10 @@ class InitializatorGenerator {
 			//generate EventContainerFactory
 			fsa.generateFile("/simulator/" + e.name + "EventObserverContainerFactory.java",
 				generateEventObserverContainerFactory(e))
+				
+			//generate ConditionalEventContainerFactory
+			fsa.generateFile("/simulator/" + e.name + "ConditionalEventContainerFactory.java",
+				generateConditionalEventContainerFactory(e))
 		}
 	}
 
@@ -184,11 +189,36 @@ class InitializatorGenerator {
 
 	def generateEventObserverContainer(Simulation e) {
 		var temp = ''''''
-		for (sch : e.scheduling.filter(typeof(ConditionalScheduling))) {
+		for (sch : e.scheduling.filter(typeof(ObserverScheduling))) {
 			temp = temp + '''
 				eOContainer.addEventObserver(new «sch.observes.name»2«sch.schedule.name»());
 			'''
 		}
 		return temp
 	}
+	
+	def generateConditionalEventContainerFactory(Simulation e) '''
+		package simulator;
+		import eu.scape_project.pw.simulator.engine.container.AbstractConditionalEventContainerFactory;
+		
+		public class «e.name»ConditionalEventContainerFactory extends AbstractConditionalEventContainerFactory {
+			
+			@Override 
+			protected void initialize() {
+				«generateConditionalEvent(e)»
+			}
+		}
+	'''
+	
+	def generateConditionalEvent(Simulation e) {
+		var temp = ''''''
+		for (s : e.scheduling.filter(typeof(ConditionalScheduling))) {
+			temp = temp + '''
+				icContainer.addCondition(new «s.name»Condition());
+			'''
+		}
+		return temp
+	}
+		
+	
 }

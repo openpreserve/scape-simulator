@@ -4,6 +4,7 @@
 package eu.scape_project.pw.generator
 
 import com.google.inject.Inject
+import eu.scape_project.pw.simulator.Condition
 import eu.scape_project.pw.simulator.ConditionalScheduling
 import eu.scape_project.pw.simulator.EExpression
 import eu.scape_project.pw.simulator.Event
@@ -11,6 +12,7 @@ import eu.scape_project.pw.simulator.Expression
 import eu.scape_project.pw.simulator.MExpression
 import eu.scape_project.pw.simulator.Normal
 import eu.scape_project.pw.simulator.OExpression
+import eu.scape_project.pw.simulator.ObserverScheduling
 import eu.scape_project.pw.simulator.PExpression
 import eu.scape_project.pw.simulator.RExpression
 import eu.scape_project.pw.simulator.RightSide
@@ -41,8 +43,13 @@ class SimulatorGenerator implements IGenerator {
 			fsa.generateFile("/simulator/" + e.name + ".java", e.compileEvent)
 		}
 
-		for (e : resource.allContents.toIterable.filter(typeof(ConditionalScheduling))) {
+		for (e : resource.allContents.toIterable.filter(typeof(ObserverScheduling))) {
 			fsa.generateFile("/simulator/" + e.observes.name + "2" + e.schedule.name + ".java",
+				e.compileObserverScheduling)
+		}
+		
+		for (e : resource.allContents.toIterable.filter(typeof(ConditionalScheduling))) {
+			fsa.generateFile("/simulator/" + e.name + "Condition.java",
 				e.compileConditionalScheduling)
 		}
 
@@ -87,11 +94,12 @@ class SimulatorGenerator implements IGenerator {
 
 	def createModule(Simulation s) '''
 		package simulator;
-		import eu.scape_project.pw.simulator.engine.container.IEventContainerFactory;
-		import eu.scape_project.pw.simulator.engine.container.IEventObserverContainerFactory;
-		import eu.scape_project.pw.simulator.engine.model.ISimulationProperties;
-		import eu.scape_project.pw.simulator.engine.model.state.ISimulationStateFactory;
-		import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
+		import eu.scape_project.pw.simulator.engine.container.IConditionalEventContainerFactory;
+import eu.scape_project.pw.simulator.engine.container.IEventContainerFactory;
+import eu.scape_project.pw.simulator.engine.container.IEventObserverContainerFactory;
+import eu.scape_project.pw.simulator.engine.model.ISimulationProperties;
+import eu.scape_project.pw.simulator.engine.model.state.ISimulationStateFactory;
+import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 		
 		public class «s.name»SimulatorModule extends SimulatorEngineModule {
 			
@@ -105,6 +113,7 @@ class SimulatorGenerator implements IGenerator {
 				bind(IEventObserverContainerFactory.class).to(«s.name»EventObserverContainerFactory.class);
 				bind(ISimulationStateFactory.class).to(«s.name»SimulatorStateFactory.class);
 				bind(ISimulationProperties.class).to(«s.name»SimulationProperties.class);
+				bind(IConditionalEventContainerFactory.class).to(«s.name»ConditionalEventContainerFactory.class);
 			}
 		}
 	'''
@@ -213,7 +222,7 @@ class SimulatorGenerator implements IGenerator {
 		temp
 	}
 	
-	def compileConditionalScheduling(ConditionalScheduling e) '''
+	def compileObserverScheduling(ObserverScheduling e) '''
 		
 		package simulator;
 		import eu.scape_project.*;
@@ -233,4 +242,36 @@ class SimulatorGenerator implements IGenerator {
 			} 
 		} 
 	'''
+	
+	def compileConditionalScheduling(ConditionalScheduling c) '''
+		package simulator;
+		import eu.scape_project.pw.simulator.engine.model.AbstractCondition;
+		import eu.scape_project.pw.simulator.engine.model.IEvent;
+		import eu.scape_project.pw.simulator.engine.model.state.ISimulationState;
+		
+		public class «c.name»Condition extends AbstractCondition {
+			
+			
+			@Override 
+			protected boolean check(ISimulationState state) {
+			return («compileCondition(c.condition)»);
+			}
+			
+			@Override
+			public IEvent getEvent(long time) { 
+			
+			 IEvent tmp = new «c.schedule.name»();
+			 tmp.setScheduleTime(time);
+			 return tmp;	
+			} 
+		}
+	'''
+	
+	def compileCondition(Condition c) {
+		var temp = ''''''
+		temp = temp + '''((Double)state.getStateVariable("''' + c.leftSide + '''")).doubleValue()'''
+		temp = temp + c.operator
+		temp = temp + c.rightSide
+	}
+	
 }
