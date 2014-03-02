@@ -51,9 +51,9 @@ public class GraphComposite extends Composite {
 		viewer.setContentProvider(new MeasureContentProvider());
 		viewer.setLabelProvider(new MeasureLabelProvider());
 		viewer.setInput(generator.getMeasureTree());
-		viewer.getTree().setLayoutData(new GridData(400, 200));
+		viewer.getTree().setLayoutData(new GridData(200, 500));
 		chartCanvas = new ChartCanvas(this, SWT.NONE);
-		chartCanvas.setLayoutData(new GridData(600, 400));
+		chartCanvas.setLayoutData(new GridData(800, 500));
 		viewer.getTree().addSelectionListener(new SelectionListener() {
 
 			public void widgetSelected(SelectionEvent e) {

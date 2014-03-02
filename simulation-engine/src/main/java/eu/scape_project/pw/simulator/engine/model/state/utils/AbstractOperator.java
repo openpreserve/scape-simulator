@@ -20,5 +20,14 @@ public abstract class AbstractOperator implements IOperator {
 	public void addVariableName(String name) {
 		references.add(name);
 	}
+	
+	@Override
+	public void removeVariableName(String name) {
+		for (String r : references) {
+			if (r.compareTo(name)==0) {
+				references.remove(r);
+			}
+		}
+	}
 
 }

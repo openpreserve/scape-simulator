@@ -16,5 +16,9 @@ public interface ISimulationState {
 	
 	void addAutoVariable(String name, IOperator operator);
 	
+	void addVariableToAutoVariable(String auto, String variable);
+	
+	void removeVariableToAutoVariable(String auto, String variable);
+	
 	Iterator getIterator();
 }

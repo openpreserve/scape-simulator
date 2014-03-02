@@ -3,41 +3,49 @@ grammar eu.scape_project.pw.Simulator with org.eclipse.xtext.xbase.Xbase
 generate simulator "http://www.scape_project.eu/pw/Simulator"
 
 Simulation : 
-	'Simulation' name=ValidID '{'
+	'SIMULATION' name=ValidID 
 		'runs' '=' runs=INT
 		'entities:' (entities+=Entity)*
 		'events:' (events+=Event)*
 		'scheduling:' (scheduling+=Scheduling)*
-	'}'
+	'ENDSIMULATION'
 ;
 
 Event :
-	'event' name=ValidID '{'
+	'EVENT' name=ValidID 
 		expression=Expression
-	'}'
+	'ENDEVENT'
 ;
 
-Expression: RExpression | OExpression; 
+Expression: RExpression | OExpression | DeleteCollection | AddCollection; 
 
 RExpression : 
-	'repeat' number=INT '{'
+	'REPEAT' number=INT 
 		(expression+=Expression)+
-	'}' 
+	'ENDREPEAT' 
 ;
 
+DeleteCollection : 
+ 'delete' collection=Identifier 'from' storage=[Storage]
+ ;
+ 
+ AddCollection : 
+  'store' collection=Identifier 'to' storage=[Storage]	
+ ;
+ 
 OExpression : PExpression | EExpression | MExpression;
 
 PExpression : leftSide=Identifier '+=' rightSide=RightSide;
 EExpression : leftSide=Identifier '=' rightSide=RightSide;
 MExpression : leftSide=Identifier '-=' rightSide=RightSide;
 
-Identifier : ID ('.' ID) * '.' ATTRIBUTES;
+Identifier : ID ('.' ID) * ('.' ATTRIBUTES)*;
 
 ATTRIBUTES: 'size';
 
-RightSide : Random;
+RightSide : Random | Descrete;
 
-Descrete : INT;
+Descrete : number=INT;
 
 Random : Uniform | Normal;
 
@@ -45,28 +53,30 @@ Uniform: 'Uniform''('a=INT','b=INT')';
 
 Normal: 'Normal''('mean=INT','std=INT')';
 
-Entity : Collection ; 
+Entity : Collection | Storage  ; 
 
 Collection : 
-	'collection' name=ID '{' 
+	'COLLECTION' name=ID  
 		
 		('size' '=' size=INT)?
-		(subCollections+=Collection)*	
-		
-	'}' 
+		(subCollections+=Collection)*
+		('stored:' (storage+=[Storage] (',' storage+=[Storage])*))*			
+	'ENDCOLLECTION'
 ;
+
+Storage : HardDisk ;
+
+HardDisk : 'DISKS' name=ID  capacity=INT 'ENDDISKS';
 
 
 Scheduling: EventScheduling | ObserverScheduling | ConditionalScheduling;
 
 EventScheduling :
-	'schedule ' schedule=[Event] 
-	'{'
+	'SCHEDULE' schedule=[Event] 
 		('start''=' start=INT ';')?
 		('end' '=' end=INT ';')?
 		('every' '=' every=INT ';')?
-			
-	'}'
+	'ENDSCHEDULE'
 ;
 
 ObserverScheduling: 
@@ -76,8 +86,8 @@ ObserverScheduling:
 ;
 
 ConditionalScheduling : 
-	'condition' name=ValidID 'when' (condition=Condition) '=>' schedule=[Event]
-	'endcondition'
+	'CONDITION' name=ValidID 'when' (condition=Condition) '=>' schedule=[Event]
+	'ENDCONDITION'
 ;
 
 Condition: 

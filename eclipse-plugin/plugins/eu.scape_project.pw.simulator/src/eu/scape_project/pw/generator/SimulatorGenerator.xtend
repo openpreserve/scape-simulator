@@ -4,11 +4,15 @@
 package eu.scape_project.pw.generator
 
 import com.google.inject.Inject
+import eu.scape_project.pw.simulator.AddCollection
 import eu.scape_project.pw.simulator.Condition
 import eu.scape_project.pw.simulator.ConditionalScheduling
+import eu.scape_project.pw.simulator.DeleteCollection
+import eu.scape_project.pw.simulator.Descrete
 import eu.scape_project.pw.simulator.EExpression
 import eu.scape_project.pw.simulator.Event
 import eu.scape_project.pw.simulator.Expression
+import eu.scape_project.pw.simulator.HardDisk
 import eu.scape_project.pw.simulator.MExpression
 import eu.scape_project.pw.simulator.Normal
 import eu.scape_project.pw.simulator.OExpression
@@ -145,6 +149,8 @@ import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 		switch e {
 			RExpression: compileRExpression(e)
 			OExpression: compileOExpression(e)
+			AddCollection: compileAddCollection(e)
+			DeleteCollection: compileDeleteCollection(e)
 		}
 
 	}
@@ -206,7 +212,23 @@ import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 		temp
 	}
 
+	def compileAddCollection(AddCollection a) {
+		var k = a.storage as HardDisk 
+		var temp = '''state.addVariableToAutoVariable("«k.name».used", "«a.collection».size");'''
+		temp
+	}
+	
+	def compileDeleteCollection(DeleteCollection a) {
+		var k = a.storage as HardDisk 
+		var temp = '''state.removeVariableToAutoVariable("«k.name».used", "«a.collection».size");'''
+		temp
+	}
+	
 	def compileRightSide(RightSide rs) {
+		if (rs instanceof Descrete) {
+			var d = rs as Descrete
+			return '''new Double(«d.number»)''' 
+		}
 		switch rs {
 			Uniform: compileRandom(rs)
 			Normal: compileRandom(rs)
@@ -225,7 +247,9 @@ import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 	def compileObserverScheduling(ObserverScheduling e) '''
 		
 		package simulator;
-		import eu.scape_project.*;
+		import eu.scape_project.pw.simulator.engine.model.EventObserver;
+		import eu.scape_project.pw.simulator.engine.model.IEvent;
+		import eu.scape_project.pw.simulator.engine.model.state.ISimulationState;
 		public class «e.observes.name»2«e.schedule.name» extends EventObserver {
 			
 			public «e.observes.name»2«e.schedule.name» () {
@@ -233,7 +257,7 @@ import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 			}
 			
 			@Override
-			public IEvent schedules(SimulationState state) { 
+			public IEvent schedules(ISimulationState state) { 
 			
 			 long currentTime = state.getTime();
 			 IEvent tmp = new «e.schedule.name»();

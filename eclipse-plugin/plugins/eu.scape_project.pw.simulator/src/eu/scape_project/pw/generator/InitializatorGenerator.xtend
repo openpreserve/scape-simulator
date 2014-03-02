@@ -3,8 +3,10 @@ package eu.scape_project.pw.generator
 import eu.scape_project.pw.simulator.Collection
 import eu.scape_project.pw.simulator.ConditionalScheduling
 import eu.scape_project.pw.simulator.EventScheduling
+import eu.scape_project.pw.simulator.HardDisk
 import eu.scape_project.pw.simulator.ObserverScheduling
 import eu.scape_project.pw.simulator.Simulation
+import eu.scape_project.pw.simulator.Storage
 import java.util.ArrayList
 import java.util.HashMap
 import java.util.List
@@ -61,12 +63,26 @@ class InitializatorGenerator {
 
 	def generateSimulationState(Simulation e) {
 		var temp = ''''''
+		for (ent : e.entities.filter(typeof(Storage))) {
+			temp = temp + passStorage(ent)
+		}
 		for (ent : e.entities.filter(typeof(Collection))) {
 			temp = temp + passEntity(ent, "")
 		}
 		return temp
 	}
 
+	def passStorage(Storage s) {
+		var temp = '''''';
+		if ( s instanceof HardDisk ) {
+			var h = s as HardDisk
+			temp = temp + '''state.addStateVariable("«h.name + ".capacity"»" ,new Double(«h.capacity») );
+				'''
+			temp = temp + '''state.addAutoVariable("«h.name + ".used"»" ,new SumOperator() );
+				'''
+			
+		}
+	}
 	def passEntity(Collection col, String name) {
 		var temp = '''''';
 		var tempName = "";
@@ -82,7 +98,13 @@ class InitializatorGenerator {
 				'''
 			types.put(tempName + ".size", "float");
 		}
-
+		for (Storage s: col.storage) {
+			if (s instanceof HardDisk) {
+				var h = s as HardDisk
+				temp = temp + '''state.addVariableToAutoVariable("«h.name».used", "«tempName».size");
+				'''
+			}
+		}
 		/*for (k : col.keyValues) {
 			if (k instanceof KeyValueInt) {
 				var t = k as KeyValueInt

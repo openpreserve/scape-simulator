@@ -58,7 +58,7 @@ public class ChartLoader {
 		// chart.getLegend().setVisible(true);
 		//
 		// // 4. Set title
-		// chart.getTitle().getLabel().getCaption().setValue("Chart");
+		chart.getTitle().getLabel().getCaption().setValue("Chart");
 		// chart.getTitle().getLabel().getCaption().getFont().setSize(14);
 		// chart.getTitle().getLabel().getCaption().getFont().setName("test");
 

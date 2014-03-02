@@ -52,6 +52,18 @@ public class SimulationState implements ISimulationState {
 	public void addAutoVariable(String name, IOperator operator) {
 		autoVariables.put(name, operator);
 	}
+	
+	@Override
+	public void addVariableToAutoVariable(String auto, String variable) {
+		IOperator op = autoVariables.get(auto);
+		op.addVariableName(variable);
+	}
+	
+	@Override
+	public void removeVariableToAutoVariable(String auto, String variable) {
+		IOperator op = autoVariables.get(auto);
+		op.removeVariableName(variable);
+	}
 
 	private class StateIterator implements Iterator {
 
