@@ -4,6 +4,8 @@ generate simulator "http://www.scape_project.eu/pw/Simulator"
 
 Simulation : 
 	'SIMULATION' name=ValidID 
+		'start' '=' startMonth = INT '/' startYear = INT 
+		'stop' '=' stopMonth = INT '/' stopYear = INT 
 		'runs' '=' runs=INT
 		'entities:' (entities+=Entity)*
 		'events:' (events+=Event)*
@@ -53,7 +55,7 @@ Uniform: 'Uniform''('a=INT','b=INT')';
 
 Normal: 'Normal''('mean=INT','std=INT')';
 
-Entity : Collection | Storage  ; 
+Entity : Collection | Storage  | Format ; 
 
 Collection : 
 	'COLLECTION' name=ID  
@@ -68,6 +70,14 @@ Storage : HardDisk ;
 
 HardDisk : 'DISKS' name=ID  capacity=INT 'ENDDISKS';
 
+Format : 
+	'family' name=ID 
+	(entries+=Entry)+   
+;
+
+Entry : 
+	'(' name=ID ',' year=INT ',' p=Number ',' q=Number ',' m=Number ')'
+;
 
 Scheduling: EventScheduling | ObserverScheduling | ConditionalScheduling;
 

@@ -3,6 +3,7 @@ package eu.scape_project.pw.generator
 import eu.scape_project.pw.simulator.Collection
 import eu.scape_project.pw.simulator.ConditionalScheduling
 import eu.scape_project.pw.simulator.EventScheduling
+import eu.scape_project.pw.simulator.Format
 import eu.scape_project.pw.simulator.HardDisk
 import eu.scape_project.pw.simulator.ObserverScheduling
 import eu.scape_project.pw.simulator.Simulation
@@ -18,7 +19,8 @@ class InitializatorGenerator {
 
 	//Resource res;
 	Map<String, String> types = new HashMap<String, String>();
-
+	Map<String, List<Double>> formatPerc; 
+	FormatPercCalculator fpc ; 
 	boolean iOperatorDefined = false;
 	
 	def getVarType(String name) {
@@ -27,7 +29,9 @@ class InitializatorGenerator {
 
 	def generateInitializator(Resource resource, IFileSystemAccess fsa) {
 
-		//res = resource;
+		fpc = new FormatPercCalculator();
+		formatPerc = fpc.calculatePerc(resource);
+		
 		for (e : resource.allContents.toIterable.filter(typeof(Simulation))) {
 
 			//generate SimulatorStateFactory
@@ -68,6 +72,9 @@ class InitializatorGenerator {
 		}
 		for (ent : e.entities.filter(typeof(Collection))) {
 			temp = temp + passEntity(ent, "")
+		}
+		for (ent : e.entities.filter(typeof(Format))) {
+			temp = temp + passFormat(ent)
 		}
 		return temp
 	}
@@ -158,6 +165,17 @@ class InitializatorGenerator {
 		return temp
 	}
 
+	def passFormat(Format f) {
+		var temp = ''''''
+		for (e :formatPerc.entrySet) {
+			var name = e.key;
+			var List<Double> value = e.value;
+			temp = temp + '''state.addStateVariable("«name»" ,new Double(«value.get(0)») );
+				'''
+		}
+		return temp;
+	}
+	
 	def generateEventContainerFactory(Simulation e) '''
 		package simulator;
 		import eu.scape_project.pw.simulator.engine.container.AbstractEventContainerFactory;
@@ -178,7 +196,8 @@ class InitializatorGenerator {
 		'''
 		for (sch : e.scheduling.filter(typeof(EventScheduling))) {
 			temp = temp + generateEventSchedules(sch)
-		}
+		}	
+		temp = temp + generateFormatEvents()
 		return temp
 	}
 
@@ -194,6 +213,26 @@ class InitializatorGenerator {
 			} 
 		'''
 		return temp
+	}
+	
+	def generateFormatEvents() {
+		var temp = '''IEvent formatEvent;
+		'''
+		for (e :formatPerc.entrySet) {
+			var name = e.key;
+			var List<Double> value = e.value;
+			var time = 0;
+			for (k:value) {
+				temp = temp + '''
+					formatEvent = new SetFormatEntryPerc("«name»",new Double(«k»));
+					formatEvent.setScheduleTime(«time»);
+					eventContainer.addEvent(formatEvent);
+				'''		
+				time = time + 12 
+			}
+			
+		}
+		return temp;
 	}
 
 	def generateEventObserverContainerFactory(Simulation e) '''

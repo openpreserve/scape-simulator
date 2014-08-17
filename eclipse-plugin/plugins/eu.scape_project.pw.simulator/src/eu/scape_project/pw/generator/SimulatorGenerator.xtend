@@ -40,6 +40,7 @@ class SimulatorGenerator implements IGenerator {
 			fsa.generateFile("/simulator/" + e.name + "SimulationProperties.java", e.createProperties)
 			fsa.generateFile("/simulator/" + e.name + ".java", e.createMain)
 			fsa.generateFile("/simulator/" + e.name + "SimulatorModule.java", e.createModule)
+			fsa.generateFile("/simulator/"+"SetFormatEntryPerc.java", format)
 		}
 		iGenerator.generateInitializator(resource, fsa);
 
@@ -59,6 +60,30 @@ class SimulatorGenerator implements IGenerator {
 
 	}
 
+	def format() '''
+	package simulator;
+	import eu.scape_project.pw.simulator.engine.model.Event;
+	import eu.scape_project.pw.simulator.engine.model.state.ISimulationState;
+	import eu.scape_project.pw.simulator.engine.utils.RandomNumberGenerator;
+		
+	public class SetFormatEntryPerc extends Event{ 
+			 	
+		private String formatName;
+		private Double value;
+		
+		public SetFormatEntryPerc(String formatName, Double value) {
+			name = "SetFormatEntryPerc";
+			this.formatName = formatName;
+			this.value = value;
+		}
+		
+		@Override
+		protected void run(ISimulationState state) {
+			state.addStateVariable(formatName, value);
+		}
+	}
+	
+	'''
 	/**
  	 * 
  	 */
