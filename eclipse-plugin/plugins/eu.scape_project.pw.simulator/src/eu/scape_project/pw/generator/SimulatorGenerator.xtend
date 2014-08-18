@@ -4,24 +4,8 @@
 package eu.scape_project.pw.generator
 
 import com.google.inject.Inject
-import eu.scape_project.pw.simulator.AddCollection
-import eu.scape_project.pw.simulator.Condition
-import eu.scape_project.pw.simulator.ConditionalScheduling
-import eu.scape_project.pw.simulator.DeleteCollection
-import eu.scape_project.pw.simulator.Descrete
-import eu.scape_project.pw.simulator.EExpression
 import eu.scape_project.pw.simulator.Event
-import eu.scape_project.pw.simulator.Expression
-import eu.scape_project.pw.simulator.HardDisk
-import eu.scape_project.pw.simulator.MExpression
-import eu.scape_project.pw.simulator.Normal
-import eu.scape_project.pw.simulator.OExpression
-import eu.scape_project.pw.simulator.ObserverScheduling
-import eu.scape_project.pw.simulator.PExpression
-import eu.scape_project.pw.simulator.RExpression
-import eu.scape_project.pw.simulator.RightSide
 import eu.scape_project.pw.simulator.Simulation
-import eu.scape_project.pw.simulator.Uniform
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
@@ -43,11 +27,11 @@ class SimulatorGenerator implements IGenerator {
 			fsa.generateFile("/simulator/"+"SetFormatEntryPerc.java", format)
 		}
 		iGenerator.generateInitializator(resource, fsa);
-
+/* 
 		for (e : resource.allContents.toIterable.filter(typeof(Event))) {
 			fsa.generateFile("/simulator/" + e.name + ".java", e.compileEvent)
 		}
-
+ 
 		for (e : resource.allContents.toIterable.filter(typeof(ObserverScheduling))) {
 			fsa.generateFile("/simulator/" + e.observes.name + "2" + e.schedule.name + ".java",
 				e.compileObserverScheduling)
@@ -57,7 +41,7 @@ class SimulatorGenerator implements IGenerator {
 			fsa.generateFile("/simulator/" + e.name + "Condition.java",
 				e.compileConditionalScheduling)
 		}
-
+*/
 	}
 
 	def format() '''
@@ -146,7 +130,7 @@ import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 			}
 		}
 	'''
-
+/* 
 	def compileEvent(Event e) '''
 		
 		package simulator;
@@ -168,7 +152,7 @@ import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 		}
 		
 	'''
-
+ 
 	def compileExpression(Expression e) {
 
 		switch e {
@@ -322,5 +306,5 @@ import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 		temp = temp + c.operator
 		temp = temp + c.rightSide
 	}
-	
+	*/
 }

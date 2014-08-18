@@ -20,7 +20,7 @@ Event :
 ;
 
 Expression: RExpression | OExpression | DeleteCollection | AddCollection; 
-
+ 
 RExpression : 
 	'REPEAT' number=INT 
 		(expression+=Expression)+
@@ -59,11 +59,17 @@ Entity : Collection | Storage  | Format ;
 
 Collection : 
 	'COLLECTION' name=ID  
-		
-		('size' '=' size=INT)?
-		(subCollections+=Collection)*
+		(entries+=CollectionEntry)+
+		/*('size' '=' size=INT)?
+		(subCollections+=Collection)* */
 		('stored:' (storage+=[Storage] (',' storage+=[Storage])*))*			
 	'ENDCOLLECTION'
+;
+QName :
+	ID('.'ID)*
+;
+CollectionEntry : 
+	'(' 'format' '=' format=[Entry|QName] ',' 'size' '=' size=Number ',' 'number_of_objects' '=' num_objects=Number ')'
 ;
 
 Storage : HardDisk ;
@@ -105,7 +111,7 @@ Condition:
 ;
 
 Opt : Greater | Smaller | Equal ;
-
+ 
 Greater : '>';
 Smaller : '<';
 Equal : '==';

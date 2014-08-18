@@ -1,14 +1,12 @@
 package eu.scape_project.pw.generator
 
 import eu.scape_project.pw.simulator.Collection
-import eu.scape_project.pw.simulator.ConditionalScheduling
 import eu.scape_project.pw.simulator.EventScheduling
 import eu.scape_project.pw.simulator.Format
 import eu.scape_project.pw.simulator.HardDisk
 import eu.scape_project.pw.simulator.ObserverScheduling
 import eu.scape_project.pw.simulator.Simulation
 import eu.scape_project.pw.simulator.Storage
-import java.util.ArrayList
 import java.util.HashMap
 import java.util.List
 import java.util.Map
@@ -71,7 +69,7 @@ class InitializatorGenerator {
 			temp = temp + passStorage(ent)
 		}
 		for (ent : e.entities.filter(typeof(Collection))) {
-			temp = temp + passEntity(ent, "")
+			temp = temp + passEntity(ent)
 		}
 		for (ent : e.entities.filter(typeof(Format))) {
 			temp = temp + passFormat(ent)
@@ -90,21 +88,28 @@ class InitializatorGenerator {
 			
 		}
 	}
-	def passEntity(Collection col, String name) {
+	def passEntity(Collection col) {
 		var temp = '''''';
-		var tempName = "";
-		if (name == "") {
-			tempName = col.name
-		} else {
-			tempName = name + "." + col.name
+		var tempName = col.name;
+		temp = temp + '''state.addAutoVariable("«tempName».size", new SumOperator());
+						 state.addAutoVariable("«tempName».number_of_objects", new SumOperator());
+						 '''
+		for (entry : col.entries) {
+			var v1 = tempName + '.' + entry.format.name + '.' + 'size'
+			var v2 = tempName + '.' + entry.format.name + '.' + 'number_of_objects'
+			temp = temp + '''state.addStateVariable("«v1»", new Double(«entry.size»));
+							 state.addStateVariable("«v2»", new Double(«entry.num_objects»));'''
+			temp = temp + '''state.addVariableToAutoVariable("«tempName».size","«v1»");
+							 state.addVariableToAutoVariable("«tempName».number_of_objects","«v2»"); 
+							 '''
 		}
-
+		
 		// add size
-		if (col.size != 0) {
+		/*if (col.size != 0) {
 			temp = temp + '''state.addStateVariable("«tempName + ".size"»" ,new Double(«col.size») );
 				'''
 			types.put(tempName + ".size", "float");
-		}
+		}*/
 		for (Storage s: col.storage) {
 			if (s instanceof HardDisk) {
 				var h = s as HardDisk
@@ -112,6 +117,7 @@ class InitializatorGenerator {
 				'''
 			}
 		}
+		return temp
 		/*for (k : col.keyValues) {
 			if (k instanceof KeyValueInt) {
 				var t = k as KeyValueInt
@@ -132,7 +138,7 @@ class InitializatorGenerator {
 				'''
 				types.put(tempName + "." + k.key, "float")
 			}
-		}*/
+		}
 		var subcol = new ArrayList<String>();
 		if (col.subCollections.length == 0) {
 			return temp
@@ -143,7 +149,7 @@ class InitializatorGenerator {
 			}
 			temp = temp + addAutoVariables(tempName, subcol)
 			return temp
-		}
+		}*/
 
 	}
 
@@ -273,11 +279,11 @@ class InitializatorGenerator {
 	
 	def generateConditionalEvent(Simulation e) {
 		var temp = ''''''
-		for (s : e.scheduling.filter(typeof(ConditionalScheduling))) {
+	/* 	for (s : e.scheduling.filter(typeof(ConditionalScheduling))) {
 			temp = temp + '''
 				icContainer.addCondition(new «s.name»Condition());
 			'''
-		}
+		}*/
 		return temp
 	}
 		
