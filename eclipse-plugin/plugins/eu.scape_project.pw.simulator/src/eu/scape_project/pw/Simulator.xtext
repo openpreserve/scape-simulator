@@ -13,48 +13,6 @@ Simulation :
 	'ENDSIMULATION'
 ;
 
-Event :
-	'EVENT' name=ValidID 
-		expression=Expression
-	'ENDEVENT'
-;
-
-Expression: RExpression | OExpression | DeleteCollection | AddCollection; 
- 
-RExpression : 
-	'REPEAT' number=INT 
-		(expression+=Expression)+
-	'ENDREPEAT' 
-;
-
-DeleteCollection : 
- 'delete' collection=Identifier 'from' storage=[Storage]
- ;
- 
- AddCollection : 
-  'store' collection=Identifier 'to' storage=[Storage]	
- ;
- 
-OExpression : PExpression | EExpression | MExpression;
-
-PExpression : leftSide=Identifier '+=' rightSide=RightSide;
-EExpression : leftSide=Identifier '=' rightSide=RightSide;
-MExpression : leftSide=Identifier '-=' rightSide=RightSide;
-
-Identifier : ID ('.' ID) * ('.' ATTRIBUTES)*;
-
-ATTRIBUTES: 'size';
-
-RightSide : Random | Descrete;
-
-Descrete : number=INT;
-
-Random : Uniform | Normal;
-
-Uniform: 'Uniform''('a=INT','b=INT')';
-
-Normal: 'Normal''('mean=INT','std=INT')';
-
 Entity : Collection | Storage  | Format ; 
 
 Collection : 
@@ -84,6 +42,49 @@ Format :
 Entry : 
 	'(' name=ID ',' year=INT ',' p=Number ',' q=Number ',' m=Number ')'
 ;
+
+
+Event :
+	'EVENT' name=ValidID 
+		expression=Expression
+	'ENDEVENT'
+;
+
+Expression: Ingest |  DeleteCollection | AddCollection; 
+ 
+ Ingest :  IngestFormat | IngestEntry;
+ 
+IngestFormat: 
+	'ingest' 'family'  format=[Format] '(' num_of_objects=Num ',' size=Num ')' 'to' collection=[Collection]
+;
+
+IngestEntry: 
+	'ingest' 'format' format=[Entry|QName] '(' num_of_objects=Num ',' size=Num ')' 'to' collection=[Collection]
+;
+
+DeleteCollection : 
+ 'delete' collection=Identifier 'from' storage=[Storage]
+ ;
+ 
+ AddCollection : 
+  'store' collection=Identifier 'to' storage=[Storage]	
+ ;
+ 
+
+Identifier : ID ('.' ID) * ('.' ATTRIBUTES)*;
+
+ATTRIBUTES: 'size';
+
+Num : Random | Descrete;
+
+Descrete : number=Number;
+
+Random : Uniform | Normal;
+
+Uniform: 'Uniform''('a=INT','b=INT')';
+
+Normal: 'Normal''('mean=INT','std=INT')';
+
 
 Scheduling: EventScheduling | ObserverScheduling | ConditionalScheduling;
 
