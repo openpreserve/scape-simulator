@@ -12,6 +12,12 @@ public interface ISimulationState {
 	
 	void addStateVariable(String name, Object value);
 	
+	void incStateVariable(String name, Double value);
+	
+	void decStateVariable(String name, Double Value);
+	
+	void multStateVariable(String name, Double value);
+	
 	Object getStateVariable(String name);
 	
 	void addAutoVariable(String name, IOperator operator);

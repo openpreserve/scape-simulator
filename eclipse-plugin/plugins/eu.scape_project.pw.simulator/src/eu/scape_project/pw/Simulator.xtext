@@ -52,13 +52,13 @@ Event :
 
 Expression: Ingest |  DeleteCollection | AddCollection; 
  
- Ingest :  IngestFormat | IngestEntry;
+ Ingest :  IngestFamily | IngestFormat;
  
-IngestFormat: 
+IngestFamily: 
 	'ingest' 'family'  format=[Format] '(' num_of_objects=Num ',' size=Num ')' 'to' collection=[Collection]
 ;
 
-IngestEntry: 
+IngestFormat: 
 	'ingest' 'format' format=[Entry|QName] '(' num_of_objects=Num ',' size=Num ')' 'to' collection=[Collection]
 ;
 

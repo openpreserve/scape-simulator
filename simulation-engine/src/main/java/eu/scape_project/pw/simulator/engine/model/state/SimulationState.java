@@ -36,6 +36,36 @@ public class SimulationState implements ISimulationState {
 	public void addStateVariable(String name, Object value) {
 		stateVariables.put(name, value);
 	}
+	
+	@Override
+	public void incStateVariable(String name, Double value) {
+		double t = value.doubleValue();
+		if (stateVariables.containsKey(name)){
+			Double temp = (Double) stateVariables.get(name);
+			t += temp.doubleValue();
+		}
+		addStateVariable(name,t);
+	}
+
+	@Override
+	public void decStateVariable(String name, Double value) {
+		double t = value.doubleValue();
+		if (stateVariables.containsKey(name)){
+			Double temp = (Double) stateVariables.get(name);
+			t -= temp.doubleValue();
+		}
+		addStateVariable(name,t);
+	}
+	
+	@Override
+	public void multStateVariable(String name, Double value) {
+		double t = value.doubleValue();
+		if (stateVariables.containsKey(name)){
+			Double temp = (Double) stateVariables.get(name);
+			t *= temp.doubleValue();
+		}
+		addStateVariable(name,t);
+	}
 
 	@Override
 	public Object getStateVariable(String name) {
@@ -110,7 +140,8 @@ public class SimulationState implements ISimulationState {
 	}
 	
 	private Object getAutoVariable(IOperator operator) {
-		Object obj = null;
+		//Object obj = null;
+		Object obj = new Double(0); //hack
 		for (String n: operator.getVariableNames()) {
 			if (obj == null) {
 				obj = getStateVariable(n);

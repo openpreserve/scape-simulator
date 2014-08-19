@@ -97,11 +97,14 @@ class InitializatorGenerator {
 		for (entry : col.entries) {
 			var v1 = tempName + '.' + entry.format.name + '.' + 'size'
 			var v2 = tempName + '.' + entry.format.name + '.' + 'number_of_objects'
-			temp = temp + '''state.addStateVariable("«v1»", new Double(«entry.size»));
-							 state.addStateVariable("«v2»", new Double(«entry.num_objects»));'''
-			temp = temp + '''state.addVariableToAutoVariable("«tempName».size","«v1»");
-							 state.addVariableToAutoVariable("«tempName».number_of_objects","«v2»"); 
+			temp = temp + '''
+				state.addStateVariable("«v1»", new Double(«entry.size»));
+				state.addStateVariable("«v2»", new Double(«entry.num_objects»));
 							 '''
+			temp = temp + '''
+				state.addVariableToAutoVariable("«tempName».size","«v1»");
+				state.addVariableToAutoVariable("«tempName».number_of_objects","«v2»"); 
+						'''
 		}
 		
 		// add size
