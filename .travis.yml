@@ -17,6 +17,6 @@ script:
   - cd ./simulation-engine
   - mvn test
   - cd ..
-  - cd ./eclipse-plugin
-  - mvn test
-  - cd ..
+#  - cd ./eclipse-plugin
+#  - mvn test
+#  - cd ..
