@@ -5,4 +5,6 @@ public interface ISimulationProperties {
 	String getName();
 	
 	int getNumberOfRuns();
+	
+	long getEndTime();
 }

@@ -4,7 +4,7 @@ import eu.scape_project.pw.simulator.engine.model.state.ISimulationState;
 
 public interface IEvent extends Comparable<IEvent> {
 
-	void execute(ISimulationState state);
+	boolean execute(ISimulationState state);
 	
 	long getScheduleTime();
 	

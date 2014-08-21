@@ -1,5 +1,7 @@
 package eu.scape_project.simulator.engine.processor;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -35,6 +37,8 @@ public class EventProcessor implements IEventProcessor {
 	private final ISimulationStateFactory simulationStateFactory;
 
 	private final IConditionalEventContainerFactory cecFactory;
+	
+	
 
 	@Inject
 	public EventProcessor(IEventContainerFactory eventContainerFactory,
@@ -67,13 +71,19 @@ public class EventProcessor implements IEventProcessor {
 					.getSimulationState();
 			IConditionalEventContainer ceContainer = cecFactory
 					.getConditionalEventContainer();
-
+			
+			// events that run longer than one cycle
+			List<IEvent> activities = new ArrayList<IEvent>();
+			
 			recorder.startRun(state, simulationRun);
 
 			boolean iCs = true;
-
-			while (!eventContainer.isEmpty()) {
-
+			
+			
+			//TODODODOD
+			while (state.getTime() <= properties.getEndTime()) {
+				
+				// schedule conditional events only at the end of each month 
 				if (state.getTime() != eventContainer.getNextEventTime()) {
 					if (iCs) {
 						eventContainer.addEvents(ceContainer.getEvents(state));
@@ -83,9 +93,12 @@ public class EventProcessor implements IEventProcessor {
 					recorder.record(state);
 					iCs = true;
 				}
+				activities = runActivities(activities, state);
 				IEvent event = eventContainer.getNextEvent();
 				state.setTime(event.getScheduleTime());
-				event.execute(state);
+				if (event.execute(state)) {
+					activities.add(event);
+				}
 				List<IEventObserver> tmp = eOContainer.get(event.getName());
 				if (tmp != null) {
 					for (IEventObserver observer : tmp) {
@@ -98,4 +111,15 @@ public class EventProcessor implements IEventProcessor {
 		recorder.stopSimulation(properties);
 	}
 
+	private List<IEvent> runActivities(List<IEvent>activities, ISimulationState state) {
+		List<IEvent> tempActivities = new ArrayList<IEvent>();
+		Iterator<IEvent> it = activities.iterator();
+		while (it.hasNext()) {
+			IEvent event = it.next();
+			if (event.execute(state)) {
+				tempActivities.add(event);
+			};
+		}
+		return tempActivities;
+	}
 }
