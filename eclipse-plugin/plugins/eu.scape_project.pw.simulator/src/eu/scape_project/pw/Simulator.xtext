@@ -50,7 +50,7 @@ Event :
 	'ENDEVENT'
 ;
 
-Expression: Ingest |  DeleteCollection | AddCollection; 
+Expression: Ingest | Migrate | DeleteCollection | AddCollection; 
  
  Ingest :  IngestFamily | IngestFormat;
  
@@ -60,6 +60,11 @@ IngestFamily:
 
 IngestFormat: 
 	'ingest' 'format' format=[Entry|QName] '(' num_of_objects=Num ',' size=Num ')' 'to' collection=[Collection]
+;
+
+Migrate : 
+	'migrate' 'in' collection=[Collection] 'family' familyFrom=[Format] ('format' formatFrom=[Entry|QName])* 'to' 'family' familyTo=[Format] 
+	   'format' formatTo=[Entry|QName] 'with' 'size relationship' '=' size_relationship=Number  
 ;
 
 DeleteCollection : 

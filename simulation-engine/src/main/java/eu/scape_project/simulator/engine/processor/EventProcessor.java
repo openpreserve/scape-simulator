@@ -1,7 +1,6 @@
 package eu.scape_project.simulator.engine.processor;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -37,8 +36,6 @@ public class EventProcessor implements IEventProcessor {
 	private final ISimulationStateFactory simulationStateFactory;
 
 	private final IConditionalEventContainerFactory cecFactory;
-	
-	
 
 	@Inject
 	public EventProcessor(IEventContainerFactory eventContainerFactory,
@@ -71,54 +68,68 @@ public class EventProcessor implements IEventProcessor {
 					.getSimulationState();
 			IConditionalEventContainer ceContainer = cecFactory
 					.getConditionalEventContainer();
-			
+
 			// events that run longer than one cycle
 			List<IEvent> activities = new ArrayList<IEvent>();
-			
+
 			recorder.startRun(state, simulationRun);
 
 			boolean iCs = true;
-			
-			
-			//TODODODOD
+
 			while (state.getTime() <= properties.getEndTime()) {
-				
-				// schedule conditional events only at the end of each month 
-				if (state.getTime() != eventContainer.getNextEventTime()) {
-					if (iCs) {
-						eventContainer.addEvents(ceContainer.getEvents(state));
-						iCs = false;
-						continue;
-					}
-					recorder.record(state);
-					iCs = true;
-				}
+				recorder.record(state);
+				// first execute already running events
 				activities = runActivities(activities, state);
-				IEvent event = eventContainer.getNextEvent();
-				state.setTime(event.getScheduleTime());
-				if (event.execute(state)) {
-					activities.add(event);
-				}
-				List<IEventObserver> tmp = eOContainer.get(event.getName());
-				if (tmp != null) {
-					for (IEventObserver observer : tmp) {
-						eventContainer.addEvent(observer.schedules(state));
+
+				// execute all events that are due on this time
+				while (eventContainer.getNextEventTime() == state.getTime()) {
+					IEvent event = eventContainer.getNextEvent();
+					if (event.execute(state)) {
+						activities.add(event);
+
+						List<IEventObserver> tmp = eOContainer.get(event
+								.getName());
+						if (tmp != null) {
+							for (IEventObserver observer : tmp) {
+								eventContainer.addEvent(observer
+										.schedules(state));
+							}
+						}
 					}
 				}
+
+				// schedule conditional events at the end of each time
+				eventContainer.addEvents(ceContainer.getEvents(state));
+
+				/*
+				 * // schedule conditional events only at the end of each month
+				 * if (state.getTime() != eventContainer.getNextEventTime()) {
+				 * if (iCs) {
+				 * eventContainer.addEvents(ceContainer.getEvents(state)); iCs =
+				 * false; continue; } recorder.record(state); iCs = true; }
+				 * IEvent event = eventContainer.getNextEvent();
+				 * state.setTime(event.getScheduleTime()); if
+				 * (event.execute(state)) { activities.add(event); }
+				 * List<IEventObserver> tmp = eOContainer.get(event.getName());
+				 * if (tmp != null) { for (IEventObserver observer : tmp) {
+				 * eventContainer.addEvent(observer.schedules(state)); } }
+				 */
+				
+				// not completely optimal
+				state.setTime(state.getTime() + 1);
 			}
 			recorder.stopRun(state, simulationRun);
 		}
 		recorder.stopSimulation(properties);
 	}
 
-	private List<IEvent> runActivities(List<IEvent>activities, ISimulationState state) {
+	private List<IEvent> runActivities(List<IEvent> activities,
+			ISimulationState state) {
 		List<IEvent> tempActivities = new ArrayList<IEvent>();
-		Iterator<IEvent> it = activities.iterator();
-		while (it.hasNext()) {
-			IEvent event = it.next();
+		for (IEvent event : activities) {
 			if (event.execute(state)) {
 				tempActivities.add(event);
-			};
+			}
 		}
 		return tempActivities;
 	}
