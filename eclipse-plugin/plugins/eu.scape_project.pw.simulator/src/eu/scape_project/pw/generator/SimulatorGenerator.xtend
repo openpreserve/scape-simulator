@@ -5,21 +5,25 @@ package eu.scape_project.pw.generator
 
 import com.google.inject.Inject
 import eu.scape_project.pw.simulator.AddCollection
+import eu.scape_project.pw.simulator.Command
 import eu.scape_project.pw.simulator.Condition
 import eu.scape_project.pw.simulator.ConditionalScheduling
 import eu.scape_project.pw.simulator.DeleteCollection
 import eu.scape_project.pw.simulator.Descrete
+import eu.scape_project.pw.simulator.Entry
 import eu.scape_project.pw.simulator.Event
-import eu.scape_project.pw.simulator.Expression
 import eu.scape_project.pw.simulator.HardDisk
 import eu.scape_project.pw.simulator.Ingest
 import eu.scape_project.pw.simulator.IngestFamily
 import eu.scape_project.pw.simulator.IngestFormat
+import eu.scape_project.pw.simulator.Migrate
 import eu.scape_project.pw.simulator.Normal
 import eu.scape_project.pw.simulator.Num
 import eu.scape_project.pw.simulator.ObserverScheduling
 import eu.scape_project.pw.simulator.Simulation
 import eu.scape_project.pw.simulator.Uniform
+import java.util.ArrayList
+import java.util.List
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
@@ -38,13 +42,14 @@ class SimulatorGenerator implements IGenerator {
 			fsa.generateFile("/simulator/" + e.name + "SimulationProperties.java", e.createProperties)
 			fsa.generateFile("/simulator/" + e.name + ".java", e.createMain)
 			fsa.generateFile("/simulator/" + e.name + "SimulatorModule.java", e.createModule)
-			fsa.generateFile("/simulator/"+"SetFormatEntryPerc.java", format)
+			fsa.generateFile("/simulator/" + "SetFormatEntryPerc.java", format)
 		}
 		iGenerator.generateInitializator(resource, fsa);
 		for (e : resource.allContents.toIterable.filter(typeof(Event))) {
 			fsa.generateFile("/simulator/" + e.name + ".java", e.compileEvent)
 		}
-/* 
+
+	/* 
  
 		for (e : resource.allContents.toIterable.filter(typeof(ObserverScheduling))) {
 			fsa.generateFile("/simulator/" + e.observes.name + "2" + e.schedule.name + ".java",
@@ -59,29 +64,31 @@ class SimulatorGenerator implements IGenerator {
 	}
 
 	def format() '''
-	package simulator;
-	import eu.scape_project.pw.simulator.engine.model.Event;
-	import eu.scape_project.pw.simulator.engine.model.state.ISimulationState;
-	import eu.scape_project.pw.simulator.engine.utils.RandomNumberGenerator;
-		
-	public class SetFormatEntryPerc extends Event{ 
-			 	
-		private String formatName;
-		private Double value;
-		
-		public SetFormatEntryPerc(String formatName, Double value) {
+		package simulator;
+		import eu.scape_project.pw.simulator.engine.model.Event;
+		import eu.scape_project.pw.simulator.engine.model.state.ISimulationState;
+		import eu.scape_project.pw.simulator.engine.utils.RandomNumberGenerator;
+			
+		public class SetFormatEntryPerc extends Event{ 
+				 	
+			private String formatName;
+			private Double value;
+			
+			public SetFormatEntryPerc(String formatName, Double value) {
 			name = "SetFormatEntryPerc";
 			this.formatName = formatName;
 			this.value = value;
+			}
+			
+			@Override
+			protected boolean run(ISimulationState state) {
+			state.addStateVariable(formatName, value);
+			return false;
+			}
 		}
 		
-		@Override
-		protected void run(ISimulationState state) {
-			state.addStateVariable(formatName, value);
-		}
-	}
-	
 	'''
+
 	/**
  	 * 
  	 */
@@ -160,44 +167,76 @@ import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 			}
 		
 				@Override
-				protected void run(ISimulationState state) {
-					«compileExpression(e.expression)»
+				protected boolean run(ISimulationState state) {
+					
+					«compileCallCommands(e)»
 				}
+				«compileCommands(e)»
 		}
 		
 	'''
- 
-	def compileExpression(Expression e) {
+
+	def compileCallCommands(Event e) {
+		var count = 1
+		var temp = ''''''
+		for (Command c : e.command) {
+			temp = temp + '''if(command«count»(state)) {
+					return true;
+				}'''
+			count = count + 1
+		}
+		temp = temp + ''' 
+			return false;
+		'''
+		return temp
+	}
+
+	def compileCommands(Event e) {
+		var temp =''''''
+		var count = 1
+		for (Command c: e.command) {
+			temp = temp + compileCommand(c, count)
+			count = count + 1
+		} 
+		return temp
+	}
+	
+	def compileCommand(Command e, int count) {
 
 		switch e {
-			Ingest: compileIngest(e)
-			AddCollection: compileAddCollection(e)
-			DeleteCollection: compileDeleteCollection(e)
+			Ingest: compileIngest(e, count)
+			Migrate: compileMigrate(e,count)
+			//AddCollection: compileAddCollection(e, count)
+			//DeleteCollection: compileDeleteCollection(e, count)
 		}
 
 	}
-	
-	def compileIngest(Ingest e) {
-		
+
+	def compileIngest(Ingest e, int count) {
+
 		switch e {
-			IngestFamily: compileIngestFamily(e)
-			IngestFormat: compileIngestFormat(e)
+			IngestFamily: compileIngestFamily(e, count)
+			IngestFormat: compileIngestFormat(e, count)
 		}
 	}
-	
-	def compileIngestFamily(IngestFamily e) {
-		var temp=''''''
+
+	def compileIngestFamily(IngestFamily e, int count) {
+		var temp = '''
+			private boolean checkIngest«count» = true;
+			private boolean command«count»(ISimulationState state) {
+			if (checkIngest«count») {
+				checkIngest«count»=false;
+		'''
 		var collName = e.collection.name
 		var formatName = e.format.name
-		temp = temp + 
-			'''double perc;
+		temp = temp + '''
+		double perc;
 			   long num = Math.round(«compileNum(e.num_of_objects)»);
 			   long numTemp;
 			   '''
-		for (entry:e.format.entries) {
+		for (entry : e.format.entries) {
 			var entryName = formatName + '.' + entry.name
-			temp = temp + 
-				'''perc = ((Double)state.getStateVariable("«entryName»")).doubleValue();
+			temp = temp + '''perc = ((Double)state.getStateVariable("«entryName»")).doubleValue();
 				'''
 			var collEntryNum = collName + '.' + entry.name + '.number_of_objects'
 			var collEntrySize = collName + '.' + entry.name + '.size'
@@ -205,48 +244,93 @@ import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 				numTemp = Math.round(perc*num);
 				state.incStateVariable("«collEntryNum»", new Double(numTemp));
 				for (int i=0; i<numTemp; i++) {
-		   			double size = «compileNum(e.size)»;
+				 			double size = «compileNum(e.size)»;
 					state.incStateVariable("«collEntrySize»",size); 
-		   		}
-		   		''' 
+						}
+					'''
 		}
-		return temp 
+		temp = temp + '''}
+		return false;
+		}
+		'''
+		return temp
 	}
-	
-	def compileIngestFormat(IngestFormat e) {
-		var temp = ''''''
+
+	def compileIngestFormat(IngestFormat e, int count) {
+		var temp = '''
+		private boolean checkIngest«count» = true;
+		private boolean command«count»(ISimulationState state) {
+		if (checkIngest«count») {
+			checkIngest«count»=false;	
+		'''
 		var collName = e.collection.name
 		var formatName = e.format.name
 		var sizeName = collName + '.' + formatName + '.size'
 		var numName = collName + '.' + formatName + '.number_of_objects'
-		temp = temp + 
-		'''long num = Math.round(«compileNum(e.num_of_objects)»);
+		temp = temp + '''long num = Math.round(«compileNum(e.num_of_objects)»);
 		   state.incStateVariable("«numName»", new Double(num));
 		   for (int i=0; i<num; i++) {
 		   	double size = «compileNum(e.size)»;
 			state.incStateVariable("«sizeName»",size); 
 		   }
 		   '''
-						 
+		temp = temp + '''
+		}
+		return false; 
+		}
+		'''
+
 		return temp
 	}
 
+	def compileMigrate(Migrate e, int count) 
+		'''private int numbOfMonths=-1;
+					  private double numberOfObjects = 0;
+					  private double sizeOfObjects = 0;
+		private boolean command«count»(ISimulationState state) {
+			numberOfObjects = «compileObjects(e, "number_of_objects")»;
+			sizeOfObjects = («compileObjects(e, "size")»)*«e.size_relationship»;
+			state.addStateVariable("«e.collectionTo.name+'.'+e.familyTo.name+'.'+e.formatTo.name+'.'+".number_of_objects"»",new Double(numberOfObjects));
+			state.addStateVariable("«e.collectionTo.name+'.'+e.familyTo.name+'.'+e.formatTo.name+'.'+".size"»",new Double(sizeOfObjects));
+			return false;
+		}''' 
+	
+	def compileObjects(Migrate m, String extens) {
+		var temp = ''''''
+		var collName = m.collectionFrom.name
+		var familyName = m.familyFrom.name
+		var name = collName + '.' + familyName
+		var List<Entry> entr = new ArrayList<Entry>()
+		
+		if (m.formatFrom != null) {
+			entr.add(m.formatFrom)	
+		} else {
+			entr.addAll(m.familyFrom.entries)
+			}
+			var k = ''
+			for (Entry e: entr) {
+				temp = temp + 
+					'''«k»((Double)state.getStateVariable("«name + '.' + e.name + '.' + extens»")).doubleValue()'''
+					k='+'
+			}
+		return temp
+	}
 	def compileAddCollection(AddCollection a) {
-		var k = a.storage as HardDisk 
-		var temp = '''state.addVariableToAutoVariable("«k.name».used", "«a.collection».size");'''
+		var k = a.storage as HardDisk
+		var temp = '''state.addVariableToAutoVariable("«k.name».used", "«a.collection.name».size");'''
 		temp
 	}
-	
+
 	def compileDeleteCollection(DeleteCollection a) {
-		var k = a.storage as HardDisk 
-		var temp = '''state.removeVariableToAutoVariable("«k.name».used", "«a.collection».size");'''
+		var k = a.storage as HardDisk
+		var temp = '''state.removeVariableToAutoVariable("«k.name».used", "«a.collection.name».size");'''
 		temp
 	}
-	
+
 	def compileNum(Num rs) {
 		if (rs instanceof Descrete) {
 			var d = rs as Descrete
-			return '''«d.number»''' 
+			return '''«d.number»'''
 		}
 		switch rs {
 			Uniform: compileRandom(rs)
@@ -254,15 +338,16 @@ import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 		}
 	}
 
-	
 	def compileRandom(Uniform u) {
 		var temp = '''RandomNumberGenerator.uniform(«u.a»,«u.b»)'''
 		temp
 	}
+
 	def compileRandom(Normal n) {
 		var temp = '''RandomNumberGenerator.normal(«n.mean»,«n.std»)'''
 		temp
 	}
+
 	def compileObserverScheduling(ObserverScheduling e) '''
 		
 		package simulator;
@@ -285,7 +370,7 @@ import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 			} 
 		} 
 	'''
-	
+
 	def compileConditionalScheduling(ConditionalScheduling c) '''
 		package simulator;
 		import eu.scape_project.pw.simulator.engine.model.AbstractCondition;
@@ -309,7 +394,7 @@ import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 			} 
 		}
 	'''
-	
+
 	def compileCondition(Condition c) {
 		var temp = ''''''
 		temp = temp + '''((Double)state.getStateVariable("''' + c.leftSide + '''")).doubleValue()'''

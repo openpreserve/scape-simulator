@@ -13,7 +13,7 @@ Simulation :
 	'ENDSIMULATION'
 ;
 
-Entity : Collection | Storage  | Format ; 
+Entity : Collection | Storage  | Format | Processing; 
 
 Collection : 
 	'COLLECTION' name=ID  
@@ -34,6 +34,10 @@ Storage : HardDisk ;
 
 HardDisk : 'DISKS' name=ID  capacity=INT 'ENDDISKS';
 
+Processing : 
+	'PROCESSING' name=ID 'number_of_nodes' '=' number_of_nodes=INT
+	'ENDPROCESSING' 
+;
 Format : 
 	'family' name=ID 
 	(entries+=Entry)+   
@@ -46,11 +50,11 @@ Entry :
 
 Event :
 	'EVENT' name=ValidID 
-		expression=Expression
+		(command+=Command)*
 	'ENDEVENT'
 ;
 
-Expression: Ingest | Migrate | DeleteCollection | AddCollection; 
+Command: Ingest | Migrate | DeleteCollection | AddCollection; 
  
  Ingest :  IngestFamily | IngestFormat;
  
@@ -63,16 +67,16 @@ IngestFormat:
 ;
 
 Migrate : 
-	'migrate' 'in' collection=[Collection] 'family' familyFrom=[Format] ('format' formatFrom=[Entry|QName])* 'to' 'family' familyTo=[Format] 
-	   'format' formatTo=[Entry|QName] 'with' 'size relationship' '=' size_relationship=Number  
+	'migrate' 'from' collectionFrom=[Collection] 'family' familyFrom=[Format] ('format' formatFrom=[Entry|QName])* 'to' collectionTo=[Collection]
+	'family' familyTo=[Format] 'format' formatTo=[Entry|QName] 'with' 'size_relationship' '=' size_relationship=Number  
 ;
 
 DeleteCollection : 
- 'delete' collection=Identifier 'from' storage=[Storage]
+ 'delete' collection=[Collection] 'from' storage=[Storage]
  ;
  
  AddCollection : 
-  'store' collection=Identifier 'to' storage=[Storage]	
+  'store' collection=[Collection] 'to' storage=[Storage]	
  ;
  
 

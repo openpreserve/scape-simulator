@@ -5,6 +5,7 @@ import eu.scape_project.pw.simulator.EventScheduling
 import eu.scape_project.pw.simulator.Format
 import eu.scape_project.pw.simulator.HardDisk
 import eu.scape_project.pw.simulator.ObserverScheduling
+import eu.scape_project.pw.simulator.Processing
 import eu.scape_project.pw.simulator.Simulation
 import eu.scape_project.pw.simulator.Storage
 import java.util.HashMap
@@ -68,6 +69,9 @@ class InitializatorGenerator {
 		for (ent : e.entities.filter(typeof(Storage))) {
 			temp = temp + passStorage(ent)
 		}
+		for(ent : e.entities.filter(typeof(Processing))) {
+			temp = temp + passProcessing(ent)
+		}
 		for (ent : e.entities.filter(typeof(Collection))) {
 			temp = temp + passEntity(ent)
 		}
@@ -87,6 +91,13 @@ class InitializatorGenerator {
 				'''
 			
 		}
+	}
+	def passProcessing(Processing p) {
+		var temp = ''''''
+		temp = temp + '''state.addStateVariable("«p.name + ".number_of_nodes"»", new Double(«p.number_of_nodes»));
+		'''
+		temp = temp + '''state.addStateVariable("«p.name + ".nodes.used"»", new Double(0));
+		'''
 	}
 	def passEntity(Collection col) {
 		var temp = '''''';
