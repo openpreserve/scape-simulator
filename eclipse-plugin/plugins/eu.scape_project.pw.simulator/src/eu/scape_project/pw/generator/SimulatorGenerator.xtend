@@ -100,11 +100,15 @@ class SimulatorGenerator implements IGenerator {
 			
 			«s.name»SimulationProperties() {
 				name="«s.name»";
-				numberOfRuns = «s.runs»;		
+				numberOfRuns = «s.runs»;
+				endTime = «compileEndTime(s)»;
+						
 			}
 		}
 	'''
-
+def compileEndTime(Simulation s) {
+	return (s.stopYear - s.startYear -1)*12 + 13 - s.startMonth + s.stopMonth
+}
 	/**
 	 * generate main file 
 	 */

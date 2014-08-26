@@ -71,16 +71,19 @@ class FormatPercCalculator {
 			println(percs);
 			formats.put(name,percs);	
 		}
-			println(sum);
 		for (entry : f.entries) {
 			name = f.name + '.' + entry.name;
 			var List<Double> value = formats.get(name)
 			println("value=" + value)
+			println("sum=" + sum)
 			var List<Double> temp = new ArrayList<Double>()
 			for (int i : 0 .. sum.length-1) {
 				var k = value.get(i);
 				var z = sum.get(i);
 				var r = k/z;
+				if (r < 0.0000001) {
+					r = 0;
+				}
 				temp.add(r);
 			} 
 			println("temp=" + temp)
