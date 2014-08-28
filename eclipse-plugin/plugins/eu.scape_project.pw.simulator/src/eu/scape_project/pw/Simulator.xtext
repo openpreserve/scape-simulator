@@ -17,7 +17,7 @@ Entity : Collection | Storage  | Format | Processing;
 
 Collection : 
 	'COLLECTION' name=ID  
-		(entries+=CollectionEntry)+
+		(entries+=CollectionEntry)*
 		/*('size' '=' size=INT)?
 		(subCollections+=Collection)* */
 		('stored:' (storage+=[Storage] (',' storage+=[Storage])*))*			
@@ -32,7 +32,7 @@ CollectionEntry :
 
 Storage : HardDisk ;
 
-HardDisk : 'DISKS' name=ID  capacity=INT 'ENDDISKS';
+HardDisk : 'DISKS' name=ID  capacity=Number 'ENDDISKS';
 
 Processing : 
 	'PROCESSING' name=ID 'number_of_nodes' '=' number_of_nodes=INT
@@ -99,8 +99,8 @@ Scheduling: EventScheduling | ObserverScheduling | ConditionalScheduling;
 
 EventScheduling :
 	'SCHEDULE' schedule=[Event] 
-		('start''=' start=INT ';')?
-		('end' '=' end=INT ';')?
+		('start''=' startMonth=INT '/' startYear=INT ';')?
+		('end' '=' endMonth=INT '/' endYear=INT ';')?
 		('every' '=' every=INT ';')?
 	'ENDSCHEDULE'
 ;
@@ -117,7 +117,7 @@ ConditionalScheduling :
 ;
 
 Condition: 
-	leftSide=Identifier operator=Opt rightSide=INT 
+	leftSide=Identifier operator=Opt rightSide=Number 
 ;
 
 Opt : Greater | Smaller | Equal ;

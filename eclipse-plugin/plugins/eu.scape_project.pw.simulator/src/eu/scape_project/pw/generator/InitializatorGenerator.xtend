@@ -215,17 +215,17 @@ class InitializatorGenerator {
 			int current = 0; 
 		'''
 		for (sch : e.scheduling.filter(typeof(EventScheduling))) {
-			temp = temp + generateEventSchedules(sch)
+			temp = temp + generateEventSchedules(e, sch)
 		}	
 		temp = temp + generateFormatEvents()
 		return temp
 	}
 
-	def generateEventSchedules(EventScheduling es) {
+	def generateEventSchedules(Simulation s, EventScheduling es) {
 		var temp = ''' 
 			// scheduling «es.schedule.name» event
-			current = «es.start»;
-			while (current <= «es.end») {
+			current = «calculateEventStart(s, es)»;
+			while (current <= «calculateEventEnd(s, es)») {
 				IEvent tmp = new «es.schedule.name»();
 				tmp.setScheduleTime(current);
 				eventContainer.addEvent(tmp);
@@ -233,6 +233,16 @@ class InitializatorGenerator {
 			} 
 		'''
 		return temp
+	}
+	
+	def calculateEventStart(Simulation s, EventScheduling es) {
+		var month = (es.startYear - s.startYear - 1)*12 + 13 - s.startMonth + es.startMonth - 1
+		return month
+	}
+	
+	def calculateEventEnd(Simulation s, EventScheduling es) {
+		var month = (es.endYear - s.startYear - 1)*12 + 13 - s.startMonth + es.endMonth - 1
+		return month
 	}
 	
 	def generateFormatEvents() {
