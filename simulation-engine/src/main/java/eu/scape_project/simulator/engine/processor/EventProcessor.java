@@ -76,7 +76,7 @@ public class EventProcessor implements IEventProcessor {
 
 			boolean iCs = true;
 
-			while (state.getTime() <= properties.getEndTime()) {
+			while (state.getTime() < properties.getEndTime()) {
 				recorder.record(state);
 				// first execute already running events
 				activities = runActivities(activities, state);
@@ -121,6 +121,7 @@ public class EventProcessor implements IEventProcessor {
 			recorder.stopRun(state, simulationRun);
 		}
 		recorder.stopSimulation(properties);
+		LOG.info("Simulation done");
 	}
 
 	private List<IEvent> runActivities(List<IEvent> activities,

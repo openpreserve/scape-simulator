@@ -15,6 +15,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.TreeItem;
 
 import eu.scape_project.pw.ui.graph.components.MeasureContentProvider;
 import eu.scape_project.pw.ui.graph.components.MeasureLabelProvider;
@@ -60,8 +61,9 @@ public class GraphComposite extends Composite {
 				IStructuredSelection s = (IStructuredSelection) viewer
 						.getSelection();
 				INode node = (INode) s.getFirstElement();
+				TreeItem ti = (TreeItem) e.item;
 				if (node instanceof Measure) {
-					cLoader.load((Measure) node);
+					cLoader.addMeasure((Measure) node);
 					chartCanvas.setChart(cLoader.getChart());
 					chartCanvas.redraw();
 					layout();

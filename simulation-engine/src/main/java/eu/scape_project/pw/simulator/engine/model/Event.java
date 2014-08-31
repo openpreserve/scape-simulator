@@ -28,7 +28,7 @@ public abstract class Event implements IEvent {
 	}
 
 	public boolean execute(ISimulationState state) {
-		LOG.info("Executing event:" + name );
+		//LOG.info("Executing event:" + name );
 		boolean temp =  this.run(state);
 		return temp;
 	}

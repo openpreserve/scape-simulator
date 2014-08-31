@@ -85,32 +85,32 @@ class InitializatorGenerator {
 		var temp = '''''';
 		if ( s instanceof HardDisk ) {
 			var h = s as HardDisk
-			temp = temp + '''state.addStateVariable("«h.name + ".capacity"»" ,new Double(«h.capacity») );
+			temp = temp + '''state.addStateVariable("«h.name + ".capacity"»" ,new Double(«h.capacity») , "GB");
 				'''
-			temp = temp + '''state.addAutoVariable("«h.name + ".used"»" ,new SumOperator() );
+			temp = temp + '''state.addAutoVariable("«h.name + ".used"»" ,new SumOperator(), "GB" );
 				'''
 			
 		}
 	}
 	def passProcessing(Processing p) {
 		var temp = ''''''
-		temp = temp + '''state.addStateVariable("«p.name + ".number_of_nodes"»", new Double(«p.number_of_nodes»));
+		temp = temp + '''state.addStateVariable("«p.name + ".number_of_nodes"»", new Double(«p.number_of_nodes»), "number");
 		'''
-		temp = temp + '''state.addStateVariable("«p.name + ".nodes.used"»", new Double(0));
+		temp = temp + '''state.addStateVariable("«p.name + ".nodes.used"»", new Double(0), "number");
 		'''
 	}
 	def passEntity(Collection col) {
 		var temp = '''''';
 		var tempName = col.name;
-		temp = temp + '''state.addAutoVariable("«tempName».size", new SumOperator());
-						 state.addAutoVariable("«tempName».number_of_objects", new SumOperator());
+		temp = temp + '''state.addAutoVariable("«tempName».size", new SumOperator(), "GB");
+						 state.addAutoVariable("«tempName».number_of_objects", new SumOperator(), "number");
 						 '''
 		for (entry : col.entries) {
 			var v1 = tempName + '.' + entry.format.name + '.' + 'size'
 			var v2 = tempName + '.' + entry.format.name + '.' + 'number_of_objects'
 			temp = temp + '''
-				state.addStateVariable("«v1»", new Double(«entry.size»));
-				state.addStateVariable("«v2»", new Double(«entry.num_objects»));
+				state.addStateVariable("«v1»", new Double(«entry.size»), "GB");
+				state.addStateVariable("«v2»", new Double(«entry.num_objects»), "number");
 							 '''
 			temp = temp + '''
 				state.addVariableToAutoVariable("«tempName».size","«v1»");
@@ -180,7 +180,7 @@ class InitializatorGenerator {
 			temp = temp + '''op.addVariableName("«s».size");
 				'''
 		}
-		temp = temp + '''state.addAutoVariable("«name +".size"»",op);
+		temp = temp + '''state.addAutoVariable("«name +".size"»",op, "GB");
 			'''
 		return temp
 	}
@@ -190,7 +190,7 @@ class InitializatorGenerator {
 		for (e :formatPerc.entrySet) {
 			var name = e.key;
 			var List<Double> value = e.value;
-			temp = temp + '''state.addStateVariable("«name»" ,new Double(«value.get(0)») );
+			temp = temp + '''state.addStateVariable("«name»" ,new Double(«value.get(0)»), "percentage" );
 				'''
 		}
 		return temp;

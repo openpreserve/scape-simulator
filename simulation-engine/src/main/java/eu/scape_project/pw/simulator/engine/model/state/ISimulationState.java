@@ -11,6 +11,8 @@ public interface ISimulationState {
 	void setTime(long t);
 	
 	void addStateVariable(String name, Object value);
+
+	void addStateVariable(String name, Object value, String type);
 	
 	void incStateVariable(String name, Double value);
 	
@@ -20,7 +22,11 @@ public interface ISimulationState {
 	
 	Object getStateVariable(String name);
 	
+	String getStateVariableType(String name);
+	
 	void addAutoVariable(String name, IOperator operator);
+	
+	void addAutoVariable(String name, IOperator operator, String type);
 	
 	void addVariableToAutoVariable(String auto, String variable);
 	

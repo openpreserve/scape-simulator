@@ -16,10 +16,13 @@ public class SimulationState implements ISimulationState {
 
 	private Map<String, IOperator> autoVariables;
 
+	private Map<String, String> types;
+	
 	public SimulationState() {
 		time = 0;
 		stateVariables = new HashMap<String, Object>();
 		autoVariables = new HashMap<String, IOperator>();
+		types = new HashMap<String, String>();	
 	}
 
 	@Override
@@ -35,6 +38,17 @@ public class SimulationState implements ISimulationState {
 	@Override
 	public void addStateVariable(String name, Object value) {
 		stateVariables.put(name, value);
+	}
+	
+	@Override 
+	public void addStateVariable(String name, Object value, String type) {
+		types.put(name, type);
+		addStateVariable(name,value);
+	}
+	
+	@Override 
+	public String getStateVariableType(String name) {
+		return types.get(name);
 	}
 	
 	@Override
@@ -81,6 +95,12 @@ public class SimulationState implements ISimulationState {
 	@Override
 	public void addAutoVariable(String name, IOperator operator) {
 		autoVariables.put(name, operator);
+	}
+	
+	@Override 
+	public void addAutoVariable(String name, IOperator operator, String type) {
+		types.put(name, type);
+		addAutoVariable(name,operator);
 	}
 	
 	@Override

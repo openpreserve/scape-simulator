@@ -7,14 +7,12 @@ public class RandomNumberGenerator {
 	public static double uniform(double a, double b) {
 		Random r = new Random(System.currentTimeMillis());
 		double temp = a + (b-a) * r.nextDouble();
-		System.out.println("returning " + temp);
 		return temp;
 	}
 	
 	public static double normal(double mean, double std) {
 		Random r = new Random(System.currentTimeMillis());
 		double temp = r.nextGaussian()*std + mean;
-		System.out.println("returning " + temp);
 		return temp;
 	}
 }

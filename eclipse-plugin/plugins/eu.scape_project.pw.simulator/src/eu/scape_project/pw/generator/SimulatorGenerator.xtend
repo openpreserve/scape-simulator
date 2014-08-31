@@ -106,9 +106,11 @@ class SimulatorGenerator implements IGenerator {
 			}
 		}
 	'''
-def compileEndTime(Simulation s) {
-	return (s.stopYear - s.startYear -1)*12 + 13 - s.startMonth + s.stopMonth
-}
+
+	def compileEndTime(Simulation s) {
+		return (s.stopYear - s.startYear - 1) * 12 + 13 - s.startMonth + s.stopMonth
+	}
+
 	/**
 	 * generate main file 
 	 */
@@ -196,22 +198,22 @@ import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 	}
 
 	def compileCommands(Event e) {
-		var temp =''''''
+		var temp = ''''''
 		var count = 1
-		for (Command c: e.command) {
+		for (Command c : e.command) {
 			temp = temp + compileCommand(c, count)
 			count = count + 1
-		} 
+		}
 		return temp
 	}
-	
+
 	def compileCommand(Command e, int count) {
 
 		switch e {
 			Ingest: compileIngest(e, count)
-			Migrate: compileMigrate(e,count)
-			//AddCollection: compileAddCollection(e, count)
-			//DeleteCollection: compileDeleteCollection(e, count)
+			Migrate: compileMigrate(e, count)
+		//AddCollection: compileAddCollection(e, count)
+		//DeleteCollection: compileDeleteCollection(e, count)
 		}
 
 	}
@@ -234,9 +236,9 @@ import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 		var collName = e.collection.name
 		var formatName = e.format.name
 		temp = temp + '''
-		double perc;
-			   long num = Math.round(«compileNum(e.num_of_objects)»);
-			   long numTemp;
+			double perc;
+				   long num = Math.round(«compileNum(e.num_of_objects)»);
+				   long numTemp;
 			   '''
 		for (entry : e.format.entries) {
 			var entryName = formatName + '.' + entry.name
@@ -250,8 +252,8 @@ import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 				for (int i=0; i<numTemp; i++) {
 				 			double size = «compileNum(e.size)»;
 					state.incStateVariable("«collEntrySize»",size); 
-						}
-					'''
+					}
+				'''
 		}
 		temp = temp + '''}
 		return false;
@@ -262,10 +264,10 @@ import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 
 	def compileIngestFormat(IngestFormat e, int count) {
 		var temp = '''
-		private boolean checkIngest«count» = true;
-		private boolean command«count»(ISimulationState state) {
-		if (checkIngest«count») {
-			checkIngest«count»=false;	
+			private boolean checkIngest«count» = true;
+			private boolean command«count»(ISimulationState state) {
+			if (checkIngest«count») {
+				checkIngest«count»=false;	
 		'''
 		var collName = e.collection.name
 		var formatName = e.format.name
@@ -279,46 +281,68 @@ import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 		   }
 		   '''
 		temp = temp + '''
-		}
-		return false; 
-		}
+			}
+			return false; 
+			}
 		'''
 
 		return temp
 	}
 
-	def compileMigrate(Migrate e, int count) 
-		'''private int numbOfMonths=-1;
-					  private double numberOfObjects = 0;
-					  private double sizeOfObjects = 0;
-		private boolean command«count»(ISimulationState state) {
-			numberOfObjects = «compileObjects(e, "number_of_objects")»;
-			sizeOfObjects = («compileObjects(e, "size")»)*«e.size_relationship»;
-			state.addStateVariable("«e.collectionTo.name+'.'+e.familyTo.name+'.'+e.formatTo.name+'.'+".number_of_objects"»",new Double(numberOfObjects));
-			state.addStateVariable("«e.collectionTo.name+'.'+e.familyTo.name+'.'+e.formatTo.name+'.'+".size"»",new Double(sizeOfObjects));
+	def compileMigrate(Migrate e, int count) '''
+	private boolean firstTime«count» = true;
+	private double numberOfObjects«count» = 0;
+	private double sizeOfObjects«count» = 0;
+	private double numberOfNodes«count» = 0;
+	private double sizePerObject«count» = 0;
+	private boolean command«count»(ISimulationState state) {
+		if (firstTime) {
+			numberOfObjects«count» = «compileObjects(e, "number_of_objects")»;
+			sizeOfObjects«count» = («compileObjects(e, "size")»)*«e.size_relationship»;
+			sizePerObject«count» = (sizeOfObjects / numberOfObjects) * «e.size_relationship»;
+			firstTime = false;
+		}
+		if (numberOfObjects«count» <= 0) {
 			return false;
-		}''' 
-	
+		}
+		double diff = ((Double)state.getStateVariable("«e.process.name».number_of_nodes").doubleValue() 
+			- ((Double)state.getStateVariable("«e.process.name».nodes.used").doubleValue();
+		numberOfNodes«count» += diff;
+		state.incStateVariable("«e.process.name».nodes.used", new Double(diff));
+		double monthMigrate = Math.floor((2592000*numberOfNodes«count»)/«e.time»);
+		double migrated = (numberOfObjects«count» - monthMigrate < 0 ) ? numberOfObjects«count» : numberOfObjects«count» - monthMigrate ; 	
+		state.incStateVariable("«e.collectionTo.name + '.' + e.familyTo.name + '.' + e.formatTo.name + '.' +
+		".number_of_objects"»",new Double(migrated));
+		state.incStateVariable("«e.collectionTo.name + '.' + e.familyTo.name + '.' + e.formatTo.name + '.' + ".size"»",new Double(migrated*sizePerObject«count»));
+		numberOfObjects«count» = numberOfObjects«count» - migrated;
+		if (numberOfObjects«count» <= 0) {
+			state.decStateVariable("«e.process.name».nodes.used", new Double(numberOfNodes));
+			return false; 
+		} 
+		return true;
+	}'''
+
 	def compileObjects(Migrate m, String extens) {
 		var temp = ''''''
 		var collName = m.collectionFrom.name
 		var familyName = m.familyFrom.name
 		var name = collName + '.' + familyName
 		var List<Entry> entr = new ArrayList<Entry>()
-		
+
 		if (m.formatFrom != null) {
-			entr.add(m.formatFrom)	
+			entr.add(m.formatFrom)
 		} else {
 			entr.addAll(m.familyFrom.entries)
-			}
-			var k = ''
-			for (Entry e: entr) {
-				temp = temp + 
-					'''«k»((Double)state.getStateVariable("«name + '.' + e.name + '.' + extens»")).doubleValue()'''
-					k='+'
-			}
+		}
+		var k = ''
+		for (Entry e : entr) {
+			temp = temp +
+				'''«k»((Double)state.getStateVariable("«name + '.' + e.name + '.' + extens»")).doubleValue()'''
+			k = '+'
+		}
 		return temp
 	}
+
 	def compileAddCollection(AddCollection a) {
 		var k = a.storage as HardDisk
 		var temp = '''state.addVariableToAutoVariable("«k.name».used", "«a.collection.name».size");'''

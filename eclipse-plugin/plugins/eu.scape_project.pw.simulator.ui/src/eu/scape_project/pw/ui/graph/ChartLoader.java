@@ -1,7 +1,9 @@
 package eu.scape_project.pw.ui.graph;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.birt.chart.model.Chart;
 import org.eclipse.birt.chart.model.ChartWithAxes;
@@ -24,13 +26,16 @@ public class ChartLoader {
 
 	private Chart chart = null;
 
-	private String s = null;
-	List<Record> records = null;
+	private String scale = null;
+	//List<Record> records = null;
 
+	private Map<String, List<Record>> records;
+	
 	public ChartLoader() {
+		records = new HashMap<String, List<Record>>();
 	}
 
-	public void load(Measure measure) {
+	public boolean addMeasure(Measure measure) {
 
 		FileReader fileReader = new FileReader();
 		String s = fileReader.loadData(measure);
@@ -38,7 +43,7 @@ public class ChartLoader {
 			createRecords(s);
 			createChart();
 		}
-
+		return true;
 	}
 
 	public Chart getChart() {
@@ -79,7 +84,9 @@ public class ChartLoader {
 		NumberDataSet yValues = NumberDataSetImpl.create(getValues());
 		LineSeries series = (LineSeries) LineSeriesImpl.create();
 		series.setDataSet(yValues);
+		series.getMarkers().get(0).setVisible(false);
 
+		
 		SeriesDefinition sdY = SeriesDefinitionImpl.create();
 		yAxis.getSeriesDefinitions().add(sdY);
 		sdY.getSeries().add(series);
@@ -97,25 +104,25 @@ public class ChartLoader {
 			tmp.add(tmpRecord);
 		}
 
-		records = tmp;
+		//records = tmp;
 
 	}
 
 	private double[] getDates() {
 		double[] dates = new double[records.size()];
-		for (int i = 0; i < records.size(); i++) {
+	/*	for (int i = 0; i < records.size(); i++) {
 			dates[i] = records.get(i).getDate();
 			System.out.println("dates: " + dates[i]);
-		}
+		}*/
 		return dates;
 	}
 
 	private double[] getValues() {
 		double[] values = new double[records.size()];
-		for (int i = 0; i < records.size(); i++) {
+		/*for (int i = 0; i < records.size(); i++) {
 			values[i] = records.get(i).getValue();
 			System.out.println("values: " + values[i]);
-		}
+		}*/
 		return values;
 	}
 }

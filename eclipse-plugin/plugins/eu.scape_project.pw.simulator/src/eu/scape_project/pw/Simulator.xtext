@@ -2,126 +2,127 @@ grammar eu.scape_project.pw.Simulator with org.eclipse.xtext.xbase.Xbase
 
 generate simulator "http://www.scape_project.eu/pw/Simulator"
 
-Simulation : 
-	'SIMULATION' name=ValidID 
-		'start' '=' startMonth = INT '/' startYear = INT 
-		'stop' '=' stopMonth = INT '/' stopYear = INT 
-		'runs' '=' runs=INT
-		'entities:' (entities+=Entity)*
-		'events:' (events+=Event)*
-		'scheduling:' (scheduling+=Scheduling)*
-	'ENDSIMULATION'
-;
+Simulation:
+	'SIMULATION' name=ValidID
+	'start' '=' startMonth=INT '/' startYear=INT
+	'stop' '=' stopMonth=INT '/' stopYear=INT
+	'runs' '=' runs=INT
+	'entities:' (entities+=Entity)*
+	'events:' (events+=Event)*
+	'scheduling:' (scheduling+=Scheduling)*
+	'ENDSIMULATION';
 
-Entity : Collection | Storage  | Format | Processing; 
+Entity:
+	Collection | Storage | Format | Processing;
 
-Collection : 
-	'COLLECTION' name=ID  
-		(entries+=CollectionEntry)*
-		/*('size' '=' size=INT)?
-		(subCollections+=Collection)* */
-		('stored:' (storage+=[Storage] (',' storage+=[Storage])*))*			
-	'ENDCOLLECTION'
-;
-QName :
-	ID('.'ID)*
-;
-CollectionEntry : 
-	'(' 'format' '=' format=[Entry|QName] ',' 'size' '=' size=Number ',' 'number_of_objects' '=' num_objects=Number ')'
-;
+Collection:
+	'COLLECTION' name=ID
+	(entries+=CollectionEntry)*
+	('stored:' (storage+=[Storage] (',' storage+=[Storage])*))*
+	'ENDCOLLECTION';
 
-Storage : HardDisk ;
+QName:
+	ID ('.' ID)*;
 
-HardDisk : 'DISKS' name=ID  capacity=Number 'ENDDISKS';
+CollectionEntry:
+	'(' 'format' '=' format=[Entry|QName] ',' 'size' '=' size=Number 'GB' ',' 'number_of_objects' '=' num_objects=Number ')';
 
-Processing : 
+Storage:
+	HardDisk;
+
+HardDisk:
+	'DISKS' name=ID 'capacity' '=' capacity=Number 'GB' 'ENDDISKS';
+
+Processing:
 	'PROCESSING' name=ID 'number_of_nodes' '=' number_of_nodes=INT
-	'ENDPROCESSING' 
-;
-Format : 
-	'family' name=ID 
-	(entries+=Entry)+   
-;
+	'ENDPROCESSING';
 
-Entry : 
-	'(' name=ID ',' year=INT ',' p=Number ',' q=Number ',' m=Number ')'
-;
+Format:
+	'family' name=ID
+	(entries+=Entry)+;
 
+Entry:
+	'(' name=ID ',' year=INT ',' p=Number ',' q=Number ',' m=Number ')';
 
-Event :
-	'EVENT' name=ValidID 
-		(command+=Command)*
-	'ENDEVENT'
-;
+Event:
+	'EVENT' name=ValidID
+	(command+=Command)*
+	'ENDEVENT';
 
-Command: Ingest | Migrate | DeleteCollection | AddCollection; 
- 
- Ingest :  IngestFamily | IngestFormat;
- 
-IngestFamily: 
-	'ingest' 'family'  format=[Format] '(' num_of_objects=Num ',' size=Num ')' 'to' collection=[Collection]
-;
+Command:
+	Ingest | Migrate | DeleteCollection | AddCollection;
 
-IngestFormat: 
-	'ingest' 'format' format=[Entry|QName] '(' num_of_objects=Num ',' size=Num ')' 'to' collection=[Collection]
-;
+Ingest:
+	IngestFamily | IngestFormat;
 
-Migrate : 
-	'migrate' 'from' collectionFrom=[Collection] 'family' familyFrom=[Format] ('format' formatFrom=[Entry|QName])* 'to' collectionTo=[Collection]
-	'family' familyTo=[Format] 'format' formatTo=[Entry|QName] 'with' 'size_relationship' '=' size_relationship=Number  
-;
+IngestFamily:
+	'ingest' 'family' format=[Format] '(' num_of_objects=Num ',' size=Num 'MB' ')' 'to' collection=[Collection];
 
-DeleteCollection : 
- 'delete' collection=[Collection] 'from' storage=[Storage]
- ;
- 
- AddCollection : 
-  'store' collection=[Collection] 'to' storage=[Storage]	
- ;
- 
+IngestFormat:
+	'ingest' 'format' format=[Entry|QName] '(' num_of_objects=Num ',' size=Num 'MB' ')' 'to' collection=[Collection];
 
-Identifier : ID ('.' ID) * ('.' ATTRIBUTES)*;
+Migrate:
+	'migrate' 'from' collectionFrom=[Collection] 'family' familyFrom=[Format] ('format' formatFrom=[Entry|QName])* 'to'
+	collectionTo=[Collection]
+	'family' familyTo=[Format] 'format' formatTo=[Entry|QName] 'with' 'size_relationship' '=' size_relationship=Number
+	'time_per_object' '=' time=Number 'on' 'processing' process=[Processing];
 
-ATTRIBUTES: 'size';
+DeleteCollection:
+	'delete' collection=[Collection] 'from' storage=[Storage];
 
-Num : Random | Descrete;
+AddCollection:
+	'store' collection=[Collection] 'to' storage=[Storage];
 
-Descrete : number=Number;
+Identifier:
+	ID ('.' ID)* ('.' ATTRIBUTES)*;
 
-Random : Uniform | Normal;
+ATTRIBUTES:
+	'size';
 
-Uniform: 'Uniform''('a=INT','b=INT')';
+Num:
+	Random | Descrete;
 
-Normal: 'Normal''('mean=INT','std=INT')';
+Descrete:
+	number=Number;
 
+Random:
+	Uniform | Normal;
 
-Scheduling: EventScheduling | ObserverScheduling | ConditionalScheduling;
+Uniform:
+	'Uniform' '(' a=INT ',' b=INT ')';
 
-EventScheduling :
-	'SCHEDULE' schedule=[Event] 
-		('start''=' startMonth=INT '/' startYear=INT ';')?
-		('end' '=' endMonth=INT '/' endYear=INT ';')?
-		('every' '=' every=INT ';')?
-	'ENDSCHEDULE'
-;
+Normal:
+	'Normal' '(' mean=INT ',' std=INT ')';
 
-ObserverScheduling: 
-	observes=[Event] '=>' schedule=[Event] '{'
-			('delay' '=' delay=INT ';')?
-		'}'
-;
+Scheduling:
+	EventScheduling | ObserverScheduling | ConditionalScheduling;
 
-ConditionalScheduling : 
+EventScheduling:
+	'SCHEDULE' schedule=[Event]
+	('start' '=' startMonth=INT '/' startYear=INT ';')?
+	('end' '=' endMonth=INT '/' endYear=INT ';')?
+	('every' '=' every=INT ';')?
+	'ENDSCHEDULE';
+
+ObserverScheduling:
+	observes=[Event] '=>' schedule=[Event]
+	('delay' '=' delay=INT ';')?;
+
+ConditionalScheduling:
 	'CONDITION' name=ValidID 'when' (condition=Condition) '=>' schedule=[Event]
-	'ENDCONDITION'
-;
+	'ENDCONDITION';
 
-Condition: 
-	leftSide=Identifier operator=Opt rightSide=Number 
-;
+Condition:
+	leftSide=Identifier operator=Opt rightSide=Number;
 
-Opt : Greater | Smaller | Equal ;
- 
-Greater : '>';
-Smaller : '<';
-Equal : '==';
+Opt:
+	Greater | Smaller | Equal;
+
+Greater:
+	'>';
+
+Smaller:
+	'<';
+
+Equal:
+	'==';

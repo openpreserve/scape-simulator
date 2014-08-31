@@ -19,6 +19,8 @@ import eu.scape_project.pw.simulator.engine.model.state.ISimulationState;
 public class Recorder implements IRecorder {
 
 	private Map<String, List<Record>> records;
+	
+	private Map<String, String> types;
 
 	private ISimulationProperties properties;
 
@@ -26,6 +28,7 @@ public class Recorder implements IRecorder {
 
 	public Recorder() {
 		records = new HashMap<String, List<Record>>();
+		types = new HashMap<String,String>();
 	}
 
 	public void record(ISimulationState state) {
@@ -36,10 +39,12 @@ public class Recorder implements IRecorder {
 					.next();
 			String name = entry.getKey();
 			String value = entry.getValue().toString();
+			String type = state.getStateVariableType(name);
 			if (records.containsKey(name)) {
 				addRecordToExistingName(name, value, state.getTime());
 			} else {
 				addRecordToNewName(name, value, state.getTime());
+				types.put(name, type);
 			}
 		}
 	}
@@ -84,7 +89,7 @@ public class Recorder implements IRecorder {
 				String line;
 				br.readLine();
 				String scale = br.readLine();
-				if (scale.endsWith("NUMERIC")) {
+				if (scale.endsWith("GB") || scale.endsWith("percentage") || scale.endsWith("number")) {
 					IOperation average = new AvgOperation();
 					IOperation max = new MaxOperation();
 					IOperation min = new MinOperation();
@@ -149,7 +154,7 @@ public class Recorder implements IRecorder {
 				writer = new PrintWriter(new FileWriter(f));
 				writer.write("Name:" + key
 						+ System.getProperty("line.separator"));
-				writer.write("Scale:" + determineScale(values)
+				writer.write("Scale:" + types.get(key)
 						+ System.getProperty("line.separator"));
 			} else {
 				writer = new PrintWriter(new FileWriter(f, true));
@@ -177,12 +182,12 @@ public class Recorder implements IRecorder {
 		}
 
 	}
-
+/*
 	private String determineScale(List<Record> values) {
 		String value = values.get(0).getValue();
 		if (value.matches("-?\\d+(\\.\\d+)?")) {
 			return "NUMERIC";
 		}
 		return "ORDINAL";
-	}
+	}*/
 }
