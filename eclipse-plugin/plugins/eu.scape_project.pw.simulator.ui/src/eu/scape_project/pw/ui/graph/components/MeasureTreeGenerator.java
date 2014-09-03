@@ -37,8 +37,8 @@ public class MeasureTreeGenerator {
 				INode root = new MeasureContainer(project.getName(), null);
 				try {
 					for (IResource res : out.members()) {
-					INode n = generate(res);
-					root.addChildren(n);
+						INode n = generate(res);
+						root.addChildren(n);
 					}
 				} catch (CoreException e) {
 					// TODO Auto-generated catch block
@@ -50,23 +50,32 @@ public class MeasureTreeGenerator {
 	}
 
 	private INode generate(IResource resource) {
-		INode f = new MeasureContainer(resource.getName(),null);
+		INode f=null;
+		String name = resource.getName();
+		String fxt = resource.getFileExtension();
+		System.out.println("EXTENSION IS " + fxt);
 		if (resource instanceof IFolder) {
+			f = new MeasureContainer(name, null);
 			IFolder folder = (IFolder) resource;
 			try {
-				for (IResource r: folder.members()) {
+				for (IResource r : folder.members()) {
 					f.addChildren(generate(r));
 				}
 			} catch (CoreException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}else if (resource instanceof IFile){
-			IFile file = (IFile) resource;
-			FileReader fileReader = new FileReader();
-			fileReader.readFile(file);
-			for (Measure m : fileReader.getMeasures()) {
-				f.addChildren(m);
+		} else if (resource instanceof IFile) {
+			if (fxt.compareTo("sout")==0) {
+				System.out.println("EXTENSION IS GOOD" + fxt);
+				String name2 = name.substring(0, name.indexOf('.')); 
+				f = new MeasureContainer(name2, null);
+				IFile file = (IFile) resource;
+				FileReader fileReader = new FileReader();
+				fileReader.readFile(file);
+				for (Measure m : fileReader.getMeasures()) {
+					f.addChildren(m);
+				}
 			}
 		}
 		return f;
