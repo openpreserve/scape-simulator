@@ -52,13 +52,13 @@ public class SimulationState implements ISimulationState {
 	}
 	
 	@Override
-	public void incStateVariable(String name, Double value) {
+	public void incStateVariable(String name, Double value, String type) {
 		double t = value.doubleValue();
 		if (stateVariables.containsKey(name)){
 			Double temp = (Double) stateVariables.get(name);
 			t += temp.doubleValue();
 		}
-		addStateVariable(name,t);
+		addStateVariable(name,t, type);
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class SimulationState implements ISimulationState {
 			Double temp = (Double) stateVariables.get(name);
 			t -= temp.doubleValue();
 		}
-		addStateVariable(name,t);
+		addStateVariable(name,-t);
 	}
 	
 	@Override

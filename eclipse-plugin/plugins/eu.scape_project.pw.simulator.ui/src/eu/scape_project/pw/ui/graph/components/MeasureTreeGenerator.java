@@ -1,5 +1,6 @@
 package eu.scape_project.pw.ui.graph.components;
 
+import org.eclipse.core.internal.resources.Folder;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
@@ -33,24 +34,26 @@ public class MeasureTreeGenerator {
 
 		for (IProject project : projects) {
 			IFolder out = project.getFolder("output");
-			if (out.exists()) {
-				INode root = new MeasureContainer(project.getName(), null);
-				try {
+
+			try {
+				out.refreshLocal(Folder.DEPTH_INFINITE, null);
+				if (out.exists()) {
+					INode root = new MeasureContainer(project.getName(), null);
 					for (IResource res : out.members()) {
 						INode n = generate(res);
 						root.addChildren(n);
 					}
-				} catch (CoreException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+					tree.addRoot(root);
 				}
-				tree.addRoot(root);
+			} catch (CoreException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 	}
 
 	private INode generate(IResource resource) {
-		INode f=null;
+		INode f = null;
 		String name = resource.getName();
 		String fxt = resource.getFileExtension();
 		System.out.println("EXTENSION IS " + fxt);
@@ -66,9 +69,9 @@ public class MeasureTreeGenerator {
 				e.printStackTrace();
 			}
 		} else if (resource instanceof IFile) {
-			if (fxt.compareTo("sout")==0) {
+			if (fxt.compareTo("sout") == 0) {
 				System.out.println("EXTENSION IS GOOD" + fxt);
-				String name2 = name.substring(0, name.indexOf('.')); 
+				String name2 = name.substring(0, name.indexOf('.'));
 				f = new MeasureContainer(name2, null);
 				IFile file = (IFile) resource;
 				FileReader fileReader = new FileReader();

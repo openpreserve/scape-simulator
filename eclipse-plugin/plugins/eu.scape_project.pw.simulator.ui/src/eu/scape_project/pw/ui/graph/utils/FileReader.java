@@ -54,10 +54,11 @@ public class FileReader {
 	public String loadData(Measure measure) {
 		IFile file = measure.getFile();
 		InputStream is;
+		BufferedReader reader;
 		try {
 			is = file.getContents();
 			
-			BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+			reader = new BufferedReader(new InputStreamReader(is));
 			//read first three lines
 			reader.readLine();
 			reader.readLine();
@@ -70,6 +71,8 @@ public class FileReader {
 					return spl[1];
 				}
 			}
+			reader.close();
+			is.close();
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

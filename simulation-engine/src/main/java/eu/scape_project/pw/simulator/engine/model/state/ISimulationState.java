@@ -14,7 +14,7 @@ public interface ISimulationState {
 
 	void addStateVariable(String name, Object value, String type);
 	
-	void incStateVariable(String name, Double value);
+	void incStateVariable(String name, Double value, String type);
 	
 	void decStateVariable(String name, Double Value);
 	

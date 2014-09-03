@@ -212,8 +212,8 @@ import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 		switch e {
 			Ingest: compileIngest(e, count)
 			Migrate: compileMigrate(e, count)
-		//AddCollection: compileAddCollection(e, count)
-		//DeleteCollection: compileDeleteCollection(e, count)
+			AddCollection: compileAddCollection(e, count)
+			DeleteCollection: compileDeleteCollection(e, count)
 		}
 
 	}
@@ -248,10 +248,13 @@ import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 			var collEntrySize = collName + '.' + entry.name + '.size'
 			temp = temp + '''
 				numTemp = Math.round(perc*num);
-				state.incStateVariable("«collEntryNum»", new Double(numTemp));
+				state.incStateVariable("«collEntryNum»", new Double(numTemp), "number");
+				if (numTemp==0) {
+					state.incStateVariable("«collEntrySize»", 0.0, "GB");
+				}
 				for (int i=0; i<numTemp; i++) {
-				 			double size = «compileNum(e.size)»;
-					state.incStateVariable("«collEntrySize»",size); 
+				 			double size = «compileNum(e.size)» / 1024;
+					state.incStateVariable("«collEntrySize»", size, "GB"); 
 					}
 				'''
 		}
@@ -273,12 +276,16 @@ import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 		var formatName = e.format.name
 		var sizeName = collName + '.' + formatName + '.size'
 		var numName = collName + '.' + formatName + '.number_of_objects'
-		temp = temp + '''long num = Math.round(«compileNum(e.num_of_objects)»);
-		   state.incStateVariable("«numName»", new Double(num));
-		   for (int i=0; i<num; i++) {
-		   	double size = «compileNum(e.size)»;
-			state.incStateVariable("«sizeName»",size); 
-		   }
+		temp = temp + '''
+			long num = Math.round(«compileNum(e.num_of_objects)»);
+		   	state.incStateVariable("«numName»", new Double(num), "number");
+		   	if (num==0) {
+					state.incStateVariable("«sizeName»", 0.0, "GB");
+				}
+		   	for (int i=0; i<num; i++) {
+		   		double size = «compileNum(e.size)» / 1024;
+				state.incStateVariable("«sizeName»" ,size, "GB"); 
+		   	}
 		   '''
 		temp = temp + '''
 			}
@@ -343,16 +350,37 @@ import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 		return temp
 	}
 
-	def compileAddCollection(AddCollection a) {
+	def compileAddCollection(AddCollection a, int count) '''
+		private boolean done = false; 
+		private boolean command«count»(ISimulationState state) {
+			if (done==false) {
+				«getHardName(a)»;
+				done = true;
+			}
+			return done;
+		}
+	'''
+	
+	def getHardName(AddCollection a) {
 		var k = a.storage as HardDisk
-		var temp = '''state.addVariableToAutoVariable("«k.name».used", "«a.collection.name».size");'''
-		temp
+		var temp = '''state.addVariableToAutoVariable("«k.name».used", "«a.collection.name».size")'''
+		return temp
 	}
 
-	def compileDeleteCollection(DeleteCollection a) {
+	def compileDeleteCollection(DeleteCollection a, int count) '''
+		private boolean done = false; 
+		private boolean command«count»(ISimulationState state) {
+			if (done==false) {
+				«getHardName2(a)»;
+				done = true;
+			}
+			return done;
+		}
+	'''
+	def getHardName2(DeleteCollection a) {
 		var k = a.storage as HardDisk
-		var temp = '''state.removeVariableToAutoVariable("«k.name».used", "«a.collection.name».size");'''
-		temp
+		var temp = '''state.removeVariableToAutoVariable("«k.name».used", "«a.collection.name».size")'''
+		 return temp
 	}
 
 	def compileNum(Num rs) {
