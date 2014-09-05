@@ -57,8 +57,8 @@ public class Recorder implements IRecorder {
 
 	@Override
 	public void startSimulation(ISimulationProperties properties) {
-		outputSimulationName = outputFolderName + "/" + properties.getName();
 		this.properties = properties;
+		outputSimulationName = outputFolderName + "/" + properties.getName();
 		File out = new File(outputFolderName);
 		if (!out.exists()) {
 			out.mkdir();
@@ -66,9 +66,8 @@ public class Recorder implements IRecorder {
 		File main = new File(outputSimulationName);
 		if (main.exists()) {
 			deleteAll(main);
-		} else {
-			main.mkdir();
 		}
+		main.mkdir();
 
 	}
 
@@ -77,9 +76,8 @@ public class Recorder implements IRecorder {
 			for (File fi : f.listFiles()) {
 				deleteAll(fi);
 			}
-		} else {
-			f.delete();
 		}
+		f.delete();
 	}
 
 	@Override
@@ -171,8 +169,8 @@ public class Recorder implements IRecorder {
 		records.put(name, tmp);
 
 		// in case when a new variable appears latter in the simulation process
-		// we initialize it with 0 
-		// TODO what about non numeric cases 
+		// we initialize it with 0
+		// TODO what about non numeric cases
 		for (int i = 0; i < time; i++) {
 			addRecordToExistingName(name, "0", i);
 		}

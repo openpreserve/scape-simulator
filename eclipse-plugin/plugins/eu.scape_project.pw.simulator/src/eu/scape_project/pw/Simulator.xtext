@@ -65,7 +65,7 @@ Migrate:
 	'migrate' 'from' collectionFrom=[Collection] 'family' familyFrom=[Format] ('format' formatFrom=[Entry|QName])* 'to'
 	collectionTo=[Collection]
 	'family' familyTo=[Format] 'format' formatTo=[Entry|QName] 'with' 'size_relationship' '=' size_relationship=Number
-	'time_per_object' '=' time=Number 'on' 'processing' process=[Processing];
+	'time_per_object' '=' time=Number 'ms' 'on' 'processing' process=[Processing];
 
 DeleteCollection:
 	'delete' collection=[Collection] 'from' storage=[Storage];
@@ -99,9 +99,9 @@ Scheduling:
 
 EventScheduling:
 	'SCHEDULE' schedule=[Event]
-	('start' '=' startMonth=INT '/' startYear=INT ';')?
-	('end' '=' endMonth=INT '/' endYear=INT ';')?
-	('every' '=' every=INT ';')?
+	('start' '=' startMonth=INT '/' startYear=INT )?
+	('end' '=' endMonth=INT '/' endYear=INT )?
+	('every' '=' every=INT )?
 	'ENDSCHEDULE';
 
 ObserverScheduling:

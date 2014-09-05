@@ -10,6 +10,7 @@ import org.eclipse.birt.chart.model.ChartWithAxes;
 import org.eclipse.birt.chart.model.attribute.ChartDimension;
 import org.eclipse.birt.chart.model.attribute.LegendItemType;
 import org.eclipse.birt.chart.model.attribute.impl.ColorDefinitionImpl;
+import org.eclipse.birt.chart.model.attribute.impl.TextImpl;
 import org.eclipse.birt.chart.model.component.Axis;
 import org.eclipse.birt.chart.model.component.Series;
 import org.eclipse.birt.chart.model.component.impl.SeriesImpl;
@@ -83,6 +84,13 @@ public class ChartLoader {
 		return chart;
 	}
 
+	public void reset() {
+		System.out.println("RESETING");
+		measures.clear();
+		currentType = null;
+		createChart();
+	}
+	
 	private void createChart() {
 		chart = ChartWithAxesImpl.create();
 		chart.setDimension(ChartDimension.TWO_DIMENSIONAL_LITERAL);
@@ -95,6 +103,8 @@ public class ChartLoader {
 		 chart.getLegend().setItemType(LegendItemType.SERIES_LITERAL);
 		 chart.getLegend().setVisible(true);
 		 chart.getLegend().getText().getFont().setSize(10);
+		 chart.getLegend().getText().getFont().setWordWrap(true);
+		 chart.getLegend().setWidthHint(100);
 		 
 		//
 		// // 4. Set title
@@ -116,6 +126,7 @@ public class ChartLoader {
 
 			xAxis.getSeriesDefinitions().add(sdX);
 			sdX.getSeries().add(seCategory);
+			xAxis.getTitle().setVisible(false);
 			
 			NumberDataSet yValues = NumberDataSetImpl.create(emptyValues);
 			LineSeries series = (LineSeries) LineSeriesImpl.create();
@@ -126,6 +137,7 @@ public class ChartLoader {
 			//series.getLineAttributes().setColor(ColorDefinitionImpl.WHITE());
 			SeriesDefinition sdY = SeriesDefinitionImpl.create();
 			yAxis.getSeriesDefinitions().add(sdY);
+			yAxis.getTitle().setVisible(false);
 			sdY.getSeries().add(series);
 			chart.getLegend().setVisible(false);
 			return;
@@ -144,16 +156,21 @@ public class ChartLoader {
 
 				xAxis.getSeriesDefinitions().add(sdX);
 				sdX.getSeries().add(seCategory);
+				xAxis.getTitle().getCaption().setValue("month");
+				xAxis.getTitle().setVisible(true);
 			}
 
 			NumberDataSet yValues = NumberDataSetImpl.create(getValues(entry
 					.getValue()));
 			LineSeries series = (LineSeries) LineSeriesImpl.create();
 			series.setDataSet(yValues);
+			series.getLineAttributes().setThickness(4);
 			series.setSeriesIdentifier(entry.getKey().getName() + ":" + entry.getKey().getOperation());
 			series.getMarkers().get(0).setVisible(false);
 			SeriesDefinition sdY = SeriesDefinitionImpl.create();
 			yAxis.getSeriesDefinitions().add(sdY);
+			yAxis.getTitle().getCaption().setValue(currentType);
+			yAxis.getTitle().setVisible(true);
 			sdY.getSeries().add(series);
 		}
 

@@ -56,7 +56,6 @@ public class MeasureTreeGenerator {
 		INode f = null;
 		String name = resource.getName();
 		String fxt = resource.getFileExtension();
-		System.out.println("EXTENSION IS " + fxt);
 		if (resource instanceof IFolder) {
 			f = new MeasureContainer(name, null);
 			IFolder folder = (IFolder) resource;
@@ -70,7 +69,6 @@ public class MeasureTreeGenerator {
 			}
 		} else if (resource instanceof IFile) {
 			if (fxt.compareTo("sout") == 0) {
-				System.out.println("EXTENSION IS GOOD" + fxt);
 				String name2 = name.substring(0, name.indexOf('.'));
 				f = new MeasureContainer(name2, null);
 				IFile file = (IFile) resource;

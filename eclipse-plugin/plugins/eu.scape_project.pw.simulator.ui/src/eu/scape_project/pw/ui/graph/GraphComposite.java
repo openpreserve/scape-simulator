@@ -64,7 +64,7 @@ public class GraphComposite extends Composite {
 		gridDataLabel.horizontalAlignment = GridData.FILL;
 		//gridData.horizontalSpan = 2;
 		label = new Label(this, 0);
-		label.setText("Hello World");
+		label.setText("");
 		label.setLayoutData(gridDataLabel);
 		viewer.getTree().addSelectionListener(new SelectionListener() {
 
@@ -97,9 +97,12 @@ public class GraphComposite extends Composite {
 		button.addSelectionListener(new SelectionListener() {
 
 			public void widgetSelected(SelectionEvent e) {
-				System.out.println("CLICK");
+				System.out.println("CLCIK");
+				cLoader.reset();
+				chartCanvas.setChart(cLoader.getChart());
+				chartCanvas.redraw();
 				viewer.setInput(generator.getMeasureTree());
-				
+				layout();
 			}
 
 			public void widgetDefaultSelected(SelectionEvent e) {

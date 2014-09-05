@@ -96,7 +96,7 @@ class InitializatorGenerator {
 		var temp = ''''''
 		temp = temp + '''state.addStateVariable("«p.name + ".number_of_nodes"»", new Double(«p.number_of_nodes»), "number");
 		'''
-		temp = temp + '''state.addStateVariable("«p.name + ".nodes.used"»", new Double(0), "number");
+		temp = temp + '''state.addStateVariable("«p.name + ".nodes_used"»", new Double(0), "number");
 		'''
 	}
 	def passEntity(Collection col) {
