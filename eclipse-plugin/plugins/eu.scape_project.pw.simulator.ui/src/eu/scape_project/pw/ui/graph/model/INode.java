@@ -2,7 +2,7 @@ package eu.scape_project.pw.ui.graph.model;
 
 public interface INode {
 
-	String getName();
+	String getLabel();
 	
 	public INode getParent();
 	

@@ -9,5 +9,7 @@ public interface IOperator {
 	List<String> getVariableNames(); 
 	
 	void addVariableName(String name);
+	
+	void removeVariableName(String name);
 
 }

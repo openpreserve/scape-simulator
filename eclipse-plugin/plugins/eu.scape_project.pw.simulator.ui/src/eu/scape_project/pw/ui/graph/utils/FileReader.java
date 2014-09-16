@@ -27,14 +27,18 @@ public class FileReader {
 		try {
 			InputStream is = file.getContents();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-			//read first two lines
-			reader.readLine();
-			reader.readLine();
-			String line; 
+			//read first three lines
+			String[] l = reader.readLine().split(":");
+			String name = l[1];
+			l = reader.readLine().split(":");
+			String scale = l[1];
+			l = reader.readLine().split(":");
+			String type = l[1];
+			String line;
 			while ((line=reader.readLine())!=null) {
 				String[] spl = line.split(":");
 				if (!spl[0].matches("\\d+")){
-					measures.add(new Measure(spl[0], file));
+					measures.add(new Measure(name, spl[0], scale, type, file));
 				}
 			}
 			reader.close();
@@ -50,20 +54,25 @@ public class FileReader {
 	public String loadData(Measure measure) {
 		IFile file = measure.getFile();
 		InputStream is;
+		BufferedReader reader;
 		try {
 			is = file.getContents();
-			BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-			//read first two lines
+			
+			reader = new BufferedReader(new InputStreamReader(is));
+			//read first three lines
+			reader.readLine();
 			reader.readLine();
 			reader.readLine();
 			String line; 
 			while ((line=reader.readLine())!=null) {
 				String[] spl = line.split(": ");
-				if (spl[0].compareTo(measure.getName())==0){
+				if (spl[0].compareTo(measure.getOperation())==0){
 					reader.close();
 					return spl[1];
 				}
 			}
+			reader.close();
+			is.close();
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

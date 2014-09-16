@@ -1,11 +1,16 @@
 package eu.scape_project.pw.ui.graph;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.birt.chart.model.Chart;
 import org.eclipse.birt.chart.model.ChartWithAxes;
 import org.eclipse.birt.chart.model.attribute.ChartDimension;
+import org.eclipse.birt.chart.model.attribute.LegendItemType;
+import org.eclipse.birt.chart.model.attribute.impl.ColorDefinitionImpl;
+import org.eclipse.birt.chart.model.attribute.impl.TextImpl;
 import org.eclipse.birt.chart.model.component.Axis;
 import org.eclipse.birt.chart.model.component.Series;
 import org.eclipse.birt.chart.model.component.impl.SeriesImpl;
@@ -16,6 +21,8 @@ import org.eclipse.birt.chart.model.data.impl.SeriesDefinitionImpl;
 import org.eclipse.birt.chart.model.impl.ChartWithAxesImpl;
 import org.eclipse.birt.chart.model.type.LineSeries;
 import org.eclipse.birt.chart.model.type.impl.LineSeriesImpl;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Display;
 
 import eu.scape_project.pw.ui.graph.model.Measure;
 import eu.scape_project.pw.ui.graph.utils.FileReader;
@@ -24,27 +31,66 @@ public class ChartLoader {
 
 	private Chart chart = null;
 
-	private String s = null;
-	List<Record> records = null;
+	private String scale = null;
 
+	private String currentType = null;
+
+	private Map<Measure, List<Record>> measures;
+
+	private double[] emptyValues = {0, 1, 2, 3, 4, 5, 6, 7};
+	
 	public ChartLoader() {
+		measures = new HashMap<Measure, List<Record>>();
+		createChart();
 	}
 
-	public void load(Measure measure) {
+	public boolean addRemoveMeasure(Measure measure) {
+
+		if (measures.containsKey(measure)) {
+			measures.remove(measure);
+			if (measures.size()==0) {
+				currentType = null;
+			}
+			createChart();
+			System.out.println("Measure removed" + measure.getName() + " " + measure.getOperation() + " "+ measures.size());
+			return true;
+		}
+
+		if (currentType == null) {
+			currentType = measure.getType();
+		} else {
+			if (currentType.compareTo(measure.getType()) != 0) {
+				System.out.println("Cannot add measure");
+				return false;
+			}
+		}
 
 		FileReader fileReader = new FileReader();
 		String s = fileReader.loadData(measure);
+		System.out.println("String is "+s);
+		List<Record> t = createRecords(s);
+
 		if (s != null) {
-			createRecords(s);
+			measures.put(measure, t);
+			System.out.println("Measure added" + measure.getName() + " " + measure.getOperation() + " " +measures.size());
 			createChart();
+			return true;
 		}
 
+		return false;
 	}
 
 	public Chart getChart() {
 		return chart;
 	}
 
+	public void reset() {
+		System.out.println("RESETING");
+		measures.clear();
+		currentType = null;
+		createChart();
+	}
+	
 	private void createChart() {
 		chart = ChartWithAxesImpl.create();
 		chart.setDimension(ChartDimension.TWO_DIMENSIONAL_LITERAL);
@@ -53,43 +99,88 @@ public class ChartLoader {
 		// chart.getPlot().getClientArea().setBackground(ColorDefinitionImpl
 		// .YELLOW());
 		//
-		// // 3. Create legend
-		// chart.getLegend().setItemType(LegendItemType.CATEGORIES_LITERAL);
-		// chart.getLegend().setVisible(true);
+		//3. Create legend
+		 chart.getLegend().setItemType(LegendItemType.SERIES_LITERAL);
+		 chart.getLegend().setVisible(true);
+		 chart.getLegend().getText().getFont().setSize(10);
+		 chart.getLegend().getText().getFont().setWordWrap(true);
+		 chart.getLegend().setWidthHint(100);
+		 
 		//
 		// // 4. Set title
-		// chart.getTitle().getLabel().getCaption().setValue("Chart");
-		// chart.getTitle().getLabel().getCaption().getFont().setSize(14);
-		// chart.getTitle().getLabel().getCaption().getFont().setName("test");
+		chart.getTitle().getLabel().getCaption().setValue("Chart");
+		//chart.getTitle().getLabel().getCaption().getFont().setSize(14);
+		//chart.getTitle().getLabel().getCaption().getFont().setName("test");
 
 		Axis xAxis = ((ChartWithAxes) chart).getPrimaryBaseAxes()[0];
 		Axis yAxis = ((ChartWithAxes) chart).getPrimaryOrthogonalAxis(xAxis);
 
-		NumberDataSet xValues = NumberDataSetImpl.create(getDates());
+		if (measures.isEmpty()) {
+			
+			NumberDataSet xValues = NumberDataSetImpl.create(emptyValues);
+			Series seCategory = SeriesImpl.create();
+			seCategory.setDataSet(xValues);
 
-		Series seCategory = SeriesImpl.create();
-		seCategory.setDataSet(xValues);
+			SeriesDefinition sdX = SeriesDefinitionImpl.create();
+			sdX.getSeriesPalette().shift(1);
 
-		SeriesDefinition sdX = SeriesDefinitionImpl.create();
-		sdX.getSeriesPalette().shift(1);
+			xAxis.getSeriesDefinitions().add(sdX);
+			sdX.getSeries().add(seCategory);
+			xAxis.getTitle().setVisible(false);
+			
+			NumberDataSet yValues = NumberDataSetImpl.create(emptyValues);
+			LineSeries series = (LineSeries) LineSeriesImpl.create();
+			series.setDataSet(yValues);
+			series.getMarkers().get(0).setVisible(false);
+			series.setVisible(false);
+		
+			//series.getLineAttributes().setColor(ColorDefinitionImpl.WHITE());
+			SeriesDefinition sdY = SeriesDefinitionImpl.create();
+			yAxis.getSeriesDefinitions().add(sdY);
+			yAxis.getTitle().setVisible(false);
+			sdY.getSeries().add(series);
+			chart.getLegend().setVisible(false);
+			return;
+		}
 
-		xAxis.getSeriesDefinitions().add(sdX);
-		sdX.getSeries().add(seCategory);
+		NumberDataSet xValues = null;
+		for (Map.Entry<Measure, List<Record>> entry : measures.entrySet()) {
 
-		NumberDataSet yValues = NumberDataSetImpl.create(getValues());
-		LineSeries series = (LineSeries) LineSeriesImpl.create();
-		series.setDataSet(yValues);
+			if (xValues == null) {
+				xValues = NumberDataSetImpl.create(getDates(entry.getValue()));
+				Series seCategory = SeriesImpl.create();
+				seCategory.setDataSet(xValues);
 
-		SeriesDefinition sdY = SeriesDefinitionImpl.create();
-		yAxis.getSeriesDefinitions().add(sdY);
-		sdY.getSeries().add(series);
+				SeriesDefinition sdX = SeriesDefinitionImpl.create();
+				sdX.getSeriesPalette().shift(1);
+
+				xAxis.getSeriesDefinitions().add(sdX);
+				sdX.getSeries().add(seCategory);
+				xAxis.getTitle().getCaption().setValue("month");
+				xAxis.getTitle().setVisible(true);
+			}
+
+			NumberDataSet yValues = NumberDataSetImpl.create(getValues(entry
+					.getValue()));
+			LineSeries series = (LineSeries) LineSeriesImpl.create();
+			series.setDataSet(yValues);
+			series.getLineAttributes().setThickness(4);
+			series.setSeriesIdentifier(entry.getKey().getName() + ":" + entry.getKey().getOperation());
+			series.getMarkers().get(0).setVisible(false);
+			SeriesDefinition sdY = SeriesDefinitionImpl.create();
+			yAxis.getSeriesDefinitions().add(sdY);
+			yAxis.getTitle().getCaption().setValue(currentType);
+			yAxis.getTitle().setVisible(true);
+			sdY.getSeries().add(series);
+		}
 
 	}
 
-	private void createRecords(String s) {
+	private List<Record> createRecords(String s) {
 
 		List<Record> tmp = new ArrayList<Record>();
 		String[] rec = s.split(" ");
+		System.out.println(rec);
 		for (String record : rec) {
 			String[] parts = record.split("-");
 			Record tmpRecord = new Record(Double.parseDouble(parts[0]),
@@ -97,25 +188,29 @@ public class ChartLoader {
 			tmp.add(tmpRecord);
 		}
 
-		records = tmp;
+		return tmp;
 
 	}
 
-	private double[] getDates() {
+	private double[] getDates(List<Record> records) {
 		double[] dates = new double[records.size()];
+
 		for (int i = 0; i < records.size(); i++) {
 			dates[i] = records.get(i).getDate();
-			System.out.println("dates: " + dates[i]);
+			// System.out.println("dates: " + dates[i]);
 		}
+
 		return dates;
 	}
 
-	private double[] getValues() {
+	private double[] getValues(List<Record> records) {
 		double[] values = new double[records.size()];
+
 		for (int i = 0; i < records.size(); i++) {
 			values[i] = records.get(i).getValue();
-			System.out.println("values: " + values[i]);
+			// System.out.println("values: " + values[i]);
 		}
+
 		return values;
 	}
 }

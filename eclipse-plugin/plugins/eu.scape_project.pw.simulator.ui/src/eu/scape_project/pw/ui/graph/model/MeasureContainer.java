@@ -21,7 +21,7 @@ public class MeasureContainer implements INode {
 		this.parent = parent;
 	}
 
-	public String getName() {
+	public String getLabel() {
 		return name;
 	}
 

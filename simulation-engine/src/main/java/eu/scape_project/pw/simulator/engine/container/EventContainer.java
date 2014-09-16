@@ -24,15 +24,22 @@ public class EventContainer implements IEventContainer{
 		
 	}
 	
+	public long getNextEventTime() {
+		if (events.isEmpty()) {
+			return -1;
+		}
+		return events.peek().getScheduleTime();
+	}
+	
 	public void addEvent(IEvent event) {
 		
 		events.add(event);
 		
 	}
 	
-	public void addEvents(Collection<IEvent> events) {
+	public void addEvents(Collection<IEvent> newEvents) {
 		
-		events.addAll(events);
+		events.addAll(newEvents);
 		
 	}
 	

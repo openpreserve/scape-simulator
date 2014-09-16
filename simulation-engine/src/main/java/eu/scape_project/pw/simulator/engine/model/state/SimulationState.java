@@ -16,10 +16,13 @@ public class SimulationState implements ISimulationState {
 
 	private Map<String, IOperator> autoVariables;
 
+	private Map<String, String> types;
+	
 	public SimulationState() {
 		time = 0;
 		stateVariables = new HashMap<String, Object>();
 		autoVariables = new HashMap<String, IOperator>();
+		types = new HashMap<String, String>();	
 	}
 
 	@Override
@@ -36,6 +39,47 @@ public class SimulationState implements ISimulationState {
 	public void addStateVariable(String name, Object value) {
 		stateVariables.put(name, value);
 	}
+	
+	@Override 
+	public void addStateVariable(String name, Object value, String type) {
+		types.put(name, type);
+		addStateVariable(name,value);
+	}
+	
+	@Override 
+	public String getStateVariableType(String name) {
+		return types.get(name);
+	}
+	
+	@Override
+	public void incStateVariable(String name, Double value, String type) {
+		double t = value.doubleValue();
+		if (stateVariables.containsKey(name)){
+			Double temp = (Double) stateVariables.get(name);
+			t += temp.doubleValue();
+		}
+		addStateVariable(name,t, type);
+	}
+
+	@Override
+	public void decStateVariable(String name, Double value) {
+		double t = value.doubleValue();
+		if (stateVariables.containsKey(name)){
+			Double temp = (Double) stateVariables.get(name);
+			t -= temp.doubleValue();
+		}
+		addStateVariable(name,-t);
+	}
+	
+	@Override
+	public void multStateVariable(String name, Double value) {
+		double t = value.doubleValue();
+		if (stateVariables.containsKey(name)){
+			Double temp = (Double) stateVariables.get(name);
+			t *= temp.doubleValue();
+		}
+		addStateVariable(name,t);
+	}
 
 	@Override
 	public Object getStateVariable(String name) {
@@ -51,6 +95,24 @@ public class SimulationState implements ISimulationState {
 	@Override
 	public void addAutoVariable(String name, IOperator operator) {
 		autoVariables.put(name, operator);
+	}
+	
+	@Override 
+	public void addAutoVariable(String name, IOperator operator, String type) {
+		types.put(name, type);
+		addAutoVariable(name,operator);
+	}
+	
+	@Override
+	public void addVariableToAutoVariable(String auto, String variable) {
+		IOperator op = autoVariables.get(auto);
+		op.addVariableName(variable);
+	}
+	
+	@Override
+	public void removeVariableToAutoVariable(String auto, String variable) {
+		IOperator op = autoVariables.get(auto);
+		op.removeVariableName(variable);
 	}
 
 	private class StateIterator implements Iterator {
@@ -98,7 +160,8 @@ public class SimulationState implements ISimulationState {
 	}
 	
 	private Object getAutoVariable(IOperator operator) {
-		Object obj = null;
+		//Object obj = null;
+		Object obj = new Double(0); //hack
 		for (String n: operator.getVariableNames()) {
 			if (obj == null) {
 				obj = getStateVariable(n);

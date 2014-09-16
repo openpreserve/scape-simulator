@@ -13,6 +13,8 @@ public interface IEventContainer {
 
 	IEvent getNextEvent();
 	
+	long getNextEventTime();
+	
 	void addEvent(IEvent event);
 	
 	void addEvents(Collection<IEvent> events);

@@ -1,10 +1,13 @@
 package eu.scape_project.pw.generator
 
 import eu.scape_project.pw.simulator.Collection
-import eu.scape_project.pw.simulator.ConditionalScheduling
 import eu.scape_project.pw.simulator.EventScheduling
+import eu.scape_project.pw.simulator.Format
+import eu.scape_project.pw.simulator.HardDisk
+import eu.scape_project.pw.simulator.ObserverScheduling
+import eu.scape_project.pw.simulator.Processing
 import eu.scape_project.pw.simulator.Simulation
-import java.util.ArrayList
+import eu.scape_project.pw.simulator.Storage
 import java.util.HashMap
 import java.util.List
 import java.util.Map
@@ -15,7 +18,8 @@ class InitializatorGenerator {
 
 	//Resource res;
 	Map<String, String> types = new HashMap<String, String>();
-
+	Map<String, List<Double>> formatPerc; 
+	FormatPercCalculator fpc ; 
 	boolean iOperatorDefined = false;
 	
 	def getVarType(String name) {
@@ -24,7 +28,9 @@ class InitializatorGenerator {
 
 	def generateInitializator(Resource resource, IFileSystemAccess fsa) {
 
-		//res = resource;
+		fpc = new FormatPercCalculator();
+		formatPerc = fpc.calculatePerc(resource);
+		
 		for (e : resource.allContents.toIterable.filter(typeof(Simulation))) {
 
 			//generate SimulatorStateFactory
@@ -36,6 +42,10 @@ class InitializatorGenerator {
 			//generate EventContainerFactory
 			fsa.generateFile("/simulator/" + e.name + "EventObserverContainerFactory.java",
 				generateEventObserverContainerFactory(e))
+				
+			//generate ConditionalEventContainerFactory
+			fsa.generateFile("/simulator/" + e.name + "ConditionalEventContainerFactory.java",
+				generateConditionalEventContainerFactory(e))
 		}
 	}
 
@@ -56,28 +66,72 @@ class InitializatorGenerator {
 
 	def generateSimulationState(Simulation e) {
 		var temp = ''''''
+		for (ent : e.entities.filter(typeof(Storage))) {
+			temp = temp + passStorage(ent)
+		}
+		for(ent : e.entities.filter(typeof(Processing))) {
+			temp = temp + passProcessing(ent)
+		}
 		for (ent : e.entities.filter(typeof(Collection))) {
-			temp = temp + passEntity(ent, "")
+			temp = temp + passEntity(ent)
+		}
+		for (ent : e.entities.filter(typeof(Format))) {
+			temp = temp + passFormat(ent)
 		}
 		return temp
 	}
 
-	def passEntity(Collection col, String name) {
+	def passStorage(Storage s) {
 		var temp = '''''';
-		var tempName = "";
-		if (name == "") {
-			tempName = col.name
-		} else {
-			tempName = name + "." + col.name
+		if ( s instanceof HardDisk ) {
+			var h = s as HardDisk
+			temp = temp + '''state.addStateVariable("«h.name + ".capacity"»" ,new Double(«h.capacity») , "GB");
+				'''
+			temp = temp + '''state.addAutoVariable("«h.name + ".used"»" ,new SumOperator(), "GB" );
+				'''
+			
 		}
-
+	}
+	def passProcessing(Processing p) {
+		var temp = ''''''
+		temp = temp + '''state.addStateVariable("«p.name + ".number_of_nodes"»", new Double(«p.number_of_nodes»), "number");
+		'''
+		temp = temp + '''state.addStateVariable("«p.name + ".nodes_used"»", new Double(0), "number");
+		'''
+	}
+	def passEntity(Collection col) {
+		var temp = '''''';
+		var tempName = col.name;
+		temp = temp + '''state.addAutoVariable("«tempName».size", new SumOperator(), "GB");
+						 state.addAutoVariable("«tempName».number_of_objects", new SumOperator(), "number");
+						 '''
+		for (entry : col.entries) {
+			var v1 = tempName + '.' + entry.format.name + '.' + 'size'
+			var v2 = tempName + '.' + entry.format.name + '.' + 'number_of_objects'
+			temp = temp + '''
+				state.addStateVariable("«v1»", new Double(«entry.size»), "GB");
+				state.addStateVariable("«v2»", new Double(«entry.num_objects»), "number");
+							 '''
+			temp = temp + '''
+				state.addVariableToAutoVariable("«tempName».size","«v1»");
+				state.addVariableToAutoVariable("«tempName».number_of_objects","«v2»"); 
+						'''
+		}
+		
 		// add size
-		if (col.size != 0) {
+		/*if (col.size != 0) {
 			temp = temp + '''state.addStateVariable("«tempName + ".size"»" ,new Double(«col.size») );
 				'''
 			types.put(tempName + ".size", "float");
+		}*/
+		for (Storage s: col.storage) {
+			if (s instanceof HardDisk) {
+				var h = s as HardDisk
+				temp = temp + '''state.addVariableToAutoVariable("«h.name».used", "«tempName».size");
+				'''
+			}
 		}
-
+		return temp
 		/*for (k : col.keyValues) {
 			if (k instanceof KeyValueInt) {
 				var t = k as KeyValueInt
@@ -98,7 +152,7 @@ class InitializatorGenerator {
 				'''
 				types.put(tempName + "." + k.key, "float")
 			}
-		}*/
+		}
 		var subcol = new ArrayList<String>();
 		if (col.subCollections.length == 0) {
 			return temp
@@ -109,7 +163,7 @@ class InitializatorGenerator {
 			}
 			temp = temp + addAutoVariables(tempName, subcol)
 			return temp
-		}
+		}*/
 
 	}
 
@@ -126,11 +180,22 @@ class InitializatorGenerator {
 			temp = temp + '''op.addVariableName("«s».size");
 				'''
 		}
-		temp = temp + '''state.addAutoVariable("«name +".size"»",op);
+		temp = temp + '''state.addAutoVariable("«name +".size"»",op, "GB");
 			'''
 		return temp
 	}
 
+	def passFormat(Format f) {
+		var temp = ''''''
+		for (e :formatPerc.entrySet) {
+			var name = e.key;
+			var List<Double> value = e.value;
+			temp = temp + '''state.addStateVariable("«name»" ,new Double(«value.get(0)»), "percentage" );
+				'''
+		}
+		return temp;
+	}
+	
 	def generateEventContainerFactory(Simulation e) '''
 		package simulator;
 		import eu.scape_project.pw.simulator.engine.container.AbstractEventContainerFactory;
@@ -150,16 +215,17 @@ class InitializatorGenerator {
 			int current = 0; 
 		'''
 		for (sch : e.scheduling.filter(typeof(EventScheduling))) {
-			temp = temp + generateEventSchedules(sch)
-		}
+			temp = temp + generateEventSchedules(e, sch)
+		}	
+		temp = temp + generateFormatEvents()
 		return temp
 	}
 
-	def generateEventSchedules(EventScheduling es) {
+	def generateEventSchedules(Simulation s, EventScheduling es) {
 		var temp = ''' 
 			// scheduling «es.schedule.name» event
-			current = «es.start»;
-			while (current <= «es.end») {
+			current = «calculateEventStart(s, es)»;
+			while (current <= «calculateEventEnd(s, es)») {
 				IEvent tmp = new «es.schedule.name»();
 				tmp.setScheduleTime(current);
 				eventContainer.addEvent(tmp);
@@ -167,6 +233,36 @@ class InitializatorGenerator {
 			} 
 		'''
 		return temp
+	}
+	
+	def calculateEventStart(Simulation s, EventScheduling es) {
+		var month = (es.startYear - s.startYear - 1)*12 + 13 - s.startMonth + es.startMonth - 1
+		return month
+	}
+	
+	def calculateEventEnd(Simulation s, EventScheduling es) {
+		var month = (es.endYear - s.startYear - 1)*12 + 13 - s.startMonth + es.endMonth - 1
+		return month
+	}
+	
+	def generateFormatEvents() {
+		var temp = '''IEvent formatEvent;
+		'''
+		for (e :formatPerc.entrySet) {
+			var name = e.key;
+			var List<Double> value = e.value;
+			var time = 0;
+			for (k:value) {
+				temp = temp + '''
+					formatEvent = new SetFormatEntryPerc("«name»",new Double(«k»));
+					formatEvent.setScheduleTime(«time»);
+					eventContainer.addEvent(formatEvent);
+				'''		
+				time = time + 12 
+			}
+			
+		}
+		return temp;
 	}
 
 	def generateEventObserverContainerFactory(Simulation e) '''
@@ -184,11 +280,36 @@ class InitializatorGenerator {
 
 	def generateEventObserverContainer(Simulation e) {
 		var temp = ''''''
-		for (sch : e.scheduling.filter(typeof(ConditionalScheduling))) {
+		for (sch : e.scheduling.filter(typeof(ObserverScheduling))) {
 			temp = temp + '''
 				eOContainer.addEventObserver(new «sch.observes.name»2«sch.schedule.name»());
 			'''
 		}
 		return temp
 	}
+	
+	def generateConditionalEventContainerFactory(Simulation e) '''
+		package simulator;
+		import eu.scape_project.pw.simulator.engine.container.AbstractConditionalEventContainerFactory;
+		
+		public class «e.name»ConditionalEventContainerFactory extends AbstractConditionalEventContainerFactory {
+			
+			@Override 
+			protected void initialize() {
+				«generateConditionalEvent(e)»
+			}
+		}
+	'''
+	
+	def generateConditionalEvent(Simulation e) {
+		var temp = ''''''
+	/* 	for (s : e.scheduling.filter(typeof(ConditionalScheduling))) {
+			temp = temp + '''
+				icContainer.addCondition(new «s.name»Condition());
+			'''
+		}*/
+		return temp
+	}
+		
+	
 }

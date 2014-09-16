@@ -27,10 +27,12 @@ public abstract class Event implements IEvent {
 		return name;
 	}
 
-	public void execute(ISimulationState state) {
-		LOG.info("Executing event:" + name );
-		this.run(state);
+	public boolean execute(ISimulationState state) {
+		//LOG.info("Executing event:" + name );
+		boolean temp =  this.run(state);
+		return temp;
 	}
+	
 	public int compareTo(IEvent e) {
 
 		if (this.scheduleTime < e.getScheduleTime()) {
@@ -43,6 +45,6 @@ public abstract class Event implements IEvent {
 
 	}
 	
-	protected abstract void run(ISimulationState state);
+	protected abstract boolean run(ISimulationState state);
 
 }

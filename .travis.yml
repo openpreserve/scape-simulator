@@ -9,14 +9,8 @@ before_script:
   - cd ./simulation-engine
   - mvn install -DskipTests=true
   - cd ..
-#  - cd ./eclipse-plugin
-#  - mvn install -DskipTests=true
-#  - cd ..
 
 script:
   - cd ./simulation-engine
   - mvn test
-  - cd ..
-#  - cd ./eclipse-plugin
-#  - mvn test
-#  - cd ..
+
