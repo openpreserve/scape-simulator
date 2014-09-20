@@ -10,9 +10,9 @@ import eu.scape_project.pw.simulator.Condition
 import eu.scape_project.pw.simulator.ConditionalScheduling
 import eu.scape_project.pw.simulator.DeleteCollection
 import eu.scape_project.pw.simulator.Descrete
+import eu.scape_project.pw.simulator.Disk
 import eu.scape_project.pw.simulator.Entry
 import eu.scape_project.pw.simulator.Event
-import eu.scape_project.pw.simulator.HardDisk
 import eu.scape_project.pw.simulator.Ingest
 import eu.scape_project.pw.simulator.IngestFamily
 import eu.scape_project.pw.simulator.IngestFormat
@@ -378,7 +378,7 @@ import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 	'''
 
 	def getHardName(AddCollection a) {
-		var k = a.storage as HardDisk
+		var k = a.storage as Disk
 		var temp = '''state.addVariableToAutoVariable("«k.name».used", "«a.collection.name».size")'''
 		return temp
 	}
@@ -395,7 +395,7 @@ import eu.scape_project.pw.simulator.engine.module.SimulatorEngineModule;
 	'''
 
 	def getHardName2(DeleteCollection a) {
-		var k = a.storage as HardDisk
+		var k = a.storage as Disk
 		var temp = '''state.removeVariableToAutoVariable("«k.name».used", "«a.collection.name».size")'''
 		return temp
 	}

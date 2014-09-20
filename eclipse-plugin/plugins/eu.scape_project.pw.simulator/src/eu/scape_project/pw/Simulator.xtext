@@ -13,7 +13,7 @@ Simulation:
 	'ENDSIMULATION';
 
 Entity:
-	Collection | Storage | Format | Processing;
+	Collection | Storage | FormatGroup | Cluster;
 
 Collection:
 	'COLLECTION' name=ID
@@ -28,24 +28,25 @@ CollectionEntry:
 	'(' 'format' '=' format=[Entry|QName] ',' 'size' '=' size=Number 'GB' ',' 'number_of_objects' '=' num_objects=Number ')';
 
 Storage:
-	HardDisk;
+	Disk;
 
-HardDisk:
+Disk:
 	'DISKS' name=ID 'capacity' '=' capacity=Number 'GB' 'ENDDISKS';
 
-Processing:
-	'PROCESSING' name=ID 'number_of_nodes' '=' number_of_nodes=INT
-	'ENDPROCESSING';
+Cluster:
+	'CLUSTER' name=ID 'number_of_nodes' '=' number_of_nodes=INT
+	'CLUSTER';
 
-Format:
-	'family' name=ID
-	(entries+=Entry)+;
-
+FormatGroup:
+	'FORMATGROUP' name=ID
+	(entries+=Entry)+
+	'ENDFORMATGROUP';
+	
 Entry:
 	'(' name=ID ',' year=INT ',' p=Number ',' q=Number ',' m=Number ')';
 
 Event:
-	'EVENT' name=ValidID
+	'EVENT' name=ID
 	(command+=Command)*
 	'ENDEVENT';
 
@@ -56,16 +57,16 @@ Ingest:
 	IngestFamily | IngestFormat;
 
 IngestFamily:
-	'ingest' 'family' format=[Format] '(' num_of_objects=Num ',' size=Num 'MB' ')' 'to' collection=[Collection];
+	'ingest' 'group' format=[FormatGroup] '(' num_of_objects=Num ',' size=Num 'MB' ')' 'to' collection=[Collection];
 
 IngestFormat:
 	'ingest' 'format' format=[Entry|QName] '(' num_of_objects=Num ',' size=Num 'MB' ')' 'to' collection=[Collection];
 
 Migrate:
-	'migrate' 'from' collectionFrom=[Collection] 'family' familyFrom=[Format] ('format' formatFrom=[Entry|QName])* 'to'
+	'migrate' 'from' collectionFrom=[Collection] 'group' familyFrom=[FormatGroup] ('format' formatFrom=[Entry|QName])* 'to'
 	collectionTo=[Collection]
-	'family' familyTo=[Format] 'format' formatTo=[Entry|QName] 'with' 'size_relationship' '=' size_relationship=Number
-	'time_per_object' '=' time=Number 'ms' 'on' 'processing' process=[Processing];
+	'family' familyTo=[FormatGroup] 'format' formatTo=[Entry|QName] 'with' 'size_relationship' '=' size_relationship=Number
+	'time_per_object' '=' time=Number 'ms' 'on' 'cluster' process=[Cluster];
 
 DeleteCollection:
 	'delete' collection=[Collection] 'from' storage=[Storage];
@@ -89,10 +90,10 @@ Random:
 	Uniform | Normal;
 
 Uniform:
-	'Uniform' '(' a=INT ',' b=INT ')';
+	'Uniform' '(' a=Number ',' b=Number ')';
 
 Normal:
-	'Normal' '(' mean=INT ',' std=INT ')';
+	'Normal' '(' mean=Number ',' std=Number ')';
 
 Scheduling:
 	EventScheduling | ObserverScheduling | ConditionalScheduling;
@@ -109,7 +110,7 @@ ObserverScheduling:
 	('delay' '=' delay=INT ';')?;
 
 ConditionalScheduling:
-	'CONDITION' name=ValidID 'when' (condition=Condition) '=>' schedule=[Event]
+	'CONDITION' name=ID 'when' (condition=Condition) '=>' schedule=[Event]
 	'ENDCONDITION';
 
 Condition:

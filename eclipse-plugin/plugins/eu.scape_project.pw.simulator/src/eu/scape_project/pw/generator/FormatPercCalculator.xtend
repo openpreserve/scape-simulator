@@ -1,7 +1,8 @@
 package eu.scape_project.pw.generator
 
-import eu.scape_project.pw.simulator.Format
+import eu.scape_project.pw.simulator.FormatGroup
 import eu.scape_project.pw.simulator.Simulation
+import java.text.Format
 import java.util.ArrayList
 import java.util.HashMap
 import java.util.List
@@ -19,7 +20,7 @@ class FormatPercCalculator {
 		for (e : resource.allContents.toIterable.filter(typeof(Simulation))) {
 			setYears(e);
 		}
-		for (e : resource.allContents.toIterable.filter(typeof(Format))) {
+		for (e : resource.allContents.toIterable.filter(typeof(FormatGroup))) {
 			calculateFormat(e);
 		}
 		return formats;
@@ -30,7 +31,7 @@ class FormatPercCalculator {
 		stopYear = s.stopYear;
 	}
 
-	def calculateFormat(Format f) {
+	def calculateFormat(FormatGroup f) {
 		var name = "";
 		var List<Double> sum = new ArrayList<Double>();
 		var counter = 0;
@@ -86,7 +87,7 @@ class FormatPercCalculator {
 				}
 				temp.add(r);
 			} 
-			println("temp=" + temp)
+			//println("temp=" + temp)
 			formats.put(name,temp);
 		}
 	}

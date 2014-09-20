@@ -1,11 +1,12 @@
 package eu.scape_project.pw.generator
 
+import eu.scape_project.pw.simulator.Cluster
 import eu.scape_project.pw.simulator.Collection
+import eu.scape_project.pw.simulator.ConditionalScheduling
+import eu.scape_project.pw.simulator.Disk
 import eu.scape_project.pw.simulator.EventScheduling
-import eu.scape_project.pw.simulator.Format
-import eu.scape_project.pw.simulator.HardDisk
+import eu.scape_project.pw.simulator.FormatGroup
 import eu.scape_project.pw.simulator.ObserverScheduling
-import eu.scape_project.pw.simulator.Processing
 import eu.scape_project.pw.simulator.Simulation
 import eu.scape_project.pw.simulator.Storage
 import java.util.HashMap
@@ -69,13 +70,13 @@ class InitializatorGenerator {
 		for (ent : e.entities.filter(typeof(Storage))) {
 			temp = temp + passStorage(ent)
 		}
-		for(ent : e.entities.filter(typeof(Processing))) {
+		for(ent : e.entities.filter(typeof(Cluster))) {
 			temp = temp + passProcessing(ent)
 		}
 		for (ent : e.entities.filter(typeof(Collection))) {
 			temp = temp + passEntity(ent)
 		}
-		for (ent : e.entities.filter(typeof(Format))) {
+		for (ent : e.entities.filter(typeof(FormatGroup))) {
 			temp = temp + passFormat(ent)
 		}
 		return temp
@@ -83,8 +84,8 @@ class InitializatorGenerator {
 
 	def passStorage(Storage s) {
 		var temp = '''''';
-		if ( s instanceof HardDisk ) {
-			var h = s as HardDisk
+		if ( s instanceof Disk ) {
+			var h = s as Disk
 			temp = temp + '''state.addStateVariable("«h.name + ".capacity"»" ,new Double(«h.capacity») , "GB");
 				'''
 			temp = temp + '''state.addAutoVariable("«h.name + ".used"»" ,new SumOperator(), "GB" );
@@ -92,7 +93,7 @@ class InitializatorGenerator {
 			
 		}
 	}
-	def passProcessing(Processing p) {
+	def passProcessing(Cluster p) {
 		var temp = ''''''
 		temp = temp + '''state.addStateVariable("«p.name + ".number_of_nodes"»", new Double(«p.number_of_nodes»), "number");
 		'''
@@ -125,8 +126,8 @@ class InitializatorGenerator {
 			types.put(tempName + ".size", "float");
 		}*/
 		for (Storage s: col.storage) {
-			if (s instanceof HardDisk) {
-				var h = s as HardDisk
+			if (s instanceof Disk) {
+				var h = s as Disk
 				temp = temp + '''state.addVariableToAutoVariable("«h.name».used", "«tempName».size");
 				'''
 			}
@@ -185,7 +186,7 @@ class InitializatorGenerator {
 		return temp
 	}
 
-	def passFormat(Format f) {
+	def passFormat(FormatGroup f) {
 		var temp = ''''''
 		for (e :formatPerc.entrySet) {
 			var name = e.key;
@@ -303,11 +304,11 @@ class InitializatorGenerator {
 	
 	def generateConditionalEvent(Simulation e) {
 		var temp = ''''''
-	/* 	for (s : e.scheduling.filter(typeof(ConditionalScheduling))) {
+	 	for (s : e.scheduling.filter(typeof(ConditionalScheduling))) {
 			temp = temp + '''
 				icContainer.addCondition(new «s.name»Condition());
 			'''
-		}*/
+		}
 		return temp
 	}
 		
