@@ -26,12 +26,21 @@ mvn assembly:assembly
 
 ## eclipse plugin 
 
-Eclipse plugin project contains a plguin which implements the domain specific language for 
+Eclipse plugin project contains an implementation of the domain specific language for 
 repository simulation 
 
 ### Requirements 
 * Eclipse IDE for Java and DSL Developers (tested on Eclipse Kepler https://www.eclipse.org/downloads/packages/eclipse-ide-java-and-dsl-developers/keplersr2)
-* XText (part of the Eclipse IDE for Java and DSL Developers)
+* XText (http://www.eclipse.org/Xtext/) it is part of the Eclipse IDE for Java and DSL Developers (tested with version 2.4)
 * Maven 3 
 
- 
+
+### Strcuture of the project
+
+* plugins
+	* eu.scape_project.pw.simulator - project containing DSL defenition
+	* eu.scape_project.pw.simulator.ui - project containing text editor and charts 
+* features
+* releng
+	* eu.scape_project.pw.simulator.updatesite - Maven generates an update site in this folder 
+
